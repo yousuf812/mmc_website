@@ -1,0 +1,14 @@
+{
+  "name": "mmc-website",
+  "version": "1.0.0",
+  "description": "Mission for Meaningful Change - Django + Tailwind CSS website",
+  "private": true,
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --minify"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

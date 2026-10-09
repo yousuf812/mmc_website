@@ -1,0 +1,510 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Mission for Meaningful Change (MMC) - From vulnerability to self-reliance."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b5d4f"
+    >
+
+    <title>
+        {% block title %}
+            Mission for Meaningful Change | MMC
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/output.css' %}"
+    >
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ANNOUNCEMENT BAR
+         ===================================================== -->
+
+    <div class="bg-mmc-primary text-white">
+        <div class="mmc-container">
+            <div class="flex min-h-10 items-center justify-center py-2 text-center text-xs font-semibold sm:text-sm">
+                <p>
+                    MMCI is now MMC:
+                    <span class="font-normal">
+                        same people, same mission, new legal form
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="mmc-header">
+
+        <div class="mmc-container">
+
+            <div class="flex min-h-20 items-center justify-between gap-6">
+
+                <!-- LOGO -->
+
+                <a
+                    href="/"
+                    class="flex shrink-0 items-center gap-3"
+                    aria-label="Mission for Meaningful Change home"
+                >
+
+                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-mmc-primary">
+                        <span class="text-lg font-extrabold text-white">
+                            MMC
+                        </span>
+                    </div>
+
+                    <div class="hidden sm:block">
+                        <span class="block text-sm font-extrabold tracking-tight text-mmc-dark">
+                            Mission for Meaningful Change
+                        </span>
+
+                        <span class="block text-xs text-mmc-muted">
+                            From vulnerability to self-reliance
+                        </span>
+                    </div>
+
+                </a>
+
+
+                <!-- DESKTOP NAVIGATION -->
+
+                <nav
+                    class="hidden items-center gap-5 lg:flex"
+                    aria-label="Primary navigation"
+                >
+
+                    <a
+                        href="/"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="#who-we-are"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Who We Are
+                    </a>
+
+                    <a
+                        href="#what-we-do"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        What We Do
+                    </a>
+
+                    <a
+                        href="#our-work"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Our Work
+                    </a>
+
+                    <a
+                        href="#resources"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Resources
+                    </a>
+
+                    <a
+                        href="#get-involved"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Get Involved
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="text-sm font-semibold text-mmc-dark transition hover:text-mmc-primary"
+                    >
+                        Contact
+                    </a>
+
+                </nav>
+
+
+                <!-- DESKTOP CTA -->
+
+                <div class="hidden lg:flex lg:items-center">
+
+                    <a
+                        href="#donate"
+                        class="mmc-btn mmc-btn-secondary"
+                    >
+                        Donate
+                    </a>
+
+                </div>
+
+
+                <!-- MOBILE MENU BUTTON -->
+
+                <button
+                    type="button"
+                    class="flex h-11 w-11 items-center justify-center rounded-lg border border-mmc-border bg-white text-mmc-dark lg:hidden"
+                    data-mobile-menu-button
+                    aria-expanded="false"
+                    aria-controls="mobile-navigation"
+                    aria-label="Open navigation menu"
+                >
+
+                    <svg
+                        class="h-6 w-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        />
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 MOBILE NAVIGATION
+                 ================================================= -->
+
+            <div
+                id="mobile-navigation"
+                class="mmc-mobile-menu border-t border-mmc-border py-4 lg:hidden"
+                data-mobile-menu
+            >
+
+                <nav
+                    class="flex flex-col gap-1"
+                    aria-label="Mobile navigation"
+                >
+
+                    <a
+                        href="/"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="#who-we-are"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Who We Are
+                    </a>
+
+                    <a
+                        href="#what-we-do"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        What We Do
+                    </a>
+
+                    <a
+                        href="#our-work"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Our Work
+                    </a>
+
+                    <a
+                        href="#resources"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Resources
+                    </a>
+
+                    <a
+                        href="#get-involved"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Get Involved
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="rounded-lg px-4 py-3 text-sm font-semibold text-mmc-dark hover:bg-mmc-primary-light hover:text-mmc-primary"
+                    >
+                        Contact
+                    </a>
+
+                    <a
+                        href="#donate"
+                        class="mmc-btn mmc-btn-secondary mt-2"
+                    >
+                        Donate
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer
+        class="mmc-footer"
+        id="contact"
+    >
+
+        <div class="mmc-container py-14">
+
+            <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+
+                <!-- ORGANISATION -->
+
+                <div>
+
+                    <div class="mb-5 flex items-center gap-3">
+
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-mmc-primary">
+                            <span class="font-extrabold text-white">
+                                MMC
+                            </span>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-white">
+                                Mission for Meaningful Change
+                            </p>
+
+                            <p class="text-xs text-white/60">
+                                From vulnerability to self-reliance
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p class="text-sm leading-7 text-white/70">
+                        A locally led Somali humanitarian and development
+                        organisation working with communities and partners
+                        towards self-reliance.
+                    </p>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div>
+
+                    <h2 class="mb-5 text-base font-bold text-white">
+                        Quick Links
+                    </h2>
+
+                    <ul class="space-y-3 text-sm">
+
+                        <li>
+                            <a href="#who-we-are">
+                                Who We Are
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#what-we-do">
+                                What We Do
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#our-work">
+                                Our Work
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#resources">
+                                Resources
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#get-involved">
+                                Get Involved
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- GET INVOLVED -->
+
+                <div>
+
+                    <h2 class="mb-5 text-base font-bold text-white">
+                        Get Involved
+                    </h2>
+
+                    <ul class="space-y-3 text-sm">
+
+                        <li>
+                            <a href="#volunteer">
+                                Volunteer
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#careers">
+                                Careers
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#partnerships">
+                                Partnerships
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#suppliers">
+                                Suppliers & Contractors
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#donate">
+                                Donate & Support
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CONTACT -->
+
+                <div>
+
+                    <h2 class="mb-5 text-base font-bold text-white">
+                        Contact MMC
+                    </h2>
+
+                    <address class="not-italic text-sm leading-7 text-white/70">
+
+                        <p>
+                            Airport Road,<br>
+                            Wadajir District,<br>
+                            Mogadishu, Banadir,<br>
+                            Somalia
+                        </p>
+
+                        <p class="mt-4">
+                            <a href="mailto:connect@mmcintnl.org">
+                                connect@mmcintnl.org
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="tel:+254728478178">
+                                (+254) 728478178
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="tel:+252618472031">
+                                (+252) 618472031
+                            </a>
+                        </p>
+
+                    </address>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="border-t border-white/10">
+
+            <div class="mmc-container flex flex-col gap-3 py-6 text-center text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+
+                <p>
+                    &copy; {% now "Y" %}
+                    Mission for Meaningful Change (MMC).
+                    All rights reserved.
+                </p>
+
+                <div class="flex justify-center gap-5 sm:justify-end">
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#">
+                        Terms & Conditions
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

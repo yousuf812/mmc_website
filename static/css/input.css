@@ -1,0 +1,363 @@
+@import "tailwindcss";
+
+/* =========================================================
+   MMC GLOBAL DESIGN SYSTEM
+   Mission for Meaningful Change
+   ========================================================= */
+
+@theme {
+    /* Brand Colors */
+    --color-mmc-primary: #0b5d4f;
+    --color-mmc-primary-dark: #08483d;
+    --color-mmc-primary-light: #e7f4f1;
+
+    --color-mmc-secondary: #d99a2b;
+    --color-mmc-secondary-dark: #b87916;
+    --color-mmc-secondary-light: #fff4dc;
+
+    --color-mmc-dark: #16332d;
+    --color-mmc-text: #33413d;
+    --color-mmc-muted: #66736f;
+
+    --color-mmc-light: #f7faf9;
+    --color-mmc-white: #ffffff;
+
+    --color-mmc-border: #dce7e3;
+
+    /* Typography */
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    /* Shadows */
+    --shadow-mmc-card: 0 10px 30px rgba(22, 51, 45, 0.08);
+    --shadow-mmc-card-hover: 0 18px 45px rgba(22, 51, 45, 0.14);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--color-mmc-white);
+    color: var(--color-mmc-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font: inherit;
+}
+
+::selection {
+    background: var(--color-mmc-primary);
+    color: var(--color-mmc-white);
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+    outline: 3px solid var(--color-mmc-secondary);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   REUSABLE CONTAINER
+   ========================================================= */
+
+.mmc-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+    .mmc-container {
+        padding-inline: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mmc-container {
+        padding-inline: 2rem;
+    }
+}
+
+/* =========================================================
+   SECTION SPACING
+   ========================================================= */
+
+.mmc-section {
+    padding-block: 4rem;
+}
+
+@media (min-width: 768px) {
+    .mmc-section {
+        padding-block: 5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mmc-section {
+        padding-block: 6rem;
+    }
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.mmc-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+    color: var(--color-mmc-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.mmc-eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    background: var(--color-mmc-secondary);
+}
+
+.mmc-heading {
+    color: var(--color-mmc-dark);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+}
+
+@media (min-width: 640px) {
+    .mmc-heading {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mmc-heading {
+        font-size: 3rem;
+    }
+}
+
+.mmc-lead {
+    color: var(--color-mmc-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+    .mmc-lead {
+        font-size: 1.125rem;
+    }
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.mmc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    min-height: 46px;
+    padding: 0.75rem 1.25rem;
+
+    border-radius: 0.5rem;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    text-decoration: none;
+
+    transition:
+        background-color 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.mmc-btn:hover {
+    transform: translateY(-2px);
+}
+
+.mmc-btn-primary {
+    background: var(--color-mmc-primary);
+    color: var(--color-mmc-white);
+    box-shadow: 0 8px 20px rgba(11, 93, 79, 0.18);
+}
+
+.mmc-btn-primary:hover {
+    background: var(--color-mmc-primary-dark);
+    box-shadow: 0 12px 25px rgba(11, 93, 79, 0.24);
+}
+
+.mmc-btn-secondary {
+    background: var(--color-mmc-secondary);
+    color: var(--color-mmc-dark);
+    box-shadow: 0 8px 20px rgba(217, 154, 43, 0.18);
+}
+
+.mmc-btn-secondary:hover {
+    background: var(--color-mmc-secondary-dark);
+    color: var(--color-mmc-white);
+}
+
+.mmc-btn-outline {
+    background: transparent;
+    color: var(--color-mmc-primary);
+    border: 1px solid var(--color-mmc-primary);
+}
+
+.mmc-btn-outline:hover {
+    background: var(--color-mmc-primary);
+    color: var(--color-mmc-white);
+}
+
+.mmc-btn-white {
+    background: var(--color-mmc-white);
+    color: var(--color-mmc-primary);
+}
+
+.mmc-btn-white:hover {
+    background: var(--color-mmc-light);
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.mmc-card {
+    background: var(--color-mmc-white);
+    border: 1px solid var(--color-mmc-border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-mmc-card);
+
+    transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.mmc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-mmc-card-hover);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mmc-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--color-mmc-border);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mmc-mobile-menu {
+    display: none;
+}
+
+.mmc-mobile-menu.is-open {
+    display: block;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.mmc-footer {
+    background: var(--color-mmc-dark);
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.mmc-footer a {
+    transition: color 180ms ease;
+}
+
+.mmc-footer a:hover {
+    color: var(--color-mmc-secondary);
+}
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+.mmc-input {
+    width: 100%;
+    min-height: 48px;
+
+    padding: 0.75rem 0.875rem;
+
+    border: 1px solid var(--color-mmc-border);
+    border-radius: 0.5rem;
+
+    background: var(--color-mmc-white);
+    color: var(--color-mmc-text);
+
+    outline: none;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.mmc-input:focus {
+    border-color: var(--color-mmc-primary);
+    box-shadow: 0 0 0 3px rgba(11, 93, 79, 0.1);
+}
+
+/* =========================================================
+   SCREEN READER ONLY
+   ========================================================= */
+
+.mmc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
