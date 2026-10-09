@@ -1,242 +1,548 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Mission for Meaningful Change | MMC
+    {% if site_settings %}
+        {{ site_settings.site_name }}
+    {% else %}
+        Mission for Meaningful Change | MMC
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 
-<!-- =====================================================
-     TEST HERO
-     ===================================================== -->
+{# Announcement bar #}
+{% if site_settings and site_settings.announcement_enabled and site_settings.announcement_text %}
+<section class="bg-emerald-700 text-white">
+    <div class="container-shell py-3 text-center text-sm font-medium">
+        {{ site_settings.announcement_text }}
+    </div>
+</section>
+{% endif %}
 
-<section class="relative overflow-hidden bg-mmc-primary">
 
-    <div class="mmc-container">
+{# Hero section #}
+<section class="relative overflow-hidden bg-slate-950 text-white">
 
-        <div class="grid min-h-[620px] items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+    {% if homepage and homepage.hero_image %}
+    <div class="absolute inset-0">
+        <img
+            src="{{ homepage.hero_image.url }}"
+            alt=""
+            class="h-full w-full object-cover opacity-30"
+        >
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/40"></div>
+    </div>
+    {% else %}
+    <div class="absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
+    {% endif %}
+
+    <div class="container-shell relative py-20 md:py-28 lg:py-36">
+
+        <div class="max-w-4xl">
+
+            <span class="inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+                Mission for Meaningful Change
+            </span>
+
+            <h1 class="mt-7 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-7xl">
+                {% if homepage and homepage.hero_title %}
+                    {{ homepage.hero_title }}
+                {% else %}
+                    From Vulnerability to Self-Reliance
+                {% endif %}
+            </h1>
+
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
+                {% if homepage and homepage.hero_description %}
+                    {{ homepage.hero_description }}
+                {% else %}
+                    We work with communities and partners to protect dignity,
+                    build resilience, strengthen local systems and expand
+                    opportunities across Somalia.
+                {% endif %}
+            </p>
+
+            <div class="mt-9 flex flex-wrap gap-4">
+
+                <a
+                    href="{% url 'projects:project_list' %}"
+                    class="btn-primary inline-flex"
+                >
+                    Explore Our Work
+                </a>
+
+                <a
+                    href="{% url 'contact:contact' %}"
+                    class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-slate-950"
+                >
+                    Partner with MMC
+                </a>
+
+                <a
+                    href="{% url 'engagement:page' slug='donate-support' %}"
+                    class="inline-flex items-center rounded-xl border border-emerald-400/50 px-6 py-3 font-semibold text-emerald-300 transition hover:bg-emerald-400 hover:text-slate-950"
+                >
+                    Donate
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+{# Impact statistics #}
+{% if statistics %}
+<section class="relative z-10 -mt-6">
+    <div class="container-shell">
+
+        <div class="grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl md:grid-cols-4">
+
+            {% for statistic in statistics %}
+
+            <div class="border-b border-r border-slate-100 p-6 text-center last:border-r-0 md:border-b-0">
+
+                {% if statistic.icon %}
+                <div class="mb-2 text-2xl" aria-hidden="true">
+                    {{ statistic.icon }}
+                </div>
+                {% endif %}
+
+                <p class="text-3xl font-extrabold tracking-tight text-emerald-700 md:text-4xl">
+                    {{ statistic.value }}
+                </p>
+
+                <h2 class="mt-2 text-sm font-bold text-slate-900 md:text-base">
+                    {{ statistic.label }}
+                </h2>
+
+                {% if statistic.description %}
+                <p class="mt-2 text-xs leading-5 text-slate-500">
+                    {{ statistic.description }}
+                </p>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+{# About / mission and vision #}
+<section class="section-shell bg-white">
+    <div class="container-shell">
+
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
 
             <div>
 
-                <p class="mmc-eyebrow text-mmc-secondary">
-                    Mission for Meaningful Change
+                <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                    Who We Are
                 </p>
 
-                <h1 class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    From vulnerability to self-reliance
-                </h1>
+                <h2 class="mt-3 text-3xl font-bold leading-tight text-slate-900 md:text-4xl">
+                    Locally Led. Community Focused. Driven by Change.
+                </h2>
 
-                <p class="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
-                    Working with crisis-affected people and partners to
-                    save lives, protect dignity, build resilience,
-                    strengthen local systems and advance self-reliance.
+                <p class="mt-5 leading-8 text-slate-600">
+                    Mission for Meaningful Change works with crisis-affected
+                    communities and partners to save lives, protect dignity,
+                    build resilience, strengthen local systems and advance
+                    inclusive prosperity.
                 </p>
 
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-
-                    <a
-                        href="#our-work"
-                        class="mmc-btn mmc-btn-secondary"
-                    >
-                        Explore our work
-                    </a>
-
-                    <a
-                        href="#partnerships"
-                        class="mmc-btn border border-white/30 bg-white/10 text-white hover:bg-white hover:text-mmc-primary"
-                    >
-                        Partner with MMC
-                    </a>
-
-                    <a
-                        href="#donate"
-                        class="mmc-btn border border-white/30 bg-transparent text-white hover:bg-white hover:text-mmc-primary"
-                    >
-                        Donate
-                    </a>
-
-                </div>
+                <a
+                    href="{% url 'pages:about' %}"
+                    class="mt-7 inline-flex items-center gap-2 font-bold text-emerald-700 hover:text-emerald-900"
+                >
+                    Discover MMC
+                    <span aria-hidden="true">→</span>
+                </a>
 
             </div>
 
 
-            <div class="hidden lg:block">
+            <div class="grid gap-5 sm:grid-cols-2">
 
-                <div class="rounded-2xl border border-white/10 bg-white/10 p-8 backdrop-blur-sm">
+                <article class="rounded-3xl bg-emerald-50 p-7">
+                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-700 text-2xl text-white" aria-hidden="true">
+                        ◎
+                    </div>
 
-                    <p class="text-sm font-semibold uppercase tracking-widest text-mmc-secondary">
-                        Our mission
+                    <h3 class="text-xl font-bold text-slate-900">
+                        Our Mission
+                    </h3>
+
+                    <p class="mt-4 leading-7 text-slate-700">
+                        {% if homepage and homepage.mission %}
+                            {{ homepage.mission }}
+                        {% else %}
+                            A Somalia where every community can move from
+                            vulnerability to self-reliance.
+                        {% endif %}
                     </p>
 
-                    <p class="mt-4 text-2xl font-bold leading-relaxed text-white">
-                        Somalia where every community can move from
-                        vulnerability to self-reliance.
+                </article>
+
+
+                <article class="rounded-3xl bg-slate-50 p-7">
+                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 text-2xl text-white" aria-hidden="true">
+                        ◈
+                    </div>
+
+                    <h3 class="text-xl font-bold text-slate-900">
+                        Our Vision
+                    </h3>
+
+                    <p class="mt-4 leading-7 text-slate-700">
+                        {% if homepage and homepage.vision %}
+                            {{ homepage.vision }}
+                        {% else %}
+                            A peaceful, resilient and prosperous Somalia
+                            where everyone can thrive.
+                        {% endif %}
                     </p>
 
-                    <div class="mt-8 h-px bg-white/20"></div>
-
-                    <p class="mt-6 text-sm leading-7 text-white/70">
-                        Locally led humanitarian and development action
-                        focused on resilience, systems strengthening
-                        and inclusive opportunity.
-                    </p>
-
-                </div>
+                </article>
 
             </div>
 
         </div>
 
     </div>
-
 </section>
 
 
-<!-- =====================================================
-     TEST STATS
-     ===================================================== -->
-
-<section class="border-b border-mmc-border bg-white">
-
-    <div class="mmc-container">
-
-        <div class="grid grid-cols-2 divide-x divide-y divide-mmc-border md:grid-cols-4 md:divide-y-0">
-
-            <div class="px-4 py-8 text-center">
-                <p class="text-3xl font-extrabold text-mmc-primary sm:text-4xl">
-                    17+
-                </p>
-
-                <p class="mt-2 text-sm text-mmc-muted">
-                    Years of field operations
-                </p>
-            </div>
-
-            <div class="px-4 py-8 text-center">
-                <p class="text-3xl font-extrabold text-mmc-primary sm:text-4xl">
-                    32
-                </p>
-
-                <p class="mt-2 text-sm text-mmc-muted">
-                    Institutional projects
-                </p>
-            </div>
-
-            <div class="px-4 py-8 text-center">
-                <p class="text-3xl font-extrabold text-mmc-primary sm:text-4xl">
-                    13+
-                </p>
-
-                <p class="mt-2 text-sm text-mmc-muted">
-                    Donor relationships
-                </p>
-            </div>
-
-            <div class="px-4 py-8 text-center">
-                <p class="text-3xl font-extrabold text-mmc-primary sm:text-4xl">
-                    12/17
-                </p>
-
-                <p class="mt-2 text-sm text-mmc-muted">
-                    SDGs contributed to
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     TEST SECTION
-     ===================================================== -->
-
-<section class="mmc-section bg-mmc-light">
-
-    <div class="mmc-container">
+{# Strategic priorities #}
+<section class="section-shell bg-slate-50">
+    <div class="container-shell">
 
         <div class="mx-auto max-w-3xl text-center">
 
-            <p class="mmc-eyebrow justify-center">
-                Our approach
+            <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                What We Do
             </p>
 
-            <h2 class="mmc-heading">
-                Protect, recover and strengthen
+            <h2 class="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+                Three Priorities. One Shared Mission.
             </h2>
 
-            <p class="mmc-lead mt-5">
-                Our work combines humanitarian response, resilience,
-                systems strengthening and opportunity creation to help
-                communities move towards self-reliance.
+            <p class="mt-5 leading-8 text-slate-600">
+                Our work connects immediate humanitarian needs with
+                longer-term resilience, stronger systems and expanded
+                opportunities for communities.
             </p>
 
         </div>
 
 
-        <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {% if priorities %}
 
-            <article class="mmc-card p-7">
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
 
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mmc-primary-light text-lg font-bold text-mmc-primary">
-                    01
+            {% for priority in priorities %}
+
+            <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+
+                {% if priority.image %}
+                <img
+                    src="{{ priority.image.url }}"
+                    alt="{{ priority.title }}"
+                    class="h-48 w-full object-cover"
+                    loading="lazy"
+                >
+                {% else %}
+                <div class="flex h-36 items-center justify-center bg-emerald-50">
+                    <span class="text-4xl font-extrabold text-emerald-700">
+                        {{ priority.number|stringformat:"02d" }}
+                    </span>
                 </div>
+                {% endif %}
 
-                <h3 class="mt-6 text-xl font-bold text-mmc-dark">
-                    Protect and Stabilize
-                </h3>
+                <div class="p-7">
 
-                <p class="mt-3 text-sm leading-7 text-mmc-muted">
-                    Emergency assistance, protection, WASH, shelter,
-                    health, nutrition, education and preparedness.
-                </p>
+                    <span class="text-sm font-bold uppercase tracking-wider text-emerald-700">
+                        Priority {{ priority.number }}
+                    </span>
+
+                    <h3 class="mt-3 text-xl font-bold leading-snug text-slate-900">
+                        {{ priority.title }}
+                    </h3>
+
+                    <p class="mt-4 leading-7 text-slate-600">
+                        {{ priority.short_description }}
+                    </p>
+
+                </div>
 
             </article>
 
+            {% endfor %}
 
-            <article class="mmc-card p-7">
+        </div>
 
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mmc-secondary-light text-lg font-bold text-mmc-secondary-dark">
-                    02
-                </div>
+        {% endif %}
 
-                <h3 class="mt-6 text-xl font-bold text-mmc-dark">
-                    Recover and Build Resilience
-                </h3>
 
-                <p class="mt-3 text-sm leading-7 text-mmc-muted">
-                    Climate resilience, livelihoods, agriculture,
-                    infrastructure, environmental restoration and
-                    peacebuilding.
+        <div class="mt-10 text-center">
+            <a
+                href="{% url 'projects:what_we_do' %}"
+                class="btn-primary inline-flex"
+            >
+                Explore What We Do
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+{# Featured projects #}
+<section class="section-shell bg-white">
+    <div class="container-shell">
+
+        <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+
+            <div>
+                <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                    Our Work
                 </p>
+
+                <h2 class="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+                    From Programmes to Lasting Impact
+                </h2>
+
+                <p class="mt-4 max-w-2xl leading-7 text-slate-600">
+                    Discover selected projects and the outcomes they
+                    are working to achieve with communities and partners.
+                </p>
+            </div>
+
+            <a
+                href="{% url 'projects:project_list' %}"
+                class="font-bold text-emerald-700 hover:text-emerald-900"
+            >
+                View All Projects →
+            </a>
+
+        </div>
+
+
+        {% if featured_projects %}
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            {% for project in featured_projects %}
+
+            <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-xl">
+
+                {% if project.featured_image %}
+                <img
+                    src="{{ project.featured_image.url }}"
+                    alt="{{ project.image_alt_text|default:project.title }}"
+                    class="h-52 w-full object-cover"
+                    loading="lazy"
+                >
+                {% else %}
+                <div class="flex h-52 items-center justify-center bg-slate-100">
+                    <span class="text-lg font-bold text-slate-400">
+                        MMC Project
+                    </span>
+                </div>
+                {% endif %}
+
+                <div class="p-6">
+
+                    {% if project.priority %}
+                    <span class="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+                        {{ project.priority.name }}
+                    </span>
+                    {% endif %}
+
+                    <h3 class="mt-4 text-xl font-bold leading-snug text-slate-900">
+                        {{ project.title }}
+                    </h3>
+
+                    <p class="mt-3 leading-7 text-slate-600">
+                        {{ project.short_description|truncatewords:25 }}
+                    </p>
+
+                    {% if project.location %}
+                    <p class="mt-4 text-sm text-slate-500">
+                        Location: {{ project.location }}
+                    </p>
+                    {% endif %}
+
+                    <a
+                        href="{% url 'projects:project_detail' slug=project.slug %}"
+                        class="mt-5 inline-flex font-bold text-emerald-700 hover:text-emerald-900"
+                    >
+                        Explore Project →
+                    </a>
+
+                </div>
 
             </article>
 
+            {% endfor %}
 
-            <article class="mmc-card p-7">
+        </div>
 
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-mmc-primary-light text-lg font-bold text-mmc-primary">
-                    03
-                </div>
+        {% else %}
 
-                <h3 class="mt-6 text-xl font-bold text-mmc-dark">
-                    Strengthen Systems and Expand Opportunity
-                </h3>
+        <div class="mt-8 rounded-2xl border border-dashed border-slate-300 p-8 text-slate-600">
+            Featured projects will appear here once they are published
+            and marked as featured in the CMS.
+        </div>
 
-                <p class="mt-3 text-sm leading-7 text-mmc-muted">
-                    Education, employment, local organisations,
-                    governance, markets, MSMEs, research and systems
-                    transformation.
+        {% endif %}
+
+    </div>
+</section>
+
+
+{# Latest news #}
+<section class="section-shell bg-slate-50">
+    <div class="container-shell">
+
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+
+            <div>
+                <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                    News & Insights
                 </p>
 
+                <h2 class="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+                    Stories, Updates and Learning
+                </h2>
+            </div>
+
+            <a
+                href="{% url 'news:news_list' %}"
+                class="font-bold text-emerald-700 hover:text-emerald-900"
+            >
+                View All News →
+            </a>
+
+        </div>
+
+
+        {% if latest_articles %}
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            {% for article in latest_articles %}
+
+            <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+
+                {% if article.featured_image %}
+                <img
+                    src="{{ article.featured_image.url }}"
+                    alt="{{ article.image_alt_text|default:article.title }}"
+                    class="h-48 w-full object-cover"
+                    loading="lazy"
+                >
+                {% endif %}
+
+                <div class="p-6">
+
+                    <p class="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                        {{ article.get_category_display }}
+                    </p>
+
+                    <h3 class="mt-3 text-xl font-bold leading-snug text-slate-900">
+                        {{ article.title }}
+                    </h3>
+
+                    <p class="mt-3 leading-7 text-slate-600">
+                        {{ article.excerpt|truncatewords:25 }}
+                    </p>
+
+                    {% if article.published_at %}
+                    <p class="mt-4 text-sm text-slate-500">
+                        {{ article.published_at|date:"j F Y" }}
+                    </p>
+                    {% endif %}
+
+                    <a
+                        href="{% url 'news:news_detail' slug=article.slug %}"
+                        class="mt-5 inline-flex font-bold text-emerald-700"
+                    >
+                        Read Story →
+                    </a>
+
+                </div>
+
             </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p class="mt-8 rounded-2xl bg-white p-8 text-slate-600">
+            News and stories will appear here when published.
+        </p>
+
+        {% endif %}
+
+    </div>
+</section>
+
+
+{# Closing call to action #}
+<section class="section-shell bg-emerald-950 text-white">
+    <div class="container-shell py-12 md:py-16">
+
+        <div class="mx-auto max-w-4xl text-center">
+
+            <p class="font-semibold uppercase tracking-wider text-emerald-300">
+                Together for Meaningful Change
+            </p>
+
+            <h2 class="mt-4 text-3xl font-bold leading-tight md:text-5xl">
+                {% if homepage and homepage.closing_cta_title %}
+                    {{ homepage.closing_cta_title }}
+                {% else %}
+                    Let's Build a More Resilient Future Together
+                {% endif %}
+            </h2>
+
+            <p class="mt-5 leading-8 text-emerald-100">
+                {% if homepage and homepage.closing_cta_description %}
+                    {{ homepage.closing_cta_description }}
+                {% else %}
+                    Partner with MMC to help communities protect dignity,
+                    strengthen resilience and expand opportunities.
+                {% endif %}
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+
+                <a href="{% url 'contact:contact' %}" class="btn-primary">
+                    Contact MMC
+                </a>
+
+                <a
+                    href="{% url 'engagement:home' %}"
+                    class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white hover:text-slate-950"
+                >
+                    Get Involved
+                </a>
+
+            </div>
 
         </div>
 
     </div>
-
 </section>
 
 {% endblock %}

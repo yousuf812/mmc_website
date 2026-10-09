@@ -1,0 +1,712 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if about_page %}
+        {{ about_page.title }} | MMC
+    {% else %}
+        Who We Are | MMC
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-orange-950/40"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+
+        <div class="max-w-4xl">
+
+            <span class="mb-5 inline-flex rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-300">
+                Who We Are
+            </span>
+
+            <h1 class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                {% if about_page %}
+                    {{ about_page.title }}
+                {% else %}
+                    Who We Are
+                {% endif %}
+            </h1>
+
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">
+                {% if about_page %}
+                    {{ about_page.subtitle }}
+                {% else %}
+                    One institution. A new legal form. A lasting mission.
+                {% endif %}
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================================================
+     ABOUT MMC
+========================================================= -->
+
+{% if about_page %}
+
+<section class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+
+            <div>
+                <p class="mb-3 text-sm font-bold uppercase tracking-widest text-orange-600">
+                    About MMC
+                </p>
+
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                    {{ about_page.about_title }}
+                </h2>
+
+                <div class="mt-6 space-y-5 text-base leading-8 text-slate-600">
+                    {{ about_page.about_content|linebreaks }}
+                </div>
+            </div>
+
+
+            {% if about_page.featured_image %}
+                <div class="overflow-hidden rounded-3xl shadow-xl">
+                    <img
+                        src="{{ about_page.featured_image.url }}"
+                        alt="{{ about_page.image_alt_text }}"
+                        class="h-full w-full object-cover"
+                        loading="lazy"
+                    >
+                </div>
+            {% else %}
+                <div class="rounded-3xl bg-slate-100 p-10">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-8">
+                        <p class="text-lg font-semibold text-slate-900">
+                            From vulnerability to self-reliance
+                        </p>
+
+                        <p class="mt-3 leading-7 text-slate-600">
+                            MMC builds on the institutional experience,
+                            technical expertise and field presence developed
+                            through its predecessor institution.
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================================================
+     PURPOSE
+========================================================= -->
+
+<section class="bg-slate-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+
+        <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
+            Our Purpose
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+            {{ about_page.purpose_title }}
+        </h2>
+
+        <p class="mx-auto mt-6 max-w-4xl text-lg leading-9 text-slate-600">
+            {{ about_page.purpose_content }}
+        </p>
+
+    </div>
+</section>
+
+
+<!-- =========================================================
+     MISSION + VISION
+========================================================= -->
+
+<section class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="grid gap-8 md:grid-cols-2">
+
+            <!-- Mission -->
+
+            <article class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm sm:p-10">
+
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-orange-600">
+                    <svg
+                        class="h-6 w-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 2v20"></path>
+                        <path d="M2 12h20"></path>
+                    </svg>
+                </div>
+
+                <h2 class="mt-6 text-2xl font-bold text-slate-900">
+                    {{ about_page.mission_title }}
+                </h2>
+
+                <p class="mt-5 leading-8 text-slate-600">
+                    {{ about_page.mission_content }}
+                </p>
+
+            </article>
+
+
+            <!-- Vision -->
+
+            <article class="rounded-3xl border border-slate-200 bg-slate-900 p-8 text-white shadow-sm sm:p-10">
+
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-white">
+                    <svg
+                        class="h-6 w-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                    >
+                        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </div>
+
+                <h2 class="mt-6 text-2xl font-bold">
+                    {{ about_page.vision_title }}
+                </h2>
+
+                <p class="mt-5 leading-8 text-slate-300">
+                    {{ about_page.vision_content }}
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================================================
+     COMMITMENT
+========================================================= -->
+
+<section class="bg-orange-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl">
+            <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
+                How We Work
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+                {{ about_page.commitment_title }}
+            </h2>
+        </div>
+
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for commitment in about_page.commitments %}
+                {% if commitment %}
+                    <div class="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm">
+
+                        <div class="flex items-start gap-4">
+
+                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-100 font-bold text-orange-600">
+                                {{ forloop.counter }}
+                            </span>
+
+                            <p class="font-semibold leading-7 text-slate-800">
+                                {{ commitment }}
+                            </p>
+
+                        </div>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endif %}
+
+
+<!-- =========================================================
+     JOURNEY
+========================================================= -->
+
+<section class="bg-white py-20 sm:py-24">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="mx-auto max-w-3xl text-center">
+
+            <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
+                From MMCI to MMC
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+                Our Journey
+            </h2>
+
+            <p class="mt-5 text-lg leading-8 text-slate-600">
+                From technical consultancy to a locally led humanitarian
+                and development NGO.
+            </p>
+
+        </div>
+
+
+        {% if milestones %}
+
+        <div class="relative mx-auto mt-16 max-w-5xl">
+
+            <!-- Timeline line -->
+
+            <div
+                class="absolute left-5 top-0 hidden h-full w-px bg-slate-200 md:left-1/2 md:block"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="space-y-12">
+
+                {% for milestone in milestones %}
+
+                    <article class="relative md:grid md:grid-cols-2 md:gap-12">
+
+                        <!-- Year -->
+
+                        <div
+                            class="
+                                {% if forloop.counter|divisibleby:2 %}
+                                    md:col-start-2
+                                {% endif %}
+                            "
+                        >
+
+                            <div
+                                class="
+                                    {% if forloop.counter|divisibleby:2 %}
+                                        md:text-left
+                                    {% else %}
+                                        md:text-right
+                                    {% endif %}
+                                "
+                            >
+
+                                <span class="text-5xl font-black tracking-tight text-orange-500">
+                                    {{ milestone.year }}
+                                </span>
+
+                                <h3 class="mt-2 text-2xl font-bold text-slate-900">
+                                    {{ milestone.title }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Timeline dot -->
+
+                        <div
+                            class="absolute left-0 top-2 hidden h-10 w-10 items-center justify-center rounded-full border-4 border-white bg-orange-500 shadow-md md:left-1/2 md:flex md:-translate-x-1/2"
+                            aria-hidden="true"
+                        >
+                            <span class="h-2 w-2 rounded-full bg-white"></span>
+                        </div>
+
+
+                        <!-- Description -->
+
+                        <div
+                            class="
+                                mt-6
+                                md:mt-0
+                                {% if forloop.counter|divisibleby:2 %}
+                                    md:col-start-1 md:row-start-1
+                                {% endif %}
+                            "
+                        >
+
+                            <div class="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
+
+                                {% if milestone.short_description %}
+                                    <p class="font-semibold leading-7 text-slate-900">
+                                        {{ milestone.short_description }}
+                                    </p>
+                                {% endif %}
+
+                                <div class="mt-4 leading-8 text-slate-600">
+                                    {{ milestone.description|linebreaks }}
+                                </div>
+
+                                {% if milestone.image %}
+                                    <img
+                                        src="{{ milestone.image.url }}"
+                                        alt="{{ milestone.image_alt_text }}"
+                                        class="mt-6 w-full rounded-2xl object-cover"
+                                        loading="lazy"
+                                    >
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+            <div class="mx-auto mt-12 max-w-2xl rounded-2xl bg-slate-50 p-8 text-center">
+                <p class="text-slate-600">
+                    Journey information will be published here.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GOVERNANCE
+========================================================= -->
+
+{% if governance %}
+
+<section class="bg-slate-950 py-20 text-white sm:py-24">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl">
+
+            <p class="text-sm font-bold uppercase tracking-widest text-orange-400">
+                Accountability
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold sm:text-4xl">
+                {{ governance.title }}
+            </h2>
+
+            <p class="mt-6 leading-8 text-slate-300">
+                {{ governance.introduction }}
+            </p>
+
+        </div>
+
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
+
+            {% if governance.strategic_governing_tier %}
+                <article class="rounded-3xl border border-white/10 bg-white/5 p-7">
+
+                    <h3 class="text-xl font-bold text-orange-400">
+                        Strategic Governing Tier
+                    </h3>
+
+                    <p class="mt-4 leading-8 text-slate-300">
+                        {{ governance.strategic_governing_tier }}
+                    </p>
+
+                </article>
+            {% endif %}
+
+
+            {% if governance.executive_secretariat %}
+                <article class="rounded-3xl border border-white/10 bg-white/5 p-7">
+
+                    <h3 class="text-xl font-bold text-orange-400">
+                        Executive Secretariat
+                    </h3>
+
+                    <p class="mt-4 leading-8 text-slate-300">
+                        {{ governance.executive_secretariat }}
+                    </p>
+
+                </article>
+            {% endif %}
+
+
+            {% if governance.field_management %}
+                <article class="rounded-3xl border border-white/10 bg-white/5 p-7">
+
+                    <h3 class="text-xl font-bold text-orange-400">
+                        Field Management
+                    </h3>
+
+                    <p class="mt-4 leading-8 text-slate-300">
+                        {{ governance.field_management }}
+                    </p>
+
+                </article>
+            {% endif %}
+
+
+            {% if governance.reporting_structure %}
+                <article class="rounded-3xl border border-white/10 bg-white/5 p-7">
+
+                    <h3 class="text-xl font-bold text-orange-400">
+                        Reporting Structure
+                    </h3>
+
+                    <p class="mt-4 leading-8 text-slate-300">
+                        {{ governance.reporting_structure }}
+                    </p>
+
+                </article>
+            {% endif %}
+
+        </div>
+
+
+        {% if governance.governance_note %}
+
+            <div class="mt-8 rounded-2xl border border-orange-400/20 bg-orange-500/10 p-6">
+
+                <p class="leading-8 text-slate-200">
+                    {{ governance.governance_note }}
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =========================================================
+     ORGANOGRAM
+========================================================= -->
+
+{% if about_page and about_page.organogram_image %}
+
+<section class="bg-slate-50 py-20 sm:py-24">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="mx-auto max-w-3xl text-center">
+
+            <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
+                Organisational Structure
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+                Institutional Organogram
+            </h2>
+
+        </div>
+
+
+        <div class="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-8">
+
+            <img
+                src="{{ about_page.organogram_image.url }}"
+                alt="{{ about_page.organogram_alt_text }}"
+                class="mx-auto h-auto max-w-full"
+                loading="lazy"
+            >
+
+        </div>
+
+
+        {% if about_page.organogram_description %}
+
+            <div class="mx-auto mt-8 max-w-4xl rounded-2xl bg-white p-7 shadow-sm">
+
+                <h3 class="text-lg font-bold text-slate-900">
+                    Text Description
+                </h3>
+
+                <div class="mt-4 leading-8 text-slate-600">
+                    {{ about_page.organogram_description|linebreaks }}
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =========================================================
+     OUR PEOPLE
+========================================================= -->
+
+<section class="bg-white py-20 sm:py-24">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+
+            <div>
+
+                <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
+                    Our People
+                </p>
+
+                <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+                    Change Makers
+                </h2>
+
+                <p class="mt-4 max-w-2xl leading-8 text-slate-600">
+                    Accountable governance, professional management and
+                    locally rooted field leadership.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if team_members %}
+
+        <div class="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for member in team_members %}
+
+                <article class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+
+                    {% if member.photograph %}
+
+                        <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+
+                            <img
+                                src="{{ member.photograph.url }}"
+                                alt="{{ member.accessibility_alt_text }}"
+                                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="flex aspect-[4/3] items-center justify-center bg-slate-100">
+
+                            <span class="text-5xl font-black text-slate-300">
+                                {{ member.name|first }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="p-6">
+
+                        <p class="text-xs font-bold uppercase tracking-widest text-orange-600">
+                            {{ member.get_category_display }}
+                        </p>
+
+                        <h3 class="mt-2 text-xl font-bold text-slate-900">
+                            {{ member.name }}
+                        </h3>
+
+                        <p class="mt-1 font-medium text-slate-600">
+                            {{ member.title }}
+                        </p>
+
+                        {% if member.mandate %}
+
+                            <p class="mt-4 line-clamp-4 text-sm leading-7 text-slate-500">
+                                {{ member.mandate }}
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+            <div class="mt-10 rounded-2xl bg-slate-50 p-8 text-center">
+                <p class="text-slate-600">
+                    Team information will be published here.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="bg-orange-500 py-16">
+
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">
+            From vulnerability to self-reliance
+        </h2>
+
+        <p class="mx-auto mt-4 max-w-2xl leading-8 text-orange-50">
+            Explore MMC’s work, priorities and partnerships across Somalia.
+        </p>
+
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+
+            <a
+                href="/projects/"
+                class="inline-flex items-center justify-center rounded-xl bg-slate-950 px-6 py-3.5 font-semibold text-white transition hover:bg-slate-800"
+            >
+                Explore our work
+            </a>
+
+            <a
+                href="/contact/"
+                class="inline-flex items-center justify-center rounded-xl border-2 border-white px-6 py-3.5 font-semibold text-white transition hover:bg-white hover:text-orange-600"
+            >
+                Contact MMC
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

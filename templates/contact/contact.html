@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+
+{% block title %}
+Contact Us | Mission for Meaningful Change
+{% endblock %}
+
+{% block content %}
+
+<section class="section bg-slate-50">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="max-w-3xl mb-12">
+
+            <span class="text-sm font-semibold uppercase tracking-wider text-brand-primary">
+                Contact Us
+            </span>
+
+            <h1 class="mt-3 text-4xl md:text-5xl font-bold text-slate-900">
+                Let’s talk about what’s possible.
+            </h1>
+
+            {% if contact_settings %}
+                <p class="mt-5 text-lg leading-8 text-slate-600">
+                    {{ contact_settings.contact_intro }}
+                </p>
+            {% endif %}
+
+        </div>
+
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+
+            <!-- Contact Information -->
+
+            <div>
+
+                <div class="grid gap-5">
+
+
+                    <!-- Email -->
+
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+
+                        <div class="flex items-start gap-4">
+
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center">
+
+                                <span class="text-brand-primary text-xl">
+                                    ✉
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <h2 class="font-semibold text-lg text-slate-900">
+                                    Send Us Mail
+                                </h2>
+
+                                {% if contact_settings %}
+                                    <a
+                                        href="mailto:{{ contact_settings.email }}"
+                                        class="mt-1 inline-block text-brand-primary hover:underline"
+                                    >
+                                        {{ contact_settings.email }}
+                                    </a>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+
+                        <div class="flex items-start gap-4">
+
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center">
+
+                                <span class="text-brand-primary text-xl">
+                                    ☎
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <h2 class="font-semibold text-lg text-slate-900">
+                                    Call Us Anytime
+                                </h2>
+
+                                {% if contact_settings %}
+
+                                    <div class="mt-2 space-y-1">
+
+                                        <a
+                                            href="tel:{{ contact_settings.phone_1 }}"
+                                            class="block text-brand-primary hover:underline"
+                                        >
+                                            {{ contact_settings.phone_1 }}
+                                        </a>
+
+                                        <a
+                                            href="tel:{{ contact_settings.phone_2 }}"
+                                            class="block text-brand-primary hover:underline"
+                                        >
+                                            {{ contact_settings.phone_2 }}
+                                        </a>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Address -->
+
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+
+                        <div class="flex items-start gap-4">
+
+                            <div class="shrink-0 w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center">
+
+                                <span class="text-brand-primary text-xl">
+                                    📍
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <h2 class="font-semibold text-lg text-slate-900">
+                                    Visit Our HQ Office
+                                </h2>
+
+                                {% if contact_settings %}
+
+                                    <p class="mt-2 leading-7 text-slate-600 whitespace-pre-line">
+                                        {{ contact_settings.office_address }}
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Contact Form -->
+
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+
+                <h2 class="text-2xl font-bold text-slate-900">
+                    Write Us What You Want to Know
+                </h2>
+
+                <p class="mt-2 text-slate-600">
+                    Send us your enquiry and our team will review it.
+                </p>
+
+
+                {% if messages %}
+
+                    <div class="mt-5 space-y-3">
+
+                        {% for message in messages %}
+
+                            <div class="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-green-800">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <form
+                    method="post"
+                    class="mt-8 space-y-5"
+                >
+
+                    {% csrf_token %}
+
+
+                    {% if form.non_field_errors %}
+
+                        <div class="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-red-700">
+
+                            {{ form.non_field_errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- Name -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.name.id_for_label }}"
+                            class="form-label"
+                        >
+                            Name
+                        </label>
+
+                        {{ form.name }}
+
+                        {% if form.name.errors %}
+                            <p class="mt-1 text-sm text-red-600">
+                                {{ form.name.errors|striptags }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.email.id_for_label }}"
+                            class="form-label"
+                        >
+                            Email
+                        </label>
+
+                        {{ form.email }}
+
+                        {% if form.email.errors %}
+                            <p class="mt-1 text-sm text-red-600">
+                                {{ form.email.errors|striptags }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.phone.id_for_label }}"
+                            class="form-label"
+                        >
+                            Phone
+                        </label>
+
+                        {{ form.phone }}
+
+                    </div>
+
+
+                    <!-- Organization -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.organization.id_for_label }}"
+                            class="form-label"
+                        >
+                            Organisation
+                        </label>
+
+                        {{ form.organization }}
+
+                    </div>
+
+
+                    <!-- Subject -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.subject.id_for_label }}"
+                            class="form-label"
+                        >
+                            Subject
+                        </label>
+
+                        {{ form.subject }}
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div>
+
+                        <label
+                            for="{{ form.message.id_for_label }}"
+                            class="form-label"
+                        >
+                            Message
+                        </label>
+
+                        {{ form.message }}
+
+                        {% if form.message.errors %}
+                            <p class="mt-1 text-sm text-red-600">
+                                {{ form.message.errors|striptags }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary w-full"
+                    >
+                        Send Enquiry
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

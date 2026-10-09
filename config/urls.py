@@ -6,7 +6,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-     path("", include("core.urls")),
+     path("contact/",include("contact.urls")),
+     path("", include("pages.urls")),
+     path("", include("projects.urls")),
+     path("resources/news/", include("news.urls")),
+     path("resources/",include("resources.urls")),
+     path("get-involved/",include("engagement.urls")),
 ]
 
 

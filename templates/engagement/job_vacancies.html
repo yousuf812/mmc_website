@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Careers | MMC{% endblock %}
+
+{% block content %}
+
+<section class="bg-slate-950 text-white">
+    <div class="container-shell py-20 md:py-24">
+
+        <a href="{% url 'engagement:home' %}"
+           class="text-sm font-semibold text-emerald-300">
+            ← Get Involved
+        </a>
+
+        <h1 class="mt-6 text-4xl font-bold sm:text-5xl">
+            Careers at MMC
+        </h1>
+
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            Explore advertised positions and review the qualifications,
+            responsibilities and application instructions for each role.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="section-shell bg-white">
+    <div class="container-shell">
+
+        {% if vacancies %}
+
+        <div class="space-y-6">
+
+            {% for vacancy in vacancies %}
+
+            <article class="rounded-3xl border border-slate-200 p-6 shadow-sm md:p-8">
+
+                <div class="flex flex-col justify-between gap-4 md:flex-row">
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">
+                            {{ vacancy.title }}
+                        </h2>
+
+                        <p class="mt-3 text-sm leading-6 text-slate-500">
+                            {% if vacancy.department %}
+                                {{ vacancy.department }}
+                            {% endif %}
+
+                            {% if vacancy.department and vacancy.location %}
+                                ·
+                            {% endif %}
+
+                            {% if vacancy.location %}
+                                {{ vacancy.location }}
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    {% if vacancy.employment_type %}
+                    <div>
+                        <span class="inline-flex rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800">
+                            {{ vacancy.employment_type }}
+                        </span>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="mt-6 whitespace-pre-line leading-7 text-slate-700">
+                    {{ vacancy.description }}
+                </div>
+
+
+                {% if vacancy.responsibilities %}
+                <div class="mt-6">
+                    <h3 class="font-bold text-slate-900">
+                        Key Responsibilities
+                    </h3>
+                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
+                        {{ vacancy.responsibilities }}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                {% if vacancy.qualifications %}
+                <div class="mt-6">
+                    <h3 class="font-bold text-slate-900">
+                        Qualifications
+                    </h3>
+                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
+                        {{ vacancy.qualifications }}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                {% if vacancy.experience %}
+                <div class="mt-6">
+                    <h3 class="font-bold text-slate-900">
+                        Experience
+                    </h3>
+                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
+                        {{ vacancy.experience }}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                {% if vacancy.closing_date %}
+                <p class="mt-6 text-sm font-semibold text-slate-700">
+                    Closing date: {{ vacancy.closing_date|date:"j F Y" }}
+                </p>
+                {% endif %}
+
+
+                {% if vacancy.application_instructions %}
+                <div class="mt-5 rounded-2xl bg-slate-50 p-5">
+                    <h3 class="font-bold text-slate-900">
+                        Application Instructions
+                    </h3>
+                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
+                        {{ vacancy.application_instructions }}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                <div class="mt-6 flex flex-wrap gap-3">
+
+                    {% if vacancy.application_url %}
+                    <a href="{{ vacancy.application_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn-primary inline-flex">
+                        Apply Online
+                    </a>
+                    {% endif %}
+
+                    {% if vacancy.application_email %}
+                    <a href="mailto:{{ vacancy.application_email }}"
+                       class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-800 hover:bg-slate-100">
+                        Apply by Email
+                    </a>
+                    {% endif %}
+
+                    {% if not vacancy.application_url and not vacancy.application_email %}
+                    <a href="{% url 'contact:contact' %}"
+                       class="btn-primary inline-flex">
+                        Contact MMC
+                    </a>
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
+
+            <h2 class="text-2xl font-bold text-slate-900">
+                No Current Vacancies
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-xl leading-7 text-slate-600">
+                MMC has no published vacancies at the moment.
+                Please check again later for new opportunities.
+            </p>
+
+            <a href="{% url 'contact:contact' %}"
+               class="btn-primary mt-6 inline-flex">
+                Contact MMC
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

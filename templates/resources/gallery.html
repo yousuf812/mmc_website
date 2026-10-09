@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery | MMC{% endblock %}
+
+{% block content %}
+
+<section class="bg-slate-950 text-white">
+    <div class="container-shell py-20 md:py-28">
+
+        <div class="max-w-3xl">
+            <span class="inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+                Resources
+            </span>
+
+            <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                Gallery
+            </h1>
+
+            <p class="mt-6 text-lg leading-8 text-slate-300">
+                Explore selected photographs and media from MMC's work,
+                programmes and engagement with communities.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section-shell bg-white">
+
+    <div class="container-shell">
+
+        {% if gallery_items %}
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for item in gallery_items %}
+
+            <article class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+
+                {% if item.media_type == "image" and item.image %}
+
+                    <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+
+                        <img
+                            src="{{ item.image.url }}"
+                            alt="{{ item.alt_text|default:item.title }}"
+                            class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                {% elif item.media_type == "video" and item.video_file %}
+
+                    <div class="aspect-[4/3] overflow-hidden bg-slate-950">
+
+                        <video
+                            controls
+                            preload="metadata"
+                            class="h-full w-full object-cover"
+                        >
+                            <source src="{{ item.video_file.url }}">
+                            Your browser does not support the video element.
+                        </video>
+
+                    </div>
+
+                {% elif item.media_type == "video" and item.video_url %}
+
+                    <div class="flex aspect-[4/3] items-center justify-center bg-slate-950 p-8">
+
+                        <a
+                            href="{{ item.video_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-emerald-400"
+                        >
+                            Watch Video
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="p-6">
+
+                    <div class="mb-3 flex items-center gap-2">
+
+                        {% if item.media_type == "image" %}
+                            <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                                Photo
+                            </span>
+                        {% else %}
+                            <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                                Video
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                    <h2 class="text-xl font-bold text-slate-900">
+                        {{ item.title }}
+                    </h2>
+
+                    {% if item.caption %}
+                    <p class="mt-3 text-sm leading-6 text-slate-600">
+                        {{ item.caption }}
+                    </p>
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
+
+            <h2 class="text-2xl font-bold text-slate-900">
+                Gallery coming soon
+            </h2>
+
+            <p class="mx-auto mt-3 max-w-xl text-slate-600">
+                MMC's gallery will be populated with consent-cleared
+                photographs and media as materials become available.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<section class="section-shell bg-slate-50">
+
+    <div class="container-shell">
+
+        <div class="rounded-3xl bg-slate-900 px-6 py-12 text-center text-white md:px-12">
+
+            <h2 class="text-3xl font-bold">
+                Looking for MMC media resources?
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-2xl text-slate-300">
+                Visit our press kit for approved logos, photographs,
+                biographies and other media materials.
+            </p>
+
+            <a
+                href="{% url 'resources:press_kit' %}"
+                class="btn-primary mt-8 inline-flex"
+            >
+                Visit Press Kit
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

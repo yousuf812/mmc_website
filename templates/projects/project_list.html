@@ -1,0 +1,606 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Our Work | MMC
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="bg-slate-950 text-white">
+
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+
+        <div class="max-w-4xl">
+
+            <span class="inline-flex rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-300">
+                Our Work
+            </span>
+
+            <h1 class="mt-6 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+                Projects that create meaningful change
+            </h1>
+
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">
+                Explore MMC's projects, partnerships, areas of intervention
+                and measurable outcomes across Somalia.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FILTERS
+===================================================== -->
+
+<section class="border-b border-slate-200 bg-white py-8">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <form
+            method="get"
+            action="{% url 'projects:project_list' %}"
+            class="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-7"
+        >
+
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <!-- SEARCH -->
+
+                <div class="lg:col-span-3">
+
+                    <label
+                        for="q"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        Search projects
+                    </label>
+
+                    <input
+                        type="search"
+                        id="q"
+                        name="q"
+                        value="{{ search_query }}"
+                        placeholder="Search by project name, location or client/donor..."
+                        class="form-input w-full"
+                    >
+
+                </div>
+
+
+                <!-- PRIORITY -->
+
+                <div>
+
+                    <label
+                        for="priority"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        Strategic Priority
+                    </label>
+
+                    <select
+                        id="priority"
+                        name="priority"
+                        class="form-input w-full"
+                    >
+
+                        <option value="">
+                            All priorities
+                        </option>
+
+                        {% for priority in priorities %}
+
+                            <option
+                                value="{{ priority.id }}"
+                                {% if selected_priority == priority.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ priority.number }}.
+                                {{ priority.title }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- SECTOR -->
+
+                <div>
+
+                    <label
+                        for="sector"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        Sector
+                    </label>
+
+                    <select
+                        id="sector"
+                        name="sector"
+                        class="form-input w-full"
+                    >
+
+                        <option value="">
+                            All sectors
+                        </option>
+
+                        {% for sector in sectors %}
+
+                            <option
+                                value="{{ sector.id }}"
+                                {% if selected_sector == sector.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ sector.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- SDG -->
+
+                <div>
+
+                    <label
+                        for="sdg"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        SDG
+                    </label>
+
+                    <select
+                        id="sdg"
+                        name="sdg"
+                        class="form-input w-full"
+                    >
+
+                        <option value="">
+                            All SDGs
+                        </option>
+
+                        {% for sdg in sdgs %}
+
+                            <option
+                                value="{{ sdg.id }}"
+                                {% if selected_sdg == sdg.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}
+                            >
+                                SDG {{ sdg.number }} —
+                                {{ sdg.title }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DELIVERY ENGINE -->
+
+                <div>
+
+                    <label
+                        for="delivery_engine"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        Delivery Engine
+                    </label>
+
+                    <select
+                        id="delivery_engine"
+                        name="delivery_engine"
+                        class="form-input w-full"
+                    >
+
+                        <option value="">
+                            All delivery engines
+                        </option>
+
+                        {% for engine in delivery_engines %}
+
+                            <option
+                                value="{{ engine.id }}"
+                                {% if selected_delivery_engine == engine.id|stringformat:"s" %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ engine.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div>
+
+                    <label
+                        for="status"
+                        class="mb-2 block text-sm font-bold text-slate-800"
+                    >
+                        Project Status
+                    </label>
+
+                    <select
+                        id="status"
+                        name="status"
+                        class="form-input w-full"
+                    >
+
+                        <option value="">
+                            All statuses
+                        </option>
+
+                        <option
+                            value="planned"
+                            {% if selected_status == "planned" %}
+                                selected
+                            {% endif %}
+                        >
+                            Planned
+                        </option>
+
+                        <option
+                            value="active"
+                            {% if selected_status == "active" %}
+                                selected
+                            {% endif %}
+                        >
+                            Active
+                        </option>
+
+                        <option
+                            value="completed"
+                            {% if selected_status == "completed" %}
+                                selected
+                            {% endif %}
+                        >
+                            Completed
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+
+                <button
+                    type="submit"
+                    class="inline-flex items-center justify-center rounded-xl bg-orange-500 px-7 py-3 font-bold text-white transition hover:bg-orange-600"
+                >
+                    Apply Filters
+                </button>
+
+                <a
+                    href="{% url 'projects:project_list' %}"
+                    class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-3 font-bold text-slate-700 transition hover:bg-slate-100"
+                >
+                    Clear Filters
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECT RESULTS
+===================================================== -->
+
+<section class="bg-slate-50 py-16 sm:py-20">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <!-- RESULT COUNT -->
+
+        <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+            <div>
+
+                <h2 class="text-2xl font-black text-slate-900">
+                    Project Directory
+                </h2>
+
+                <p class="mt-1 text-sm text-slate-500">
+                    Showing {{ projects|length }} project{{ projects|length|pluralize }}
+                </p>
+
+            </div>
+
+            {% if search_query %}
+
+                <p class="text-sm text-slate-600">
+                    Search:
+                    <strong class="text-slate-900">
+                        "{{ search_query }}"
+                    </strong>
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        {% if projects %}
+
+            <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+
+                {% for project in projects %}
+
+                    <article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                        <!-- IMAGE -->
+
+                        {% if project.featured_image %}
+
+                            <a
+                                href="{% url 'projects:project_detail' project.slug %}"
+                                class="overflow-hidden"
+                            >
+
+                                <img
+                                    src="{{ project.featured_image.url }}"
+                                    alt="{{ project.image_alt_text }}"
+                                    class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                                >
+
+                            </a>
+
+                        {% else %}
+
+                            <div class="flex h-56 items-center justify-center bg-gradient-to-br from-slate-900 to-orange-900">
+
+                                <span class="text-3xl font-black text-white">
+                                    MMC
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- CONTENT -->
+
+                        <div class="flex flex-1 flex-col p-6">
+
+                            <div class="flex flex-wrap gap-2">
+
+                                {% if project.is_featured %}
+
+                                    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
+                                        Featured
+                                    </span>
+
+                                {% endif %}
+
+                                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold capitalize text-slate-700">
+                                    {{ project.get_project_status_display }}
+                                </span>
+
+                            </div>
+
+
+                            <h3 class="mt-5 text-xl font-black leading-7 text-slate-900">
+
+                                <a
+                                    href="{% url 'projects:project_detail' project.slug %}"
+                                    class="transition hover:text-orange-600"
+                                >
+                                    {{ project.title }}
+                                </a>
+
+                            </h3>
+
+
+                            {% if project.short_description %}
+
+                                <p class="mt-4 line-clamp-4 text-sm leading-7 text-slate-600">
+                                    {{ project.short_description }}
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- LOCATION -->
+
+                            {% if project.location %}
+
+                                <div class="mt-5 flex gap-2 text-sm">
+
+                                    <span class="font-bold text-slate-900">
+                                        Location:
+                                    </span>
+
+                                    <span class="text-slate-600">
+                                        {{ project.location }}
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- CLIENT -->
+
+                            {% if project.client_donor %}
+
+                                <div class="mt-2 flex gap-2 text-sm">
+
+                                    <span class="font-bold text-slate-900">
+                                        Client/Donor:
+                                    </span>
+
+                                    <span class="text-slate-600">
+                                        {{ project.client_donor }}
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- PRIORITY -->
+
+                            {% if project.priority %}
+
+                                <div class="mt-5">
+
+                                    <span class="text-xs font-bold uppercase tracking-wider text-orange-600">
+                                        Priority
+                                    </span>
+
+                                    <p class="mt-1 text-sm font-semibold text-slate-800">
+                                        {{ project.priority.title }}
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- SECTORS -->
+
+                            {% with project_sectors=project.sectors.all %}
+
+                                {% if project_sectors %}
+
+                                    <div class="mt-4 flex flex-wrap gap-2">
+
+                                        {% for sector in project_sectors|slice:":3" %}
+
+                                            <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+                                                {{ sector.name }}
+                                            </span>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endwith %}
+
+
+                            <!-- LINK -->
+
+                            <div class="mt-auto pt-7">
+
+                                <a
+                                    href="{% url 'projects:project_detail' project.slug %}"
+                                    class="inline-flex items-center font-bold text-orange-600 hover:text-orange-700"
+                                >
+                                    View project
+
+                                    <span class="ml-2 transition group-hover:translate-x-1">
+                                        →
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <!-- NO RESULTS -->
+
+            <div class="rounded-3xl border border-slate-200 bg-white p-12 text-center">
+
+                <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 text-2xl">
+                    🔎
+                </div>
+
+                <h2 class="mt-6 text-2xl font-black text-slate-900">
+                    No projects found
+                </h2>
+
+                <p class="mx-auto mt-3 max-w-xl leading-7 text-slate-600">
+                    No published projects match your current search or
+                    filter selections.
+                </p>
+
+                <a
+                    href="{% url 'projects:project_list' %}"
+                    class="mt-7 inline-flex rounded-xl bg-orange-500 px-6 py-3 font-bold text-white hover:bg-orange-600"
+                >
+                    View all projects
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="bg-orange-500 py-16">
+
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+
+        <h2 class="text-3xl font-black text-white sm:text-4xl">
+            Interested in working with MMC?
+        </h2>
+
+        <p class="mx-auto mt-4 max-w-2xl leading-8 text-orange-50">
+            Explore partnership opportunities and connect with our team.
+        </p>
+
+        <a
+            href="{% url 'contact:contact' %}"
+            class="mt-8 inline-flex rounded-xl bg-slate-950 px-7 py-3.5 font-bold text-white hover:bg-slate-800"
+        >
+            Contact MMC
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

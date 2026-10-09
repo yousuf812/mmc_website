@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | MMC{% endblock %}
+
+{% block content %}
+
+<section class="bg-slate-950 text-white">
+    <div class="container-shell py-20 md:py-28">
+
+        <a href="{% url 'engagement:home' %}"
+           class="text-sm font-semibold text-emerald-300 hover:text-white">
+            ← Get Involved
+        </a>
+
+        <h1 class="mt-6 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            {{ page.title }}
+        </h1>
+
+        {% if page.short_description %}
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+            {{ page.short_description }}
+        </p>
+        {% endif %}
+
+        {% if page.call_to_action and page.call_to_action_url %}
+        <a href="{{ page.call_to_action_url }}"
+           class="btn-primary mt-8 inline-flex">
+            {{ page.call_to_action }}
+        </a>
+        {% endif %}
+
+    </div>
+</section>
+
+
+{% if page.featured_image %}
+<section class="bg-white pt-10">
+    <div class="container-shell">
+
+        <img
+            src="{{ page.featured_image.url }}"
+            alt="{{ page.image_alt_text|default:page.title }}"
+            class="max-h-[520px] w-full rounded-3xl object-cover"
+        >
+
+    </div>
+</section>
+{% endif %}
+
+
+<section class="section-shell bg-white">
+    <div class="container-shell">
+
+        <div class="mx-auto max-w-4xl">
+
+            {% if page.content %}
+            <div class="whitespace-pre-line text-base leading-8 text-slate-700">
+                {{ page.content }}
+            </div>
+            {% endif %}
+
+
+            {% if page.why_engage %}
+            <div class="mt-12 rounded-3xl bg-emerald-50 p-7 md:p-10">
+
+                <h2 class="text-2xl font-bold text-slate-900">
+                    Why Engage with MMC?
+                </h2>
+
+                <div class="mt-4 whitespace-pre-line leading-8 text-slate-700">
+                    {{ page.why_engage }}
+                </div>
+
+            </div>
+            {% endif %}
+
+
+            {% if page.process %}
+            <div class="mt-12">
+
+                <h2 class="text-2xl font-bold text-slate-900">
+                    Process
+                </h2>
+
+                <div class="mt-4 whitespace-pre-line leading-8 text-slate-700">
+                    {{ page.process }}
+                </div>
+
+            </div>
+            {% endif %}
+
+
+            {% if page.requirements %}
+            <div class="mt-12">
+
+                <h2 class="text-2xl font-bold text-slate-900">
+                    Requirements
+                </h2>
+
+                <div class="mt-4 whitespace-pre-line leading-8 text-slate-700">
+                    {{ page.requirements }}
+                </div>
+
+            </div>
+            {% endif %}
+
+
+            <div class="mt-14 rounded-3xl bg-slate-950 p-8 text-white md:p-10">
+
+                <h2 class="text-2xl font-bold">
+                    Take the Next Step
+                </h2>
+
+                <p class="mt-3 leading-7 text-slate-300">
+                    Contact MMC to discuss your enquiry and the next steps.
+                </p>
+
+                {% if page.call_to_action and page.call_to_action_url %}
+
+                <a href="{{ page.call_to_action_url }}"
+                   class="btn-primary mt-6 inline-flex">
+                    {{ page.call_to_action }}
+                </a>
+
+                {% else %}
+
+                <a href="{% url 'contact:contact' %}"
+                   class="btn-primary mt-6 inline-flex">
+                    Contact MMC
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
