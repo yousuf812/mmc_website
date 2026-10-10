@@ -12,6 +12,7 @@ urlpatterns = [
      path("resources/news/", include("news.urls")),
      path("resources/",include("resources.urls")),
      path("get-involved/",include("engagement.urls")),
+     path("tenders/", include("tenders.urls")),
 ]
 
 

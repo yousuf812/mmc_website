@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tender.title }} | MMC Tenders{% endblock %}
+
+{% block content %}
+
+<section class="min-h-screen bg-stone-50 py-10 sm:py-14">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+
+    <a href="{% url 'tenders:list' %}"
+       class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-800 hover:text-emerald-950">
+        <span aria-hidden="true">&larr;</span>
+        Back to tender notices
+    </a>
+
+    <article class="mt-6 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+
+        <div class="border-b border-stone-200 p-6 sm:p-8">
+            <p class="text-xs font-bold uppercase tracking-widest text-emerald-700">
+                Tender reference
+            </p>
+
+            <p class="mt-2 font-semibold text-slate-600">
+                {{ tender.reference }}
+            </p>
+
+            <h1 class="mt-4 text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl">
+                {{ tender.title }}
+            </h1>
+
+            <div class="mt-4">
+                {% if tender.effective_status == "open" %}
+                    <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">
+                        Open
+                    </span>
+                {% elif tender.effective_status == "awarded" %}
+                    <span class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+                        Awarded
+                    </span>
+                {% else %}
+                    <span class="inline-flex rounded-full bg-rose-100 px-3 py-1 text-sm font-semibold text-rose-800">
+                        Closed
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="grid gap-5 border-b border-stone-200 bg-stone-50 p-6 sm:grid-cols-3 sm:p-8">
+            <div>
+                <p class="text-xs font-medium text-slate-500">Category</p>
+                <p class="mt-1 font-semibold text-slate-900">
+                    {{ tender.get_category_display }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium text-slate-500">Published date</p>
+                <p class="mt-1 font-semibold text-slate-900">
+                    {{ tender.published_date|date:"j F Y" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium text-slate-500">Closing date</p>
+                <p class="mt-1 font-semibold text-slate-900">
+                    {{ tender.closing_date|date:"j F Y" }}
+                </p>
+            </div>
+        </div>
+
+        <div class="p-6 sm:p-8">
+            <h2 class="text-lg font-bold text-slate-900">
+                Tender information
+            </h2>
+
+            {% if tender.description %}
+                <div class="mt-4 whitespace-pre-line text-sm leading-7 text-slate-600">
+                    {{ tender.description }}
+                </div>
+            {% else %}
+                <p class="mt-4 text-sm text-slate-500">
+                    Please consult the official tender document for further information.
+                </p>
+            {% endif %}
+
+            {% if tender.document %}
+                <div class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+                    <h2 class="font-bold text-slate-900">
+                        Official tender document
+                    </h2>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        Download the document for the full specifications,
+                        eligibility requirements and submission instructions.
+                    </p>
+
+                    <a href="{% url 'tenders:document' tender.slug %}"
+                       class="mt-4 inline-flex items-center justify-center rounded-lg bg-emerald-800 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-900">
+                        Download tender document
+                    </a>
+                </div>
+            {% else %}
+                <p class="mt-6 rounded-lg bg-stone-100 p-4 text-sm text-slate-600">
+                    The tender document is not currently available online.
+                </p>
+            {% endif %}
+
+            <p class="mt-8 text-xs leading-5 text-slate-500">
+                Please follow the requirements and deadlines stated in
+                the official tender documentation.
+            </p>
+        </div>
+
+    </article>
+</div>
+
+
+</section>
+{% endblock %}
