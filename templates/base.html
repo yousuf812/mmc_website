@@ -37,210 +37,126 @@
 
 
     {# Header #}
-    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
+    
 
-        <div class="container-shell">
 
-            <div class="flex min-h-20 items-center justify-between gap-4 py-3">
 
-                {# Logo and brand #}
-                <a href="{% url 'pages:home' %}"
-                   class="flex min-w-0 items-center gap-3"
-                   aria-label="MMC homepage">
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
+    <div class="mx-auto w-full max-w-[1600px] px-3 sm:px-5 lg:px-6">
 
-                    {% if site_settings and site_settings.logo %}
-                        <img
-                            src="{{ site_settings.logo.url }}"
-                            alt="{{ site_settings.site_name|default:'MMC' }}"
-                            class="h-12 w-auto max-w-36 object-contain sm:h-14"
-                        >
-                    {% else %}
-                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-800 text-lg font-extrabold text-white">
-                            MMC
-                        </span>
-                    {% endif %}
+        <div class="flex min-h-[76px] items-center gap-4 py-2">
 
-                    <span class="min-w-0">
-                        <span class="block truncate text-base font-extrabold leading-tight text-slate-950 sm:text-lg">
-                            {% if site_settings and site_settings.site_name %}
-                                {{ site_settings.site_name }}
-                            {% else %}
-                                Mission for Meaningful Change
-                            {% endif %}
-                        </span>
+            <!-- Logo: Fixed and Compact Width -->
+            <a href="{% url 'pages:home' %}"
+               class="flex w-[90px] shrink-0 items-center justify-start"
+               aria-label="MMC Home">
 
-                        {% if site_settings and site_settings.tagline %}
-                        <span class="mt-1 hidden max-w-64 text-xs leading-4 text-slate-500 sm:block">
-                            {{ site_settings.tagline }}
-                        </span>
-                        {% endif %}
+                {% if site_settings and site_settings.logo %}
+                    <img
+                        src="{{ site_settings.logo.url }}"
+                        alt="{{ site_settings.site_name|default:'MMC' }} logo"
+                        class="block h-11 w-[90px] object-contain object-left"
+                    >
+                {% else %}
+                    <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-800 text-sm font-bold text-white">
+                        MMC
                     </span>
+                {% endif %}
+            </a>
 
-                </a>
+            <!-- Laptop and Desktop Navigation -->
+            <nav
+                class="ml-auto hidden min-w-0 flex-1 items-center justify-end gap-x-2 lg:flex xl:gap-x-3"
+                aria-label="Main navigation">
 
+                <a href="{% url 'pages:home' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Home</a>
 
-                {# Desktop navigation #}
-                <nav class="hidden items-center gap-5 xl:flex"
-                     aria-label="Main navigation">
+                <a href="{% url 'pages:about' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Who We Are</a>
 
-                    <a href="{% url 'pages:home' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Home
-                    </a>
+                <a href="{% url 'projects:what_we_do' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">What We Do</a>
 
-                    <a href="{% url 'pages:about' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Who We Are
-                    </a>
+                <a href="{% url 'projects:project_list' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Our Work</a>
 
-                    <a href="{% url 'projects:what_we_do' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        What We Do
-                    </a>
+                <a href="{% url 'news:news_list' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Resources</a>
 
-                    <a href="{% url 'projects:project_list' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Our Work
-                    </a>
+                <a href="{% url 'tenders:list' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Tenders</a>
 
-                    <a href="{% url 'news:news_list' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Resources
-                    </a>
-                    
-                        <a href="{% url 'tenders:list' %}"
-                        class="text-sm font-medium text-slate-700 transition hover:text-emerald-700">
-                            Tenders
-                        </a>
+                <a href="{% url 'engagement:home' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Get Involved</a>
 
-                    <a href="{% url 'engagement:home' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Get Involved
-                    </a>
+                <a href="{% url 'contact:contact' %}"
+                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Contact</a>
 
-                    <a href="{% url 'contact:contact' %}"
-                       class="text-sm font-semibold text-slate-700 transition hover:text-emerald-700">
-                        Contact
-                    </a>
-
-                </nav>
-
-
-                {# Desktop CTA and mobile toggle #}
-                <div class="flex shrink-0 items-center gap-3">
-
-                    <a href="{% url 'engagement:page' slug='donate-support' %}"
-                       class="hidden rounded-xl bg-emerald-800 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-900 xl:inline-flex">
-                        Donate
-                    </a>
-
-                    <button
-                        id="mobile-menu-button"
-                        type="button"
-                        class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 text-slate-800 transition hover:bg-slate-100 xl:hidden"
-                        aria-label="Open navigation menu"
-                        aria-controls="mobile-menu"
-                        aria-expanded="false">
-
-                        <svg id="menu-open-icon"
-                             xmlns="http://www.w3.org/2000/svg"
-                             width="24"
-                             height="24"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2"
-                             stroke-linecap="round"
-                             aria-hidden="true">
-                            <path d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-
-                        <svg id="menu-close-icon"
-                             class="hidden"
-                             xmlns="http://www.w3.org/2000/svg"
-                             width="24"
-                             height="24"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2"
-                             stroke-linecap="round"
-                             aria-hidden="true">
-                            <path d="m18 6-12 12M6 6l12 12"/>
-                        </svg>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            {# Mobile navigation #}
-            <nav id="mobile-menu"
-                 class="hidden border-t border-slate-200 py-4 xl:hidden"
-                 aria-label="Mobile navigation">
-
-                <div class="flex flex-col gap-1">
-
-                    <a href="{% url 'pages:home' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Home
-                    </a>
-
-                    <a href="{% url 'pages:about' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Who We Are
-                    </a>
-
-                    <a href="{% url 'projects:what_we_do' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        What We Do
-                    </a>
-
-                    <a href="{% url 'projects:project_list' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Our Work
-                    </a>
-
-                    
-                    <a href="{% url 'tenders:list' %}"
-                    class="block rounded-lg px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-700">
-                        Tenders
-                    </a>
-
-                    <a href="{% url 'news:news_list' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Resources
-                    </a>
-
-                    <a href="{% url 'resources:gallery' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Gallery
-                    </a>
-
-                    <a href="{% url 'engagement:home' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Get Involved
-                    </a>
-
-                    <a href="{% url 'contact:contact' %}"
-                       class="rounded-lg px-4 py-3 font-semibold hover:bg-emerald-50 hover:text-emerald-800">
-                        Contact
-                    </a>
-
-                    <a href="{% url 'engagement:page' slug='donate-support' %}"
-                       class="mt-2 rounded-xl bg-emerald-800 px-4 py-3 text-center font-bold text-white hover:bg-emerald-900">
-                        Donate
-                    </a>
-
-                </div>
-
+                <a href="{% url 'engagement:page' slug='donate-support' %}"
+                   class="shrink-0 whitespace-nowrap rounded-md bg-emerald-700 px-2.5 py-2 text-xs font-bold text-white hover:bg-emerald-800 xl:px-3 xl:text-sm">Donate</a>
             </nav>
 
+            <!-- Mobile / Tablet Toggle -->
+            <button
+                id="mobile-menu-button"
+                type="button"
+                class="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100 lg:hidden"
+                aria-label="Open navigation menu"
+                aria-controls="mobile-menu"
+                aria-expanded="false">
+
+                <svg id="menu-open-icon"
+                     xmlns="http://www.w3.org/2000/svg"
+                     class="h-6 w-6"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+
+                <svg id="menu-close-icon"
+                     xmlns="http://www.w3.org/2000/svg"
+                     class="hidden h-6 w-6"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
 
-    </header>
+        <!-- Mobile / Tablet Menu -->
+        <nav id="mobile-menu"
+             class="hidden border-t border-slate-200 py-3 lg:hidden"
+             aria-label="Mobile navigation">
+
+            <div class="flex flex-col gap-1">
+                <a href="{% url 'pages:home' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Home</a>
+                <a href="{% url 'pages:about' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Who We Are</a>
+                <a href="{% url 'projects:what_we_do' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">What We Do</a>
+                <a href="{% url 'projects:project_list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Our Work</a>
+                <a href="{% url 'news:news_list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Resources</a>
+                <a href="{% url 'tenders:list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Tenders</a>
+                <a href="{% url 'engagement:home' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Get Involved</a>
+                <a href="{% url 'contact:contact' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Contact</a>
+                <a href="{% url 'engagement:page' slug='donate-support' %}" class="mt-2 rounded-lg bg-emerald-700 px-4 py-3 text-center font-bold text-white hover:bg-emerald-800">Donate</a>
+            </div>
+        </nav>
+
+    </div>
+</header>
+
+
+
+
+
+
+
 
 
     {# Page content #}
