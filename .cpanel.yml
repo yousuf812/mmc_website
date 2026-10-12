@@ -1,0 +1,15 @@
+---
+deployment:
+  tasks:
+    # ১. আপনার cPanel পাইথন অ্যাপ্লিকেশনের ফোল্ডারে ফাইলগুলো কপি করা
+    - export DEPLOYPATH=/home/your_cpanel_username/your_app_folder/
+    - /bin/cp -R * $DEPLOYPATH
+    
+    # ২. ভার্চুয়াল এনভায়রনমেন্ট অ্যাক্টিভ করে ডিপেন্ডেন্সি ও মাইগ্রেশন রান করা
+    - cd /home/your_cpanel_username/your_app_folder
+    - source /home/your_cpanel_username/virtualenv/your_app_folder/3.11/bin/activate && pip install -r requirements.txt
+    - python manage.py migrate
+    - python manage.py collectstatic --noinput
+    
+    # ৩. পাইথন সার্ভার রিস্টার্ট করার জন্য প্যাসেঞ্জার রিপ্রোম্পট করা
+    - touch passenger_wsgi.py

@@ -41,67 +41,92 @@
 
 
 
+
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
-    <div class="mx-auto w-full max-w-[1600px] px-3 sm:px-5 lg:px-6">
 
-        <div class="flex min-h-[76px] items-center gap-4 py-2">
+    <div class="mx-auto w-full max-w-[1600px] px-4 sm:px-6 xl:px-8">
 
-            <!-- Logo: Fixed and Compact Width -->
+        <!-- Header Row -->
+        <div class="flex min-h-[88px] items-center gap-5 py-3">
+
+            <!-- Logo -->
             <a href="{% url 'pages:home' %}"
-               class="flex w-[90px] shrink-0 items-center justify-start"
+               class="flex w-[110px] shrink-0 items-center"
                aria-label="MMC Home">
 
                 {% if site_settings and site_settings.logo %}
                     <img
                         src="{{ site_settings.logo.url }}"
                         alt="{{ site_settings.site_name|default:'MMC' }} logo"
-                        class="block h-11 w-[90px] object-contain object-left"
+                        class="block h-20 w-[110px] object-contain object-left"
                     >
                 {% else %}
-                    <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-800 text-sm font-bold text-white">
+                    <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-800 text-sm font-bold text-white">
                         MMC
                     </span>
                 {% endif %}
+
             </a>
 
-            <!-- Laptop and Desktop Navigation -->
+
+            <!-- Desktop Navigation -->
             <nav
-                class="ml-auto hidden min-w-0 flex-1 items-center justify-end gap-x-2 lg:flex xl:gap-x-3"
+                class="ml-auto hidden min-w-0 flex-1 items-center justify-end gap-x-4 xl:gap-x-6 2xl:gap-x-7 lg:flex"
                 aria-label="Main navigation">
 
                 <a href="{% url 'pages:home' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Home</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Home
+                </a>
 
                 <a href="{% url 'pages:about' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Who We Are</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Who We Are
+                </a>
 
                 <a href="{% url 'projects:what_we_do' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">What We Do</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    What We Do
+                </a>
 
                 <a href="{% url 'projects:project_list' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Our Work</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Our Work
+                </a>
 
                 <a href="{% url 'news:news_list' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Resources</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Resources
+                </a>
 
                 <a href="{% url 'tenders:list' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Tenders</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Tenders
+                </a>
 
                 <a href="{% url 'engagement:home' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Get Involved</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Get Involved
+                </a>
 
                 <a href="{% url 'contact:contact' %}"
-                   class="whitespace-nowrap text-xs font-semibold text-slate-700 hover:text-emerald-700 xl:text-sm">Contact</a>
+                   class="whitespace-nowrap py-3 text-sm font-semibold text-slate-700 transition-colors hover:text-emerald-700 xl:text-base">
+                    Contact
+                </a>
 
                 <a href="{% url 'engagement:page' slug='donate-support' %}"
-                   class="shrink-0 whitespace-nowrap rounded-md bg-emerald-700 px-2.5 py-2 text-xs font-bold text-white hover:bg-emerald-800 xl:px-3 xl:text-sm">Donate</a>
+                   class="ml-1 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-emerald-700 px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-emerald-800 hover:shadow-md xl:px-5 xl:text-base">
+                    Donate
+                </a>
+
             </nav>
+
 
             <!-- Mobile / Tablet Toggle -->
             <button
                 id="mobile-menu-button"
                 type="button"
-                class="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-800 hover:bg-slate-100 lg:hidden"
+                class="ml-auto inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-800 transition hover:bg-slate-100 lg:hidden"
                 aria-label="Open navigation menu"
                 aria-controls="mobile-menu"
                 aria-expanded="false">
@@ -113,7 +138,8 @@
                      viewBox="0 0 24 24"
                      stroke="currentColor"
                      stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
                           d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
 
@@ -124,32 +150,78 @@
                      viewBox="0 0 24 24"
                      stroke="currentColor"
                      stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
                           d="M6 18L18 6M6 6l12 12"/>
                 </svg>
+
             </button>
+
         </div>
 
-        <!-- Mobile / Tablet Menu -->
-        <nav id="mobile-menu"
-             class="hidden border-t border-slate-200 py-3 lg:hidden"
-             aria-label="Mobile navigation">
+
+        <!-- Mobile / Tablet Navigation -->
+        <nav
+            id="mobile-menu"
+            class="hidden border-t border-slate-200 py-4 lg:hidden"
+            aria-label="Mobile navigation">
 
             <div class="flex flex-col gap-1">
-                <a href="{% url 'pages:home' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Home</a>
-                <a href="{% url 'pages:about' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Who We Are</a>
-                <a href="{% url 'projects:what_we_do' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">What We Do</a>
-                <a href="{% url 'projects:project_list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Our Work</a>
-                <a href="{% url 'news:news_list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Resources</a>
-                <a href="{% url 'tenders:list' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Tenders</a>
-                <a href="{% url 'engagement:home' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Get Involved</a>
-                <a href="{% url 'contact:contact' %}" class="rounded-lg px-4 py-3 font-semibold text-slate-700 hover:bg-emerald-50">Contact</a>
-                <a href="{% url 'engagement:page' slug='donate-support' %}" class="mt-2 rounded-lg bg-emerald-700 px-4 py-3 text-center font-bold text-white hover:bg-emerald-800">Donate</a>
+
+                <a href="{% url 'pages:home' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Home
+                </a>
+
+                <a href="{% url 'pages:about' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Who We Are
+                </a>
+
+                <a href="{% url 'projects:what_we_do' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    What We Do
+                </a>
+
+                <a href="{% url 'projects:project_list' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Our Work
+                </a>
+
+                <a href="{% url 'news:news_list' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Resources
+                </a>
+
+                <a href="{% url 'tenders:list' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Tenders
+                </a>
+
+                <a href="{% url 'engagement:home' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Get Involved
+                </a>
+
+                <a href="{% url 'contact:contact' %}"
+                   class="rounded-lg px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-emerald-50 hover:text-emerald-800">
+                    Contact
+                </a>
+
+                <a href="{% url 'engagement:page' slug='donate-support' %}"
+                   class="mt-3 rounded-lg bg-emerald-700 px-4 py-3 text-center text-base font-bold text-white transition hover:bg-emerald-800">
+                    Donate
+                </a>
+
             </div>
+
         </nav>
 
     </div>
+
 </header>
+
+
 
 
 
