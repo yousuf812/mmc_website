@@ -69,18 +69,22 @@
 
                 {% elif item.media_type == "video" and item.video_url %}
 
-                    <div class="flex aspect-[4/3] items-center justify-center bg-slate-950 p-8">
+                    
+                <div class="flex aspect-[4/3] items-center justify-center bg-slate-950 p-8">
 
-                        <a
-                            href="{{ item.video_url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-emerald-400"
-                        >
-                            Watch Video
-                        </a>
+                    <a
+                        href="{{ item.video_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        <span>Watch Video</span>
+                        <span aria-hidden="true" class="text-xl leading-none">→</span>
+                    </a>
 
-                    </div>
+                </div>
+
 
                 {% endif %}
 

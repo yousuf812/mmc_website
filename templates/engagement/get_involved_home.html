@@ -27,16 +27,25 @@
             from vulnerability to self-reliance.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-4">
-            <a href="{% url 'contact:contact' %}" class="btn-primary">
-                Partner with MMC
-            </a>
+        
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a
+                        href="{% url 'contact:contact' %}"
+                        class="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Partner with MMC
+                    </a>
 
-            <a href="{% url 'engagement:volunteer_opportunities' %}"
-               class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-slate-900">
-                Explore Volunteering
-            </a>
-        </div>
+                    <a
+                        href="{% url 'engagement:volunteer_opportunities' %}"
+                        class="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Explore Volunteering
+                    </a>
+                </div>
+
 
     </div>
 </section>
@@ -92,13 +101,18 @@
                     </p>
                     {% endif %}
 
+                    
+                <div class="mt-6 flex justify-center">
                     <a
                         href="{% url 'engagement:page' slug=page.slug %}"
-                        class="mt-6 inline-flex items-center gap-2 font-bold text-emerald-700 hover:text-emerald-900"
+                        class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
                     >
-                        Learn More
-                        <span aria-hidden="true">→</span>
+                        <span>Learn More</span>
+                        <span aria-hidden="true" class="text-xl leading-none">→</span>
                     </a>
+                </div>
+
 
                 </div>
 
@@ -141,10 +155,17 @@
                 </p>
             </div>
 
-            <a href="{% url 'engagement:volunteer_opportunities' %}"
-               class="font-bold text-emerald-700 hover:text-emerald-900">
-                View All Opportunities →
-            </a>
+           
+                
+                    <a
+                        href="{% url 'engagement:volunteer_opportunities' %}"
+                        class="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        View All Opportunities →
+                    </a>
+
+
 
         </div>
 
@@ -175,10 +196,17 @@
                 </p>
                 {% endif %}
 
-                <a href="{% url 'engagement:volunteer_opportunities' %}"
-                   class="mt-5 inline-flex font-bold text-emerald-700">
-                    Application Details →
-                </a>
+                
+                
+                    <a
+                        href="{% url 'engagement:volunteer_opportunities' %}"
+                        class="mt-5 inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Application Details →
+                    </a>
+
+
 
             </article>
 
@@ -219,10 +247,15 @@
                 </p>
             </div>
 
-            <a href="{% url 'engagement:job_vacancies' %}"
-               class="font-bold text-emerald-700 hover:text-emerald-900">
-                View All Vacancies →
-            </a>
+            
+                        <a
+                            href="{% url 'engagement:job_vacancies' %}"
+                            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
+                            style="background-color: var(--color-mmc-secondary);"
+                        >
+                            View All Vacancies →
+                        </a>
+
 
         </div>
 
@@ -253,10 +286,15 @@
                 </p>
                 {% endif %}
 
-                <a href="{% url 'engagement:job_vacancies' %}"
-                   class="mt-5 inline-flex font-bold text-emerald-700">
+                
+                <a
+                    href="{% url 'engagement:job_vacancies' %}"
+                    class="mt-5 inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
+                    style="background-color: var(--color-mmc-secondary);"
+                >
                     Application Details →
                 </a>
+
 
             </article>
 
@@ -288,10 +326,14 @@
             procurement or other ways to collaborate.
         </p>
 
-        <a href="{% url 'contact:contact' %}"
-           class="btn-primary mt-8 inline-flex">
-            Contact MMC
-        </a>
+       
+            <a
+                href="{% url 'contact:contact' %}"
+                class="mt-8 inline-flex items-center justify-center rounded-xl px-6 py-3 font-bold text-white shadow-md transition hover:brightness-90"
+                style="background-color: var(--color-mmc-secondary);"
+            >
+                Contact MMC
+            </a>
 
     </div>
 </section>

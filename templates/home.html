@@ -22,69 +22,103 @@
 
 
 {# Hero section #}
-<section class="relative overflow-hidden bg-slate-950 text-white">
 
+<section class="relative isolate overflow-hidden bg-slate-950 text-white">
+
+    <!-- Background image -->
     {% if homepage and homepage.hero_image %}
-    <div class="absolute inset-0">
+    <div class="absolute inset-0 -z-20">
         <img
             src="{{ homepage.hero_image.url }}"
             alt=""
-            class="h-full w-full object-cover opacity-30"
+            class="h-full w-full object-cover object-center opacity-35"
         >
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/40"></div>
     </div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40"></div>
     {% else %}
-    <div class="absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
+    <div class="absolute inset-0 -z-20 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
     {% endif %}
 
-    <div class="container-shell relative py-20 md:py-28 lg:py-36">
+    <!-- Decorative glow -->
+    <div class="pointer-events-none absolute -right-32 top-10 -z-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-1/4 -z-10 h-72 w-72 rounded-full bg-teal-500/10 blur-3xl"></div>
 
-        <div class="max-w-4xl">
+    <!-- Hero content -->
+    <div class="container-shell relative mx-auto w-full px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-32">
 
-            <span class="inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
-                Mission for Meaningful Change
-            </span>
+        <div class="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:items-center lg:gap-12">
 
-            <h1 class="mt-7 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-7xl">
-                {% if homepage and homepage.hero_title %}
-                    {{ homepage.hero_title }}
-                {% else %}
-                    From Vulnerability to Self-Reliance
-                {% endif %}
-            </h1>
+            <div class="max-w-4xl lg:col-span-10">
 
-            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
-                {% if homepage and homepage.hero_description %}
-                    {{ homepage.hero_description }}
-                {% else %}
-                    We work with communities and partners to protect dignity,
-                    build resilience, strengthen local systems and expand
-                    opportunities across Somalia.
-                {% endif %}
-            </p>
+                <!-- Eyebrow -->
+                <div class="flex justify-center lg:justify-start">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-emerald-300 sm:text-sm">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]"></span>
+                        Mission for Meaningful Change
+                    </span>
+                </div>
 
-            <div class="mt-9 flex flex-wrap gap-4">
+                <!-- Main heading -->
+                <h1 class="mt-7 text-center text-4xl font-extrabold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl lg:mt-8 lg:text-left lg:text-7xl xl:text-8xl">
 
-                <a
-                    href="{% url 'projects:project_list' %}"
-                    class="btn-primary inline-flex"
-                >
-                    Explore Our Work
-                </a>
+                    {% if homepage and homepage.hero_title %}
+                        {{ homepage.hero_title }}
+                    {% else %}
+                        From Vulnerability
+                        <span class="block mt-2 bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">
+                            to Self-Reliance
+                        </span>
+                    {% endif %}
 
-                <a
-                    href="{% url 'contact:contact' %}"
-                    class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-slate-950"
-                >
-                    Partner with MMC
-                </a>
+                </h1>
 
-                <a
-                    href="{% url 'engagement:page' slug='donate-support' %}"
-                    class="inline-flex items-center rounded-xl border border-emerald-400/50 px-6 py-3 font-semibold text-emerald-300 transition hover:bg-emerald-400 hover:text-slate-950"
-                >
-                    Donate
-                </a>
+                <!-- Modern accent -->
+                <div class="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-300 lg:mx-0"></div>
+
+                <!-- Description -->
+                <p class="mx-auto mt-7 max-w-3xl text-center text-base leading-8 text-slate-300 sm:text-lg md:text-xl lg:mx-0 lg:text-left">
+                    {% if homepage and homepage.hero_description %}
+                        {{ homepage.hero_description }}
+                    {% else %}
+                        We work with communities and partners to protect dignity,
+                        build resilience, strengthen local systems and expand
+                        opportunities across Somalia.
+                    {% endif %}
+                </p>
+
+                <!-- CTA buttons -->
+                <div class="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:justify-start">
+
+                    
+                    <a
+                        href="{% url 'projects:project_list' %}"
+                        class="inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 text-center font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        <span>Explore Our Work</span>
+                        <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h12m-5-5 5 5-5 5"/>
+                        </svg>
+                    </a>
+
+                    <a
+                        href="{% url 'contact:contact' %}"
+                        class="inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 text-center font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Partner with MMC
+                    </a>
+
+                    <a
+                        href="{% url 'engagement:page' slug='donate-support' %}"
+                        class="inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 text-center font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Donate
+                    </a>
+
+
+                </div>
 
             </div>
 
@@ -94,33 +128,41 @@
 </section>
 
 
+
+
 {# Impact statistics #}
+
 {% if statistics %}
-<section class="relative z-10 -mt-6">
+<section class="relative z-10 mt-6">
     <div class="container-shell">
 
-        <div class="grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl md:grid-cols-4">
+        <div
+            class="grid grid-cols-2 overflow-hidden rounded-3xl shadow-xl md:grid-cols-4"
+            style="background-color: var(--color-mmc-secondary); border: 1px solid #d96e54;"
+        >
 
             {% for statistic in statistics %}
 
-            <div class="border-b border-r border-slate-100 p-6 text-center last:border-r-0 md:border-b-0">
+            <div
+                class="border-b border-r border-white/20 p-5 text-center transition duration-300 hover:bg-white/10 sm:p-6 md:border-b-0"
+            >
 
                 {% if statistic.icon %}
-                <div class="mb-2 text-2xl" aria-hidden="true">
+                <div class="mb-3 text-2xl" aria-hidden="true">
                     {{ statistic.icon }}
                 </div>
                 {% endif %}
 
-                <p class="text-3xl font-extrabold tracking-tight text-emerald-700 md:text-4xl">
+                <p class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                     {{ statistic.value }}
                 </p>
 
-                <h2 class="mt-2 text-sm font-bold text-slate-900 md:text-base">
+                <h2 class="mt-2 text-sm font-bold text-white sm:text-base">
                     {{ statistic.label }}
                 </h2>
 
                 {% if statistic.description %}
-                <p class="mt-2 text-xs leading-5 text-slate-500">
+                <p class="mx-auto mt-2 max-w-xs text-xs leading-5 text-white/95 sm:text-sm">
                     {{ statistic.description }}
                 </p>
                 {% endif %}
@@ -136,8 +178,9 @@
 {% endif %}
 
 
+
 {# About / mission and vision #}
-<section class="section-shell bg-white">
+<section class="section-shell bg-white mt-9">
     <div class="container-shell">
 
         <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -159,13 +202,16 @@
                     inclusive prosperity.
                 </p>
 
+                
                 <a
                     href="{% url 'pages:about' %}"
-                    class="mt-7 inline-flex items-center gap-2 font-bold text-emerald-700 hover:text-emerald-900"
+                    class="mt-7 inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg mb-2"
+                    style="background-color: var(--color-mmc-secondary);"
                 >
-                    Discover MMC
-                    <span aria-hidden="true">→</span>
+                    <span>Discover MMC</span>
+                    <span aria-hidden="true" class="text-xl leading-none">→</span>
                 </a>
+
 
             </div>
 
@@ -222,7 +268,7 @@
 
 
 {# Strategic priorities #}
-<section class="section-shell bg-slate-50">
+<section class="section-shell bg-slate-50 mt-9">
     <div class="container-shell">
 
         <div class="mx-auto max-w-3xl text-center">
@@ -326,12 +372,16 @@
                 </p>
             </div>
 
-            <a
-                href="{% url 'projects:project_list' %}"
-                class="font-bold text-emerald-700 hover:text-emerald-900"
-            >
-                View All Projects →
-            </a>
+            
+                <a
+                    href="{% url 'projects:project_list' %}"
+                    class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                    style="background-color: var(--color-mmc-secondary);"
+                >
+                    <span>View All Projects</span>
+                    <span aria-hidden="true" class="text-xl leading-none">→</span>
+                </a>
+
 
         </div>
 
@@ -381,12 +431,16 @@
                     </p>
                     {% endif %}
 
+                   
                     <a
                         href="{% url 'projects:project_detail' slug=project.slug %}"
-                        class="mt-5 inline-flex font-bold text-emerald-700 hover:text-emerald-900"
+                        class="mt-5 inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
                     >
-                        Explore Project →
+                        <span>Explore Project</span>
+                        <span aria-hidden="true" class="text-xl leading-none">→</span>
                     </a>
+
 
                 </div>
 
@@ -410,7 +464,7 @@
 
 
 {# Latest news #}
-<section class="section-shell bg-slate-50">
+<section class="section-shell bg-slate-50 mt-9">
     <div class="container-shell">
 
         <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -425,12 +479,16 @@
                 </h2>
             </div>
 
+           
             <a
                 href="{% url 'news:news_list' %}"
-                class="font-bold text-emerald-700 hover:text-emerald-900"
+                class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                style="background-color: var(--color-mmc-secondary);"
             >
-                View All News →
+                <span>View All News</span>
+                <span aria-hidden="true" class="text-xl leading-none">→</span>
             </a>
+
 
         </div>
 
@@ -472,12 +530,16 @@
                     </p>
                     {% endif %}
 
-                    <a
-                        href="{% url 'news:news_detail' slug=article.slug %}"
-                        class="mt-5 inline-flex font-bold text-emerald-700"
-                    >
-                        Read Story →
-                    </a>
+                    
+                <a
+                    href="{% url 'news:news_detail' slug=article.slug %}"
+                    class="mt-5 inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                    style="background-color: var(--color-mmc-secondary);"
+                >
+                    <span>Read Story</span>
+                    <span aria-hidden="true" class="text-xl leading-none">→</span>
+                </a>
+
 
                 </div>
 
@@ -525,60 +587,177 @@
                 <!-- First set -->
                 <div class="partners-group">
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-1.png' %}"
+                        <img src="{% static 'images/partners/partner-1.jpeg' %}"
                              alt="Partner 1" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-2.png' %}"
+                        <img src="{% static 'images/partners/partner-2.jpeg' %}"
                              alt="Partner 2" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-3.png' %}"
+                        <img src="{% static 'images/partners/partner-3.jpeg' %}"
                              alt="Partner 3" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-4.png' %}"
+                        <img src="{% static 'images/partners/partner-4.jpeg' %}"
                              alt="Partner 4" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-5.png' %}"
+                        <img src="{% static 'images/partners/partner-5.jpeg' %}"
                              alt="Partner 5" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-6.png' %}"
+                        <img src="{% static 'images/partners/partner-6.jpeg' %}"
                              alt="Partner 6" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-7.jpeg' %}"
+                             alt="Partner 7" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-8.jpeg' %}"
+                             alt="Partner 8" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-9.jpeg' %}"
+                             alt="Partner 9" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-10.jpeg' %}"
+                             alt="Partner 10" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-11.jpeg' %}"
+                             alt="Partner 11" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-12.jpeg' %}"
+                             alt="Partner 12" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-13.jpeg' %}"
+                             alt="Partner 13" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-14.jpeg' %}"
+                             alt="Partner 14" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-15.jpeg' %}"
+                             alt="Partner 15" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-16.jpeg' %}"
+                             alt="Partner 16" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-17.jpeg' %}"
+                             alt="Partner 17" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-18.jpeg' %}"
+                             alt="Partner 18" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-19.jpeg' %}"
+                             alt="Partner 19" loading="lazy">
                     </div>
                 </div>
 
                 <!-- Duplicate set for seamless animation -->
                 <div class="partners-group" aria-hidden="true">
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-1.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-1.jpeg' %}" alt="" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-2.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-2.jpeg' %}" alt="" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-3.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-3.jpeg' %}" alt="" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-4.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-4.jpeg' %}" alt="" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-5.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-5.jpeg' %}" alt="" loading="lazy">
                     </div>
 
                     <div class="partner-logo">
-                        <img src="{% static 'images/partners/partner-6.png' %}" alt="" loading="lazy">
+                        <img src="{% static 'images/partners/partner-6.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-7.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-8.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-9.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-10.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-11.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-12.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-13.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-14.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-15.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-16.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-17.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-18.jpeg' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-19.jpeg' %}" alt="" loading="lazy">
                     </div>
                 </div>
 
@@ -592,7 +771,7 @@
 
 
 {# Closing call to action #}
-<section class="section-shell bg-emerald-950 text-white">
+<section class="section-shell bg-emerald-950 text-white mt-3">
     <div class="container-shell py-12 md:py-16">
 
         <div class="mx-auto max-w-4xl text-center">
@@ -620,16 +799,25 @@
 
             <div class="mt-8 flex flex-wrap justify-center gap-4">
 
-                <a href="{% url 'contact:contact' %}" class="btn-primary">
-                    Contact MMC
-                </a>
+                
+                    <a
+                        href="{% url 'contact:contact' %}"
+                        class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        <span>Contact MMC</span>
+                        <span aria-hidden="true" class="text-xl leading-none">→</span>
+                    </a>
 
-                <a
-                    href="{% url 'engagement:home' %}"
-                    class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white hover:text-slate-950"
-                >
-                    Get Involved
-                </a>
+                    <a
+                        href="{% url 'engagement:home' %}"
+                        class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        <span>Get Involved</span>
+                        <span aria-hidden="true" class="text-xl leading-none">→</span>
+                    </a>
+
 
             </div>
 

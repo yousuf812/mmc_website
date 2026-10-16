@@ -114,10 +114,15 @@
                     Contact
                 </a>
 
-                <a href="{% url 'engagement:page' slug='donate-support' %}"
-                   class="ml-1 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-emerald-700 px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-emerald-800 hover:shadow-md xl:px-5 xl:text-base">
-                    Donate
-                </a>
+                
+                    <a
+                        href="{% url 'engagement:page' slug='donate-support' %}"
+                        class="ml-1 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:brightness-90 hover:shadow-md xl:px-5 xl:text-base"
+                        style="background-color: var(--color-mmc-secondary);"
+                    >
+                        Donate
+                    </a>
+
 
             </nav>
 
@@ -208,10 +213,15 @@
                     Contact
                 </a>
 
-                <a href="{% url 'engagement:page' slug='donate-support' %}"
-                   class="mt-3 rounded-lg bg-emerald-700 px-4 py-3 text-center text-base font-bold text-white transition hover:bg-emerald-800">
+                
+                <a
+                    href="{% url 'engagement:page' slug='donate-support' %}"
+                    class="mt-3 rounded-lg px-4 py-3 text-center text-base font-bold text-white transition hover:brightness-90"
+                    style="background-color: var(--color-mmc-secondary);"
+                >
                     Donate
                 </a>
+
 
             </div>
 
@@ -238,289 +248,186 @@
 
 
     {# Footer #}
-    <footer class="bg-slate-950 text-slate-300">
+   
+<footer class="bg-slate-950 text-slate-300">
+    <div class="container-shell py-12 md:py-16">
 
-        <div class="container-shell py-14 md:py-16">
+        <!-- Footer columns -->
+        <div class="grid grid-cols-1 gap-10 text-center sm:grid-cols-2 sm:gap-10 sm:text-left lg:grid-cols-4">
 
-            <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- Organisation -->
+            <div class="flex flex-col items-center sm:items-start">
 
-                {# Organisation #}
-                <div>
+                <a href="{% url 'pages:home' %}"
+                   class="inline-flex items-center justify-center gap-3">
 
-                    <a href="{% url 'pages:home' %}"
-                       class="inline-flex items-center gap-3">
+                    {% if site_settings and site_settings.logo %}
+                        <img
+                            src="{{ site_settings.logo.url }}"
+                            alt="{{ site_settings.site_name|default:'MMC' }}"
+                            class="h-12 w-auto max-w-36 object-contain"
+                        >
+                    {% else %}
+                        <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-700 font-extrabold text-white">
+                            MMC
+                        </span>
+                    {% endif %}
+                </a>
 
-                        {% if site_settings and site_settings.logo %}
-                            <img
-                                src="{{ site_settings.logo.url }}"
-                                alt="{{ site_settings.site_name|default:'MMC' }}"
-                                class="h-12 w-auto max-w-36 object-contain"
-                            >
-                        {% else %}
-                            <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-700 font-extrabold text-white">
-                                MMC
-                            </span>
-                        {% endif %}
-
-                    </a>
-
-                    <h2 class="mt-5 text-lg font-bold text-white">
-                        {% if site_settings and site_settings.site_name %}
-                            {{ site_settings.site_name }}
-                        {% else %}
-                            Mission for Meaningful Change
-                        {% endif %}
-                    </h2>
-
-                    <p class="mt-4 text-sm leading-7 text-slate-400">
-                        {% if site_settings and site_settings.tagline %}
-                            {{ site_settings.tagline }}
-                        {% else %}
-                            Working with communities and partners to advance
-                            resilience, dignity and self-reliance.
-                        {% endif %}
-                    </p>
-
-                    <div class="mt-5 flex flex-wrap gap-3">
-
-                        {% if site_settings.facebook %}
-                        <a href="{{ site_settings.facebook }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="MMC on Facebook"
-                           class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold hover:border-emerald-500 hover:text-white">
-                            Facebook
-                        </a>
-                        {% endif %}
-
-                        {% if site_settings.linkedin %}
-                        <a href="{{ site_settings.linkedin }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="MMC on LinkedIn"
-                           class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold hover:border-emerald-500 hover:text-white">
-                            LinkedIn
-                        </a>
-                        {% endif %}
-
-                        {% if site_settings.youtube %}
-                        <a href="{{ site_settings.youtube }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           aria-label="MMC on YouTube"
-                           class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold hover:border-emerald-500 hover:text-white">
-                            YouTube
-                        </a>
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-
-                {# Explore #}
-                <div>
-
-                    <h2 class="text-lg font-bold text-white">
-                        Explore MMC
-                    </h2>
-
-                    <ul class="mt-5 space-y-3 text-sm">
-
-                        <li>
-                            <a href="{% url 'pages:about' %}"
-                               class="hover:text-emerald-300">
-                                Who We Are
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'projects:what_we_do' %}"
-                               class="hover:text-emerald-300">
-                                What We Do
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'projects:project_list' %}"
-                               class="hover:text-emerald-300">
-                                Our Work
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'news:news_list' %}"
-                               class="hover:text-emerald-300">
-                                News & Insights
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'resources:publication_list' %}"
-                               class="hover:text-emerald-300">
-                                Publications
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'resources:gallery' %}"
-                               class="hover:text-emerald-300">
-                                Gallery
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                {# Get involved #}
-                <div>
-
-                    <h2 class="text-lg font-bold text-white">
-                        Get Involved
-                    </h2>
-
-                    <ul class="mt-5 space-y-3 text-sm">
-
-                        <li>
-                            <a href="{% url 'engagement:home' %}"
-                               class="hover:text-emerald-300">
-                                Volunteer & Careers
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'engagement:page' slug='partnerships' %}"
-                               class="hover:text-emerald-300">
-                                Partnerships
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'engagement:page' slug='donate-support' %}"
-                               class="hover:text-emerald-300">
-                                Donate & Support
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'engagement:page' slug='customers-clients' %}"
-                               class="hover:text-emerald-300">
-                                Customers & Clients
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'engagement:page' slug='suppliers-contractors' %}"
-                               class="hover:text-emerald-300">
-                                Suppliers & Contractors
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{% url 'contact:contact' %}"
-                               class="hover:text-emerald-300">
-                                Contact Us
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                {# Contact #}
-                <div>
-
-                    <h2 class="text-lg font-bold text-white">
-                        Contact MMC
-                    </h2>
-
-                    <div class="mt-5 space-y-4 text-sm leading-6">
-
-                        {% if site_settings and site_settings.address %}
-                        <div>
-                            <p class="font-semibold text-white">Address</p>
-                            <p class="mt-1 text-slate-400">
-                                {{ site_settings.address }}
-                            </p>
-                        </div>
-                        {% endif %}
-
-                        {% if site_settings and site_settings.email %}
-                        <div>
-                            <p class="font-semibold text-white">Email</p>
-                            <a href="mailto:{{ site_settings.email }}"
-                               class="mt-1 inline-block break-all text-emerald-300 hover:text-white">
-                                {{ site_settings.email }}
-                            </a>
-                        </div>
-                        {% endif %}
-
-                        {% if site_settings and site_settings.phone_1 %}
-                        <div>
-                            <p class="font-semibold text-white">Phone</p>
-                            <a href="tel:{{ site_settings.phone_1 }}"
-                               class="mt-1 inline-block text-slate-400 hover:text-white">
-                                {{ site_settings.phone_1 }}
-                            </a>
-                        </div>
-                        {% endif %}
-
-                        {% if site_settings and site_settings.phone_2 %}
-                        <div>
-                            <a href="tel:{{ site_settings.phone_2 }}"
-                               class="text-slate-400 hover:text-white">
-                                {{ site_settings.phone_2 }}
-                            </a>
-                        </div>
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            {# Bottom bar #}
-            <div class="mt-12 flex flex-col gap-4 border-t border-slate-800 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-
-                <p class="text-slate-400">
-                    &copy; {% now "Y" %}
+                <h2 class="mt-5 text-lg font-bold text-white">
                     {% if site_settings and site_settings.site_name %}
                         {{ site_settings.site_name }}
                     {% else %}
                         Mission for Meaningful Change
-                    {% endif %}.
-                    All rights reserved.
+                    {% endif %}
+                </h2>
+
+                <p class="mt-4 max-w-sm text-sm leading-7 text-slate-400">
+                    {% if site_settings and site_settings.tagline %}
+                        {{ site_settings.tagline }}
+                    {% else %}
+                        Working with communities and partners to advance
+                        resilience, dignity and self-reliance.
+                    {% endif %}
                 </p>
 
-                <div class="flex flex-wrap gap-x-5 gap-y-2">
+                <!-- Social links -->
+                <div class="mt-5 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
 
-                    <a href="{% url 'contact:contact' %}"
-                       class="hover:text-emerald-300">
-                        Contact
+                    {% if site_settings.facebook %}
+                    <a href="{{ site_settings.facebook }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="MMC on Facebook"
+                       class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold transition hover:border-emerald-500 hover:text-white">
+                        Facebook
                     </a>
+                    {% endif %}
 
-                    <a href="{% url 'resources:publication_list' %}"
-                       class="hover:text-emerald-300">
-                        Publications
+                    {% if site_settings.linkedin %}
+                    <a href="{{ site_settings.linkedin }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="MMC on LinkedIn"
+                       class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold transition hover:border-emerald-500 hover:text-white">
+                        LinkedIn
                     </a>
+                    {% endif %}
 
-                    <a href="{% url 'engagement:home' %}"
-                       class="hover:text-emerald-300">
-                        Get Involved
+                    {% if site_settings.youtube %}
+                    <a href="{{ site_settings.youtube }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="MMC on YouTube"
+                       class="rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold transition hover:border-emerald-500 hover:text-white">
+                        YouTube
                     </a>
+                    {% endif %}
 
                 </div>
+            </div>
 
+            <!-- Explore -->
+            <div>
+                <h2 class="text-lg font-bold text-white">Explore MMC</h2>
+
+                <ul class="mt-5 space-y-3 text-sm">
+                    <li><a href="{% url 'pages:about' %}" class="transition hover:text-emerald-300">Who We Are</a></li>
+                    <li><a href="{% url 'projects:what_we_do' %}" class="transition hover:text-emerald-300">What We Do</a></li>
+                    <li><a href="{% url 'projects:project_list' %}" class="transition hover:text-emerald-300">Our Work</a></li>
+                    <li><a href="{% url 'news:news_list' %}" class="transition hover:text-emerald-300">News &amp; Insights</a></li>
+                    <li><a href="{% url 'resources:publication_list' %}" class="transition hover:text-emerald-300">Publications</a></li>
+                    <li><a href="{% url 'resources:gallery' %}" class="transition hover:text-emerald-300">Gallery</a></li>
+                </ul>
+            </div>
+
+            <!-- Get involved -->
+            <div>
+                <h2 class="text-lg font-bold text-white">Get Involved</h2>
+
+                <ul class="mt-5 space-y-3 text-sm">
+                    <li><a href="{% url 'engagement:home' %}" class="transition hover:text-emerald-300">Volunteer &amp; Careers</a></li>
+                    <li><a href="{% url 'engagement:page' slug='partnerships' %}" class="transition hover:text-emerald-300">Partnerships</a></li>
+                    <li><a href="{% url 'engagement:page' slug='donate-support' %}" class="transition hover:text-emerald-300">Donate &amp; Support</a></li>
+                    <li><a href="{% url 'engagement:page' slug='customers-clients' %}" class="transition hover:text-emerald-300">Customers &amp; Clients</a></li>
+                    <li><a href="{% url 'engagement:page' slug='suppliers-contractors' %}" class="transition hover:text-emerald-300">Suppliers &amp; Contractors</a></li>
+                    <li><a href="{% url 'contact:contact' %}" class="transition hover:text-emerald-300">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="min-w-0">
+                <h2 class="text-lg font-bold text-white">Contact MMC</h2>
+
+                <div class="mt-5 space-y-4 text-sm leading-6">
+
+                    {% if site_settings and site_settings.address %}
+                    <div>
+                        <p class="font-semibold text-white">Address</p>
+                        <p class="mx-auto mt-1 max-w-xs break-words text-slate-400 sm:mx-0">
+                            {{ site_settings.address }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    {% if site_settings and site_settings.email %}
+                    <div>
+                        <p class="font-semibold text-white">Email</p>
+                        <a href="mailto:{{ site_settings.email }}"
+                           class="mt-1 inline-block max-w-full break-all text-emerald-300 transition hover:text-white">
+                            {{ site_settings.email }}
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if site_settings and site_settings.phone_1 %}
+                    <div>
+                        <p class="font-semibold text-white">Phone</p>
+                        <a href="tel:{{ site_settings.phone_1 }}"
+                           class="mt-1 inline-block break-words text-slate-400 transition hover:text-white">
+                            {{ site_settings.phone_1 }}
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if site_settings and site_settings.phone_2 %}
+                    <div>
+                        <a href="tel:{{ site_settings.phone_2 }}"
+                           class="inline-block break-words text-slate-400 transition hover:text-white">
+                            {{ site_settings.phone_2 }}
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
             </div>
 
         </div>
 
-    </footer>
+        <!-- Bottom bar -->
+        <div class="mt-12 flex flex-col items-center gap-5 border-t border-slate-800 pt-6 text-center text-sm sm:flex-row sm:justify-between sm:text-left">
+
+            <p class="max-w-2xl leading-6 text-slate-400">
+                &copy; {% now "Y" %}
+                {% if site_settings and site_settings.site_name %}
+                    {{ site_settings.site_name }}
+                {% else %}
+                    Mission for Meaningful Change
+                {% endif %}.
+                All rights reserved.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:justify-end">
+                <a href="{% url 'contact:contact' %}" class="transition hover:text-emerald-300">Contact</a>
+                <a href="{% url 'resources:publication_list' %}" class="transition hover:text-emerald-300">Publications</a>
+                <a href="{% url 'engagement:home' %}" class="transition hover:text-emerald-300">Get Involved</a>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
 
 
     <script src="{% static 'js/main.js' %}" defer></script>
