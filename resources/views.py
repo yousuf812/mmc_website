@@ -1,6 +1,12 @@
+
 from django.shortcuts import get_object_or_404, render
 
 from .models import Publication, GalleryItem, PressKitItem
+
+
+def resources_home(request):
+    """Main Resources landing page."""
+    return render(request, "resources/resources_home.html")
 
 
 def publication_list(request):
@@ -44,9 +50,7 @@ def gallery_list(request):
     return render(
         request,
         "resources/gallery.html",
-        {
-            "gallery_items": gallery_items,
-        },
+        {"gallery_items": gallery_items},
     )
 
 
@@ -63,7 +67,12 @@ def press_kit(request):
     return render(
         request,
         "resources/press_kit.html",
-        {
-            "press_kit_items": press_kit_items,
-        },
+        {"press_kit_items": press_kit_items},
+    )
+
+
+def media_home(request):
+    return render(
+        request,
+        "resources/media_home.html",
     )

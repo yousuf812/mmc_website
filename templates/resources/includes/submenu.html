@@ -1,0 +1,100 @@
+
+<nav aria-label="Resources submenu"
+     class="border-b border-slate-200 bg-gradient-to-r from-emerald-50 via-white to-teal-50">
+
+    <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4 p-4">
+
+            <!-- News and Blog -->
+            <a href="{% url 'news:news_list' %}"
+               {% if active_resource == "news" %}aria-current="page"{% endif %}
+               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               {% if active_resource == 'news' %}
+                   border-emerald-700 bg-emerald-700 text-white shadow-emerald-200
+               {% else %}
+                   border-emerald-100 bg-white text-slate-700 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800
+               {% endif %}">
+
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg
+                    {% if active_resource == 'news' %}bg-white/15{% else %}bg-emerald-100 text-emerald-800{% endif %}">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M15 4v6h6M7 13h10M7 17h7"/>
+                    </svg>
+                </span>
+
+                News and Blog
+            </a>
+
+
+            <!-- Publications -->
+            <a href="{% url 'resources:publication_list' %}"
+               {% if active_resource == "publications" %}aria-current="page"{% endif %}
+               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               {% if active_resource == 'publications' %}
+                   border-blue-700 bg-blue-700 text-white shadow-blue-200
+               {% else %}
+                   border-blue-100 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800
+               {% endif %}">
+
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg
+                    {% if active_resource == 'publications' %}bg-white/15{% else %}bg-blue-100 text-blue-800{% endif %}">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M6 3h9l4 4v14H6a2 2 0 01-2-2V5a2 2 0 012-2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M14 3v5h5M8 12h8M8 16h8"/>
+                    </svg>
+                </span>
+
+                Publications
+            </a>
+
+
+            <!-- Gallery and Press Kit -->
+            <a href="{% url 'resources:media_home' %}"
+               {% if active_resource == "media" %}aria-current="page"{% endif %}
+               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               {% if active_resource == 'media' %}
+                   border-violet-700 bg-violet-700 text-white shadow-violet-200
+               {% else %}
+                   border-violet-100 bg-white text-slate-700 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-800
+               {% endif %}">
+
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg
+                    {% if active_resource == 'media' %}bg-white/15{% else %}bg-violet-100 text-violet-800{% endif %}">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <circle cx="8.5" cy="9" r="1.5"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M21 15l-5-5L5 20"/>
+                    </svg>
+                </span>
+
+                Gallery and Press Kit
+            </a>
+
+        </div>
+    </div>
+</nav>

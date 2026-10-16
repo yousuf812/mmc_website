@@ -1,5 +1,6 @@
-{% extends "base.html" %}
 
+{% extends "base.html" %}
+{% load static %}
 {% block title %}
     {% if site_settings %}
         {{ site_settings.site_name }}
@@ -496,6 +497,98 @@
 
     </div>
 </section>
+
+<!-- marquee section start -->
+
+
+
+<!-- Our Valuable Partners -->
+<section class="partners-section overflow-hidden bg-white py-12 sm:py-16 lg:py-20">
+
+    <div class="container-shell mx-auto w-full">
+
+        <!-- Section Heading -->
+        <div class="mb-10 text-center sm:mb-12">
+            <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+                Our Valuable
+                <span class="text-emerald-600">Partners</span>
+            </h2>
+
+            <div class="mx-auto mt-4 h-1 w-20 rounded-full bg-emerald-500"></div>
+        </div>
+
+        <!-- Marquee -->
+        <div class="partners-marquee relative">
+
+            <div class="partners-track">
+
+                <!-- First set -->
+                <div class="partners-group">
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-1.png' %}"
+                             alt="Partner 1" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-2.png' %}"
+                             alt="Partner 2" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-3.png' %}"
+                             alt="Partner 3" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-4.png' %}"
+                             alt="Partner 4" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-5.png' %}"
+                             alt="Partner 5" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-6.png' %}"
+                             alt="Partner 6" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Duplicate set for seamless animation -->
+                <div class="partners-group" aria-hidden="true">
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-1.png' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-2.png' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-3.png' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-4.png' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-5.png' %}" alt="" loading="lazy">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="{% static 'images/partners/partner-6.png' %}" alt="" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- marquee end -->
 
 
 {# Closing call to action #}

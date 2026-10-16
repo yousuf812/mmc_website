@@ -1,0 +1,177 @@
+
+{% extends "base.html" %}
+
+{% block title %}Resources | MMC International{% endblock %}
+
+{% block content %}
+
+{% include "resources/includes/submenu.html" with active_resource="home" %}
+
+<!-- Resources Hero -->
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div class="max-w-3xl">
+            <p class="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-emerald-400">
+                Knowledge · Stories · Media
+            </p>
+
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Resources
+            </h1>
+
+            <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                Explore the evidence, learning and stories behind our work.
+                Read field stories and news, download our reports, evaluations
+                and policy documents, and find approved images, logos and
+                biographies for media use. Together they show how MMC helps
+                communities move from vulnerability to self-reliance.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Resources Cards -->
+<section class="bg-slate-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="mb-10 max-w-2xl">
+            <p class="text-sm font-bold uppercase tracking-widest text-emerald-700">
+                Explore our library
+            </p>
+
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Discover our resources
+            </h2>
+
+            <p class="mt-4 leading-7 text-slate-600">
+                Find stories from our work, publications that share our
+                learning, and approved media materials about MMC.
+            </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+            <!-- News and Blog -->
+            <article class="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-7 w-7"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.7"
+                         aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M15 4v6h6M7 13h10M7 17h7"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-6 text-xl font-bold text-slate-900">
+                    News and Blog
+                </h3>
+
+                <p class="mt-3 flex-1 leading-7 text-slate-600">
+                    Read field stories, thematic analysis, organisational
+                    announcements and staff perspectives on our work.
+                </p>
+
+                <a href="{% url 'news:news_list' %}"
+                   class="mt-7 inline-flex items-center gap-2 font-bold text-emerald-800 transition group-hover:gap-3">
+                    Explore news and blog
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+
+            </article>
+
+
+            <!-- Publications -->
+            <article class="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-7 w-7"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.7"
+                         aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M6 3h9l4 4v14H6a2 2 0 01-2-2V5a2 2 0 012-2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M14 3v5h5M8 12h8M8 16h8"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-6 text-xl font-bold text-slate-900">
+                    Publications
+                </h3>
+
+                <p class="mt-3 flex-1 leading-7 text-slate-600">
+                    Explore reports, case studies, capability briefs,
+                    evaluations, policy documents and organisational
+                    publications.
+                </p>
+
+                <a href="{% url 'resources:publication_list' %}"
+                   class="mt-7 inline-flex items-center gap-2 font-bold text-emerald-800 transition group-hover:gap-3">
+                    Browse publications
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+
+            </article>
+
+
+            <!-- Gallery and Press Kit -->
+            <article class="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-7 w-7"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.7"
+                         aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <circle cx="8.5" cy="9" r="1.5"/>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M21 15l-5-5L5 20"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-6 text-xl font-bold text-slate-900">
+                    Gallery and Press Kit
+                </h3>
+
+                <p class="mt-3 flex-1 leading-7 text-slate-600">
+                    Browse approved photographs and videos, and access MMC
+                    logos, executive biographies and other media materials.
+                </p>
+
+                <div class="mt-7 flex flex-wrap gap-4">
+                    <a href="{% url 'resources:gallery' %}"
+                       class="inline-flex items-center gap-2 font-bold text-emerald-800 transition hover:gap-3">
+                        View gallery
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+
+                    <a href="{% url 'resources:press_kit' %}"
+                       class="inline-flex items-center gap-2 font-bold text-emerald-800 transition hover:gap-3">
+                        Open press kit
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+
 from django.shortcuts import get_object_or_404, render
 
 from .models import (
@@ -5,6 +6,35 @@ from .models import (
     VolunteerOpportunity,
     JobVacancy,
 )
+
+
+# Shared submenu for all Get Involved pages
+GET_INVOLVED_MENU = [
+    {
+        "title": "Volunteer",
+        "slug": "volunteer",
+    },
+    {
+        "title": "Careers",
+        "slug": "careers",
+    },
+    {
+        "title": "Partnerships",
+        "slug": "partnerships",
+    },
+    {
+        "title": "Donate & Support",
+        "slug": "donate-support",
+    },
+    {
+        "title": "Clients",
+        "slug": "customers-clients",
+    },
+    {
+        "title": "Suppliers & Contractors",
+        "slug": "suppliers-contractors",
+    },
+]
 
 
 def get_involved_home(request):
@@ -24,6 +54,8 @@ def get_involved_home(request):
         "pages": pages,
         "opportunities": opportunities,
         "vacancies": vacancies,
+        "get_involved_menu": GET_INVOLVED_MENU,
+        "active_engagement_slug": "",
     }
 
     return render(
@@ -40,10 +72,16 @@ def engagement_page(request, slug):
         is_published=True,
     )
 
+    context = {
+        "page": page,
+        "get_involved_menu": GET_INVOLVED_MENU,
+        "active_engagement_slug": page.slug,
+    }
+
     return render(
         request,
         "engagement/engagement_page.html",
-        {"page": page},
+        context,
     )
 
 
@@ -52,10 +90,15 @@ def volunteer_opportunities(request):
         is_open=True
     ).order_by("ordering", "title")
 
+    context = {
+        "opportunities": opportunities,
+        "get_involved_menu": GET_INVOLVED_MENU,
+    }
+
     return render(
         request,
         "engagement/volunteer_opportunities.html",
-        {"opportunities": opportunities},
+        context,
     )
 
 
@@ -64,8 +107,13 @@ def job_vacancies(request):
         is_open=True
     ).order_by("ordering", "title")
 
+    context = {
+        "vacancies": vacancies,
+        "get_involved_menu": GET_INVOLVED_MENU,
+    }
+
     return render(
         request,
         "engagement/job_vacancies.html",
-        {"vacancies": vacancies},
+        context,
     )
