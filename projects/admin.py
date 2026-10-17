@@ -9,6 +9,7 @@ from .models import (
     PriorityAction,
     WhatWeDoPage,
     CrossCuttingCommitment,
+    ImpactMetric
 )
 
 
@@ -411,4 +412,39 @@ class CrossCuttingCommitmentAdmin(admin.ModelAdmin):
                 )
             },
         ),
+    )
+
+
+
+@admin.register(ImpactMetric)
+class ImpactMetricAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "value",
+        "unit",
+        "reporting_period",
+        "is_published",
+        "ordering",
+    )
+
+    list_filter = (
+        "is_published",
+        "reporting_period",
+    )
+
+    search_fields = (
+        "title",
+        "description",
+        "source_note",
+        "reporting_period",
+    )
+
+    list_editable = (
+        "is_published",
+        "ordering",
+    )
+
+    ordering = (
+        "ordering",
+        "title",
     )

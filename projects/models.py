@@ -468,3 +468,74 @@ class CrossCuttingCommitment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class ImpactMetric(models.Model):
+    """
+    Verified organisation-wide impact statistics managed from Django Admin.
+    """
+
+    title = models.CharField(
+        max_length=200,
+        help_text="Example: People reached through our programmes",
+    )
+
+    value = models.CharField(
+        max_length=100,
+        help_text="Enter a verified value, e.g. 12500 or 12,500+",
+    )
+
+    unit = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Optional unit, e.g. people, communities, projects",
+    )
+
+    description = models.TextField(
+        blank=True,
+        help_text="Explain what the metric measures and its context.",
+    )
+
+    icon = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Optional icon name for frontend use.",
+    )
+
+    source_note = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Optional source or verification reference.",
+    )
+
+    reporting_period = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Example: 2025 or January–December 2025",
+    )
+
+    ordering = models.PositiveIntegerField(
+        default=0,
+    )
+
+    is_published = models.BooleanField(
+        default=False,
+        help_text="Publish only after the figure has been verified.",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["ordering", "title"]
+        verbose_name = "Impact Metric"
+        verbose_name_plural = "Impact Metrics"
+
+    def __str__(self):
+        return f"{self.title}: {self.value}"

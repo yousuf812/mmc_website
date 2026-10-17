@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block title %}
     Our Work | MMC
@@ -7,6 +7,8 @@
 
 
 {% block content %}
+
+{% include "projects/includes/submenu.html" with active_work_section="projects" %}
 
 <!-- =====================================================
      HERO
@@ -37,26 +39,168 @@
 
 </section>
 
+{# Impact statistics #}
+
+{% if statistics %}
+<section class="relative z-10 mt-6">
+     
+<!-- Our Projects Hero Section -->
+<section class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-blue-950 via-indigo-900 to-teal-800 px-6 py-14 shadow-xl sm:px-10 sm:py-16 lg:px-14 mb-5">
+    
+    <!-- Decorative Background Shapes -->
+    <div class="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-orange-400/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute right-1/4 top-0 h-40 w-40 rounded-full border border-white/10"></div>
+
+    <div class="relative z-10 mx-auto max-w-4xl text-center">
+
+        <!-- Eyebrow Label -->
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-cyan-200 shadow-lg backdrop-blur-sm sm:text-sm">
+            <span class="h-2 w-2 rounded-full bg-orange-400"></span>
+            Our Impact in Action
+        </span>
+
+        <!-- Main Heading -->
+        <h1 class="mt-6 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Our
+            <span class="bg-gradient-to-r from-cyan-300 via-sky-200 to-orange-300 bg-clip-text text-transparent">
+                Projects
+            </span>
+        </h1>
+
+        <!-- Decorative Underline -->
+        <div class="mx-auto mt-5 flex items-center justify-center gap-2">
+            <span class="h-1 w-10 rounded-full bg-orange-400"></span>
+            <span class="h-1.5 w-16 rounded-full bg-cyan-400"></span>
+            <span class="h-1 w-10 rounded-full bg-teal-300"></span>
+        </div>
+
+        <!-- Description -->
+        <p class="mx-auto mt-6 max-w-3xl text-base leading-8 text-blue-100 sm:text-lg lg:text-xl">
+            A verified record of MMC’s institutional project delivery across Somalia, showcasing our commitment to sustainable development, community empowerment, and lasting impact.
+        </p>
+
+        <!-- Bottom Highlight -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm font-semibold text-white/90">
+            <span class="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <span class="text-cyan-300">●</span> Verified Projects
+            </span>
+            <span class="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <span class="text-orange-300">●</span> Community Impact
+            </span>
+            <span class="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <span class="text-teal-300">●</span> Sustainable Development
+            </span>
+        </div>
+
+    </div>
+</section>
+
+    <div class="container-shell">
+
+        <div
+            class="grid grid-cols-2 overflow-hidden rounded-3xl shadow-xl md:grid-cols-4"
+            style="background-color: var(--color-mmc-secondary); border: 1px solid #d96e54;"
+        >
+
+            {% for statistic in statistics %}
+
+            <div
+                class="border-b border-r border-white/20 p-5 text-center transition duration-300 hover:bg-white/10 sm:p-6 md:border-b-0"
+            >
+
+                {% if statistic.icon %}
+                <div class="mb-3 text-2xl" aria-hidden="true">
+                    {{ statistic.icon }}
+                </div>
+                {% endif %}
+
+                <p class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                    {{ statistic.value }}
+                </p>
+
+                <h2 class="mt-2 text-sm font-bold text-white sm:text-base">
+                    {{ statistic.label }}
+                </h2>
+
+                {% if statistic.description %}
+                <p class="mx-auto mt-2 max-w-xs text-xs leading-5 text-white/95 sm:text-sm">
+                    {{ statistic.description }}
+                </p>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+
 
 <!-- =====================================================
      FILTERS
 ===================================================== -->
 
-<section class="border-b border-slate-200 bg-white py-8">
+
+<section class="border-b border-slate-200 bg-slate-50 py-10 sm:py-14">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <form
             method="get"
             action="{% url 'projects:project_list' %}"
-            class="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-7"
+            class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
         >
 
-            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <!-- FORM HEADER -->
 
-                <!-- SEARCH -->
+            <div class="border-b border-slate-200 bg-mmc-primary px-6 py-6 sm:px-8">
 
-                <div class="lg:col-span-3">
+                <div class="flex items-start gap-4">
+
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            aria-hidden="true"
+                        >
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="m20 20-4-4"></path>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-black text-white sm:text-2xl">
+                            Find a Project
+                        </h2>
+
+                        <p class="mt-1 text-sm leading-6 text-white/75">
+                            Explore MMC projects by keyword, strategic priority,
+                            sector and project status.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM BODY -->
+
+            <div class="p-5 sm:p-8">
+
+                <!-- SEARCH FIELD -->
+
+                <div>
 
                     <label
                         for="q"
@@ -65,248 +209,269 @@
                         Search projects
                     </label>
 
-                    <input
-                        type="search"
-                        id="q"
-                        name="q"
-                        value="{{ search_query }}"
-                        placeholder="Search by project name, location or client/donor..."
-                        class="form-input w-full"
-                    >
+                    <div class="relative">
 
-                </div>
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
 
-
-                <!-- PRIORITY -->
-
-                <div>
-
-                    <label
-                        for="priority"
-                        class="mb-2 block text-sm font-bold text-slate-800"
-                    >
-                        Strategic Priority
-                    </label>
-
-                    <select
-                        id="priority"
-                        name="priority"
-                        class="form-input w-full"
-                    >
-
-                        <option value="">
-                            All priorities
-                        </option>
-
-                        {% for priority in priorities %}
-
-                            <option
-                                value="{{ priority.id }}"
-                                {% if selected_priority == priority.id|stringformat:"s" %}
-                                    selected
-                                {% endif %}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                aria-hidden="true"
                             >
-                                {{ priority.number }}.
-                                {{ priority.title }}
-                            </option>
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m20 20-4-4"></path>
+                            </svg>
 
-                        {% endfor %}
+                        </div>
 
-                    </select>
-
-                </div>
-
-
-                <!-- SECTOR -->
-
-                <div>
-
-                    <label
-                        for="sector"
-                        class="mb-2 block text-sm font-bold text-slate-800"
-                    >
-                        Sector
-                    </label>
-
-                    <select
-                        id="sector"
-                        name="sector"
-                        class="form-input w-full"
-                    >
-
-                        <option value="">
-                            All sectors
-                        </option>
-
-                        {% for sector in sectors %}
-
-                            <option
-                                value="{{ sector.id }}"
-                                {% if selected_sector == sector.id|stringformat:"s" %}
-                                    selected
-                                {% endif %}
-                            >
-                                {{ sector.name }}
-                            </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- SDG -->
-
-                <div>
-
-                    <label
-                        for="sdg"
-                        class="mb-2 block text-sm font-bold text-slate-800"
-                    >
-                        SDG
-                    </label>
-
-                    <select
-                        id="sdg"
-                        name="sdg"
-                        class="form-input w-full"
-                    >
-
-                        <option value="">
-                            All SDGs
-                        </option>
-
-                        {% for sdg in sdgs %}
-
-                            <option
-                                value="{{ sdg.id }}"
-                                {% if selected_sdg == sdg.id|stringformat:"s" %}
-                                    selected
-                                {% endif %}
-                            >
-                                SDG {{ sdg.number }} —
-                                {{ sdg.title }}
-                            </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- DELIVERY ENGINE -->
-
-                <div>
-
-                    <label
-                        for="delivery_engine"
-                        class="mb-2 block text-sm font-bold text-slate-800"
-                    >
-                        Delivery Engine
-                    </label>
-
-                    <select
-                        id="delivery_engine"
-                        name="delivery_engine"
-                        class="form-input w-full"
-                    >
-
-                        <option value="">
-                            All delivery engines
-                        </option>
-
-                        {% for engine in delivery_engines %}
-
-                            <option
-                                value="{{ engine.id }}"
-                                {% if selected_delivery_engine == engine.id|stringformat:"s" %}
-                                    selected
-                                {% endif %}
-                            >
-                                {{ engine.name }}
-                            </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- STATUS -->
-
-                <div>
-
-                    <label
-                        for="status"
-                        class="mb-2 block text-sm font-bold text-slate-800"
-                    >
-                        Project Status
-                    </label>
-
-                    <select
-                        id="status"
-                        name="status"
-                        class="form-input w-full"
-                    >
-
-                        <option value="">
-                            All statuses
-                        </option>
-
-                        <option
-                            value="planned"
-                            {% if selected_status == "planned" %}
-                                selected
-                            {% endif %}
+                        <input
+                            type="search"
+                            id="q"
+                            name="q"
+                            value="{{ search_query }}"
+                            placeholder="Project name, location or client/donor..."
+                            class="w-full rounded-xl border border-slate-300 bg-slate-50 py-4 pl-12 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-mmc-primary focus:bg-white focus:ring-4 focus:ring-mmc-primary/10"
                         >
-                            Planned
-                        </option>
 
-                        <option
-                            value="active"
-                            {% if selected_status == "active" %}
-                                selected
-                            {% endif %}
-                        >
-                            Active
-                        </option>
+                    </div>
 
-                        <option
-                            value="completed"
-                            {% if selected_status == "completed" %}
-                                selected
-                            {% endif %}
-                        >
-                            Completed
-                        </option>
-
-                    </select>
+                    <p class="mt-2 text-xs text-slate-500">
+                        Enter a keyword to find relevant projects.
+                    </p>
 
                 </div>
 
-            </div>
+
+                <!-- FILTER HEADING -->
+
+                <div class="mb-5 mt-8 flex items-center gap-3">
+
+                    <div class="h-5 w-1 rounded-full bg-mmc-secondary"></div>
+
+                    <h3 class="text-base font-extrabold text-slate-900">
+                        Refine Your Search
+                    </h3>
+
+                    <span class="text-xs text-slate-400">
+                        Optional filters
+                    </span>
+
+                </div>
 
 
-            <!-- BUTTONS -->
+                <!-- FILTER GRID -->
 
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-                <button
-                    type="submit"
-                    class="inline-flex items-center justify-center rounded-xl bg-orange-500 px-7 py-3 font-bold text-white transition hover:bg-orange-600"
-                >
-                    Apply Filters
-                </button>
+                    <!-- PRIORITY -->
 
-                <a
-                    href="{% url 'projects:project_list' %}"
-                    class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-3 font-bold text-slate-700 transition hover:bg-slate-100"
-                >
-                    Clear Filters
-                </a>
+                    <div>
+
+                        <label for="priority" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Strategic Priority
+                        </label>
+
+                        <select
+                            id="priority"
+                            name="priority"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition hover:border-slate-400 focus:border-mmc-primary focus:ring-4 focus:ring-mmc-primary/10"
+                        >
+
+                            <option value="">All priorities</option>
+
+                            {% for priority in priorities %}
+                                <option
+                                    value="{{ priority.id }}"
+                                    {% if selected_priority == priority.id|stringformat:"s" %}selected{% endif %}
+                                >
+                                    {{ priority.number }}. {{ priority.title }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SECTOR -->
+
+                    <div>
+
+                        <label for="sector" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Sector
+                        </label>
+
+                        <select
+                            id="sector"
+                            name="sector"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition hover:border-slate-400 focus:border-mmc-primary focus:ring-4 focus:ring-mmc-primary/10"
+                        >
+
+                            <option value="">All sectors</option>
+
+                            {% for sector in sectors %}
+                                <option
+                                    value="{{ sector.id }}"
+                                    {% if selected_sector == sector.id|stringformat:"s" %}selected{% endif %}
+                                >
+                                    {{ sector.name }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SDG -->
+
+                    <div>
+
+                        <label for="sdg" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Sustainable Development Goal
+                        </label>
+
+                        <select
+                            id="sdg"
+                            name="sdg"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition hover:border-slate-400 focus:border-mmc-primary focus:ring-4 focus:ring-mmc-primary/10"
+                        >
+
+                            <option value="">All SDGs</option>
+
+                            {% for sdg in sdgs %}
+                                <option
+                                    value="{{ sdg.id }}"
+                                    {% if selected_sdg == sdg.id|stringformat:"s" %}selected{% endif %}
+                                >
+                                    SDG {{ sdg.number }} — {{ sdg.title }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DELIVERY ENGINE -->
+
+                    <div>
+
+                        <label for="delivery_engine" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Delivery Engine
+                        </label>
+
+                        <select
+                            id="delivery_engine"
+                            name="delivery_engine"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition hover:border-slate-400 focus:border-mmc-primary focus:ring-4 focus:ring-mmc-primary/10"
+                        >
+
+                            <option value="">All delivery engines</option>
+
+                            {% for engine in delivery_engines %}
+                                <option
+                                    value="{{ engine.id }}"
+                                    {% if selected_delivery_engine == engine.id|stringformat:"s" %}selected{% endif %}
+                                >
+                                    {{ engine.name }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div>
+
+                        <label for="status" class="mb-2 block text-sm font-semibold text-slate-700">
+                            Project Status
+                        </label>
+
+                        <select
+                            id="status"
+                            name="status"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition hover:border-slate-400 focus:border-mmc-primary focus:ring-4 focus:ring-mmc-primary/10"
+                        >
+
+                            <option value="">All statuses</option>
+
+                            <option value="planned" {% if selected_status == "planned" %}selected{% endif %}>
+                                Planned
+                            </option>
+
+                            <option value="active" {% if selected_status == "active" %}selected{% endif %}>
+                                Active
+                            </option>
+
+                            <option value="completed" {% if selected_status == "completed" %}selected{% endif %}>
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:items-center">
+
+                    <button
+                        type="submit"
+                        class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-7 py-3.5 font-bold text-white shadow-sm transition hover:bg-mmc-secondary-dark focus:outline-none focus:ring-4 focus:ring-mmc-secondary/20 sm:w-auto"
+                    >
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            aria-hidden="true"
+                        >
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="m20 20-4-4"></path>
+                        </svg>
+
+                        Apply Filters
+
+                    </button>
+
+                    <a
+                        href="{% url 'projects:project_list' %}"
+                        class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-3.5 font-bold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 sm:w-auto"
+                    >
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            aria-hidden="true"
+                        >
+                            <path d="M3 6h18"></path>
+                            <path d="M7 12h10"></path>
+                            <path d="M10 18h4"></path>
+                        </svg>
+
+                        Clear Filters
+
+                    </a>
+
+                </div>
 
             </div>
 
@@ -315,6 +480,7 @@
     </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -578,6 +744,371 @@
     </div>
 
 </section>
+
+<!-- location -->
+
+
+<!-- =========================
+     WHERE WE WORK SECTION
+========================= -->
+<section id="where-we-work" class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-orange-50 py-16 sm:py-20">
+
+    <!-- Decorative Background -->
+    <div class="pointer-events-none absolute -left-20 top-10 h-64 w-64 rounded-full bg-orange-200/30 blur-3xl"></div>
+    <div class="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-teal-200/30 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Heading -->
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+
+            <span class="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-100 px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-orange-800">
+                <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-mmc-secondary"></span>
+                Explore Our Geographic Reach
+            </span>
+
+            <h2 class="mt-5 text-3xl font-black tracking-tight text-mmc-primary sm:text-4xl lg:text-5xl">
+                Where We Work
+            </h2>
+
+            <div class="mx-auto mt-5 h-1.5 w-24 rounded-full bg-mmc-secondary"></div>
+
+            <p class="mt-6 text-base leading-8 text-slate-600 sm:text-lg">
+                Discover the communities and locations where MMC International
+                works to support people, strengthen communities, and create
+                sustainable positive change.
+            </p>
+
+        </div>
+
+        <!-- Location Summary Cards -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+            <!-- Elbardo -->
+            <article class="group overflow-hidden rounded-2xl border border-orange-200 bg-gradient-to-br from-orange-50 via-white to-amber-100/70 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-mmc-secondary hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-mmc-secondary transition-all duration-300 group-hover:scale-110 group-hover:bg-mmc-secondary group-hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.5 7-12a7 7 0 1 0-14 0c0 6.5 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                </div>
+
+                <p class="mt-5 text-xs font-extrabold uppercase tracking-widest text-orange-700">
+                    Field Location 01
+                </p>
+
+                <h3 class="mt-2 text-xl font-extrabold text-mmc-primary">
+                    Elbardo
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-slate-600">
+                    Explore our geographic presence and community engagement
+                    in and around Elbardo, Somalia.
+                </p>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=Elbardo%2C+Somalia"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-4 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                    View on Google Maps
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                </a>
+
+            </article>
+
+            <!-- Hudur -->
+            <article class="group overflow-hidden rounded-2xl border border-teal-200 bg-gradient-to-br from-teal-50 via-white to-emerald-100/70 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-mmc-primary hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-100 text-mmc-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-mmc-primary group-hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.5 7-12a7 7 0 1 0-14 0c0 6.5 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                </div>
+
+                <p class="mt-5 text-xs font-extrabold uppercase tracking-widest text-teal-700">
+                    Field Location 02
+                </p>
+
+                <h3 class="mt-2 text-xl font-extrabold text-mmc-primary">
+                    Hudur
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-slate-600">
+                    Learn more about our work and community engagement
+                    in and around Hudur, Somalia.
+                </p>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=Hudur%2C+Somalia"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-4 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                    View on Google Maps
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                </a>
+
+            </article>
+
+            <!-- Baidoa -->
+            <article class="group overflow-hidden rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-cyan-100/70 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-sky-400 hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-100 text-sky-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-mmc-secondary group-hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.5 7-12a7 7 0 1 0-14 0c0 6.5 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                </div>
+
+                <p class="mt-5 text-xs font-extrabold uppercase tracking-widest text-sky-700">
+                    Field Location 03
+                </p>
+
+                <h3 class="mt-2 text-xl font-extrabold text-mmc-primary">
+                    Baidoa
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-slate-600">
+                    Discover our community-focused work in and around
+                    Baidoa, Somalia.
+                </p>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=Baidoa%2C+Somalia"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-4 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                    View on Google Maps
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                </a>
+
+            </article>
+
+            <!-- Xudur -->
+            <article class="group overflow-hidden rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 via-white to-fuchsia-100/70 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-violet-400 hover:shadow-xl">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-100 text-violet-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-mmc-secondary group-hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.5 7-12a7 7 0 1 0-14 0c0 6.5 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                </div>
+
+                <p class="mt-5 text-xs font-extrabold uppercase tracking-widest text-violet-700">
+                    Field Location 04
+                </p>
+
+                <h3 class="mt-2 text-xl font-extrabold text-mmc-primary">
+                    Xudur
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-slate-600">
+                    Explore our geographic reach and community presence
+                    in and around Xudur, Somalia.
+                </p>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=Xudur%2C+Somalia"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-4 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                    View on Google Maps
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                </a>
+
+            </article>
+
+        </div>
+
+        <!-- Map Section Heading -->
+        <div class="mt-16 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+
+            <div>
+                <span class="text-xs font-extrabold uppercase tracking-widest text-mmc-secondary">
+                    Find Us on the Map
+                </span>
+
+                <h3 class="mt-2 text-2xl font-black text-mmc-primary sm:text-3xl">
+                    Our Geographic Locations
+                </h3>
+
+                <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                    Use the map previews below to explore these locations.
+                    For exact office locations, please verify the official
+                    address before publishing.
+                </p>
+            </div>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Somalia"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-5 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                Explore Somalia on Maps
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h10v10M7 17 17 7"/>
+                </svg>
+            </a>
+
+        </div>
+
+        <!-- Embedded Google Maps -->
+        <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+
+            <!-- Elbardo Map -->
+            <article class="group overflow-hidden rounded-2xl border border-orange-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-mmc-secondary hover:shadow-xl">
+                <div class="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-100 to-amber-50 px-5 py-4">
+                    <div>
+                        <h4 class="font-extrabold text-mmc-primary">Elbardo</h4>
+                        <p class="mt-1 text-xs text-slate-600">Somalia</p>
+                    </div>
+                    <span class="rounded-full bg-orange-200 px-3 py-1 text-xs font-bold text-orange-800">Location 01</span>
+                </div>
+
+                <iframe
+                    title="Map showing Elbardo, Somalia"
+                    src="https://maps.google.com/maps?q=Elbardo%2C%20Somalia&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                    class="h-64 w-full border-0 sm:h-72"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div class="p-4">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Elbardo%2C+Somalia"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 rounded-lg bg-mmc-secondary px-4 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-md focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                        Open Map
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Hudur Map -->
+            <article class="group overflow-hidden rounded-2xl border border-teal-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-mmc-primary hover:shadow-xl">
+                <div class="flex items-center justify-between gap-3 bg-gradient-to-r from-teal-100 to-emerald-50 px-5 py-4">
+                    <div>
+                        <h4 class="font-extrabold text-mmc-primary">Hudur</h4>
+                        <p class="mt-1 text-xs text-slate-600">Somalia</p>
+                    </div>
+                    <span class="rounded-full bg-teal-200 px-3 py-1 text-xs font-bold text-teal-800">Location 02</span>
+                </div>
+
+                <iframe
+                    title="Map showing Hudur, Somalia"
+                    src="https://maps.google.com/maps?q=Hudur%2C%20Somalia&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                    class="h-64 w-full border-0 sm:h-72"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div class="p-4">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Hudur%2C+Somalia"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 rounded-lg bg-mmc-secondary px-4 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-md focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                        Open Map
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Baidoa Map -->
+            <article class="group overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-sky-400 hover:shadow-xl">
+                <div class="flex items-center justify-between gap-3 bg-gradient-to-r from-sky-100 to-cyan-50 px-5 py-4">
+                    <div>
+                        <h4 class="font-extrabold text-mmc-primary">Baidoa</h4>
+                        <p class="mt-1 text-xs text-slate-600">Somalia</p>
+                    </div>
+                    <span class="rounded-full bg-sky-200 px-3 py-1 text-xs font-bold text-sky-800">Location 03</span>
+                </div>
+
+                <iframe
+                    title="Map showing Baidoa, Somalia"
+                    src="https://maps.google.com/maps?q=Baidoa%2C%20Somalia&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                    class="h-64 w-full border-0 sm:h-72"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div class="p-4">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Baidoa%2C+Somalia"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 rounded-lg bg-mmc-secondary px-4 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-md focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                        Open Map
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Xudur Map -->
+            <article class="group overflow-hidden rounded-2xl border border-violet-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-violet-400 hover:shadow-xl">
+                <div class="flex items-center justify-between gap-3 bg-gradient-to-r from-violet-100 to-fuchsia-50 px-5 py-4">
+                    <div>
+                        <h4 class="font-extrabold text-mmc-primary">Xudur</h4>
+                        <p class="mt-1 text-xs text-slate-600">Somalia</p>
+                    </div>
+                    <span class="rounded-full bg-violet-200 px-3 py-1 text-xs font-bold text-violet-800">Location 04</span>
+                </div>
+
+                <iframe
+                    title="Map showing Xudur, Somalia"
+                    src="https://maps.google.com/maps?q=Xudur%2C%20Somalia&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                    class="h-64 w-full border-0 sm:h-72"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div class="p-4">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Xudur%2C+Somalia"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 rounded-lg bg-mmc-secondary px-4 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-mmc-secondary-dark hover:shadow-md focus:outline-none focus:ring-4 focus:ring-mmc-secondary/30">
+                        Open Map
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="mt-12 overflow-hidden rounded-3xl bg-gradient-to-r from-mmc-primary to-teal-800 p-7 shadow-xl sm:p-10">
+            <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+                <div class="max-w-2xl">
+                    <p class="text-xs font-extrabold uppercase tracking-widest text-orange-200">
+                        Community First
+                    </p>
+
+                    <h3 class="mt-3 text-2xl font-black text-white sm:text-3xl">
+                        Working Together for Lasting Change
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-teal-50 sm:text-base">
+                        Our geographic reach reflects our commitment to working
+                        with communities and partners toward meaningful,
+                        sustainable outcomes.
+                    </p>
+                </div>
+
+                <a href="{% url 'contact:contact' %}"
+                   class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-mmc-secondary px-6 py-3.5 text-sm font-extrabold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-mmc-secondary-dark hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-mmc-secondary/40">
+                    Contact Our Team
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
 
 
 <!-- =====================================================

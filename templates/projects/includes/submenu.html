@@ -1,0 +1,56 @@
+
+{% with current_section=active_work_section|default:"" %}
+<section class="relative z-20 border-b border-slate-200 bg-gradient-to-r from-orange-50 via-white to-emerald-50 shadow-sm">
+    <div class="container-shell py-4">
+        <nav
+            aria-label="Our Work navigation"
+            class="flex flex-wrap items-stretch gap-3 sm:gap-4"
+        >
+            <!-- Our Projects -->
+            <a
+                href="{% url 'projects:project_list' %}"
+                class="group inline-flex min-h-[68px] items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:px-5
+                {% if current_section == 'projects' %}
+                    border-orange-300 bg-orange-50 text-slate-900 ring-1 ring-orange-200
+                {% else %}
+                    border-slate-200 bg-white text-slate-700 hover:border-orange-300 hover:text-slate-900
+                {% endif %}"
+                {% if current_section == 'projects' %}aria-current="page"{% endif %}
+            >
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-700 transition group-hover:bg-orange-200">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <path stroke-linecap="round" d="M8 8h8M8 12h5M8 16h8"/>
+                    </svg>
+                </span>
+
+                <span>Our Projects</span>
+
+                <span class="ml-1 text-sm text-orange-500 transition group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+
+            <!-- Our Impact -->
+            <a
+                href="{% url 'projects:our_impact' %}"
+                class="group inline-flex min-h-[68px] items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:px-5
+                {% if current_section == 'impact' %}
+                    border-orange-300 bg-orange-50 text-slate-900 ring-1 ring-orange-200
+                {% else %}
+                    border-slate-200 bg-white text-slate-700 hover:border-orange-300 hover:text-slate-900
+                {% endif %}"
+                {% if current_section == 'impact' %}aria-current="page"{% endif %}
+            >
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 transition group-hover:bg-emerald-200">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h17M8 15v-4m5 4V7m5 8V9"/>
+                    </svg>
+                </span>
+
+                <span>Our Impact</span>
+
+                <span class="ml-1 text-sm text-orange-500 transition group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+        </nav>
+    </div>
+</section>
+{% endwith %}
