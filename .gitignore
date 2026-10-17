@@ -38,3 +38,10 @@ htmlcov/
 build/
 dist/
 *.egg-info/
+
+# Node
+node_modules/
+
+# Database backups
+*.sql
+*.sql.gz

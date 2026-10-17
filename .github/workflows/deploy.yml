@@ -1,0 +1,84 @@
+
+name: Deploy MMC Test Website
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mmc-test-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      CPANEL_HOST: 85.155.112.3
+      CPANEL_USER: mmcintnl
+      APP_DIR: /home/mmcintnl/demo1
+      VENV_PYTHON: /home/mmcintnl/virtualenv/demo1/3.10/bin/python
+      EXPECTED_HOST_FINGERPRINT: SHA256:O8A3H7z07hj3N9BCJrChwxRW9p1kuwqE7+bWyYY4TRA
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
+
+      - name: Verify server host key
+        shell: bash
+        run: |
+          set -eu
+          ssh-keyscan -p 22 "$CPANEL_HOST" > "$RUNNER_TEMP/known_hosts"
+          ssh-keygen -lf "$RUNNER_TEMP/known_hosts" > "$RUNNER_TEMP/fingerprints"
+          cat "$RUNNER_TEMP/fingerprints"
+          grep -F "$EXPECTED_HOST_FINGERPRINT" "$RUNNER_TEMP/fingerprints"
+          mkdir -p "$HOME/.ssh"
+          cp "$RUNNER_TEMP/known_hosts" "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Deploy code to test website only
+        shell: bash
+        run: |
+          set -eu
+
+          rsync -az \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.env' \
+            --exclude='media/' \
+            --exclude='staticfiles/' \
+            --exclude='node_modules/' \
+            --exclude='.venv*/' \
+            --exclude='venv/' \
+            --exclude='__pycache__/' \
+            --exclude='*.pyc' \
+            --exclude='*.sqlite3' \
+            --exclude='*.sql' \
+            --exclude='*.sql.gz' \
+            --exclude='tmp/' \
+            --exclude='.htaccess' \
+            --exclude='passenger_wsgi.py' \
+            --exclude='.cpanel.yml' \
+            ./ "$CPANEL_USER@$CPANEL_HOST:$APP_DIR/"
+
+      - name: Install dependencies and check Django
+        shell: bash
+        run: |
+          set -eu
+
+          ssh -p 22 "$CPANEL_USER@$CPANEL_HOST" \
+            "cd '$APP_DIR' &&
+             '$VENV_PYTHON' -m pip install -r requirements.txt &&
+             '$VENV_PYTHON' manage.py check &&
+             mkdir -p tmp &&
+             touch tmp/restart.txt"
