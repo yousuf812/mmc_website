@@ -78,8 +78,8 @@ jobs:
 
           ssh -p 22 "$CPANEL_USER@$CPANEL_HOST" \
             "cd '$APP_DIR' &&
-             '$VENV_PYTHON' -m pip install -r requirements.txt &&
-              '$VENV_PYTHON' manage.py check &&
-              '$VENV_PYTHON' manage.py collectstatic --noinput &&
-              mkdir -p tmp &&
-              touch tmp/restart.txt
+            '$VENV_PYTHON' -m pip install -r requirements.txt &&
+            '$VENV_PYTHON' manage.py check &&
+            '$VENV_PYTHON' manage.py collectstatic --noinput &&
+            mkdir -p tmp &&
+            touch tmp/restart.txt"
