@@ -273,3 +273,83 @@ class JobVacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+
+class JobApplication(models.Model):
+
+    class ApplicationStatus(models.TextChoices):
+        RECEIVED = "received", "Received"
+        UNDER_REVIEW = "under_review", "Under Review"
+        SHORTLISTED = "shortlisted", "Shortlisted"
+        REJECTED = "rejected", "Rejected"
+        HIRED = "hired", "Hired"
+
+    vacancy = models.ForeignKey(
+        JobVacancy,
+        on_delete=models.PROTECT,
+        related_name="applications",
+    )
+
+    full_name = models.CharField(
+        max_length=200,
+    )
+
+    email = models.EmailField()
+
+    phone = models.CharField(
+        max_length=30,
+    )
+
+    area_of_expertise = models.CharField(
+        max_length=255,
+    )
+
+    sector = models.CharField(
+        max_length=150,
+    )
+
+    language = models.CharField(
+        max_length=255,
+        help_text="Languages you speak, e.g. English, Bangla.",
+    )
+
+    availability = models.CharField(
+        max_length=150,
+        help_text="e.g. Full-time, Part-time, Immediate, or 2 weeks.",
+    )
+
+    cv_or_sample_work = models.FileField(
+        upload_to="engagement/job_applications/",
+    )
+
+    daily_rate_expectation = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        help_text="Optional daily rate expectation.",
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=ApplicationStatus.choices,
+        default=ApplicationStatus.RECEIVED,
+    )
+
+    submitted_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["-submitted_at"]
+        verbose_name = "Job Application"
+        verbose_name_plural = "Job Applications"
+
+    def __str__(self):
+        return f"{self.full_name} — {self.vacancy.title}"

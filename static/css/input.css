@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Google Fonts Import: Inter Tight (Body) & Space Grotesk (Headings) */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@300..700&display=swap');
+
 /* =========================================================
    MMC GLOBAL DESIGN SYSTEM
    Mission for Meaningful Change
@@ -11,7 +14,7 @@
     --color-mmc-primary-dark: #08483d;
     --color-mmc-primary-light: #e7f4f1;
 
-     --color-mmc-secondary: #e97c61;
+    --color-mmc-secondary: #e97c61;
     --color-mmc-secondary-dark: #b87916;
     --color-mmc-secondary-light: #fff4dc;
 
@@ -25,7 +28,8 @@
     --color-mmc-border: #dce7e3;
 
     /* Typography */
-    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 
     /* Shadows */
     --shadow-mmc-card: 0 10px 30px rgba(22, 51, 45, 0.08);
@@ -33,21 +37,51 @@
 }
 
 /* =========================================================
-   BASE
+   BASE & TYPOGRAPHY RULES
    ========================================================= */
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px; /* Base 16px font size */
 }
 
 body {
     margin: 0;
     font-family: var(--font-sans);
+    font-size: 16px;
     background: var(--color-mmc-white);
     color: var(--color-mmc-text);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+/* All headings: Space Grotesk */
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.mmc-heading {
+    font-family: var(--font-heading) !important;
+}
+
+/* All buttons: 3px border radius and primary color hover */
+button,
+a[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.mmc-btn {
+    border-radius: 3px !important;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+button:hover,
+a[role="button"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
+    background-color: var(--color-mmc-primary) !important;
+    border-color: var(--color-mmc-primary) !important;
+    color: var(--color-mmc-white) !important;
 }
 
 img {
@@ -122,7 +156,7 @@ button {
 }
 
 /* =========================================================
-   TYPOGRAPHY
+   TYPOGRAPHY UTILITIES
    ========================================================= */
 
 .mmc-eyebrow {
@@ -191,7 +225,7 @@ button {
     min-height: 46px;
     padding: 0.75rem 1.25rem;
 
-    border-radius: 0.5rem;
+    border-radius: 3px !important;
 
     font-size: 0.95rem;
     font-weight: 700;
@@ -209,6 +243,9 @@ button {
 
 .mmc-btn:hover {
     transform: translateY(-2px);
+    background: var(--color-mmc-primary) !important;
+    border-color: var(--color-mmc-primary) !important;
+    color: var(--color-mmc-white) !important;
 }
 
 .mmc-btn-primary {
@@ -218,7 +255,7 @@ button {
 }
 
 .mmc-btn-primary:hover {
-    background: var(--color-mmc-primary-dark);
+    background: var(--color-mmc-primary-dark) !important;
     box-shadow: 0 12px 25px rgba(11, 93, 79, 0.24);
 }
 
@@ -229,8 +266,8 @@ button {
 }
 
 .mmc-btn-secondary:hover {
-    background: var(--color-mmc-secondary-dark);
-    color: var(--color-mmc-white);
+    background: var(--color-mmc-primary) !important;
+    color: var(--color-mmc-white) !important;
 }
 
 .mmc-btn-outline {
@@ -240,8 +277,8 @@ button {
 }
 
 .mmc-btn-outline:hover {
-    background: var(--color-mmc-primary);
-    color: var(--color-mmc-white);
+    background: var(--color-mmc-primary) !important;
+    color: var(--color-mmc-white) !important;
 }
 
 .mmc-btn-white {
@@ -250,7 +287,8 @@ button {
 }
 
 .mmc-btn-white:hover {
-    background: var(--color-mmc-light);
+    background: var(--color-mmc-primary) !important;
+    color: var(--color-mmc-white) !important;
 }
 
 /* =========================================================
@@ -362,10 +400,6 @@ button {
     border: 0;
 }
 
-
-
-
-
 /* ========================================
    OUR VALUABLE PARTNERS MARQUEE
 ======================================== */
@@ -462,7 +496,6 @@ button {
     from {
         transform: translateX(0);
     }
-
     to {
         transform: translateX(-50%);
     }

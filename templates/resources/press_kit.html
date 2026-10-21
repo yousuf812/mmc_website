@@ -4,188 +4,164 @@
 
 {% block content %}
 
+<!-- Submenu -->
 {% include "resources/includes/submenu.html" with active_resource="media" %}
 
-<section class="bg-slate-950 text-white">
-    <div class="container-shell py-20 md:py-28">
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/40"></div>
 
+    <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div class="max-w-3xl">
-
-            <span class="inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+            <span class="inline-flex items-center rounded-full bg-white/10 px-5 py-2 text-base font-semibold text-emerald-300">
                 Resources
             </span>
 
-            <h1 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                 Press Kit
             </h1>
 
-            <p class="mt-6 text-lg leading-8 text-slate-300">
-                Access approved MMC media materials including logos,
-                photographs, biographies, videos and documents.
+            <p class="mt-6 text-lg leading-relaxed text-slate-300 sm:text-xl">
+                Access approved MMC media materials including logos, photographs, biographies, videos and documents.
             </p>
-
         </div>
-
     </div>
 </section>
 
-
-<section class="section-shell bg-white">
-
-    <div class="container-shell">
+<!-- =========================================================
+     PRESS KIT ITEMS GRID
+========================================================= -->
+<section class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {% if press_kit_items %}
+            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {% for item in press_kit_items %}
+                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-7">
+                        <div>
+                            <!-- Type Badge Icon -->
+                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-base font-bold text-emerald-800">
+                                {% if item.item_type == "logo" %}
+                                    LOGO
+                                {% elif item.item_type == "photo" %}
+                                    PHOTO
+                                {% elif item.item_type == "biography" %}
+                                    BIO
+                                {% elif item.item_type == "video" %}
+                                    VIDEO
+                                {% elif item.item_type == "document" %}
+                                    DOC
+                                {% else %}
+                                    FILE
+                                {% endif %}
+                            </div>
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <!-- Preview Image -->
+                            {% if item.image %}
+                                <div class="mb-6 aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-50 border border-slate-100 p-2">
+                                    <img
+                                        src="{{ item.image.url }}"
+                                        alt="{{ item.alt_text|default:item.title }}"
+                                        class="h-full w-full object-contain"
+                                        loading="lazy"
+                                    >
+                                </div>
+                            {% endif %}
 
-            {% for item in press_kit_items %}
+                            <!-- Details -->
+                            <div>
+                                <span class="rounded-full bg-emerald-50 px-3.5 py-1 text-base font-bold uppercase tracking-wider text-emerald-800">
+                                    {{ item.get_item_type_display }}
+                                </span>
 
-            <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                                <h2 class="mt-3 text-xl font-bold text-slate-900 sm:text-2xl">
+                                    {{ item.title }}
+                                </h2>
 
-                <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-xl font-bold text-emerald-700">
+                                {% if item.description %}
+                                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                                        {{ item.description }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
 
-                    {% if item.item_type == "logo" %}
-                        LOGO
-                    {% elif item.item_type == "photo" %}
-                        PHOTO
-                    {% elif item.item_type == "biography" %}
-                        BIO
-                    {% elif item.item_type == "video" %}
-                        VIDEO
-                    {% elif item.item_type == "document" %}
-                        DOC
-                    {% else %}
-                        FILE
-                    {% endif %}
+                        <!-- Action Button -->
+                        <div class="mt-8 border-t border-slate-100 pt-6">
+                            {% if item.file %}
+                                <a
+                                    href="{{ item.file.url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                                >
+                                    <span>Download / View</span>
+                                    <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            {% elif item.external_url %}
+                                <a
+                                    href="{{ item.external_url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                                >
+                                    <span>Open Resource</span>
+                                    <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            {% else %}
+                                <span class="text-base font-medium text-slate-500">
+                                    Resource details available on request.
+                                </span>
+                            {% endif %}
+                        </div>
 
-                </div>
-
-
-                {% if item.image %}
-
-                <div class="mb-6 overflow-hidden rounded-2xl bg-slate-100">
-
-                    <img
-                        src="{{ item.image.url }}"
-                        alt="{{ item.alt_text|default:item.title }}"
-                        class="h-56 w-full object-contain"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                {% endif %}
-
-
-                <div>
-
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">
-                        {{ item.get_item_type_display }}
-                    </span>
-
-                    <h2 class="mt-2 text-xl font-bold text-slate-900">
-                        {{ item.title }}
-                    </h2>
-
-                    {% if item.description %}
-
-                    <p class="mt-3 text-sm leading-6 text-slate-600">
-                        {{ item.description }}
-                    </p>
-
-                    {% endif %}
-
-                </div>
-
-
-                <div class="mt-6">
-
-                    {% if item.file %}
-
-                    <a
-                        href="{{ item.file.url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-primary inline-flex"
-                    >
-                        Download / View
-                    </a>
-
-                    {% elif item.external_url %}
-
-                    <a
-                        href="{{ item.external_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-primary inline-flex"
-                    >
-                        Open Resource
-                    </a>
-
-                    {% else %}
-
-                    <span class="text-sm font-medium text-slate-500">
-                        Resource details available on request.
-                    </span>
-
-                    {% endif %}
-
-                </div>
-
-            </article>
-
-            {% endfor %}
-
-        </div>
-
+                    </article>
+                {% endfor %}
+            </div>
         {% else %}
+            <div class="mx-auto max-w-2xl rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center sm:p-12">
+                <h2 class="text-2xl font-bold text-slate-900">
+                    Press kit coming soon
+                </h2>
 
-        <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
-
-            <h2 class="text-2xl font-bold text-slate-900">
-                Press kit coming soon
-            </h2>
-
-            <p class="mx-auto mt-3 max-w-xl text-slate-600">
-                Approved media resources will be added here as they
-                become available.
-            </p>
-
-        </div>
-
+                <p class="mt-3 text-base leading-relaxed text-slate-600 sm:text-lg">
+                    Approved media resources will be added here as they become available.
+                </p>
+            </div>
         {% endif %}
 
     </div>
-
 </section>
 
-
-<section class="section-shell bg-slate-50">
-
-    <div class="container-shell">
-
-        <div class="mx-auto max-w-3xl text-center">
-
-            <h2 class="text-3xl font-bold text-slate-900">
+<!-- =========================================================
+     ADDITIONAL MEDIA ENQUIRY CTA
+========================================================= -->
+<section class="bg-slate-50 py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-slate-900 px-6 py-12 text-center text-white shadow-sm sm:px-12 sm:py-16">
+            <h2 class="text-2xl font-bold sm:text-3xl lg:text-4xl">
                 Need additional media material?
             </h2>
 
-            <p class="mt-4 text-slate-600">
-                For media enquiries or materials not currently listed,
-                please contact MMC.
+            <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                For media enquiries or materials not currently listed, please contact MMC.
             </p>
 
-            <a
-                href="{% url 'contact:contact' %}"
-                class="btn-primary mt-8 inline-flex"
-            >
-                Contact MMC
-            </a>
-
+            <div class="mt-8 flex justify-center">
+                <a
+                    href="{% url 'contact:contact' %}"
+                    class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
+                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                >
+                    Contact MMC
+                </a>
+            </div>
         </div>
-
     </div>
-
 </section>
 
 {% endblock %}

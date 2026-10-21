@@ -1,25 +1,24 @@
-
 <nav aria-label="Resources submenu"
-     class="border-b border-slate-200 bg-gradient-to-r from-emerald-50 via-white to-teal-50">
+     class="border-b border-slate-200 bg-gradient-to-r from-emerald-50 via-white to-teal-50 shadow-xs">
 
-    <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 py-1.5 sm:px-6 lg:px-8">
 
-        <div class="flex flex-wrap items-center gap-3 sm:gap-4 p-4">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
 
             <!-- News and Blog -->
             <a href="{% url 'news:news_list' %}"
                {% if active_resource == "news" %}aria-current="page"{% endif %}
-               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               class="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-semibold shadow-xs transition duration-200 hover:shadow-sm
                {% if active_resource == 'news' %}
                    border-emerald-700 bg-emerald-700 text-white shadow-emerald-200
                {% else %}
                    border-emerald-100 bg-white text-slate-700 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800
                {% endif %}">
 
-                <span class="flex h-8 w-8 items-center justify-center rounded-lg
-                    {% if active_resource == 'news' %}bg-white/15{% else %}bg-emerald-100 text-emerald-800{% endif %}">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md
+                    {% if active_resource == 'news' %}bg-white/15 text-white{% else %}bg-emerald-100 text-emerald-800{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-5 w-5"
+                         class="h-3.5 w-3.5"
                          fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor"
@@ -32,24 +31,23 @@
                     </svg>
                 </span>
 
-                News and Blog
+                <span class="whitespace-nowrap leading-none">News and Blog</span>
             </a>
-
 
             <!-- Publications -->
             <a href="{% url 'resources:publication_list' %}"
                {% if active_resource == "publications" %}aria-current="page"{% endif %}
-               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               class="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-semibold shadow-xs transition duration-200 hover:shadow-sm
                {% if active_resource == 'publications' %}
                    border-blue-700 bg-blue-700 text-white shadow-blue-200
                {% else %}
                    border-blue-100 bg-white text-slate-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800
                {% endif %}">
 
-                <span class="flex h-8 w-8 items-center justify-center rounded-lg
-                    {% if active_resource == 'publications' %}bg-white/15{% else %}bg-blue-100 text-blue-800{% endif %}">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md
+                    {% if active_resource == 'publications' %}bg-white/15 text-white{% else %}bg-blue-100 text-blue-800{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-5 w-5"
+                         class="h-3.5 w-3.5"
                          fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor"
@@ -62,24 +60,23 @@
                     </svg>
                 </span>
 
-                Publications
+                <span class="whitespace-nowrap leading-none">Publications</span>
             </a>
-
 
             <!-- Gallery and Press Kit -->
             <a href="{% url 'resources:media_home' %}"
                {% if active_resource == "media" %}aria-current="page"{% endif %}
-               class="inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md
+               class="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-semibold shadow-xs transition duration-200 hover:shadow-sm
                {% if active_resource == 'media' %}
                    border-violet-700 bg-violet-700 text-white shadow-violet-200
                {% else %}
                    border-violet-100 bg-white text-slate-700 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-800
                {% endif %}">
 
-                <span class="flex h-8 w-8 items-center justify-center rounded-lg
-                    {% if active_resource == 'media' %}bg-white/15{% else %}bg-violet-100 text-violet-800{% endif %}">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md
+                    {% if active_resource == 'media' %}bg-white/15 text-white{% else %}bg-violet-100 text-violet-800{% endif %}">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-5 w-5"
+                         class="h-3.5 w-3.5"
                          fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor"
@@ -92,7 +89,7 @@
                     </svg>
                 </span>
 
-                Gallery and Press Kit
+                <span class="whitespace-nowrap leading-none">Gallery and Press Kit</span>
             </a>
 
         </div>

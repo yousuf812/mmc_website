@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.utils import timezone
 
-from .models import Tender
-
+from .models import Tender, SupplierRegistration
 
 @admin.register(Tender)
 class TenderAdmin(admin.ModelAdmin):
@@ -85,6 +84,80 @@ class TenderAdmin(admin.ModelAdmin):
     @admin.display(description="Effective status", ordering="status")
     def display_status(self, obj):
         return obj.effective_status
+
+
+
+@admin.register(SupplierRegistration)
+class SupplierRegistrationAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "company_name",
+        "email",
+        "registration_number",
+        "tender",
+        "supply_category",
+        "status",
+        "submitted_at",
+    )
+
+    list_filter = (
+        "supply_category",
+        "status",
+        "submitted_at",
+    )
+
+    search_fields = (
+        "company_name",
+        "email",
+        "registration_number",
+        "tender__reference",
+        "tender__title",
+    )
+
+    readonly_fields = (
+        "submitted_at",
+        "updated_at",
+    )
+
+    fieldsets = (
+        (
+            "Tender Information",
+            {
+                "fields": ("tender",),
+            },
+        ),
+        (
+            "Company Information",
+            {
+                "fields": (
+                    "company_name",
+                    "email",
+                    "registration_number",
+                    "supply_category",
+                ),
+            },
+        ),
+        (
+            "Registration Document",
+            {
+                "fields": ("registration_document",),
+            },
+        ),
+        (
+            "Application Review",
+            {
+                "fields": (
+                    "status",
+                    "submitted_at",
+                    "updated_at",
+                ),
+            },
+        ),
+    )
+
+    ordering = ("-submitted_at",)
+    list_per_page = 25
+
 
     # Optional: delete this if `ordering` attribute is enough
     # def get_queryset(self, request):

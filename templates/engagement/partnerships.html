@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} | MMC{% endblock %}
+
+{% block content %}
+
+<!-- Submenu -->
+{% include "engagement/includes/submenu.html" %}
+
+<!-- =========================================================
+     PARTNERSHIPS HERO
+========================================================= -->
+<section class="relative isolate overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950"></div>
+    <div class="absolute -right-20 -top-20 -z-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"></div>
+
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-8 text-base text-slate-300">
+            <a href="{% url 'pages:home' %}" class="transition hover:text-white">Home</a>
+            <span class="mx-2 text-slate-500">/</span>
+            <a href="{% url 'engagement:home' %}" class="transition hover:text-white">Get Involved</a>
+            <span class="mx-2 text-slate-500">/</span>
+            <span class="font-medium text-emerald-300">{{ page.title }}</span>
+        </nav>
+
+        <div class="grid items-center gap-12 lg:grid-cols-12">
+            <div class="lg:col-span-8">
+                <span class="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-5 py-2 text-base font-semibold text-emerald-300">
+                    Collaboration for Lasting Impact
+                </span>
+
+                <h1 class="mt-6 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    {{ page.title }}
+                </h1>
+
+                {% if page.short_description %}
+                    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+                        {{ page.short_description }}
+                    </p>
+                {% else %}
+                    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+                        Join MMC in building meaningful partnerships that support communities, strengthen collaboration and contribute to sustainable development.
+                    </p>
+                {% endif %}
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    {% if page.call_to_action_url and page.call_to_action %}
+                        <a href="{{ page.call_to_action_url }}"
+                           class="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:bg-emerald-400">
+                            {{ page.call_to_action }}
+                            <span class="ml-2" aria-hidden="true">&rarr;</span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'contact:contact' %}"
+                           class="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:bg-emerald-400">
+                            Discuss a Partnership &rarr;
+                        </a>
+                    {% endif %}
+
+                    <a href="#partnership-details"
+                       class="inline-flex items-center justify-center rounded-xl border border-white/25 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-white/10">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4">
+                {% if page.featured_image %}
+                    <div class="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+                        <img src="{{ page.featured_image.url }}"
+                             alt="{{ page.image_alt_text|default:page.title }}"
+                             class="max-h-[420px] w-full object-cover"
+                             loading="lazy">
+                    </div>
+                {% else %}
+                    <div class="rounded-3xl border border-white/10 bg-white/5 p-8 sm:p-10">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-400/10 text-3xl text-emerald-300" aria-hidden="true">
+                            🤝
+                        </div>
+                        <h2 class="mt-6 text-2xl font-bold">Stronger Together</h2>
+                        <p class="mt-3 text-base leading-relaxed text-slate-300">
+                            Bring together knowledge, resources and shared commitment to create meaningful outcomes.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================
+     PARTNERSHIP DETAILS SECTION
+========================================================= -->
+<section id="partnership-details" class="bg-[#F8F6F0] py-12 sm:py-16 lg:py-20 text-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
+
+        <!-- Top Notice Banner -->
+        <div class="border-l-4 border-amber-600 bg-amber-50/90 p-4 text-base leading-relaxed text-amber-950 rounded-r-xl border border-amber-200/50">
+            <strong>Design sample:</strong> vacancies, tenders, volunteer roles, dates and payment options are placeholders for layout review. Forms send nothing.
+        </div>
+
+        <!-- Intro Description -->
+        <p class="max-w-4xl text-base leading-relaxed text-slate-700 sm:text-lg">
+            {% if page.short_description %}
+                {{ page.short_description }}
+            {% else %}
+                Engage MMC as a local implementing partner or as a partner in a joint consortium. We bring local access, community trust and accountable systems to your programme.
+            {% endif %}
+        </p>
+
+        <!-- Two Ways to Partner -->
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                Two ways to partner
+            </h2>
+
+            <div class="mt-6 grid gap-6 md:grid-cols-2">
+                <!-- Card 1: Local Implementing Partner -->
+                <div class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">
+                            Local implementing partner
+                        </h3>
+                        <p class="mt-3 text-base leading-relaxed text-slate-600">
+                            We deliver your programme in Somalia through our field teams, local networks and accountable financial and reporting systems.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-2">
+                        <a href="{% url 'contact:contact' %}?topic=implementation" 
+                           class="inline-flex items-center justify-center rounded-xl bg-[#0F172A] px-6 py-3.5 text-base font-semibold text-white shadow transition hover:bg-slate-800">
+                            Discuss implementation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Consortium or Joint Bid -->
+                <div class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">
+                            Consortium or joint bid
+                        </h3>
+                        <p class="mt-3 text-base leading-relaxed text-slate-600">
+                            We join or help build consortia for funding opportunities, with clear roles, shared risk and joint accountability.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-2">
+                        <a href="{% url 'contact:contact' %}?topic=consortium" 
+                           class="inline-flex items-center justify-center rounded-xl bg-[#0F172A] px-6 py-3.5 text-base font-semibold text-white shadow transition hover:bg-slate-800">
+                            Discuss a consortium
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Partner with MMC -->
+        <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                Why partner with MMC
+            </h2>
+
+            <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Box 1 -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                    <h3 class="text-lg font-bold text-slate-900 sm:text-xl">Established institution</h3>
+                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                        17+ years of operating experience, now a registered not-for-profit NGO.
+                    </p>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                    <h3 class="text-lg font-bold text-slate-900 sm:text-xl">Locally led, field-rooted</h3>
+                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                        Somali leadership with field teams across the Federal Member States.
+                    </p>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                    <h3 class="text-lg font-bold text-slate-900 sm:text-xl">Audit-ready governance</h3>
+                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                        Board committees for finance, audit, risk, and people, with clear controls.
+                    </p>
+                </div>
+
+                <!-- Box 4 -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                    <h3 class="text-lg font-bold text-slate-900 sm:text-xl">Integrated offer</h3>
+                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                        Humanitarian action, resilience, systems strengthening, social enterprise and policy influence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Action Button -->
+            <div class="mt-10">
+                <a href="{% url 'contact:contact' %}?action=capability_profile" 
+                   class="inline-flex items-center justify-center rounded-xl border-2 border-slate-900 bg-white px-7 py-3.5 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50">
+                    Request a capability profile
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

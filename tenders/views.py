@@ -1,12 +1,13 @@
 from datetime import timedelta
 from mimetypes import guess_type
-
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import FileResponse, Http404
-from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import SupplierRegistrationForm
 from .models import Tender
 
 def tender_list(request):
@@ -143,4 +144,58 @@ def tender_document(request, slug):
 
     response["X-Content-Type-Options"] = "nosniff"
     return response
+
+
+
+
+
+def supplier_registration(request, slug):
+    tender = get_object_or_404(
+        Tender,
+        slug=slug,
+        is_published=True,
+    )
+
+    if tender.effective_status != Tender.Status.OPEN:
+        messages.error(
+            request,
+            "Applications are not available for this tender.",
+        )
+        return redirect(
+            "tenders:tender_detail",
+            slug=tender.slug,
+        )
+
+    if request.method == "POST":
+        form = SupplierRegistrationForm(
+            request.POST,
+            request.FILES,
+        )
+
+        if form.is_valid():
+            registration = form.save(commit=False)
+            registration.tender = tender
+            registration.save()
+
+            messages.success(
+                request,
+                "Your supplier registration has been submitted successfully.",
+            )
+
+            return redirect(
+                  "tenders:detail",
+                  slug=tender.slug,
+            )
+    else:
+        form = SupplierRegistrationForm()
+
+    return render(
+        request,
+        "tenders/supplier_registration.html",
+        {
+            "tender": tender,
+            "form": form,
+        },
+    )
+
 

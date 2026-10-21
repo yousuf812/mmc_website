@@ -30,4 +30,10 @@ urlpatterns = [
         views.engagement_page,
         name="page",
     ),
+
+    path(
+    "job-vacancies/<slug:slug>/apply/",
+    views.job_application,
+    name="job_application",
+),
 ]

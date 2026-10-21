@@ -1,188 +1,421 @@
 {% extends "base.html" %}
 
-{% block title %}Careers | MMC{% endblock %}
+{% block title %}Job Board | MMC{% endblock %}
 
 {% block content %}
 
-<section class="bg-slate-950 text-white">
-    <div class="container-shell py-20 md:py-24">
-
+<!-- =========================================================
+     PAGE HEADING / HERO
+========================================================= -->
+<section class="bg-[#172235] text-white">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <a href="{% url 'engagement:home' %}"
-           class="text-sm font-semibold text-emerald-300">
-            ← Get Involved
+           class="inline-flex items-center gap-2 text-base font-bold text-emerald-300 transition hover:text-white">
+            <span aria-hidden="true">&larr;</span> Get Involved
         </a>
 
-        <h1 class="mt-6 text-4xl font-bold sm:text-5xl">
-            Careers at MMC
+        <h1 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            Get Involved
         </h1>
 
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Explore advertised positions and review the qualifications,
-            responsibilities and application instructions for each role.
+        <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            Whether you are a donor, partner, volunteer, client or supplier, there is a meaningful way to engage with us.
         </p>
-
     </div>
 </section>
 
+<!-- Submenu -->
+{% include "engagement/includes/submenu.html" %}
 
-<section class="section-shell bg-white">
-    <div class="container-shell">
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+<section class="w-full bg-[#f6f5f0] py-12 sm:py-16 lg:py-20 text-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {% if vacancies %}
+        <!-- Notice Banner -->
+        <div class="mb-8 rounded-xl border border-amber-200/80 border-l-4 border-l-amber-600 bg-amber-50/90 p-5 text-base leading-relaxed text-amber-950">
+            <strong>Important notice:</strong> Explore current vacancies, volunteer roles and consultancy opportunities. Applications are subject to the requirements and deadlines of each opportunity.
+        </div>
 
-        <div class="space-y-6">
+        <!-- Intro -->
+        <div class="mb-10 max-w-4xl">
+            <p class="text-base leading-relaxed text-slate-700 sm:text-lg">
+                Join us in saving lives and transforming lives. Whether you want to volunteer, build experience as an intern, start or grow a career, or offer your expertise as a consultant, explore opportunities and find the right fit.
+            </p>
+        </div>
 
-            {% for vacancy in vacancies %}
+        <!-- Opportunity Cards -->
+        <div class="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-            <article class="rounded-3xl border border-slate-200 p-6 shadow-sm md:p-8">
-
-                <div class="flex flex-col justify-between gap-4 md:flex-row">
-
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-900">
-                            {{ vacancy.title }}
-                        </h2>
-
-                        <p class="mt-3 text-sm leading-6 text-slate-500">
-                            {% if vacancy.department %}
-                                {{ vacancy.department }}
-                            {% endif %}
-
-                            {% if vacancy.department and vacancy.location %}
-                                ·
-                            {% endif %}
-
-                            {% if vacancy.location %}
-                                {{ vacancy.location }}
-                            {% endif %}
-                        </p>
-                    </div>
-
-                    {% if vacancy.employment_type %}
-                    <div>
-                        <span class="inline-flex rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800">
-                            {{ vacancy.employment_type }}
-                        </span>
-                    </div>
-                    {% endif %}
-
-                </div>
-
-
-                <div class="mt-6 whitespace-pre-line leading-7 text-slate-700">
-                    {{ vacancy.description }}
-                </div>
-
-
-                {% if vacancy.responsibilities %}
-                <div class="mt-6">
-                    <h3 class="font-bold text-slate-900">
-                        Key Responsibilities
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ vacancy.responsibilities }}
-                    </div>
-                </div>
-                {% endif %}
-
-
-                {% if vacancy.qualifications %}
-                <div class="mt-6">
-                    <h3 class="font-bold text-slate-900">
-                        Qualifications
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ vacancy.qualifications }}
-                    </div>
-                </div>
-                {% endif %}
-
-
-                {% if vacancy.experience %}
-                <div class="mt-6">
-                    <h3 class="font-bold text-slate-900">
-                        Experience
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ vacancy.experience }}
-                    </div>
-                </div>
-                {% endif %}
-
-
-                {% if vacancy.closing_date %}
-                <p class="mt-6 text-sm font-semibold text-slate-700">
-                    Closing date: {{ vacancy.closing_date|date:"j F Y" }}
+            <!-- Card 1: Volunteer -->
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <p class="text-base font-bold uppercase tracking-wider text-slate-500">
+                    Open opportunities
                 </p>
-                {% endif %}
-
-
-                {% if vacancy.application_instructions %}
-                <div class="mt-5 rounded-2xl bg-slate-50 p-5">
-                    <h3 class="font-bold text-slate-900">
-                        Application Instructions
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ vacancy.application_instructions }}
-                    </div>
+                <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                    Volunteer
+                </h2>
+                <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                    Give your time and skills to support our field teams and communities.
+                </p>
+                <div class="mt-6 pt-2">
+                    <a href="{% url 'engagement:volunteer_opportunities' %}"
+                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
+                        View opportunities
+                    </a>
                 </div>
-                {% endif %}
-
-
-                <div class="mt-6 flex flex-wrap gap-3">
-
-                    {% if vacancy.application_url %}
-                    <a href="{{ vacancy.application_url }}"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="btn-primary inline-flex">
-                        Apply Online
-                    </a>
-                    {% endif %}
-
-                    {% if vacancy.application_email %}
-                    <a href="mailto:{{ vacancy.application_email }}"
-                       class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-800 hover:bg-slate-100">
-                        Apply by Email
-                    </a>
-                    {% endif %}
-
-                    {% if not vacancy.application_url and not vacancy.application_email %}
-                    <a href="{% url 'contact:contact' %}"
-                       class="btn-primary inline-flex">
-                        Contact MMC
-                    </a>
-                    {% endif %}
-
-                </div>
-
             </article>
 
-            {% endfor %}
+            <!-- Card 2: Internship -->
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <p class="text-base font-bold uppercase tracking-wider text-slate-500">
+                    Early career
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                    Internship
+                </h2>
+                <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                    Build career experience through supervised placements and mentoring.
+                </p>
+                <div class="mt-6 pt-2">
+                    <a href="#job-board"
+                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
+                        Explore roles
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 3: Staff / Career -->
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <p class="text-base font-bold uppercase tracking-wider text-slate-500">
+                    Career development
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                    Staff / Career
+                </h2>
+                <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                    Start or grow a career in programmes, finance and operations.
+                </p>
+                <div class="mt-6 pt-2">
+                    <a href="#job-board"
+                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
+                        View vacancies
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 4: Consultant -->
+            <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <p class="text-base font-bold uppercase tracking-wider text-slate-500">
+                    Expert network
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                    Consultant
+                </h2>
+                <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                    Join our consultant network for short-term expert assignments.
+                </p>
+                <div class="mt-6 pt-2">
+                    <a href="#job-board"
+                       class="inline-flex w-full items-center justify-center rounded-xl bg-[#172235] px-5 py-3 text-base font-bold text-white shadow-sm transition hover:bg-slate-800">
+                        Explore roles
+                    </a>
+                </div>
+            </article>
 
         </div>
 
-        {% else %}
+        <!-- Job Board Header -->
+        <div id="job-board" class="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                    MMC Job Board
+                </h2>
+                <p class="mt-1 text-base text-slate-600">
+                    Search opportunities and apply online.
+                </p>
+            </div>
 
-        <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
+            <span class="rounded-full bg-slate-200/80 px-4 py-1.5 text-base font-semibold text-slate-700">
+                {{ vacancies|length }} matching opportunity{{ vacancies|length|pluralize }}
+            </span>
+        </div>
 
-            <h2 class="text-2xl font-bold text-slate-900">
-                No Current Vacancies
+        <!-- Search and Filters Form -->
+        <form id="job-search-form"
+              method="get"
+              action="{% url 'engagement:job_vacancies' %}"
+              class="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
+
+                <div>
+                    <label for="job-query" class="mb-2 block text-base font-bold uppercase tracking-wider text-slate-700">
+                        Search
+                    </label>
+                    <input id="job-query"
+                           type="search"
+                           name="q"
+                           value="{{ search_query }}"
+                           placeholder="Title or keyword"
+                           class="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100">
+                </div>
+
+                <div>
+                    <label for="job-type" class="mb-2 block text-base font-bold uppercase tracking-wider text-slate-700">
+                        Opportunity type
+                    </label>
+                    <select id="job-type"
+                            name="type"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-600">
+                        <option value="">All types</option>
+                        <option value="staff" {% if selected_type == "staff" %}selected{% endif %}>Staff / Career</option>
+                        <option value="internship" {% if selected_type == "internship" %}selected{% endif %}>Internship</option>
+                        <option value="volunteer" {% if selected_type == "volunteer" %}selected{% endif %}>Volunteer</option>
+                        <option value="consultant" {% if selected_type == "consultant" %}selected{% endif %}>Consultant</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="job-area" class="mb-2 block text-base font-bold uppercase tracking-wider text-slate-700">
+                        Area
+                    </label>
+                    <input id="job-area"
+                           type="search"
+                           name="area"
+                           value="{{ selected_area }}"
+                           placeholder="e.g. Programmes"
+                           class="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-600">
+                </div>
+
+                <div>
+                    <label for="job-location" class="mb-2 block text-base font-bold uppercase tracking-wider text-slate-700">
+                        Location
+                    </label>
+                    <select id="job-location"
+                            name="location"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-600">
+                        <option value="">All locations</option>
+                        {% for location in available_locations %}
+                            <option value="{{ location }}" {% if selected_location == location %}selected{% endif %}>
+                                {{ location }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="job-status" class="mb-2 block text-base font-bold uppercase tracking-wider text-slate-700">
+                        Status
+                    </label>
+                    <select id="job-status"
+                            name="status"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-600">
+                        <option value="">All statuses</option>
+                        <option value="open" {% if selected_status == "open" %}selected{% endif %}>Open</option>
+                        <option value="closing" {% if selected_status == "closing" %}selected{% endif %}>Closing soon</option>
+                        <option value="closed" {% if selected_status == "closed" %}selected{% endif %}>Closed</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="mt-6 flex flex-wrap items-center gap-4 border-t border-slate-100 pt-5">
+                <button type="submit"
+                        class="rounded-xl bg-[#172235] px-7 py-3 text-base font-bold text-white shadow transition hover:bg-slate-800">
+                    Search opportunities
+                </button>
+
+                <a href="{% url 'engagement:job_vacancies' %}"
+                   class="rounded-xl border border-slate-300 px-7 py-3 text-base font-semibold text-slate-700 transition hover:bg-slate-50">
+                    Reset filters
+                </a>
+            </div>
+        </form>
+
+        <!-- Horizontal Job Table -->
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[1050px] table-fixed border-collapse text-left">
+                    <thead class="border-b border-slate-200 bg-slate-50">
+                        <tr class="text-base font-bold uppercase tracking-wider text-slate-700">
+                            <th class="w-[26%] px-5 py-4">Opportunity</th>
+                            <th class="w-[13%] px-4 py-4">Type</th>
+                            <th class="w-[13%] px-4 py-4">Area</th>
+                            <th class="w-[13%] px-4 py-4">Location</th>
+                            <th class="w-[12%] px-4 py-4">Commitment</th>
+                            <th class="w-[12%] px-4 py-4">Closing</th>
+                            <th class="w-[10%] px-4 py-4">Status</th>
+                            <th class="w-[10%] px-5 py-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-slate-100">
+                        {% for vacancy in vacancies %}
+                            <tr class="align-middle transition hover:bg-slate-50">
+                                
+                                <!-- Title & Department -->
+                                <td class="break-words px-5 py-4">
+                                    <p class="text-base font-bold text-slate-900">
+                                        {{ vacancy.title }}
+                                    </p>
+                                    {% if vacancy.department %}
+                                        <p class="mt-1 text-base text-slate-500">
+                                            {{ vacancy.department }}
+                                        </p>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Type -->
+                                <td class="px-4 py-4">
+                                    <span class="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-base font-medium text-slate-700">
+                                        {{ vacancy.employment_type|default:"Staff / Career" }}
+                                    </span>
+                                </td>
+
+                                <!-- Area -->
+                                <td class="break-words px-4 py-4 text-base text-slate-700">
+                                    {{ vacancy.department|default:"All sectors" }}
+                                </td>
+
+                                <!-- Location -->
+                                <td class="break-words px-4 py-4 text-base text-slate-700">
+                                    {{ vacancy.location|default:"Flexible" }}
+                                </td>
+
+                                <!-- Commitment -->
+                                <td class="px-4 py-4 text-base text-slate-700">
+                                    {{ vacancy.employment_type|default:"As advertised" }}
+                                </td>
+
+                                <!-- Closing -->
+                                <td class="px-4 py-4 text-base text-slate-700">
+                                    {% if vacancy.closing_date %}
+                                        {{ vacancy.closing_date|date:"j M Y" }}
+                                    {% else %}
+                                        Open until filled
+                                    {% endif %}
+                                </td>
+
+                                <!-- Status -->
+                                <td class="px-4 py-4">
+                                    {% if vacancy.closing_date and vacancy.closing_date < today %}
+                                        <span class="inline-flex rounded-full bg-rose-100 px-3 py-1 text-base font-bold text-rose-800">
+                                            Closed
+                                        </span>
+                                    {% elif vacancy.closing_date and vacancy.closing_date <= closing_soon_limit %}
+                                        <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-base font-bold text-amber-800">
+                                            Closing soon
+                                        </span>
+                                    {% else %}
+                                        <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-base font-bold text-emerald-800">
+                                            Open
+                                        </span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Action -->
+                                <td class="px-5 py-4 text-right">
+                                    {% if not vacancy.closing_date or vacancy.closing_date >= today %}
+                                        <a href="{% url 'engagement:job_application' slug=vacancy.slug %}"
+                                           class="inline-flex items-center justify-center rounded-xl bg-[#172235] px-5 py-2.5 text-base font-bold text-white shadow-sm transition hover:bg-emerald-800">
+                                            Apply
+                                        </a>
+                                    {% else %}
+                                        <span class="text-base font-semibold text-slate-400">
+                                            Closed
+                                        </span>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="8" class="px-6 py-14 text-center">
+                                    <h3 class="text-xl font-bold text-slate-900">
+                                        No matching opportunities
+                                    </h3>
+                                    <p class="mt-2 text-base text-slate-500">
+                                        Try another keyword or reset the filters.
+                                    </p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="border-t border-slate-200 bg-slate-50/50 px-6 py-4 text-base text-slate-600">
+                Showing {{ vacancies|length }} opportunity{{ vacancies|length|pluralize }}. On smaller screens, scroll horizontally to view all details.
+            </div>
+        </div>
+
+        <!-- =========================================================
+             HOW TO APPLY
+        ========================================================= -->
+        <section class="mt-14">
+            <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                How to apply
             </h2>
 
-            <p class="mx-auto mt-4 max-w-xl leading-7 text-slate-600">
-                MMC has no published vacancies at the moment.
-                Please check again later for new opportunities.
-            </p>
+            <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-            <a href="{% url 'contact:contact' %}"
-               class="btn-primary mt-6 inline-flex">
-                Contact MMC
-            </a>
+                <!-- Step 1 -->
+                <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-800 text-base font-bold text-white">
+                        1
+                    </span>
+                    <h3 class="mt-4 text-xl font-bold text-slate-900">
+                        Choose
+                    </h3>
+                    <p class="mt-2 text-base leading-relaxed text-slate-600">
+                        Pick the opportunity type and role that fits your background and goals.
+                    </p>
+                </article>
 
-        </div>
+                <!-- Step 2 -->
+                <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-800 text-base font-bold text-white">
+                        2
+                    </span>
+                    <h3 class="mt-4 text-xl font-bold text-slate-900">
+                        Apply online
+                    </h3>
+                    <p class="mt-2 text-base leading-relaxed text-slate-600">
+                        Complete the application form and upload your CV or sample work.
+                    </p>
+                </article>
 
-        {% endif %}
+                <!-- Step 3 -->
+                <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-800 text-base font-bold text-white">
+                        3
+                    </span>
+                    <h3 class="mt-4 text-xl font-bold text-slate-900">
+                        Screening
+                    </h3>
+                    <p class="mt-2 text-base leading-relaxed text-slate-600">
+                        Shortlisted applicants may be contacted for further technical assessment.
+                    </p>
+                </article>
+
+                <!-- Step 4 -->
+                <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-800 text-base font-bold text-white">
+                        4
+                    </span>
+                    <h3 class="mt-4 text-xl font-bold text-slate-900">
+                        Onboarding
+                    </h3>
+                    <p class="mt-2 text-base leading-relaxed text-slate-600">
+                        Selected candidates receive further induction instructions from MMC.
+                    </p>
+                </article>
+
+            </div>
+        </section>
 
     </div>
 </section>

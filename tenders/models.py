@@ -115,3 +115,62 @@ class Tender(models.Model):
 
     def __str__(self):
         return f"{self.reference} — {self.title}"
+
+
+
+# registration
+
+class SupplierRegistration(models.Model):
+
+    class SupplyCategory(models.TextChoices):
+        GOODS = "goods", "Goods Supply"
+        SERVICES = "services", "Services"
+        WORKS = "works", "Works"
+        CONSULTANCY = "consultancy", "Consultancy"
+
+    class ApplicationStatus(models.TextChoices):
+        PENDING = "pending", "Pending"
+        UNDER_REVIEW = "under_review", "Under Review"
+        APPROVED = "approved", "Approved"
+        REJECTED = "rejected", "Rejected"
+
+    tender = models.ForeignKey(
+        Tender,
+        on_delete=models.PROTECT,
+        related_name="supplier_registrations",
+    )
+
+    company_name = models.CharField(max_length=255)
+
+    email = models.EmailField()
+
+    registration_number = models.CharField(
+        max_length=100,
+    )
+
+    supply_category = models.CharField(
+        max_length=20,
+        choices=SupplyCategory.choices,
+    )
+
+    registration_document = models.FileField(
+        upload_to="tenders/registrations/",
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=ApplicationStatus.choices,
+        default=ApplicationStatus.PENDING,
+    )
+
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-submitted_at"]
+        verbose_name = "Supplier Registration"
+        verbose_name_plural = "Supplier Registrations"
+
+    def __str__(self):
+        return f"{self.company_name} — {self.tender.reference}"

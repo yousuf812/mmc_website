@@ -5,336 +5,301 @@
 {% block content %}
 
 <!-- submenu start -->
-
 {% include "engagement/includes/submenu.html" %}
-
 <!-- submenu end -->
 
-<section class="bg-slate-950 text-white">
-    <div class="container-shell py-20 md:py-28">
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950"></div>
 
-        <span class="inline-flex rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+    <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <span class="inline-flex items-center rounded-full bg-white/10 px-5 py-2 text-base font-semibold text-emerald-300">
             Be Part of the Change
         </span>
 
-        <h1 class="mt-6 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 class="mt-6 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
             Get Involved
         </h1>
 
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Work with Mission for Meaningful Change to strengthen
-            communities, expand opportunity and support the journey
-            from vulnerability to self-reliance.
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            Work with Mission for Meaningful Change to strengthen communities, expand opportunity and support the journey from vulnerability to self-reliance.
         </p>
 
-        
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a
-                        href="{% url 'contact:contact' %}"
-                        class="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-                        style="background-color: var(--color-mmc-secondary);"
-                    >
-                        Partner with MMC
-                    </a>
+        <div class="mt-8 flex flex-wrap gap-4">
+            <a
+                href="{% url 'contact:contact' %}"
+                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                style="background-color: var(--color-mmc-secondary, #ea580c);"
+            >
+                Partner with MMC
+            </a>
 
-                    <a
-                        href="{% url 'engagement:volunteer_opportunities' %}"
-                        class="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-                        style="background-color: var(--color-mmc-secondary);"
-                    >
-                        Explore Volunteering
-                    </a>
-                </div>
-
-
+            <a
+                href="{% url 'engagement:volunteer_opportunities' %}"
+                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                style="background-color: var(--color-mmc-secondary, #ea580c);"
+            >
+                Explore Volunteering
+            </a>
+        </div>
     </div>
 </section>
 
-
-
-
-<section class="section-shell bg-white">
-    <div class="container-shell">
+<!-- =========================================================
+     WORK WITH US (PAGES GRID)
+========================================================= -->
+<section class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="max-w-3xl">
-            <p class="font-semibold uppercase tracking-wider text-emerald-700">
+            <p class="text-base font-bold uppercase tracking-wider text-emerald-700">
                 Work With Us
             </p>
 
-            <h2 class="mt-3 text-3xl font-bold text-slate-900 md:text-4xl">
+            <h2 class="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl lg:text-4xl">
                 Find Your Way to Contribute
             </h2>
 
-            <p class="mt-4 leading-7 text-slate-600">
-                Whether you are an individual, organisation, client
-                or supplier, explore how you can engage with MMC.
+            <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+                Whether you are an individual, organisation, client or supplier, explore how you can engage with MMC.
             </p>
         </div>
 
-
         {% if pages %}
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for page in pages %}
+                    <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+                        
+                        {% if page.featured_image %}
+                            <div class="aspect-[16/9] w-full overflow-hidden bg-slate-100">
+                                <img
+                                    src="{{ page.featured_image.url }}"
+                                    alt="{{ page.image_alt_text|default:page.title }}"
+                                    class="h-full w-full object-cover transition duration-300 hover:scale-105"
+                                    loading="lazy"
+                                >
+                            </div>
+                        {% endif %}
 
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-1 flex-col p-6 sm:p-7">
+                            <h3 class="text-xl font-bold text-slate-900">
+                                {{ page.title }}
+                            </h3>
 
-            {% for page in pages %}
+                            {% if page.short_description %}
+                                <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                                    {{ page.short_description }}
+                                </p>
+                            {% endif %}
 
-            <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+                            <div class="mt-6 pt-2">
+                                <a
+                                    href="{% url 'engagement:page' slug=page.slug %}"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                                >
+                                    <span>Learn More</span>
+                                    <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
 
-                {% if page.featured_image %}
-                <img
-                    src="{{ page.featured_image.url }}"
-                    alt="{{ page.image_alt_text|default:page.title }}"
-                    class="h-48 w-full object-cover"
-                    loading="lazy"
-                >
-                {% endif %}
-
-                <div class="flex flex-1 flex-col p-6">
-
-                    <h3 class="text-xl font-bold text-slate-900">
-                        {{ page.title }}
-                    </h3>
-
-                    {% if page.short_description %}
-                    <p class="mt-3 flex-1 text-sm leading-7 text-slate-600">
-                        {{ page.short_description }}
-                    </p>
-                    {% endif %}
-
-                    
-                <div class="mt-6 flex justify-center">
-                    <a
-                        href="{% url 'engagement:page' slug=page.slug %}"
-                        class="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-                        style="background-color: var(--color-mmc-secondary);"
-                    >
-                        <span>Learn More</span>
-                        <span aria-hidden="true" class="text-xl leading-none">→</span>
-                    </a>
-                </div>
-
-
-                </div>
-
-            </article>
-
-            {% endfor %}
-
-        </div>
-
+                    </article>
+                {% endfor %}
+            </div>
         {% else %}
-
-        <p class="mt-8 rounded-2xl bg-slate-50 p-6 text-slate-600">
-            Get Involved pages are being prepared. Please contact MMC
-            for more information.
-        </p>
-
+            <div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center">
+                <p class="text-base text-slate-600">
+                    Get Involved pages are being prepared. Please contact MMC for more information.
+                </p>
+            </div>
         {% endif %}
 
     </div>
 </section>
 
-
-<section class="section-shell bg-slate-50">
-    <div class="container-shell">
+<!-- =========================================================
+     VOLUNTEER OPPORTUNITIES
+========================================================= -->
+<section class="bg-slate-50 py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-
             <div>
-                <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                <p class="text-base font-bold uppercase tracking-wider text-emerald-700">
                     Volunteer With Us
                 </p>
 
-                <h2 class="mt-3 text-3xl font-bold text-slate-900">
+                <h2 class="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl lg:text-4xl">
                     Volunteer Opportunities
                 </h2>
 
-                <p class="mt-3 max-w-2xl leading-7 text-slate-600">
-                    Explore published opportunities to contribute your
-                    time, skills and experience.
+                <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                    Explore published opportunities to contribute your time, skills and experience.
                 </p>
             </div>
 
-           
-                
-                    <a
-                        href="{% url 'engagement:volunteer_opportunities' %}"
-                        class="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
-                        style="background-color: var(--color-mmc-secondary);"
-                    >
-                        View All Opportunities →
-                    </a>
-
-
-
+            <div>
+                <a
+                    href="{% url 'engagement:volunteer_opportunities' %}"
+                    class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                >
+                    <span>View All Opportunities</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
         </div>
-
 
         {% if opportunities %}
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for opportunity in opportunities %}
+                    <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                        <h3 class="text-xl font-bold text-slate-900">
+                            {{ opportunity.title }}
+                        </h3>
 
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
+                        <p class="mt-2 text-base font-medium text-slate-500">
+                            {{ opportunity.location|default:"Location to be confirmed" }}
+                        </p>
 
-            {% for opportunity in opportunities %}
+                        <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                            {{ opportunity.description|truncatewords:25 }}
+                        </p>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-6">
+                        {% if opportunity.deadline %}
+                            <p class="mt-4 text-base font-semibold text-slate-800">
+                                Deadline: {{ opportunity.deadline|date:"j F Y" }}
+                            </p>
+                        {% endif %}
 
-                <h3 class="text-lg font-bold text-slate-900">
-                    {{ opportunity.title }}
-                </h3>
-
-                <p class="mt-2 text-sm text-slate-500">
-                    {{ opportunity.location|default:"Location to be confirmed" }}
-                </p>
-
-                <p class="mt-4 leading-7 text-slate-600">
-                    {{ opportunity.description|truncatewords:25 }}
-                </p>
-
-                {% if opportunity.deadline %}
-                <p class="mt-4 text-sm font-semibold text-slate-700">
-                    Deadline: {{ opportunity.deadline|date:"j F Y" }}
-                </p>
-                {% endif %}
-
-                
-                
-                    <a
-                        href="{% url 'engagement:volunteer_opportunities' %}"
-                        class="mt-5 inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
-                        style="background-color: var(--color-mmc-secondary);"
-                    >
-                        Application Details →
-                    </a>
-
-
-
-            </article>
-
-            {% endfor %}
-
-        </div>
-
+                        <div class="mt-6 pt-2">
+                            <a
+                                href="{% url 'engagement:volunteer_opportunities' %}"
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                                style="background-color: var(--color-mmc-secondary, #ea580c);"
+                            >
+                                <span>Application Details</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
         {% else %}
-
-        <div class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-slate-600">
-            There are no open volunteer opportunities at the moment.
-            Please check again later.
-        </div>
-
+            <div class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center">
+                <p class="text-base text-slate-600">
+                    There are no open volunteer opportunities at the moment. Please check again later.
+                </p>
+            </div>
         {% endif %}
 
     </div>
 </section>
 
-
-<section class="section-shell bg-white">
-    <div class="container-shell">
+<!-- =========================================================
+     CAREERS AT MMC
+========================================================= -->
+<section class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-
             <div>
-                <p class="font-semibold uppercase tracking-wider text-emerald-700">
+                <p class="text-base font-bold uppercase tracking-wider text-emerald-700">
                     Careers at MMC
                 </p>
 
-                <h2 class="mt-3 text-3xl font-bold text-slate-900">
+                <h2 class="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl lg:text-4xl">
                     Make Your Skills Matter
                 </h2>
 
-                <p class="mt-3 max-w-2xl leading-7 text-slate-600">
-                    Discover current job openings and the application
-                    requirements for each advertised position.
+                <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                    Discover current job openings and the application requirements for each advertised position.
                 </p>
             </div>
 
-            
-                        <a
-                            href="{% url 'engagement:job_vacancies' %}"
-                            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
-                            style="background-color: var(--color-mmc-secondary);"
-                        >
-                            View All Vacancies →
-                        </a>
-
-
-        </div>
-
-
-        {% if vacancies %}
-
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-
-            {% for vacancy in vacancies %}
-
-            <article class="rounded-2xl border border-slate-200 p-6">
-
-                <h3 class="text-lg font-bold text-slate-900">
-                    {{ vacancy.title }}
-                </h3>
-
-                <p class="mt-2 text-sm text-slate-500">
-                    {{ vacancy.department }} · {{ vacancy.location }}
-                </p>
-
-                <p class="mt-4 leading-7 text-slate-600">
-                    {{ vacancy.description|truncatewords:25 }}
-                </p>
-
-                {% if vacancy.closing_date %}
-                <p class="mt-4 text-sm font-semibold text-slate-700">
-                    Closing date: {{ vacancy.closing_date|date:"j F Y" }}
-                </p>
-                {% endif %}
-
-                
+            <div>
                 <a
                     href="{% url 'engagement:job_vacancies' %}"
-                    class="mt-5 inline-flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white transition hover:brightness-90"
-                    style="background-color: var(--color-mmc-secondary);"
+                    class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                    style="background-color: var(--color-mmc-secondary, #ea580c);"
                 >
-                    Application Details →
+                    <span>View All Vacancies</span>
+                    <span aria-hidden="true">&rarr;</span>
                 </a>
-
-
-            </article>
-
-            {% endfor %}
-
+            </div>
         </div>
 
+        {% if vacancies %}
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for vacancy in vacancies %}
+                    <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                        <h3 class="text-xl font-bold text-slate-900">
+                            {{ vacancy.title }}
+                        </h3>
+
+                        <p class="mt-2 text-base font-medium text-slate-500">
+                            {{ vacancy.department }} &middot; {{ vacancy.location }}
+                        </p>
+
+                        <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600">
+                            {{ vacancy.description|truncatewords:25 }}
+                        </p>
+
+                        {% if vacancy.closing_date %}
+                            <p class="mt-4 text-base font-semibold text-slate-800">
+                                Closing date: {{ vacancy.closing_date|date:"j F Y" }}
+                            </p>
+                        {% endif %}
+
+                        <div class="mt-6 pt-2">
+                            <a
+                                href="{% url 'engagement:job_vacancies' %}"
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
+                                style="background-color: var(--color-mmc-secondary, #ea580c);"
+                            >
+                                <span>Application Details</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
         {% else %}
-
-        <div class="mt-8 rounded-2xl border border-dashed border-slate-300 p-8 text-slate-600">
-            No vacancies are currently advertised.
-        </div>
-
+            <div class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                <p class="text-base text-slate-600">
+                    No vacancies are currently advertised.
+                </p>
+            </div>
         {% endif %}
 
     </div>
 </section>
 
-
-<section class="section-shell bg-emerald-950 text-white">
-    <div class="container-shell py-12 text-center md:py-16">
-
-        <h2 class="text-3xl font-bold">
+<!-- =========================================================
+     BOTTOM CTA
+========================================================= -->
+<section class="bg-emerald-950 py-12 sm:py-16 text-white">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold sm:text-3xl lg:text-4xl">
             Interested in working with MMC?
         </h2>
 
-        <p class="mx-auto mt-4 max-w-2xl leading-7 text-emerald-100">
-            Contact our team to discuss partnerships, services,
-            procurement or other ways to collaborate.
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-emerald-100 sm:text-lg">
+            Contact our team to discuss partnerships, services, procurement or other ways to collaborate.
         </p>
 
-       
+        <div class="mt-8 flex justify-center">
             <a
                 href="{% url 'contact:contact' %}"
-                class="mt-8 inline-flex items-center justify-center rounded-xl px-6 py-3 font-bold text-white shadow-md transition hover:brightness-90"
-                style="background-color: var(--color-mmc-secondary);"
+                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:brightness-95"
+                style="background-color: var(--color-mmc-secondary, #ea580c);"
             >
                 Contact MMC
             </a>
-
+        </div>
     </div>
 </section>
 

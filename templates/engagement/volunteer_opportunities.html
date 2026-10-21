@@ -4,143 +4,140 @@
 
 {% block content %}
 
-<section class="bg-slate-950 text-white">
-    <div class="container-shell py-20 md:py-24">
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950"></div>
 
+    <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <!-- Back Link -->
         <a href="{% url 'engagement:home' %}"
-           class="text-sm font-semibold text-emerald-300">
-            ← Get Involved
+           class="inline-flex items-center gap-2 text-base font-bold text-emerald-300 transition hover:text-white">
+            <span aria-hidden="true">&larr;</span> Get Involved
         </a>
 
-        <h1 class="mt-6 text-4xl font-bold sm:text-5xl">
+        <h1 class="mt-6 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
             Volunteer Opportunities
         </h1>
 
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Explore current opportunities to contribute your skills,
-            experience and time to meaningful community-focused work.
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            Explore current opportunities to contribute your skills, experience and time to meaningful community-focused work.
         </p>
-
     </div>
 </section>
 
-
-<section class="section-shell bg-white">
-    <div class="container-shell">
+<!-- =========================================================
+     OPPORTUNITIES LIST
+========================================================= -->
+<section class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {% if opportunities %}
+            <div class="grid gap-8 md:grid-cols-2">
+                {% for opportunity in opportunities %}
+                    <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-8">
 
-        <div class="grid gap-6 md:grid-cols-2">
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                            {{ opportunity.title }}
+                        </h2>
 
-            {% for opportunity in opportunities %}
+                        <p class="mt-3 text-base font-medium text-slate-500">
+                            <strong class="font-semibold text-slate-800">Location:</strong>
+                            {{ opportunity.location|default:"To be confirmed" }}
+                        </p>
 
-            <article class="rounded-3xl border border-slate-200 p-6 shadow-sm md:p-8">
+                        <div class="mt-4 whitespace-pre-line text-base leading-relaxed text-slate-700">
+                            {{ opportunity.description }}
+                        </div>
 
+                        {% if opportunity.responsibilities %}
+                            <div class="mt-6">
+                                <h3 class="text-lg font-bold text-slate-900 sm:text-xl">
+                                    Responsibilities
+                                </h3>
+                                <div class="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-600">
+                                    {{ opportunity.responsibilities }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if opportunity.requirements %}
+                            <div class="mt-6">
+                                <h3 class="text-lg font-bold text-slate-900 sm:text-xl">
+                                    Requirements
+                                </h3>
+                                <div class="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-600">
+                                    {{ opportunity.requirements }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if opportunity.deadline %}
+                            <p class="mt-6 text-base font-semibold text-slate-800">
+                                Deadline: {{ opportunity.deadline|date:"j F Y" }}
+                            </p>
+                        {% endif %}
+
+                        {% if opportunity.application_instructions %}
+                            <div class="mt-6 rounded-2xl border border-slate-200/80 bg-slate-50 p-6">
+                                <h3 class="text-lg font-bold text-slate-900">
+                                    How to Apply
+                                </h3>
+                                <div class="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-600">
+                                    {{ opportunity.application_instructions }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="mt-8 flex flex-wrap gap-4 border-t border-slate-100 pt-6">
+                            {% if opportunity.application_url %}
+                                <a href="{{ opportunity.application_url }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
+                                   style="background-color: var(--color-mmc-secondary, #ea580c);">
+                                    Apply Online
+                                </a>
+                            {% endif %}
+
+                            {% if opportunity.application_email %}
+                                <a href="mailto:{{ opportunity.application_email }}"
+                                   class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-3.5 text-base font-bold text-slate-800 shadow-sm transition hover:bg-slate-50">
+                                    Apply by Email
+                                </a>
+                            {% endif %}
+
+                            {% if not opportunity.application_url and not opportunity.application_email %}
+                                <a href="{% url 'contact:contact' %}"
+                                   class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
+                                   style="background-color: var(--color-mmc-secondary, #ea580c);">
+                                    Contact MMC
+                                </a>
+                            {% endif %}
+                        </div>
+
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="mx-auto max-w-2xl rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center sm:p-12">
                 <h2 class="text-2xl font-bold text-slate-900">
-                    {{ opportunity.title }}
+                    No Open Opportunities
                 </h2>
 
-                <p class="mt-3 text-sm font-medium text-slate-500">
-                    Location:
-                    {{ opportunity.location|default:"To be confirmed" }}
+                <p class="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+                    There are no published volunteer opportunities right now. Please check back later or contact our team.
                 </p>
 
-                <div class="mt-5 whitespace-pre-line leading-7 text-slate-700">
-                    {{ opportunity.description }}
-                </div>
-
-                {% if opportunity.responsibilities %}
-                <div class="mt-6">
-                    <h3 class="font-bold text-slate-900">
-                        Responsibilities
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ opportunity.responsibilities }}
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if opportunity.requirements %}
-                <div class="mt-6">
-                    <h3 class="font-bold text-slate-900">
-                        Requirements
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ opportunity.requirements }}
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if opportunity.deadline %}
-                <p class="mt-6 text-sm font-semibold text-slate-700">
-                    Deadline: {{ opportunity.deadline|date:"j F Y" }}
-                </p>
-                {% endif %}
-
-                {% if opportunity.application_instructions %}
-                <div class="mt-5 rounded-2xl bg-slate-50 p-5">
-                    <h3 class="font-bold text-slate-900">
-                        How to Apply
-                    </h3>
-                    <div class="mt-2 whitespace-pre-line leading-7 text-slate-600">
-                        {{ opportunity.application_instructions }}
-                    </div>
-                </div>
-                {% endif %}
-
-                <div class="mt-6 flex flex-wrap gap-3">
-
-                    {% if opportunity.application_url %}
-                    <a href="{{ opportunity.application_url }}"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="btn-primary inline-flex">
-                        Apply Online
-                    </a>
-                    {% endif %}
-
-                    {% if opportunity.application_email %}
-                    <a href="mailto:{{ opportunity.application_email }}"
-                       class="inline-flex items-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-800 hover:bg-slate-100">
-                        Apply by Email
-                    </a>
-                    {% endif %}
-
-                    {% if not opportunity.application_url and not opportunity.application_email %}
+                <div class="mt-8 flex justify-center">
                     <a href="{% url 'contact:contact' %}"
-                       class="btn-primary inline-flex">
+                       class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
+                       style="background-color: var(--color-mmc-secondary, #ea580c);">
                         Contact MMC
                     </a>
-                    {% endif %}
-
                 </div>
-
-            </article>
-
-            {% endfor %}
-
-        </div>
-
-        {% else %}
-
-        <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
-
-            <h2 class="text-2xl font-bold text-slate-900">
-                No Open Opportunities
-            </h2>
-
-            <p class="mt-4 leading-7 text-slate-600">
-                There are no published volunteer opportunities right now.
-                Please check back later or contact our team.
-            </p>
-
-            <a href="{% url 'contact:contact' %}"
-               class="btn-primary mt-6 inline-flex">
-                Contact MMC
-            </a>
-
-        </div>
-
+            </div>
         {% endif %}
 
     </div>

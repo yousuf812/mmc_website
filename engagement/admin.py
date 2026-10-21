@@ -4,6 +4,7 @@ from .models import (
     EngagementPage,
     VolunteerOpportunity,
     JobVacancy,
+    JobApplication,
 )
 
 
@@ -250,6 +251,100 @@ class JobVacancyAdmin(admin.ModelAdmin):
                     "is_open",
                     "ordering",
                 )
+            },
+        ),
+    )
+
+
+
+
+
+@admin.register(JobApplication)
+class JobApplicationAdmin(admin.ModelAdmin):
+
+    list_display = [
+        "full_name",
+        "vacancy",
+        "email",
+        "phone",
+        "sector",
+        "status",
+        "submitted_at",
+    ]
+
+    list_filter = [
+        "status",
+        "sector",
+        "availability",
+        "submitted_at",
+    ]
+
+    search_fields = [
+        "full_name",
+        "email",
+        "phone",
+        "area_of_expertise",
+        "sector",
+        "vacancy__title",
+    ]
+
+    readonly_fields = [
+        "submitted_at",
+        "updated_at",
+    ]
+
+    list_editable = [
+        "status",
+    ]
+
+    list_select_related = [
+        "vacancy",
+    ]
+
+    date_hierarchy = "submitted_at"
+    ordering = ["-submitted_at"]
+    list_per_page = 25
+
+    fieldsets = (
+        (
+            "Job Information",
+            {
+                "fields": (
+                    "vacancy",
+                ),
+            },
+        ),
+        (
+            "Applicant Information",
+            {
+                "fields": (
+                    "full_name",
+                    "email",
+                    "phone",
+                    "area_of_expertise",
+                    "sector",
+                    "language",
+                    "availability",
+                    "daily_rate_expectation",
+                ),
+            },
+        ),
+        (
+            "CV / Sample Work",
+            {
+                "fields": (
+                    "cv_or_sample_work",
+                ),
+            },
+        ),
+        (
+            "Application Review",
+            {
+                "fields": (
+                    "status",
+                    "submitted_at",
+                    "updated_at",
+                ),
             },
         ),
     )

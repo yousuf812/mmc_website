@@ -7,6 +7,11 @@ from .models import (
     JobVacancy,
 )
 
+from django.contrib import messages
+from django.shortcuts import redirect
+
+from .forms import JobApplicationForm
+
 
 # Shared submenu for all Get Involved pages
 GET_INVOLVED_MENU = [
@@ -65,11 +70,26 @@ def get_involved_home(request):
     )
 
 
+
 def engagement_page(request, slug):
     page = get_object_or_404(
         EngagementPage,
         slug=slug,
         is_published=True,
+    )
+
+    # Dedicated frontend templates for selected pages
+    page_templates = {
+        "partnerships": "engagement/partnerships.html",
+        "donate-support": "engagement/donate_support.html",
+        "customers-clients": "engagement/clients.html",
+    }
+
+    # Keep the existing template for Volunteer, Careers,
+    # Suppliers & Contractors, and other engagement pages.
+    template_name = page_templates.get(
+        page.slug,
+        "engagement/engagement_page.html",
     )
 
     context = {
@@ -80,7 +100,7 @@ def engagement_page(request, slug):
 
     return render(
         request,
-        "engagement/engagement_page.html",
+        template_name,
         context,
     )
 
@@ -105,11 +125,32 @@ def volunteer_opportunities(request):
 def job_vacancies(request):
     vacancies = JobVacancy.objects.filter(
         is_open=True
-    ).order_by("ordering", "title")
+    )
+
+    search_query = request.GET.get("q", "").strip()
+
+    if search_query:
+        from django.db.models import Q
+
+        vacancies = vacancies.filter(
+            Q(title__icontains=search_query)
+            | Q(department__icontains=search_query)
+            | Q(location__icontains=search_query)
+            | Q(employment_type__icontains=search_query)
+            | Q(description__icontains=search_query)
+            | Q(qualifications__icontains=search_query)
+            | Q(experience__icontains=search_query)
+        )
+
+    vacancies = vacancies.order_by(
+        "ordering",
+        "title",
+    )
 
     context = {
         "vacancies": vacancies,
         "get_involved_menu": GET_INVOLVED_MENU,
+        "search_query": search_query,
     }
 
     return render(
@@ -117,3 +158,54 @@ def job_vacancies(request):
         "engagement/job_vacancies.html",
         context,
     )
+
+
+
+def job_application(request, slug):
+    vacancy = get_object_or_404(
+        JobVacancy,
+        slug=slug,
+        is_open=True,
+    )
+
+    if vacancy.closing_date:
+        from django.utils import timezone
+
+        if vacancy.closing_date < timezone.localdate():
+            messages.error(
+                request,
+                "The application deadline for this vacancy has passed.",
+            )
+            return redirect("engagement:job_vacancies")
+
+    if request.method == "POST":
+        form = JobApplicationForm(
+            request.POST,
+            request.FILES,
+        )
+
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.vacancy = vacancy
+            application.save()
+
+            messages.success(
+                request,
+                "Your application has been submitted successfully.",
+            )
+
+            return redirect("engagement:job_vacancies")
+
+    else:
+        form = JobApplicationForm()
+
+    return render(
+        request,
+        "engagement/job_application_form.html",
+        {
+            "vacancy": vacancy,
+            "form": form,
+            "get_involved_menu": GET_INVOLVED_MENU,
+        },
+    )
+
