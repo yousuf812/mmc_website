@@ -139,20 +139,18 @@
                         the required registration document for this tender.
                     </p>
 
-                    {% if tender.effective_status == "open" and tender.document %}
-                        <a href="{% url 'tenders:apply' tender.slug %}"
-                           class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-200 sm:w-auto">
-                            Apply for This Tender
-                        </a>
-                    {% elif tender.effective_status == "open" %}
-                        <p class="mt-4 text-sm font-medium text-amber-800">
-                            Applications are unavailable until the official tender document is uploaded.
-                        </p>
-                    {% else %}
-                        <p class="mt-4 text-sm font-medium text-rose-700">
-                            Applications are closed for this tender.
-                        </p>
-                    {% endif %}
+                   
+                {% if tender.effective_status == "open" %}
+                    <a href="{% url 'tenders:apply' tender.slug %}"
+                    class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-200 sm:w-auto">
+                        Apply for This Tender
+                    </a>
+                {% else %}
+                    <p class="mt-4 text-sm font-medium text-rose-700">
+                        Applications are closed for this tender.
+                    </p>
+                {% endif %}
+
                 </div>
 
                 <p class="mt-8 text-xs leading-5 text-slate-500">
