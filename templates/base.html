@@ -78,106 +78,111 @@
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="ml-auto hidden items-center justify-end lg:flex"
-                 aria-label="Main navigation">
+            <!-- Desktop Navigation Redesign -->
+<!-- Desktop Navigation Redesign -->
+            <nav class="ml-auto hidden items-center justify-end lg:flex" aria-label="Main navigation">
+                <div class="flex items-center gap-1 xl:gap-2">
 
-                <div class="flex items-center gap-x-4 xl:gap-x-6 2xl:gap-x-8">
                     <!-- Home -->
                     <a href="{% url 'pages:home' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if request.path == '/' or request.resolver_match.url_name == 'home' %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if request.path == '/' or request.resolver_match.url_name == 'home' %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Home
                     </a>
 
                     <!-- Who We Are -->
                     <a href="{% url 'pages:about' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'about' in request.path or request.resolver_match.url_name == 'about' %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'about' in request.path or request.resolver_match.url_name == 'about' %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Who We Are
                     </a>
 
                     <!-- What We Do -->
                     <a href="{% url 'projects:what_we_do' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'what-we-do' in request.path or request.resolver_match.url_name == 'what_we_do' %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'what-we-do' in request.path or request.resolver_match.url_name == 'what_we_do' %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         What We Do
                     </a>
 
                     <!-- Our Work -->
                     <a href="{% url 'projects:project_list' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'project' in request.path and 'what-we-do' not in request.path %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'project' in request.path and 'what-we-do' not in request.path %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Our Work
                     </a>
 
                     <!-- Resources -->
                     <a href="{% url 'news:news_list' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'news' in request.path or 'resources' in request.path %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'news' in request.path or 'resources' in request.path %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Resources
                     </a>
 
                     <!-- Tenders -->
                     <a href="{% url 'tenders:list' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'tender' in request.path %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'tender' in request.path %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Tenders
                     </a>
 
                     <!-- Get Involved -->
-                    <a href="{% url 'engagement:home' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'engagement' in request.path or 'career' in request.path or 'vacanc' in request.path %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
-                        Get Involved
-                    </a>
+                    <!-- Get Involved -->
+                        <a href="{% url 'engagement:home' %}"
+                        class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                        {% if 'get-involved' in request.path or 'engagement' in request.path or 'career' in request.path or 'vacanc' in request.path or request.resolver_match.app_name == 'engagement' or request.resolver_match.url_name == 'home' and 'engagement' in request.path %}
+                            bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                        {% else %}
+                            text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                        {% endif %}">
+                            Get Involved
+                        </a>
 
                     <!-- Contact -->
                     <a href="{% url 'contact:contact' %}"
-                       class="inline-block shrink-0 whitespace-nowrap px-3.5 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-5 xl:text-base
-                       {% if 'contact' in request.path %}
-                           font-bold text-emerald-700 border-b-2 border-emerald-700
-                       {% else %}
-                           text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-                       {% endif %}">
+                    class="inline-flex shrink-0 items-center rounded-t-lg px-2.5 py-1.5 text-[14px] xl:px-3 xl:text-[15px] font-medium transition-all
+                    {% if 'contact' in request.path %}
+                        bg-emerald-50 text-emerald-700 font-semibold border-b-2 border-emerald-600
+                    {% else %}
+                        text-slate-600 border-b-2 border-transparent hover:bg-slate-100 hover:text-slate-900 rounded-b-lg
+                    {% endif %}">
                         Contact
                     </a>
 
-                    <!-- Donate Button -->
+                    <!-- Subtle Vertical Separator -->
+                    <div class="mx-1 h-5 w-px bg-slate-200 xl:mx-2"></div>
+
+                    <!-- Donate CTA Button -->
                     <a href="{% url 'engagement:page' slug='donate-support' %}"
-                       class="ml-4 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:brightness-90 hover:shadow-md xl:ml-6 xl:px-7 xl:text-base"
-                       style="background-color: var(--color-mmc-secondary);">
+                    class="inline-flex shrink-0 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-xs transition-all hover:opacity-95 hover:shadow-sm"
+                    style="background-color: var(--color-mmc-secondary);">
                         Donate
                     </a>
-                </div>
 
+                </div>
             </nav>
 
             <!-- Mobile / Tablet Toggle -->
