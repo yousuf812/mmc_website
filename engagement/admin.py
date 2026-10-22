@@ -5,7 +5,9 @@ from .models import (
     VolunteerOpportunity,
     JobVacancy,
     JobApplication,
+    VolunteerApplication
 )
+
 
 
 @admin.register(EngagementPage)
@@ -95,78 +97,65 @@ class EngagementPageAdmin(admin.ModelAdmin):
 
 @admin.register(VolunteerOpportunity)
 class VolunteerOpportunityAdmin(admin.ModelAdmin):
-
     list_display = [
         "title",
+        "opportunity_type",
+        "area",
         "location",
+        "commitment",
         "deadline",
         "is_open",
         "ordering",
     ]
-
     list_filter = [
+        "opportunity_type",
         "is_open",
+        "area",
         "location",
         "deadline",
     ]
-
     search_fields = [
         "title",
-        "description",
+        "area",
         "location",
+        "description",
         "requirements",
     ]
-
-    prepopulated_fields = {
-        "slug": ("title",)
-    }
-
-    ordering = [
-        "ordering",
-        "title",
-    ]
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ["ordering", "title"]
 
     fieldsets = (
-        (
-            "Opportunity Information",
-            {
-                "fields": (
-                    "title",
-                    "slug",
-                    "location",
-                    "description",
-                )
-            },
-        ),
-        (
-            "Role Details",
-            {
-                "fields": (
-                    "responsibilities",
-                    "requirements",
-                )
-            },
-        ),
-        (
-            "Application",
-            {
-                "fields": (
-                    "application_instructions",
-                    "application_email",
-                    "application_url",
-                    "deadline",
-                )
-            },
-        ),
-        (
-            "Status",
-            {
-                "fields": (
-                    "is_open",
-                    "ordering",
-                )
-            },
-        ),
+        ("Opportunity Information", {
+            "fields": (
+                "title",
+                "slug",
+                "opportunity_type",
+                "area",
+                "location",
+                "commitment",
+                "description",
+            )
+        }),
+        ("Role Details", {
+            "fields": (
+                "responsibilities",
+                "requirements",
+            )
+        }),
+        ("Application", {
+            "fields": (
+                "application_instructions",
+                "application_email",
+                "application_url",
+                "deadline",
+            )
+        }),
+        ("Status & Ordering", {
+            "fields": (
+                "is_open",
+                "ordering",
+            )
+        }),
     )
 
 
@@ -348,3 +337,75 @@ class JobApplicationAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+
+
+
+@admin.register(VolunteerApplication)
+class VolunteerApplicationAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "full_name",
+        "opportunity",
+        "email",
+        "phone",
+        "status",
+        "submitted_at",
+    )
+
+    list_filter = (
+        "status",
+        "opportunity",
+        "submitted_at",
+    )
+
+    search_fields = (
+        "full_name",
+        "email",
+        "phone",
+        "opportunity__title",
+    )
+
+    readonly_fields = (
+        "submitted_at",
+        "updated_at",
+    )
+
+    list_per_page = 25
+
+    fieldsets = (
+        (
+            "Applicant Information",
+            {
+                "fields": (
+                    "opportunity",
+                    "full_name",
+                    "email",
+                    "phone",
+                    "location",
+                ),
+            },
+        ),
+        (
+            "Volunteer Details",
+            {
+                "fields": (
+                    "skills_and_experience",
+                    "motivation",
+                    "availability",
+                    "cv_or_supporting_document",
+                ),
+            },
+        ),
+        (
+            "Application Review",
+            {
+                "fields": (
+                    "status",
+                    "submitted_at",
+                    "updated_at",
+                ),
+            },
+        ),
+    )
+

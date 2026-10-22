@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}Apply to Volunteer | MMC International{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-slate-100/70 py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+
+        <!-- Back Link -->
+        <div class="mb-6 flex justify-center sm:justify-start">
+            <a href="{% url 'engagement:volunteer_opportunities' %}"
+               class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 transition hover:text-emerald-800">
+                <span aria-hidden="true">&larr;</span>
+                Back to Volunteer Opportunities
+            </a>
+        </div>
+
+        <!-- Main Card -->
+        <div class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-xl shadow-slate-200/50">
+
+            <!-- Card Header (Centered & Sleek Gradient) -->
+            <div class="relative bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 px-6 py-10 text-center text-white sm:px-12">
+                <div class="mx-auto max-w-xl">
+                    <span class="inline-block rounded-full bg-emerald-500/20 px-3.5 py-1 text-xs font-bold tracking-widest text-emerald-200 uppercase">
+                        MMC International
+                    </span>
+
+                    <h1 class="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+                        Volunteer Application
+                    </h1>
+
+                    <p class="mt-2 text-sm text-emerald-100 sm:text-base">
+                        Join our mission and make a tangible impact in the community.
+                    </p>
+
+                    <div class="mt-5 inline-block rounded-2xl bg-white/10 px-5 py-3 backdrop-blur-md">
+                        <h2 class="text-base font-bold text-white sm:text-lg">
+                            {{ opportunity.title }}
+                        </h2>
+                        <div class="mt-1 flex flex-wrap items-center justify-center gap-3 text-xs text-emerald-200">
+                            {% if opportunity.location %}
+                                <span>📍 {{ opportunity.location }}</span>
+                            {% endif %}
+                            {% if opportunity.deadline %}
+                                <span>⏳ Deadline: {{ opportunity.deadline|date:"F j, Y" }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6 sm:p-10 lg:p-12">
+
+                {% if messages %}
+                    <div class="mb-8 space-y-3">
+                        {% for message in messages %}
+                            <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-center text-sm font-medium text-emerald-800" role="status">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Section Intro (Centered) -->
+                <div class="mb-8 text-center">
+                    <h2 class="text-xl font-bold tracking-tight text-slate-900">
+                        Applicant Information
+                    </h2>
+                    <p class="mt-1.5 text-sm text-slate-500">
+                        Complete the form below. Fields marked with <span class="text-rose-500">*</span> are required.
+                    </p>
+                    <div class="mx-auto mt-3 h-1 w-12 rounded-full bg-emerald-600"></div>
+                </div>
+
+                <!-- Form -->
+                <form method="post" enctype="multipart/form-data" class="space-y-6">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4 text-center text-sm font-medium text-rose-700">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        {% for field in form %}
+                            <div class="form-field-wrapper flex flex-col {% if field.name == 'skills_and_experience' or field.name == 'motivation' or field.name == 'cv_or_supporting_document' %}sm:col-span-2{% endif %}">
+                                
+                                <label for="{{ field.id_for_label }}"
+                                       class="mb-2 text-sm font-semibold text-slate-800">
+                                    {{ field.label }}
+                                    {% if field.field.required %}
+                                        <span class="text-rose-500">*</span>
+                                    {% endif %}
+                                </label>
+
+                                <div class="relative w-full">
+                                    {{ field }}
+                                </div>
+
+                                {% if field.help_text %}
+                                    <p class="mt-1.5 text-xs text-slate-500">
+                                        {{ field.help_text }}
+                                    </p>
+                                {% endif %}
+
+                                {% if field.errors %}
+                                    <div class="mt-1.5 text-xs font-medium text-rose-600">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Footer & Submit Button (Centered) -->
+                    <div class="border-t border-slate-100 pt-8 text-center">
+                        <p class="mx-auto mb-6 max-w-lg text-xs leading-relaxed text-slate-400">
+                            By submitting this application, you confirm that all entered details are accurate and agree to allow MMC International to review your submission.
+                        </p>
+
+                        <div class="flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+                            <button type="submit"
+                                    class="inline-flex w-full items-center justify-center rounded-xl bg-emerald-700 px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-800 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-emerald-200 sm:w-auto">
+                                Submit Application
+                            </button>
+
+                            <a href="{% url 'engagement:volunteer_opportunities' %}"
+                               class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 sm:w-auto">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Custom Styling to make Django input fields look gorgeous -->
+<style>
+    .form-field-wrapper input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    .form-field-wrapper select,
+    .form-field-wrapper textarea {
+        width: 100%;
+        display: block;
+        border-radius: 0.75rem; /* rounded-xl */
+        border: 1px solid #cbd5e1; /* slate-300 */
+        background-color: #f8fafc; /* slate-50 */
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        color: #0f172a; /* slate-900 */
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    .form-field-wrapper input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+    .form-field-wrapper select:focus,
+    .form-field-wrapper textarea:focus {
+        outline: none;
+        background-color: #ffffff;
+        border-color: #059669; /* emerald-600 */
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15); /* ring-emerald */
+    }
+
+    .form-field-wrapper textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    /* Gorgeous File Input */
+    .form-field-wrapper input[type="file"] {
+        width: 100%;
+        font-size: 0.875rem;
+        color: #475569;
+        background-color: #f8fafc;
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 0.75rem;
+        padding: 0.6rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .form-field-wrapper input[type="file"]:hover {
+        border-color: #059669;
+        background-color: #f0fdf4;
+    }
+
+    .form-field-wrapper input[type="file"]::file-selector-button {
+        padding: 0.45rem 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: #047857; /* emerald-700 */
+        color: white;
+        font-weight: 600;
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-right: 0.85rem;
+        transition: background-color 0.2s;
+    }
+
+    .form-field-wrapper input[type="file"]::file-selector-button:hover {
+        background-color: #065f46;
+    }
+</style>
+{% endblock %}

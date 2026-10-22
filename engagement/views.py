@@ -1,6 +1,6 @@
 
 from django.shortcuts import get_object_or_404, render
-
+from django.db.models import Q
 from .models import (
     EngagementPage,
     VolunteerOpportunity,
@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 from .forms import JobApplicationForm
+from .models import VolunteerApplication
+from .forms import VolunteerApplicationForm
 
 
 # Shared submenu for all Get Involved pages
@@ -106,19 +108,78 @@ def engagement_page(request, slug):
 
 
 def volunteer_opportunities(request):
-    opportunities = VolunteerOpportunity.objects.filter(
-        is_open=True
-    ).order_by("ordering", "title")
+    queryset = VolunteerOpportunity.objects.all()
+
+    # Stat counters (Image onujayi)
+    total_open_count = queryset.filter(is_open=True).count()
+    volunteer_count = queryset.filter(is_open=True, opportunity_type="volunteer").count()
+    internship_count = queryset.filter(is_open=True, opportunity_type="internship").count()
+    staff_count = queryset.filter(is_open=True, opportunity_type="staff").count()
+
+    # Distinct values for dropdown filters
+    areas_list = (
+        VolunteerOpportunity.objects.exclude(area__exact="")
+        .values_list("area", flat=True)
+        .distinct()
+    )
+    locations_list = (
+        VolunteerOpportunity.objects.exclude(location__exact="")
+        .values_list("location", flat=True)
+        .distinct()
+    )
+
+    # Filter parameters from GET request
+    q = request.GET.get("q", "").strip()
+    opp_type = request.GET.get("type", "").strip()
+    area = request.GET.get("area", "").strip()
+    location = request.GET.get("location", "").strip()
+    status = request.GET.get("status", "").strip()
+
+    # Apply Filters
+    if q:
+        queryset = queryset.filter(
+            Q(title__icontains=q)
+            | Q(area__icontains=q)
+            | Q(location__icontains=q)
+            | Q(description__icontains=q)
+        )
+    if opp_type:
+        queryset = queryset.filter(opportunity_type=opp_type)
+    if area:
+        queryset = queryset.filter(area=area)
+    if location:
+        queryset = queryset.filter(location=location)
+    if status == "open":
+        queryset = queryset.filter(is_open=True)
+    elif status == "closed":
+        queryset = queryset.filter(is_open=False)
+
+    opportunities = queryset.order_by("ordering", "title")
 
     context = {
         "opportunities": opportunities,
         "get_involved_menu": GET_INVOLVED_MENU,
+        "active_engagement_slug": "volunteer",
+        # Counters
+        "total_open_count": total_open_count,
+        "volunteer_count": volunteer_count,
+        "internship_count": internship_count,
+        "staff_count": staff_count,
+        # Filter options
+        "areas_list": areas_list,
+        "locations_list": locations_list,
+        # Selected filter states
+        "selected_q": q,
+        "selected_type": opp_type,
+        "selected_area": area,
+        "selected_location": location,
+        "selected_status": status,
     }
 
     return render(
-        request,
-        "engagement/volunteer_opportunities.html",
-        context,
+        request, 
+        "engagement/volunteer_opportunities.html", 
+        context
     )
 
 
@@ -208,4 +269,56 @@ def job_application(request, slug):
             "get_involved_menu": GET_INVOLVED_MENU,
         },
     )
+
+
+
+def volunteer_application(request, slug):
+    opportunity = get_object_or_404(
+        VolunteerOpportunity,
+        slug=slug,
+        is_open=True,
+    )
+
+    if opportunity.deadline:
+        from django.utils import timezone
+
+        if opportunity.deadline < timezone.localdate():
+            messages.error(
+                request,
+                "The application deadline for this opportunity has passed.",
+            )
+            return redirect("engagement:volunteer_opportunities")
+
+    if request.method == "POST":
+        form = VolunteerApplicationForm(
+            request.POST,
+            request.FILES,
+        )
+
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.opportunity = opportunity
+            application.save()
+
+            messages.success(
+                request,
+                "Your volunteer application has been submitted successfully.",
+            )
+
+            return redirect("engagement:volunteer_opportunities")
+
+    else:
+        form = VolunteerApplicationForm()
+
+    return render(
+        request,
+        "engagement/volunteer_application_form.html",
+        {
+            "opportunity": opportunity,
+            "form": form,
+            "get_involved_menu": GET_INVOLVED_MENU,
+            "active_engagement_slug": "volunteer",
+        },
+    )
+
 

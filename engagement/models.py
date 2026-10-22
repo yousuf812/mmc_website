@@ -108,80 +108,61 @@ class EngagementPage(models.Model):
 
 
 class VolunteerOpportunity(models.Model):
+    OPPORTUNITY_TYPES = [
+        ("volunteer", "Volunteer"),
+        ("internship", "Internship"),
+        ("staff", "Staff / Career"),
+        ("consultant", "Consultant"),
+    ]
 
-    title = models.CharField(
-        max_length=200
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220, unique=True, blank=True)
+    
+    # Image er table onujayi notun fields
+    opportunity_type = models.CharField(
+        max_length=30, 
+        choices=OPPORTUNITY_TYPES, 
+        default="volunteer"
     )
-
-    slug = models.SlugField(
-        max_length=220,
-        unique=True,
-        blank=True
+    area = models.CharField(
+        max_length=150, 
+        blank=True, 
+        help_text="e.g. Field support, Skills & livelihood, Communications"
     )
-
     location = models.CharField(
-        max_length=150,
-        blank=True
+        max_length=150, 
+        blank=True, 
+        help_text="e.g. Baidoa, Mogadishu, Remote"
     )
-
+    commitment = models.CharField(
+        max_length=150, 
+        blank=True, 
+        help_text="e.g. Part-time, 3 months / Flexible, 5 hrs/week"
+    )
+    
     description = models.TextField()
+    responsibilities = models.TextField(blank=True)
+    requirements = models.TextField(blank=True)
+    application_instructions = models.TextField(blank=True)
+    application_email = models.EmailField(blank=True)
+    application_url = models.URLField(blank=True)
+    deadline = models.DateField(blank=True, null=True)
 
-    responsibilities = models.TextField(
-        blank=True
-    )
-
-    requirements = models.TextField(
-        blank=True
-    )
-
-    application_instructions = models.TextField(
-        blank=True
-    )
-
-    application_email = models.EmailField(
-        blank=True
-    )
-
-    application_url = models.URLField(
-        blank=True
-    )
-
-    deadline = models.DateField(
-        blank=True,
-        null=True
-    )
-
-    is_open = models.BooleanField(
-        default=True
-    )
-
-    ordering = models.PositiveIntegerField(
-        default=0
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    is_open = models.BooleanField(default=True)
+    ordering = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = [
-            "ordering",
-            "title",
-        ]
+        ordering = ["ordering", "title"]
 
     def save(self, *args, **kwargs):
-
         if not self.slug:
             self.slug = slugify(self.title)
-
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.get_opportunity_type_display()})"
 
 
 class JobVacancy(models.Model):
@@ -353,3 +334,74 @@ class JobApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} — {self.vacancy.title}"
+
+
+# volunteerr application
+
+class VolunteerApplication(models.Model):
+
+    class ApplicationStatus(models.TextChoices):
+        RECEIVED = "received", "Received"
+        UNDER_REVIEW = "under_review", "Under Review"
+        SHORTLISTED = "shortlisted", "Shortlisted"
+        ACCEPTED = "accepted", "Accepted"
+        REJECTED = "rejected", "Rejected"
+
+    opportunity = models.ForeignKey(
+        VolunteerOpportunity,
+        on_delete=models.PROTECT,
+        related_name="applications",
+    )
+
+    full_name = models.CharField(max_length=200)
+
+    email = models.EmailField()
+
+    phone = models.CharField(max_length=30)
+
+    location = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+
+    skills_and_experience = models.TextField(
+        help_text="Describe your relevant skills and experience.",
+    )
+
+    motivation = models.TextField(
+        help_text="Why would you like to volunteer with MMC?",
+    )
+
+    availability = models.CharField(
+        max_length=200,
+        help_text="e.g. Weekends, weekdays, or specific hours.",
+    )
+
+    cv_or_supporting_document = models.FileField(
+        upload_to="engagement/volunteer_applications/",
+        blank=True,
+        null=True,
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=ApplicationStatus.choices,
+        default=ApplicationStatus.RECEIVED,
+    )
+
+    submitted_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = ["-submitted_at"]
+        verbose_name = "Volunteer Application"
+        verbose_name_plural = "Volunteer Applications"
+
+    def __str__(self):
+        return f"{self.full_name} — {self.opportunity.title}"
+

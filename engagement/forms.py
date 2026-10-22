@@ -4,6 +4,7 @@ from pathlib import Path
 from django import forms
 
 from .models import JobApplication
+from .models import VolunteerApplication
 
 
 class JobApplicationForm(forms.ModelForm):
@@ -107,5 +108,79 @@ class JobApplicationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "The file must not exceed 5 MB."
             )
+
+        return uploaded_file
+
+
+class VolunteerApplicationForm(forms.ModelForm):
+
+    class Meta:
+        model = VolunteerApplication
+
+        fields = [
+            "full_name",
+            "email",
+            "phone",
+            "location",
+            "skills_and_experience",
+            "motivation",
+            "availability",
+            "cv_or_supporting_document",
+        ]
+
+        widgets = {
+            "full_name": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "Enter your full name",
+            }),
+            "email": forms.EmailInput(attrs={
+                "class": "form-input",
+                "placeholder": "Enter your email address",
+            }),
+            "phone": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "Enter your phone number",
+            }),
+            "location": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "City or country",
+            }),
+            "skills_and_experience": forms.Textarea(attrs={
+                "class": "form-input",
+                "rows": 4,
+                "placeholder": "Describe your relevant skills and experience",
+            }),
+            "motivation": forms.Textarea(attrs={
+                "class": "form-input",
+                "rows": 4,
+                "placeholder": "Why would you like to volunteer with MMC?",
+            }),
+            "availability": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "e.g. Weekends or weekdays",
+            }),
+        }
+
+    def clean_cv_or_supporting_document(self):
+        uploaded_file = self.cleaned_data.get(
+            "cv_or_supporting_document"
+        )
+
+        if uploaded_file:
+            max_size = 5 * 1024 * 1024  # 5 MB
+
+            if uploaded_file.size > max_size:
+                raise forms.ValidationError(
+                    "File size must not exceed 5 MB."
+                )
+
+            allowed_extensions = (".pdf", ".doc", ".docx")
+
+            filename = uploaded_file.name.lower()
+
+            if not filename.endswith(allowed_extensions):
+                raise forms.ValidationError(
+                    "Only PDF, DOC, and DOCX files are allowed."
+                )
 
         return uploaded_file

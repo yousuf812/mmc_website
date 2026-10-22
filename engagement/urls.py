@@ -36,4 +36,12 @@ urlpatterns = [
     views.job_application,
     name="job_application",
 ),
+
+
+path(
+    "volunteer-opportunities/<slug:slug>/apply/",
+    views.volunteer_application,
+    name="volunteer_application",
+),
+
 ]
