@@ -79,105 +79,107 @@
             </a>
 
             <!-- Desktop Navigation -->
-           <nav class="ml-auto hidden min-w-0 items-center justify-end gap-x-1 lg:flex xl:gap-x-2 2xl:gap-x-3"
-            aria-label="Main navigation">
+           <nav class="ml-auto hidden items-center justify-end lg:flex"
+     aria-label="Main navigation">
 
-            <!-- Home -->
-            <a href="{% url 'pages:home' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if request.path == '/' or request.resolver_match.url_name == 'home' %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Home
-            </a>
+    <div class="flex items-center gap-x-2 xl:gap-x-4 2xl:gap-x-5">
+        <!-- Home -->
+        <a href="{% url 'pages:home' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if request.path == '/' or request.resolver_match.url_name == 'home' %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Home
+        </a>
 
-            <!-- Who We Are -->
-            <a href="{% url 'pages:about' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'about' in request.path or request.resolver_match.url_name == 'about' %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Who We Are
-            </a>
+        <!-- Who We Are -->
+        <a href="{% url 'pages:about' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'about' in request.path or request.resolver_match.url_name == 'about' %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Who We Are
+        </a>
 
-            <!-- What We Do -->
-            <a href="{% url 'projects:what_we_do' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'what-we-do' in request.path or request.resolver_match.url_name == 'what_we_do' %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                What We Do
-            </a>
+        <!-- What We Do -->
+        <a href="{% url 'projects:what_we_do' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'what-we-do' in request.path or request.resolver_match.url_name == 'what_we_do' %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            What We Do
+        </a>
 
-            <!-- Our Work -->
-            <a href="{% url 'projects:project_list' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'project' in request.path and 'what-we-do' not in request.path %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Our Work
-            </a>
+        <!-- Our Work -->
+        <a href="{% url 'projects:project_list' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'project' in request.path and 'what-we-do' not in request.path %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Our Work
+        </a>
 
-            <!-- Resources -->
-            <a href="{% url 'news:news_list' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'news' in request.path or 'resources' in request.path %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Resources
-            </a>
+        <!-- Resources -->
+        <a href="{% url 'news:news_list' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'news' in request.path or 'resources' in request.path %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Resources
+        </a>
 
-            <!-- Tenders -->
-            <a href="{% url 'tenders:list' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'tender' in request.path %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Tenders
-            </a>
+        <!-- Tenders -->
+        <a href="{% url 'tenders:list' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'tender' in request.path %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Tenders
+        </a>
 
-            <!-- Get Involved -->
-            <a href="{% url 'engagement:home' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'engagement' in request.path or 'career' in request.path or 'vacanc' in request.path %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Get Involved
-            </a>
+        <!-- Get Involved -->
+        <a href="{% url 'engagement:home' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'engagement' in request.path or 'career' in request.path or 'vacanc' in request.path %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Get Involved
+        </a>
 
-            <!-- Contact -->
-            <a href="{% url 'contact:contact' %}"
-            class="inline-block whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:text-[15px] 2xl:text-base
-            {% if 'contact' in request.path %}
-                font-bold text-emerald-700 border-b-2 border-emerald-700
-            {% else %}
-                text-slate-700 border-b-2 border-transparent hover:border-emerald-300
-            {% endif %}">
-                Contact
-            </a>
+        <!-- Contact -->
+        <a href="{% url 'contact:contact' %}"
+           class="inline-block shrink-0 whitespace-nowrap px-2 py-2 text-sm font-semibold transition-colors hover:text-emerald-700 xl:px-3 xl:text-base
+           {% if 'contact' in request.path %}
+               font-bold text-emerald-700 border-b-2 border-emerald-700
+           {% else %}
+               text-slate-700 border-b-2 border-transparent hover:border-emerald-300
+           {% endif %}">
+            Contact
+        </a>
 
-            <!-- Donate Button -->
-            <a href="{% url 'engagement:page' slug='donate-support' %}"
-            class="ml-2 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 text-sm font-bold text-white shadow-sm transition-all hover:brightness-90 hover:shadow-md xl:px-4.5 xl:text-[15px] 2xl:text-base"
-            style="background-color: var(--color-mmc-secondary);">
-                Donate
-            </a>
+        <!-- Donate Button -->
+        <a href="{% url 'engagement:page' slug='donate-support' %}"
+           class="ml-2 inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 text-sm font-bold text-white shadow-sm transition-all hover:brightness-90 hover:shadow-md xl:ml-3 xl:px-5 xl:text-base"
+           style="background-color: var(--color-mmc-secondary);">
+            Donate
+        </a>
+    </div>
 
-            </nav>
+</nav>
 
             <!-- Mobile / Tablet Toggle -->
             <button
