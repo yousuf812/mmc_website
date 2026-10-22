@@ -28,21 +28,25 @@
         </p>
 
         <div class="mt-8 flex flex-wrap gap-4">
-            <a
-                href="{% url 'contact:contact' %}"
-                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-                style="background-color: var(--color-mmc-secondary, #ea580c);"
-            >
-                Partner with MMC
-            </a>
+           <a
+            href="{% url 'contact:contact' %}"
+            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow-md transition duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+        >
+            Partner with MMC
+        </a>
 
-            <a
-                href="{% url 'engagement:volunteer_opportunities' %}"
-                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-                style="background-color: var(--color-mmc-secondary, #ea580c);"
-            >
-                Explore Volunteering
-            </a>
+                <a
+                    href="{% url 'engagement:volunteer_opportunities' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow-md transition duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                    Explore Volunteering
+                </a>
         </div>
     </div>
 </section>
@@ -95,10 +99,12 @@
                             {% endif %}
 
                             <div class="mt-6 pt-2">
-                                <a
+                               <a
                                     href="{% url 'engagement:page' slug=page.slug %}"
-                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
                                 >
                                     <span>Learn More</span>
                                     <span aria-hidden="true">&rarr;</span>
@@ -144,8 +150,10 @@
             <div>
                 <a
                     href="{% url 'engagement:volunteer_opportunities' %}"
-                    class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                    style="background-color: var(--color-mmc-secondary, #ea580c);"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
                 >
                     <span>View All Opportunities</span>
                     <span aria-hidden="true">&rarr;</span>
@@ -177,13 +185,15 @@
 
                         <div class="mt-6 pt-2">
                             <a
-                                href="{% url 'engagement:volunteer_opportunities' %}"
-                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                style="background-color: var(--color-mmc-secondary, #ea580c);"
-                            >
-                                <span>Application Details</span>
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
+                            href="{% url 'engagement:volunteer_opportunities' %}"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+                        >
+                            <span>Application Details</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                         </div>
                     </article>
                 {% endfor %}
@@ -221,14 +231,16 @@
             </div>
 
             <div>
-                <a
-                    href="{% url 'engagement:job_vacancies' %}"
-                    class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                >
-                    <span>View All Vacancies</span>
-                    <span aria-hidden="true">&rarr;</span>
-                </a>
+               <a
+                href="{% url 'engagement:job_vacancies' %}"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+            >
+                <span>View All Vacancies</span>
+                <span aria-hidden="true">&rarr;</span>
+            </a>
             </div>
         </div>
 
@@ -255,14 +267,16 @@
                         {% endif %}
 
                         <div class="mt-6 pt-2">
-                            <a
-                                href="{% url 'engagement:job_vacancies' %}"
-                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                style="background-color: var(--color-mmc-secondary, #ea580c);"
-                            >
-                                <span>Application Details</span>
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
+                           <a
+                            href="{% url 'engagement:job_vacancies' %}"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+                        >
+                            <span>Application Details</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                         </div>
                     </article>
                 {% endfor %}
@@ -292,13 +306,15 @@
         </p>
 
         <div class="mt-8 flex justify-center">
-            <a
-                href="{% url 'contact:contact' %}"
-                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow-md transition hover:brightness-95"
-                style="background-color: var(--color-mmc-secondary, #ea580c);"
-            >
-                Contact MMC
-            </a>
+           <a
+            href="{% url 'contact:contact' %}"
+            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow-md transition-colors duration-200"
+        >
+            Contact MMC
+        </a>
         </div>
     </div>
 </section>

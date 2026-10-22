@@ -645,9 +645,11 @@
                     <div class="mt-5 flex justify-center">
     <a
         href="{% url 'projects:project_detail' project.slug %}"
-        class="group inline-flex min-h-12 items-center justify-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-        style="background-color: var(--color-mmc-secondary);"
-    >
+       style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+        onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+        class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl px-7 py-3 text-sm font-bold shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+        >
         <span>View project</span>
         <span
             class="text-xl leading-none transition-transform duration-300 group-hover:translate-x-1"

@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load static %}
 
@@ -13,7 +12,7 @@
     <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-orange-100/70 blur-3xl"></div>
     <div class="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-emerald-100/70 blur-3xl"></div>
 
-    <div class="container-shell relative py-16 sm:py-20 lg:py-24">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative py-16 sm:py-20 lg:py-24">
         <div class="max-w-4xl">
             <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-bold text-orange-800">
                 <span class="h-2 w-2 rounded-full bg-orange-500"></span>
@@ -22,7 +21,7 @@
 
             <h1 class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-mmc-primary sm:text-5xl lg:text-6xl">
                 Creating Change.
-                <span style="color: var(--color-mmc-secondary);">
+                <span style="color: var(--color-mmc-secondary, #e97c61);">
                     Measuring Impact.
                 </span>
             </h1>
@@ -37,8 +36,10 @@
             <div class="mt-8 flex flex-wrap gap-3">
                 <a
                     href="{% url 'projects:project_list' %}"
-                    class="inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white transition hover:brightness-90"
-                    style="background-color: var(--color-mmc-secondary);"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-bold shadow-md transition-colors duration-200"
                 >
                     Explore Our Projects
                     <span class="ml-2" aria-hidden="true">→</span>
@@ -46,7 +47,10 @@
 
                 <a
                     href="#impact-reports"
-                    class="inline-flex min-h-12 items-center justify-center rounded-lg border border-mmc-primary px-6 py-3 text-sm font-bold text-mmc-primary transition hover:bg-mmc-primary hover:text-white"
+                    style="border: 1.5px solid var(--color-mmc-primary, #184544); color: var(--color-mmc-primary, #184544); background-color: transparent;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.color='#ffffff';"
+                    onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-mmc-primary, #184544)';"
+                    class="inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-bold shadow-sm transition-colors duration-200"
                 >
                     Explore Impact Resources
                 </a>
@@ -55,11 +59,10 @@
     </div>
 </section>
 
-
 <!-- Verified Impact Metrics -->
 {% if impact_metrics %}
 <section class="border-b border-slate-200 bg-white">
-    <div class="container-shell py-12 sm:py-16">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
 
         <div class="mb-8">
             <p class="text-sm font-bold uppercase tracking-[0.16em] text-orange-700">
@@ -80,7 +83,7 @@
             <article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:shadow-md">
 
                 <div class="mb-4 h-1.5 w-12 rounded-full"
-                     style="background-color: var(--color-mmc-secondary);">
+                     style="background-color: var(--color-mmc-secondary, #e97c61);">
                 </div>
 
                 <p class="text-3xl font-extrabold tracking-tight text-mmc-primary">
@@ -123,11 +126,9 @@
 </section>
 {% endif %}
 
-
-
 <!-- Impact Overview -->
 <section class="border-y border-slate-200 bg-slate-50">
-    <div class="container-shell py-12 sm:py-16">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div class="grid gap-6 md:grid-cols-3">
 
             <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-8">
@@ -187,7 +188,7 @@
 
 <!-- Completed Projects -->
 <section class="bg-white py-16 sm:py-20">
-    <div class="container-shell">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div class="max-w-2xl">
@@ -207,8 +208,10 @@
 
             <a
                 href="{% url 'projects:project_list' %}?status=completed"
-                class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg px-5 py-3 text-sm font-bold text-white transition hover:brightness-90 sm:self-auto"
-                style="background-color: var(--color-mmc-secondary);"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 self-start rounded-lg px-5 py-3 text-sm font-bold shadow-md transition-colors duration-200 sm:self-auto"
             >
                 View All Projects
                 <span aria-hidden="true">→</span>
@@ -227,8 +230,8 @@
                                 aria-label="View {{ project.title }}"
                             >
                                 <img
-                                   src="{{ project.featured_image.url }}"
-                                   alt="{{ project.image_alt_text|default:project.title }}"
+                                    src="{{ project.featured_image.url }}"
+                                    alt="{{ project.image_alt_text|default:project.title }}"
                                     loading="lazy"
                                     class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
                                 >
@@ -307,14 +310,16 @@
                             here. Visit the project directory to explore our
                             other published work.
                         </p>
-                       
-                            <a
-                                href="{% url 'projects:project_list' %}"
-                                class="mt-4 inline-flex items-center gap-2 rounded-xl bg-mmc-secondary px-5 py-3 font-bold text-white transition hover:bg-mmc-secondary-dark"
-                            >
-                                Browse project directory →
-                            </a>
-
+                        
+                        <a
+                            href="{% url 'projects:project_list' %}"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="mt-4 inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold shadow-sm transition-colors duration-200"
+                        >
+                            Browse project directory →
+                        </a>
                     </div>
                 </div>
             </div>
@@ -322,11 +327,10 @@
     </div>
 </section>
 
-
 <!-- Success Stories -->
 {% if success_stories %}
 <section class="bg-white py-16 sm:py-20">
-    <div class="container-shell">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mb-10 max-w-3xl">
             <p class="text-sm font-bold uppercase tracking-[0.16em] text-orange-700">
@@ -381,7 +385,7 @@
 <!-- Testimonials -->
 {% if testimonials %}
 <section class="bg-slate-50 py-16 sm:py-20">
-    <div class="container-shell">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="mb-10 max-w-3xl">
             <p class="text-sm font-bold uppercase tracking-[0.16em] text-orange-700">
@@ -446,10 +450,9 @@
 </section>
 {% endif %}
 
-
 <!-- Impact Resources -->
 <section id="impact-reports" class="scroll-mt-24 bg-slate-50 py-16 sm:py-20">
-    <div class="container-shell">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="max-w-3xl">
             <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-orange-700">
@@ -486,14 +489,15 @@
                     evaluations that document progress and lessons learned.
                 </p>
 
-                
-                        <a
-                            href="{% url 'resources:publication_list' %}"
-                            class="mt-5 inline-flex items-center gap-2 rounded-xl bg-mmc-secondary px-5 py-3 text-sm font-bold text-white transition hover:bg-mmc-secondary-dark"
-                        >
-                            Browse Publications →
-                        </a>
-
+                <a
+                    href="{% url 'resources:publication_list' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="mt-5 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition-colors duration-200"
+                >
+                    Browse Publications →
+                </a>
             </article>
 
             <article class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
@@ -513,14 +517,15 @@
                     video testimonials that show what change means in practice.
                 </p>
 
-               
                 <a
                     href="{% url 'news:news_list' %}"
-                    class="mt-5 inline-flex items-center gap-2 rounded-xl bg-mmc-secondary px-5 py-3 text-sm font-bold text-white transition hover:bg-mmc-secondary-dark"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="mt-5 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition-colors duration-200"
                 >
                     Explore Stories & News →
                 </a>
-
             </article>
 
             <article class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
@@ -540,14 +545,15 @@
                     responsible delivery and continuous improvement.
                 </p>
 
-                
-                        <a
-                            href="{% url 'resources:publication_list' %}"
-                            class="mt-5 inline-flex items-center gap-2 rounded-xl bg-mmc-secondary px-5 py-3 text-sm font-bold text-white transition hover:bg-mmc-secondary-dark"
-                        >
-                            View Available Resources →
-                        </a>
-
+                <a
+                    href="{% url 'resources:publication_list' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="mt-5 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm transition-colors duration-200"
+                >
+                    View Available Resources →
+                </a>
             </article>
 
         </div>
@@ -561,7 +567,7 @@
 
 <!-- Partner CTA -->
 <section class="py-16 sm:py-20">
-    <div class="container-shell">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden rounded-3xl bg-mmc-primary px-6 py-10 sm:px-10 sm:py-14 lg:px-14">
             <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/5"></div>
             <div class="absolute -bottom-24 right-1/3 h-64 w-64 rounded-full bg-white/5"></div>
@@ -586,8 +592,10 @@
                 <div class="flex shrink-0 flex-wrap gap-3">
                     <a
                         href="{% url 'engagement:page' slug='partnerships' %}"
-                        class="inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white transition hover:brightness-90"
-                        style="background-color: var(--color-mmc-secondary);"
+                        style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                        onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                        class="inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 text-sm font-bold shadow-md transition-colors duration-200"
                     >
                         Become a Partner →
                     </a>

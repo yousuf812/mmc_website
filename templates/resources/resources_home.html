@@ -78,10 +78,15 @@
                 </div>
 
                 <div class="mt-8 border-t border-slate-100 pt-6">
-                    <a href="{% url 'news:news_list' %}"
-                       class="inline-flex items-center gap-2 text-base font-bold text-emerald-800 transition hover:text-emerald-950">
+                    <a 
+                        href="{% url 'news:news_list' %}"
+                        style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                        onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                        class="group inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow-sm transition-colors duration-200"
+                    >
                         <span>Explore news and blog</span>
-                        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                        <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
                     </a>
                 </div>
             </article>
@@ -112,11 +117,16 @@
                 </div>
 
                 <div class="mt-8 border-t border-slate-100 pt-6">
-                    <a href="{% url 'resources:publication_list' %}"
-                       class="inline-flex items-center gap-2 text-base font-bold text-emerald-800 transition hover:text-emerald-950">
-                        <span>Browse publications</span>
-                        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
-                    </a>
+                    <a 
+                    href="{% url 'resources:publication_list' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="group inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow-sm transition-colors duration-200"
+                >
+                    <span>Browse publications</span>
+                    <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                </a>
                 </div>
             </article>
 
@@ -147,17 +157,27 @@
                 </div>
 
                 <div class="mt-8 flex flex-wrap items-center gap-5 border-t border-slate-100 pt-6">
-                    <a href="{% url 'resources:gallery' %}"
-                       class="inline-flex items-center gap-2 text-base font-bold text-emerald-800 transition hover:text-emerald-950">
-                        <span>View gallery</span>
-                        <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    <a 
+                    href="{% url 'resources:gallery' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow-sm transition-colors duration-200"
+                >
+                    <span>View gallery</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
 
-                    <a href="{% url 'resources:press_kit' %}"
-                       class="inline-flex items-center gap-2 text-base font-bold text-emerald-800 transition hover:text-emerald-950">
-                        <span>Open press kit</span>
-                        <span aria-hidden="true">&rarr;</span>
-                    </a>
+                <a 
+                    href="{% url 'resources:press_kit' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow-sm transition-colors duration-200"
+                >
+                    <span>Open press kit</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
                 </div>
             </article>
 

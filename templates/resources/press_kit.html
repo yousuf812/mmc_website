@@ -92,26 +92,30 @@
                         <div class="mt-8 border-t border-slate-100 pt-6">
                             {% if item.file %}
                                 <a
-                                    href="{{ item.file.url }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                                >
-                                    <span>Download / View</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
+                                href="{{ item.file.url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+                            >
+                                <span>Download / View</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
                             {% elif item.external_url %}
-                                <a
-                                    href="{{ item.external_url }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                                >
-                                    <span>Open Resource</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
+                               <a
+                            href="{{ item.external_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+                        >
+                            <span>Open Resource</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                             {% else %}
                                 <span class="text-base font-medium text-slate-500">
                                     Resource details available on request.
@@ -153,12 +157,14 @@
 
             <div class="mt-8 flex justify-center">
                 <a
-                    href="{% url 'contact:contact' %}"
-                    class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
-                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                >
-                    Contact MMC
-                </a>
+                href="{% url 'contact:contact' %}"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow transition-colors duration-200"
+            >
+                Contact MMC
+            </a>
             </div>
         </div>
     </div>

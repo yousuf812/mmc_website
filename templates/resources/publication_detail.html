@@ -18,11 +18,15 @@
     <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div class="max-w-4xl">
             <!-- Back Link -->
-            <a
+           <a
                 href="{% url 'resources:publication_list' %}"
-                class="inline-flex items-center gap-2 text-base font-bold text-orange-400 transition hover:text-orange-300"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-base font-bold shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
             >
-                <span aria-hidden="true">&larr;</span> Back to Publications
+                <span aria-hidden="true">&larr;</span>
+                <span>Back to Publications</span>
             </a>
 
             <!-- Badge -->
@@ -89,14 +93,17 @@
 
                     {% if publication.access_level == "public" %}
                         <div class="mt-6">
-                            <a
-                                href="{{ publication.document.url }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center justify-center rounded-xl bg-orange-600 px-7 py-3.5 text-base font-bold text-white shadow transition hover:bg-orange-700"
-                            >
-                                Open Publication
-                            </a>
+                           <a
+                            href="{{ publication.document.url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow transition-colors duration-200"
+                        >
+                            Open Publication
+                        </a>
                         </div>
                     {% else %}
                         <div class="mt-5 rounded-xl border border-orange-200 bg-orange-50/80 p-5 text-base leading-relaxed text-orange-950">
@@ -105,11 +112,14 @@
 
                         <div class="mt-6">
                             <a
-                                href="{% url 'contact:contact' %}"
-                                class="inline-flex items-center justify-center rounded-xl bg-slate-950 px-7 py-3.5 text-base font-bold text-white shadow transition hover:bg-slate-800"
-                            >
-                                Contact MMC
-                            </a>
+                        href="{% url 'contact:contact' %}"
+                        style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                        onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                        class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow transition-colors duration-200"
+                    >
+                        Contact MMC
+                    </a>
                         </div>
                     {% endif %}
                 </div>

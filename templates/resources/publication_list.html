@@ -93,13 +93,16 @@
 
                             <!-- Action Link -->
                             <div class="mt-6 border-t border-slate-100 pt-5">
-                                <a
-                                    href="{% url 'resources:publication_detail' publication.slug %}"
-                                    class="inline-flex items-center gap-2 text-base font-bold text-orange-600 transition hover:text-orange-700"
-                                >
-                                    <span>View publication</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
+                               <a
+                            href="{% url 'resources:publication_detail' publication.slug %}"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow-sm transition-colors duration-200"
+                        >
+                            <span>View publication</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                             </div>
 
                         </div>

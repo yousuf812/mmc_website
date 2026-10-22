@@ -9,9 +9,15 @@
 ========================================================= -->
 <section class="bg-[#172235] text-white">
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <a href="{% url 'engagement:home' %}"
-           class="inline-flex items-center gap-2 text-base font-bold text-emerald-300 transition hover:text-white">
-            <span aria-hidden="true">&larr;</span> Get Involved
+       <a 
+            href="{% url 'engagement:home' %}"
+            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            class="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-base font-bold shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+        >
+            <span aria-hidden="true">&larr;</span>
+            <span>Get Involved</span>
         </a>
 
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
@@ -60,10 +66,15 @@
                     Give your time and skills to support our field teams and communities.
                 </p>
                 <div class="mt-6 pt-2">
-                    <a href="{% url 'engagement:volunteer_opportunities' %}"
-                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
-                        View opportunities
-                    </a>
+                   <a 
+                    href="{% url 'engagement:volunteer_opportunities' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                >
+                    View opportunities
+                </a>
                 </div>
             </article>
 
@@ -79,10 +90,15 @@
                     Build career experience through supervised placements and mentoring.
                 </p>
                 <div class="mt-6 pt-2">
-                    <a href="#job-board"
-                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
-                        Explore roles
-                    </a>
+                  <a 
+                href="#job-board"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+            >
+                Explore roles
+            </a>
                 </div>
             </article>
 
@@ -99,8 +115,11 @@
                 </p>
                 <div class="mt-6 pt-2">
                     <a href="#job-board"
-                       class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-base font-bold text-slate-800 transition hover:bg-slate-50">
-                        View vacancies
+                     style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                    >View Vacancies
                     </a>
                 </div>
             </article>
@@ -117,10 +136,15 @@
                     Join our consultant network for short-term expert assignments.
                 </p>
                 <div class="mt-6 pt-2">
-                    <a href="#job-board"
-                       class="inline-flex w-full items-center justify-center rounded-xl bg-[#172235] px-5 py-3 text-base font-bold text-white shadow-sm transition hover:bg-slate-800">
-                        Explore roles
-                    </a>
+                   <a 
+                    href="#job-board"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                >
+                    Explore roles
+                </a>
                 </div>
             </article>
 

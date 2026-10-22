@@ -178,13 +178,16 @@
                                 Explore currently published opportunities and their application instructions.
                             </p>
 
-                            <a
-                                href="{% url 'engagement:volunteer_opportunities' %}"
-                                class="mt-5 inline-flex items-center gap-2 text-base font-bold text-emerald-700 transition hover:text-emerald-900"
-                            >
-                                <span>Explore Opportunities</span>
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
+                           <a
+                            href="{% url 'engagement:volunteer_opportunities' %}"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="mt-5 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-base font-bold transition-colors duration-200"
+                        >
+                            <span>Explore Opportunities</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                         </div>
                     {% endif %}
 

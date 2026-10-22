@@ -64,7 +64,7 @@
     display: inline-block;
     padding: 8px 18px;
     border: 1.5px solid #0f172a;
-    background: transparent;
+    background: #e97c61;
     color: #0f172a;
     font-weight: 600;
     font-size: 13px;
@@ -234,7 +234,7 @@
     color: #b91c1c;
   }
   .btn-apply {
-    background: #0f172a;
+    background: #e97c61;
     color: #ffffff;
     padding: 6px 14px;
     font-size: 12px;
@@ -244,7 +244,7 @@
     display: inline-block;
   }
   .btn-apply:hover {
-    background: #1e293b;
+    background: #184544;
   }
   .meta-footer {
     font-size: 12px;
@@ -340,7 +340,15 @@
         <h3>Staff / Career</h3>
         <p>Start or grow a career in programmes, finance, operations and partnerships.</p>
       </div>
-      <a href="?type=staff" class="btn-outline">View opportunities</a>
+     <a 
+        href="?type=staff" 
+        class="btn-outline"
+        style="border: 1.5px solid var(--color-mmc-primary, #184544); color: var(--color-mmc-primary, #184544); background-color: transparent;"
+        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.color='#ffffff';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-mmc-primary, #184544)';"
+    >
+    View opportunities
+</a>
     </div>
   </div>
 
@@ -350,8 +358,25 @@
     <h3>Consultant</h3>
     <p>Always open. Join our consultant network for short-term expert assignments.</p>
     <div class="actions">
-      <a href="?type=consultant" class="btn-outline">View opportunities</a>
-      <a href="#" class="btn-dark">Join the network</a>
+     <a 
+        href="?type=consultant" 
+        class="btn-outline"
+        style="border: 1.5px solid var(--color-mmc-primary, #184544); color: var(--color-mmc-primary, #184544); background-color: transparent;"
+        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.color='#ffffff';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-mmc-primary, #184544)';"
+    >
+        View opportunities
+    </a>
+
+      <a 
+          href="#" 
+          class="btn-dark"
+          style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff; border: 1.5px solid var(--color-mmc-secondary, #e97c61);"
+          onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.borderColor='var(--color-mmc-primary, #184544)';"
+          onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)'; this.style.borderColor='var(--color-mmc-secondary, #e97c61)';"
+      >
+          Join the network
+      </a>
     </div>
   </div>
 

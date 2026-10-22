@@ -100,15 +100,18 @@
                                 {% endif %}
 
                                 <div>
-                                    <a
-                                        href="{% url 'news:news_detail' article.slug %}"
-                                        class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-base font-bold text-white shadow transition hover:bg-orange-700 hover:shadow-md"
-                                    >
-                                        <span>Read article</span>
-                                        <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                                            &rarr;
-                                        </span>
-                                    </a>
+                                   <a
+                                href="{% url 'news:news_detail' article.slug %}"
+                                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                                class="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-bold shadow transition-all duration-200 hover:shadow-md"
+                            >
+                                <span>Read article</span>
+                                <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                                    &rarr;
+                                </span>
+                            </a>
                                 </div>
                             </div>
 

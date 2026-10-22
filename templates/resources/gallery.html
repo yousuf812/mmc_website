@@ -63,16 +63,18 @@
                             </div>
                         {% elif item.media_type == "video" and item.video_url %}
                             <div class="flex aspect-[4/3] w-full items-center justify-center bg-slate-950 p-6">
-                                <a
-                                    href="{{ item.video_url }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:brightness-95"
-                                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                                >
-                                    <span>Watch Video</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
+                               <a
+                            href="{{ item.video_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
+                        >
+                            <span>Watch Video</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                             </div>
                         {% endif %}
 
@@ -134,12 +136,14 @@
 
             <div class="mt-8 flex justify-center">
                 <a
-                    href="{% url 'resources:press_kit' %}"
-                    class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:brightness-95"
-                    style="background-color: var(--color-mmc-secondary, #ea580c);"
-                >
-                    Visit Press Kit
-                </a>
+                href="{% url 'resources:press_kit' %}"
+                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow transition-colors duration-200"
+            >
+                Visit Press Kit
+            </a>
             </div>
         </div>
     </div>

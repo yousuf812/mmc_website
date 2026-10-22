@@ -129,7 +129,11 @@
                     </div>
                     <div class="mt-8 pt-2">
                         <a href="{% url 'contact:contact' %}?topic=implementation" 
-                           class="inline-flex items-center justify-center rounded-xl bg-[#0F172A] px-6 py-3.5 text-base font-semibold text-white shadow transition hover:bg-slate-800">
+                        style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                                class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                            >
                             Discuss implementation
                         </a>
                     </div>
@@ -147,7 +151,11 @@
                     </div>
                     <div class="mt-8 pt-2">
                         <a href="{% url 'contact:contact' %}?topic=consortium" 
-                           class="inline-flex items-center justify-center rounded-xl bg-[#0F172A] px-6 py-3.5 text-base font-semibold text-white shadow transition hover:bg-slate-800">
+                           style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                            class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                        >
                             Discuss a consortium
                         </a>
                     </div>
@@ -198,7 +206,11 @@
             <!-- Bottom Action Button -->
             <div class="mt-10">
                 <a href="{% url 'contact:contact' %}?action=capability_profile" 
-                   class="inline-flex items-center justify-center rounded-xl border-2 border-slate-900 bg-white px-7 py-3.5 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50">
+                  style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                        onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                        class="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-base font-bold shadow-md transition-colors duration-200"
+                    >
                     Request a capability profile
                 </a>
             </div>

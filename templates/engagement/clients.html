@@ -187,13 +187,26 @@
             <!-- Action Buttons -->
             <div class="mt-10 flex flex-wrap items-center gap-4">
                 <a href="{% url 'contact:contact' %}?topic=business_enquiry" 
-                   class="inline-flex items-center justify-center rounded-xl bg-slate-950 px-7 py-3.5 text-base font-semibold text-white shadow transition hover:bg-slate-800">
-                    Make a business enquiry
+                  style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="mt-5 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-base font-bold transition-colors duration-200"
+                >
+                    <span>Make a business enquiry</span>
+                    <span aria-hidden="true">&rarr;</span>
+                   
+                    
                 </a>
 
                 <a href="https://jobkaab.com" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center rounded-xl border-2 border-slate-900 bg-white px-7 py-3.5 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50">
-                    Explore Job-Kaab Services Ltd
+                  style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="mt-5 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-base font-bold transition-colors duration-200"
+                >
+                    <span>Explore Job-Kaab Services Ltd</span>
+                    <span aria-hidden="true">&rarr;</span>
+                    
                 </a>
             </div>
         </div>
