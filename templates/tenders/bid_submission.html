@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Online Bid Submission | MMC International{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-slate-50 py-12 sm:py-16">
+    <div class="container-shell mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header Banner -->
+        <div class="mb-8 rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+            <p class="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-800">
+                <span class="h-2 w-2 rounded-full bg-orange-500"></span>
+                MMC PROCUREMENT PORTAL
+            </p>
+            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-mmc-primary sm:text-4xl">
+                Online Bid Submission Form
+            </h1>
+            <p class="mt-2 text-sm leading-6 text-slate-600 max-w-3xl">
+                MMC welcomes eligible suppliers and contractors to submit bids for advertised tenders. Please complete all required fields, upload the specified documents, and submit your bid before the stated deadline. Submission does not guarantee eligibility or contract award.
+            </p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-8">
+            {% csrf_token %}
+
+            <!-- 1. Tender Details -->
+            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-xl font-bold text-mmc-primary">1. Tender Details</h2>
+                    <p class="text-xs font-medium text-slate-500">These details are automatically populated from the tender advertisement.</p>
+                </div>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                    <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200">
+                        <span class="text-xs font-semibold uppercase text-slate-500">Tender Reference Number</span>
+                        <p class="mt-1 text-base font-bold text-slate-800">{{ tender.reference_number }}</p>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200">
+                        <span class="text-xs font-semibold uppercase text-slate-500">Tender Title</span>
+                        <p class="mt-1 text-base font-bold text-slate-800">{{ tender.title }}</p>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 p-4 border border-slate-200">
+                        <span class="text-xs font-semibold uppercase text-slate-500">Closing Date & Time</span>
+                        <p class="mt-1 text-base font-bold text-orange-700">{{ tender.closing_datetime }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Bidder Information -->
+            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-xl font-bold text-mmc-primary">2. Bidder Information</h2>
+                    <p class="text-xs font-medium text-slate-500">Provide official details of the bidding organization.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Company/Organization Name *</label>
+                        {{ form.company_name }}
+                        {% if form.company_name.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.company_name.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Authorized Representative *</label>
+                        {{ form.authorized_representative }}
+                        {% if form.authorized_representative.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.authorized_representative.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Email Address *</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.email.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Telephone Number *</label>
+                        {{ form.telephone_number }}
+                        {% if form.telephone_number.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.telephone_number.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Business Registration Number (where applicable)</label>
+                        {{ form.business_registration_number }}
+                        {% if form.business_registration_number.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.business_registration_number.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Bid Submission (Two Separate Uploads) -->
+            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-xl font-bold text-mmc-primary">3. Bid Submission (Two-Envelope Upload)</h2>
+                    <p class="text-xs font-medium text-slate-500">Ensure technical and financial submissions are strictly separated.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Financial Proposal -->
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900">A. Financial Proposal / Price Quotation *</h3>
+                                <p class="mt-1 text-xs text-slate-600 leading-relaxed">
+                                    Upload the signed financial proposal or price quotation separately in PDF format.
+                                </p>
+                            </div>
+                            <span class="rounded bg-teal-100 px-2 py-1 text-xs font-semibold text-teal-800">PDF Only</span>
+                        </div>
+                        <div class="mt-4">
+                            {{ form.financial_proposal }}
+                            {% if form.financial_proposal.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.financial_proposal.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Technical Proposal & Supporting ZIP -->
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900">B. Technical Proposal and Supporting Documents *</h3>
+                                <p class="mt-1 text-xs text-slate-600 leading-relaxed">
+                                    Upload one ZIP folder containing the technical proposal, duly completed and signed Supplier/Contractor Information Form, eligibility evidence, business registration documents, required annexes, and all other supporting documents specified in the tender.
+                                </p>
+                                <p class="mt-2 text-xs font-medium text-slate-500">
+                                    Accepted format: <strong>ZIP (.zip)</strong> | Naming standard: <code>CompanyName_TenderReferenceNumber.zip</code>
+                                </p>
+                            </div>
+                            <span class="rounded bg-teal-100 px-2 py-1 text-xs font-semibold text-teal-800">ZIP Only</span>
+                        </div>
+
+                        <div class="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 font-semibold">
+                            ⚠️ Important: The financial proposal must not be included in the ZIP folder. All other required documents must be consolidated into one ZIP file.
+                        </div>
+
+                        <div class="mt-4">
+                            {{ form.technical_proposal }}
+                            {% if form.technical_proposal.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.technical_proposal.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Declarations -->
+            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-xl font-bold text-mmc-primary">4. Declarations</h2>
+                    <p class="text-xs font-medium text-slate-500">Please confirm each statement before submitting your bid.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_accuracy_authorization }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>Accuracy and Authorization:</strong> I confirm that the information and documents submitted are accurate and complete, and that I am authorized to submit this bid.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_eligibility_integrity }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>Eligibility and Integrity:</strong> I confirm that my company/organization meets the applicable tender eligibility requirements and has not engaged in fraud, corruption, collusion, coercion, obstruction, or other prohibited practices in connection with this bid.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_conflict_interest }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>Conflict of Interest:</strong> I have disclosed any actual, potential, or perceived conflict of interest relevant to this tender and undertake to disclose any changes promptly.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_sanctions }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>Sanctions and Suspensions:</strong> I have disclosed whether my company/organization, including its affiliates, agents, or subcontractors, is subject to applicable sanctions or temporary suspensions, and any such sanctions or suspensions during the preceding three years, as required by the tender.
+                        </span>
+                    </label>
+
+                    <!-- Sanction Radio Check -->
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 mt-4">
+                        <label class="block text-xs font-bold text-slate-800 mb-3">
+                            Is your company/organization, including its affiliates, agents, or subcontractors, currently subject to any applicable sanction or temporary suspension? *
+                        </label>
+                        <div class="flex items-center gap-8">
+                            <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer">
+                                <input type="radio" name="is_subject_to_sanctions" value="YES" class="h-4 w-4 text-teal-700 focus:ring-teal-600" {% if form.is_subject_to_sanctions.value == "YES" %}checked{% endif %}>
+                                YES
+                            </label>
+                            <label class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 cursor-pointer">
+                                <input type="radio" name="is_subject_to_sanctions" value="NO" class="h-4 w-4 text-teal-700 focus:ring-teal-600" {% if form.is_subject_to_sanctions.value == "NO" or not form.is_subject_to_sanctions.value %}checked{% endif %}>
+                                NO
+                            </label>
+                        </div>
+
+                        <!-- Conditional Field -->
+                        <div id="sanction-detail-container" class="mt-4 {% if form.is_subject_to_sanctions.value != 'YES' %}hidden{% endif %}">
+                            <label class="mb-2 block text-xs font-bold uppercase tracking-wider text-rose-700">
+                                If YES, specify the organization, reason, date, duration, and current status. Include relevant supporting evidence in the ZIP folder: *
+                            </label>
+                            {{ form.sanctions_details }}
+                            {% if form.sanctions_details.errors %}<p class="mt-1 text-xs text-rose-600">{{ form.sanctions_details.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_terms_code_of_conduct }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>MMC Terms and Supplier Code of Conduct:</strong> I confirm that I have read and agree to abide by the MMC General Terms and Conditions and the MMC Supplier Code of Conduct.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 transition hover:bg-slate-50 cursor-pointer">
+                        {{ form.declare_verification_submission }}
+                        <span class="text-xs font-medium leading-5 text-slate-700">
+                            <strong>Verification and Electronic Submission:</strong> I authorize MMC to verify the submitted information and understand that my bid will be evaluated according to the tender requirements. I acknowledge that submission does not guarantee eligibility or contract award.
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 5. Submit Section -->
+<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+    <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+        <strong>Confidentiality:</strong> MMC will handle bids in accordance with its procurement procedures, applicable confidentiality requirements, and the relevant tender documents.
+    </p>
+
+    <!-- সেন্টারে আনার জন্য flex justify-center যোগ করা হয়েছে -->
+    <div class="flex justify-center">
+        <button
+            type="submit"
+            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff; min-width: 320px;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            class="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl px-12 py-3.5 text-base font-bold shadow-md transition-colors duration-200 cursor-pointer"
+        >
+            Submit Bid
+        </button>
+    </div>
+</div>
+        </form>
+    </div>
+</section>
+
+<!-- Conditional Toggle Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sanctionRadios = document.querySelectorAll('input[name="is_subject_to_sanctions"]');
+        const container = document.getElementById('sanction-detail-container');
+        const textarea = container ? container.querySelector('textarea') : null;
+
+        function updateSanctionState() {
+            const selected = document.querySelector('input[name="is_subject_to_sanctions"]:checked');
+            if (selected && selected.value === 'YES') {
+                container.classList.remove('hidden');
+                if (textarea) textarea.setAttribute('required', 'required');
+            } else {
+                container.classList.add('hidden');
+                if (textarea) {
+                    textarea.removeAttribute('required');
+                    textarea.value = '';
+                }
+            }
+        }
+
+        sanctionRadios.forEach(radio => radio.addEventListener('change', updateSanctionState));
+        updateSanctionState();
+    });
+</script>
+{% endblock %}

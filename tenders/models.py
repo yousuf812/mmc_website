@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-
-
+import uuid
 class Tender(models.Model):
 
     class Category(models.TextChoices):
@@ -174,3 +173,78 @@ class SupplierRegistration(models.Model):
 
     def __str__(self):
         return f"{self.company_name} — {self.tender.reference}"
+
+
+
+
+# new bid code
+
+
+
+def financial_upload_path(instance, filename):
+    return f"bids/{instance.tender_reference}/financial/{instance.submission_reference}_{filename}"
+
+
+def technical_upload_path(instance, filename):
+    return f"bids/{instance.tender_reference}/technical/{instance.submission_reference}_{filename}"
+
+
+class BidSubmission(models.Model):
+    # Unique Submission Reference & Metadata
+    submission_reference = models.CharField(
+        max_length=32, unique=True, editable=False, db_index=True
+    )
+    submitted_at = models.DateTimeField(default=timezone.now, editable=False)
+
+    # 1. Tender Details
+    tender_reference = models.CharField(max_length=100, editable=False)
+    tender_title = models.CharField(max_length=255, editable=False)
+    closing_datetime = models.DateTimeField(editable=False)
+
+    # 2. Bidder Information
+    company_name = models.CharField(max_length=255)
+    authorized_representative = models.CharField(max_length=255)
+    email = models.EmailField()
+    telephone_number = models.CharField(max_length=50)
+    business_registration_number = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+
+    # 3. Two-Envelope Uploads
+    financial_proposal = models.FileField(
+        upload_to=financial_upload_path,
+        help_text="Signed financial proposal in PDF format only.",
+    )
+    technical_proposal = models.FileField(
+        upload_to=technical_upload_path,
+        help_text="Technical proposal and all supporting documents in single ZIP format.",
+    )
+
+    # 4. Declarations
+    declare_accuracy_authorization = models.BooleanField(default=False)
+    declare_eligibility_integrity = models.BooleanField(default=False)
+    declare_conflict_interest = models.BooleanField(default=False)
+    declare_sanctions = models.BooleanField(default=False)
+    
+    # Sanction Question & Conditional Detail
+    is_subject_to_sanctions = models.BooleanField(
+        choices=[(True, "YES"), (False, "NO")],
+        help_text="Is your company/organization currently subject to sanctions/suspensions?",
+    )
+    sanctions_details = models.TextField(
+        blank=True,
+        null=True,
+        help_text="If YES, specify organization, reason, date, duration, and status.",
+    )
+
+    declare_terms_code_of_conduct = models.BooleanField(default=False)
+    declare_verification_submission = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.submission_reference:
+            # MMC-YYYYMMDD-UUID 
+            self.submission_reference = f"MMC-{timezone.now().strftime('%Y%m%d')}-{uuid.uuid4().hex[:8].upper()}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.submission_reference} - {self.company_name} ({self.tender_reference})"

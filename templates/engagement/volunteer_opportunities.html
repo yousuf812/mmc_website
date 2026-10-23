@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Get Involved Submenu -->
+{% include "engagement/includes/submenu.html" %}
 <style>
   .job-board-container {
     max-width: 1140px;
@@ -367,9 +369,9 @@
     >
         View opportunities
     </a>
-
+    {% if featured_opportunity %}
       <a 
-          href="#" 
+         href="{% url 'engagement:volunteer_application' slug=featured_opportunity.slug %}"
           class="btn-dark"
           style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff; border: 1.5px solid var(--color-mmc-secondary, #e97c61);"
           onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.borderColor='var(--color-mmc-primary, #184544)';"
@@ -377,6 +379,9 @@
       >
           Join the network
       </a>
+      {% else %}
+      <p>No volunteer opportunities are currently available.</p>
+     {% endif %}
     </div>
   </div>
 
@@ -493,11 +498,30 @@
               <span class="status-badge status-closed">Closed</span>
             {% endif %}
           </td>
-          <td>
-            {% if opp.is_open %}
-              <a href="{% url 'engagement:volunteer_application' opp.slug %}" class="btn-apply">Apply</a>
-            {% endif %}
-          </td>
+          
+
+
+<td>
+    {% if opp.is_open %}
+
+        {% if opp.opportunity_type == "volunteer" or opp.opportunity_type == "internship" or opp.opportunity_type == "consultant" %}
+            <a href="{% url 'engagement:volunteer_application' slug=opp.slug %}"
+               class="btn-apply">
+                Apply
+            </a>
+
+        {% elif opp.opportunity_type == "staff" %}
+            <a href="{% url 'engagement:volunteer_application' slug=opp.slug %}"
+               class="btn-apply">
+                Apply
+            </a>
+        {% endif %}
+
+    {% endif %}
+</td>
+
+
+
         </tr>
         {% empty %}
         <tr>

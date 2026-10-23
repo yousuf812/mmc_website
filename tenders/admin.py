@@ -3,6 +3,8 @@ from django.utils import timezone
 
 from .models import Tender, SupplierRegistration
 
+from .models import BidSubmission
+
 @admin.register(Tender)
 class TenderAdmin(admin.ModelAdmin):
 
@@ -157,6 +159,63 @@ class SupplierRegistrationAdmin(admin.ModelAdmin):
 
     ordering = ("-submitted_at",)
     list_per_page = 25
+
+
+
+
+
+
+@admin.register(BidSubmission)
+class BidSubmissionAdmin(admin.ModelAdmin):
+    list_display = (
+        "submission_reference",
+        "company_name",
+        "tender_reference",
+        "submitted_at",
+        "is_subject_to_sanctions",
+    )
+    list_filter = ("tender_reference", "is_subject_to_sanctions", "submitted_at")
+    search_fields = ("submission_reference", "company_name", "email", "tender_reference")
+    readonly_fields = (
+        "submission_reference",
+        "submitted_at",
+        "tender_reference",
+        "tender_title",
+        "closing_datetime",
+    )
+
+    def get_fields(self, request, obj=None):
+        fields = [
+            "submission_reference",
+            "submitted_at",
+            "tender_reference",
+            "tender_title",
+            "company_name",
+            "authorized_representative",
+            "email",
+            "telephone_number",
+            "business_registration_number",
+            "technical_proposal",
+        ]
+
+        # Two-Envelope Restriction: Financial proposal is hidden unless user is a Superuser 
+        # or in the 'Procurement Financial Evaluators' permission group.
+        can_view_financial = request.user.is_superuser or request.user.groups.filter(name="Financial Evaluators").exists()
+
+        if can_view_financial:
+            fields.append("financial_proposal")
+
+        fields.extend([
+            "is_subject_to_sanctions",
+            "sanctions_details",
+            "declare_accuracy_authorization",
+            "declare_eligibility_integrity",
+            "declare_conflict_interest",
+            "declare_sanctions",
+            "declare_terms_code_of_conduct",
+            "declare_verification_submission",
+        ])
+        return fields
 
 
     # Optional: delete this if `ordering` attribute is enough

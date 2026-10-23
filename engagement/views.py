@@ -16,32 +16,33 @@ from .forms import VolunteerApplicationForm
 
 
 # Shared submenu for all Get Involved pages
+
+# Shared submenu for all Get Involved pages
 GET_INVOLVED_MENU = [
     {
-        "title": "Volunteer",
-        "slug": "volunteer",
+        "title": "Join Our Team",
+        "slug": "join-our-team",
+    },
+    
+    {
+        "title": " Donors",
+        "slug": "donors",
     },
     {
-        "title": "Careers",
-        "slug": "careers",
-    },
-    {
-        "title": "Partnerships",
-        "slug": "partnerships",
-    },
-    {
-        "title": "Donate & Support",
-        "slug": "donate-support",
+        "title": "Suppliers & Contractors",
+        "slug": "suppliers-contractors",
     },
     {
         "title": "Clients",
         "slug": "customers-clients",
     },
     {
-        "title": "Suppliers & Contractors",
-        "slug": "suppliers-contractors",
+        "title": "Partnerships",
+        "slug": "partnerships",
     },
+       
 ]
+
 
 
 def get_involved_home(request):
@@ -73,22 +74,55 @@ def get_involved_home(request):
 
 
 
+
+
 def engagement_page(request, slug):
+
+    # Join Our Team combines the existing Volunteer
+    # and Careers page content.
+    if slug == "join-our-team":
+        volunteer_page = get_object_or_404(
+            EngagementPage,
+            slug="volunteer",
+            is_published=True,
+        )
+
+        careers_page = get_object_or_404(
+            EngagementPage,
+            slug="careers",
+            is_published=True,
+        )
+
+        return render(
+            request,
+            "engagement/join_our_team.html",
+            {
+                "volunteer_page": volunteer_page,
+                "careers_page": careers_page,
+                "get_involved_menu": GET_INVOLVED_MENU,
+                "active_engagement_slug": "join-our-team",
+            },
+        )
+
+    # Donors uses the existing Donate & Support page content.
+    page_slug = (
+        "donate-support"
+        if slug in ("donors", "only-donors")
+        else slug
+    )
+
     page = get_object_or_404(
         EngagementPage,
-        slug=slug,
+        slug=page_slug,
         is_published=True,
     )
 
-    # Dedicated frontend templates for selected pages
     page_templates = {
         "partnerships": "engagement/partnerships.html",
         "donate-support": "engagement/donate_support.html",
         "customers-clients": "engagement/clients.html",
     }
 
-    # Keep the existing template for Volunteer, Careers,
-    # Suppliers & Contractors, and other engagement pages.
     template_name = page_templates.get(
         page.slug,
         "engagement/engagement_page.html",
@@ -97,7 +131,7 @@ def engagement_page(request, slug):
     context = {
         "page": page,
         "get_involved_menu": GET_INVOLVED_MENU,
-        "active_engagement_slug": page.slug,
+        "active_engagement_slug": slug,
     }
 
     return render(
@@ -105,6 +139,7 @@ def engagement_page(request, slug):
         template_name,
         context,
     )
+
 
 
 def volunteer_opportunities(request):
@@ -155,11 +190,17 @@ def volunteer_opportunities(request):
         queryset = queryset.filter(is_open=False)
 
     opportunities = queryset.order_by("ordering", "title")
+    featured_opportunity = VolunteerOpportunity.objects.filter(
+        is_open=True
+    ).exclude(
+        slug=""
+    ).order_by("ordering", "title").first()
 
     context = {
         "opportunities": opportunities,
         "get_involved_menu": GET_INVOLVED_MENU,
         "active_engagement_slug": "volunteer",
+        "featured_opportunity": featured_opportunity,
         # Counters
         "total_open_count": total_open_count,
         "volunteer_count": volunteer_count,
@@ -272,6 +313,7 @@ def job_application(request, slug):
 
 
 
+
 def volunteer_application(request, slug):
     opportunity = get_object_or_404(
         VolunteerOpportunity,
@@ -279,6 +321,26 @@ def volunteer_application(request, slug):
         is_open=True,
     )
 
+    # Staff / Career applications use the Job Application form.
+    if opportunity.opportunity_type == "staff":
+        vacancy = JobVacancy.objects.filter(
+            slug=slug,
+            is_open=True,
+        ).first()
+
+        if vacancy is None:
+            messages.error(
+                request,
+                "This career opportunity is not linked to a Job Vacancy record yet. Please add the vacancy in Admin.",
+            )
+            return redirect("engagement:job_vacancies")
+
+        return redirect(
+            "engagement:job_application",
+            slug=vacancy.slug,
+        )
+
+    # Check the deadline for volunteer, internship, and consultant.
     if opportunity.deadline:
         from django.utils import timezone
 
@@ -289,6 +351,7 @@ def volunteer_application(request, slug):
             )
             return redirect("engagement:volunteer_opportunities")
 
+    # Process the volunteer application form.
     if request.method == "POST":
         form = VolunteerApplicationForm(
             request.POST,
@@ -302,7 +365,7 @@ def volunteer_application(request, slug):
 
             messages.success(
                 request,
-                "Your volunteer application has been submitted successfully.",
+                "Your application has been submitted successfully.",
             )
 
             return redirect("engagement:volunteer_opportunities")
@@ -317,8 +380,7 @@ def volunteer_application(request, slug):
             "opportunity": opportunity,
             "form": form,
             "get_involved_menu": GET_INVOLVED_MENU,
-            "active_engagement_slug": "volunteer",
+            "active_engagement_slug": "join-our-team",
         },
     )
-
 

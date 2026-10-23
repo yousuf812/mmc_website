@@ -1,21 +1,27 @@
 from datetime import timedelta
 from mimetypes import guess_type
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import FileResponse, Http404
-from django.utils import timezone
-from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.html import strip_tags
 
-from .forms import SupplierRegistrationForm
-from .models import Tender
+from engagement.views import GET_INVOLVED_MENU
+from .forms import BidSubmissionForm
+from .models import Tender, BidSubmission
+
 
 def tender_list(request):
     today = timezone.localdate()
     closing_soon_date = today + timedelta(days=14)
 
     all_published = Tender.objects.filter(is_published=True)
-
     tenders = all_published.order_by("closing_date", "reference")
 
     search_query = request.GET.get("q", "").strip()
@@ -97,18 +103,19 @@ def tender_list(request):
         "closing_soon_count": closing_soon_count,
         "closed_count": closed_count,
         "awarded_count": awarded_count,
+        "get_involved_menu": GET_INVOLVED_MENU,
+        "active_engagement_slug": "suppliers-contractors",
     }
 
     return render(request, "tenders/tender_list.html", context)
 
+
 def tender_detail(request, slug):
     tender = get_object_or_404(
-    Tender,
-    slug=slug,
-    is_published=True,
+        Tender,
+        slug=slug,
+        is_published=True,
     )
-
-
     return render(
         request,
         "tenders/tender_detail.html",
@@ -118,11 +125,10 @@ def tender_detail(request, slug):
 
 def tender_document(request, slug):
     tender = get_object_or_404(
-    Tender,
-    slug=slug,
-    is_published=True,
+        Tender,
+        slug=slug,
+        is_published=True,
     )
-
 
     if not tender.document:
         raise Http404("Tender document is not available.")
@@ -146,56 +152,53 @@ def tender_document(request, slug):
     return response
 
 
+def apply_tender_view(request, slug):
+    tender = get_object_or_404(Tender, slug=slug, is_published=True)
 
+    # টেন্ডার যদি ওপেন না থাকে তবে নোটিফিকেশন দিয়ে ডিটেইল পেজে রিডাইরেক্ট করবে
+    if hasattr(tender, "effective_status") and tender.effective_status != Tender.Status.OPEN:
+        messages.error(request, "Applications are closed for this tender.")
+        return redirect("tenders:detail", slug=tender.slug)
 
-
-def supplier_registration(request, slug):
-    tender = get_object_or_404(
-        Tender,
-        slug=slug,
-        is_published=True,
-    )
-
-    if tender.effective_status != Tender.Status.OPEN:
-        messages.error(
-            request,
-            "Applications are not available for this tender.",
-        )
-        return redirect(
-            "tenders:tender_detail",
-            slug=tender.slug,
-        )
+    # টেন্ডার মেটাডাটা (আপনার মডেলের ফিল্ড 'reference' অনুযায়ী)
+    tender_meta = {
+        "reference_number": getattr(tender, "reference", tender.slug),
+        "title": tender.title,
+        "closing_datetime": getattr(tender, "closing_date", "N/A"),
+    }
 
     if request.method == "POST":
-        form = SupplierRegistrationForm(
-            request.POST,
-            request.FILES,
-        )
-
+        form = BidSubmissionForm(request.POST, request.FILES)
         if form.is_valid():
-            registration = form.save(commit=False)
-            registration.tender = tender
-            registration.save()
+            bid = form.save(commit=False)
+            bid.tender_reference = tender_meta["reference_number"]
+            bid.tender_title = tender_meta["title"]
+            if hasattr(tender, "closing_date") and tender.closing_date:
+                bid.closing_datetime = tender.closing_date
+            bid.save()
 
-            messages.success(
-                request,
-                "Your supplier registration has been submitted successfully.",
-            )
+            # কনফার্মেশন ইমেইল পাঠানো
+            context = {
+                "bid": bid,
+                "tender": tender_meta,
+            }
+            html_content = render_to_string("tenders/bid_confirmation_email.html", context)
+            text_content = strip_tags(html_content)
 
-            return redirect(
-                  "tenders:detail",
-                  slug=tender.slug,
+            email = EmailMultiAlternatives(
+                subject=f"Bid Submission Acknowledgment - {bid.submission_reference}",
+                body=text_content,
+                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", "procurement@mmcinternational.org"),
+                to=[bid.email],
             )
+            email.attach_alternative(html_content, "text/html")
+            email.send(fail_silently=False)
+
+            return render(request, "tenders/bid_success.html", {"bid": bid})
     else:
-        form = SupplierRegistrationForm()
+        form = BidSubmissionForm()
 
-    return render(
-        request,
-        "tenders/supplier_registration.html",
-        {
-            "tender": tender,
-            "form": form,
-        },
-    )
-
-
+    return render(request, "tenders/bid_submission.html", {
+        "form": form,
+        "tender": tender_meta,
+    })
