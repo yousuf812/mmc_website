@@ -2,6 +2,7 @@ from django.shortcuts import render
 from projects.models import Project
 from news.models import NewsArticle
 from team.models import TeamMember
+from core.models import HeroSlide
 
 from .models import (
     AboutPage,
@@ -15,6 +16,7 @@ from pages.models import (
     StrategicPriority,
     ImpactStatistic,
 )
+
 
 def home(request):
     site_settings = SiteSettings.objects.filter(
@@ -51,6 +53,11 @@ def home(request):
         .order_by("-is_featured", "-published_at", "ordering")[:3]
     )
 
+    # Active homepage hero slides
+    hero_slides = HeroSlide.objects.filter(
+        is_active=True
+    ).order_by("ordering", "-created_at")
+
     context = {
         "site_settings": site_settings,
         "homepage": homepage,
@@ -58,9 +65,11 @@ def home(request):
         "statistics": statistics,
         "featured_projects": featured_projects,
         "latest_articles": latest_articles,
+        "hero_slides": hero_slides,
     }
 
     return render(request, "home.html", context)
+
 
 
 

@@ -21,30 +21,60 @@
 {% endif %}
 
 
-{# --- Hero Section --- #}
-<section class="relative isolate overflow-hidden bg-slate-900 text-white">
-    <!-- Background Image & Overlays -->
-    {% if homepage and homepage.hero_image %}
-    <div class="absolute inset-0 -z-20">
-        <img
-            src="{{ homepage.hero_image.url }}"
-            alt=""
-            class="h-full w-full object-cover object-center opacity-90 select-none"
-        >
+
+{# --- Hero Section with Admin-Managed Background Slider --- #}
+<section
+    id="homepage-hero"
+    class="relative isolate overflow-hidden bg-slate-900 text-white"
+    data-slide-interval="6000"
+>
+    <!-- Background Slides -->
+    <div class="absolute inset-0 -z-20 bg-slate-900">
+
+        {% if hero_slides %}
+            {% for slide in hero_slides %}
+                <div
+                    class="hero-background-slide absolute inset-0 transition-opacity duration-1000 ease-in-out {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}"
+                    data-slide-index="{{ forloop.counter0 }}"
+                    aria-hidden="true"
+                >
+                    <img
+                        src="{{ slide.image.url }}"
+                        alt=""
+                        class="h-full w-full select-none object-cover object-center opacity-90"
+                        {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                    >
+                </div>
+            {% endfor %}
+
+        {% elif homepage and homepage.hero_image %}
+            <!-- Fallback: Existing Homepage Hero Image -->
+            <div class="absolute inset-0">
+                <img
+                    src="{{ homepage.hero_image.url }}"
+                    alt=""
+                    class="h-full w-full select-none object-cover object-center opacity-90"
+                    fetchpriority="high"
+                >
+            </div>
+
+        {% else %}
+            <!-- Fallback: Gradient Background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
+        {% endif %}
     </div>
-    <!-- Soft overlay: left side gives readability for text while keeping image clear -->
+
+    <!-- Readability Overlay -->
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950/70 via-slate-950/45 to-transparent"></div>
-    {% else %}
-    <div class="absolute inset-0 -z-20 bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900"></div>
-    {% endif %}
 
     <!-- Ambient Glow / Blur Elements -->
     <div class="pointer-events-none absolute -right-24 top-0 -z-10 h-80 w-80 rounded-full bg-emerald-500/15 blur-3xl sm:h-96 sm:w-96"></div>
     <div class="pointer-events-none absolute -bottom-24 left-1/4 -z-10 h-72 w-72 rounded-full bg-teal-500/10 blur-3xl"></div>
 
-    <!-- Hero Content (Matches exact Header / Nav container width) -->
+    <!-- Existing Hero Content -->
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
         <div class="max-w-3xl">
+
             <!-- Eyebrow Badge -->
             <div class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 sm:text-sm">
                 <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
@@ -57,7 +87,7 @@
                     {{ homepage.hero_title }}
                 {% else %}
                     From Vulnerability
-                    <span class="block mt-2 bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">
+                    <span class="mt-2 block bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">
                         to Self-Reliance
                     </span>
                 {% endif %}
@@ -76,6 +106,7 @@
 
             <!-- Action CTAs -->
             <div class="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center sm:gap-4">
+
                 <a
                     href="{% url 'projects:project_list' %}"
                     style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
@@ -96,19 +127,21 @@
                     Partner with MMC
                 </a>
 
-               <a
-                href="{% url 'engagement:page' slug='donate-support' %}"
-                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
-                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
-                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-                class="inline-flex min-h-[48px] items-center justify-center rounded-xl px-6 py-3 text-sm font-bold shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            >
-                Donate
-            </a>
+                <a
+                    href="{% url 'engagement:page' slug='donate-support' %}"
+                    style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
+                    onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
+                    onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+                    class="inline-flex min-h-[48px] items-center justify-center rounded-xl px-6 py-3 text-sm font-bold shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                    Donate
+                </a>
+
             </div>
         </div>
     </div>
 </section>
+
 
 
 {# --- Impact Statistics --- #}

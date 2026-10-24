@@ -55,3 +55,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+
+/* Homepage Hero Background Slider */
+document.addEventListener("DOMContentLoaded", function () {
+    const hero = document.getElementById("homepage-hero");
+
+    if (!hero) return;
+
+    const slides = hero.querySelectorAll(".hero-background-slide");
+
+    // No slider or only one image: nothing to rotate.
+    if (slides.length <= 1) return;
+
+    const interval = Number(hero.dataset.slideInterval) || 6000;
+    let currentIndex = 0;
+
+    window.setInterval(function () {
+        slides[currentIndex].classList.remove("opacity-100");
+        slides[currentIndex].classList.add("opacity-0");
+
+        currentIndex = (currentIndex + 1) % slides.length;
+
+        slides[currentIndex].classList.remove("opacity-0");
+        slides[currentIndex].classList.add("opacity-100");
+    }, interval);
+});
