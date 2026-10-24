@@ -1,12 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
-
 from .forms import ContactEnquiryForm
 from .models import ContactSettings
 
 
 def contact(request):
-
     settings = (
         ContactSettings.objects
         .filter(is_active=True)
@@ -14,22 +12,15 @@ def contact(request):
     )
 
     if request.method == "POST":
-
         form = ContactEnquiryForm(request.POST)
-
         if form.is_valid():
-
             form.save()
-
             messages.success(
                 request,
                 "Thank you. Your enquiry has been submitted successfully."
             )
-
             return redirect("contact:contact")
-
     else:
-
         form = ContactEnquiryForm()
 
     context = {
@@ -42,3 +33,7 @@ def contact(request):
         "contact/contact.html",
         context
     )
+
+
+def feedback_view(request):
+    return render(request, 'contact/feedback.html')

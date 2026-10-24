@@ -82,3 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
         slides[currentIndex].classList.add("opacity-100");
     }, interval);
 });
+
+
+// dropdown menu
+
+   
+    document.addEventListener('click', function(e) {
+        document.querySelectorAll('details').forEach(function(detail) {
+            if (!detail.contains(e.target)) {
+                detail.removeAttribute('open');
+            }
+        });
+    });

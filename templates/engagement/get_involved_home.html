@@ -7,22 +7,7 @@
 <!-- submenu start -->
 
 <!-- Get Involved Submenu -->
-<nav aria-label="Get Involved navigation"
-     class="mt-8 flex flex-wrap justify-center gap-3">
-
-    {% for item in get_involved_menu %}
-        <a href="{% url 'engagement:page' item.slug %}"
-           class="rounded-full border px-5 py-3 text-sm font-semibold transition
-           {% if active_engagement_slug == item.slug %}
-               border-orange-600 bg-orange-600 text-white
-           {% else %}
-               border-slate-200 bg-white text-slate-700 hover:border-orange-500 hover:text-orange-600
-           {% endif %}">
-            {{ item.title }}
-        </a>
-    {% endfor %}
-
-</nav>
+{% include "engagement/includes/submenu.html" %}
 
 <!-- submenu end -->
 
