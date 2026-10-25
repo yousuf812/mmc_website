@@ -58,30 +58,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-/* Homepage Hero Background Slider */
+
+/* Homepage Hero Background Slider with Arrows and Dots */
 document.addEventListener("DOMContentLoaded", function () {
     const hero = document.getElementById("homepage-hero");
 
     if (!hero) return;
 
-    const slides = hero.querySelectorAll(".hero-background-slide");
+    const slides = Array.from(
+        hero.querySelectorAll(".hero-background-slide")
+    );
 
-    // No slider or only one image: nothing to rotate.
+    const dots = Array.from(
+        hero.querySelectorAll(".hero-slide-dot")
+    );
+
+    const previousButton = hero.querySelector("#hero-prev");
+    const nextButton = hero.querySelector("#hero-next");
+
     if (slides.length <= 1) return;
 
     const interval = Number(hero.dataset.slideInterval) || 6000;
     let currentIndex = 0;
+    let autoplay;
 
-    window.setInterval(function () {
-        slides[currentIndex].classList.remove("opacity-100");
-        slides[currentIndex].classList.add("opacity-0");
+    function showSlide(index) {
+        currentIndex = (index + slides.length) % slides.length;
 
-        currentIndex = (currentIndex + 1) % slides.length;
+        slides.forEach(function (slide, i) {
+            const isActive = i === currentIndex;
 
-        slides[currentIndex].classList.remove("opacity-0");
-        slides[currentIndex].classList.add("opacity-100");
-    }, interval);
+            slide.classList.toggle("opacity-100", isActive);
+            slide.classList.toggle("opacity-0", !isActive);
+        });
+
+        dots.forEach(function (dot, i) {
+            const isActive = i === currentIndex;
+
+            dot.classList.toggle("bg-white", isActive);
+            dot.classList.toggle("bg-white/40", !isActive);
+            dot.classList.toggle("scale-110", isActive);
+
+            dot.setAttribute("aria-current", String(isActive));
+        });
+    }
+
+    function startAutoplay() {
+        window.clearInterval(autoplay);
+
+        autoplay = window.setInterval(function () {
+            showSlide(currentIndex + 1);
+        }, interval);
+    }
+
+    function goToSlide(index) {
+        showSlide(index);
+        startAutoplay();
+    }
+
+    if (previousButton) {
+        previousButton.addEventListener("click", function () {
+            goToSlide(currentIndex - 1);
+        });
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", function () {
+            goToSlide(currentIndex + 1);
+        });
+    }
+
+    dots.forEach(function (dot, index) {
+        dot.addEventListener("click", function () {
+            goToSlide(index);
+        });
+    });
+
+    showSlide(currentIndex);
+    startAutoplay();
 });
+
 
 
 // dropdown menu
