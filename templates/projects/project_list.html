@@ -41,59 +41,108 @@
 
 {# Impact statistics #}
 
-{% if statistics %}
-<section class="relative z-10 py-10 sm:py-14">
-    <div class="container-shell">
-
-        <!-- Section Heading -->
-        <div class="mx-auto mb-8 max-w-2xl text-center sm:mb-12">
-            <p class="text-xs font-bold uppercase tracking-widest text-emerald-700">
-                Our Achievements
-            </p>
-            <h2 class="mt-2 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
-                Impact in Numbers
+<section class="border-b border-slate-100 bg-[#fbfbfa] py-12 sm:py-16">
+    <div class="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="mb-10  sm:mb-12">
+            <h2 class="text-xl font-black uppercase tracking-wider text-[#084843] sm:text-3xl lg:text-2xl">
+                <span class="inline-block border-b-4 border-[#1b7a66] pb-1">IMPACT</span> AT A GLANCE
             </h2>
-            <div class="mx-auto mt-3 h-1 w-12 rounded-full" style="background-color: var(--color-mmc-secondary);"></div>
         </div>
 
-        <!-- Separate Cards Grid with Gap -->
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-
-            {% for statistic in statistics %}
-            <div
-                class="group flex flex-col justify-between rounded-2xl p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-7"
-                style="background-color: var(--color-mmc-secondary); border: 1px solid rgba(255, 255, 255, 0.15);"
-            >
-                <div>
-                    {% if statistic.icon %}
-                    <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-2xl text-white backdrop-blur-xs transition group-hover:bg-white/25" aria-hidden="true">
-                        {{ statistic.icon }}
-                    </div>
-                    {% endif %}
-
-                    <p class="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
-                        {{ statistic.value }}
-                    </p>
-
-                    <h3 class="mt-2 text-sm font-bold tracking-wide text-white/95 sm:text-base">
-                        {{ statistic.label }}
-                    </h3>
+        <!-- 5 Columns Container with Vertical Dividers -->
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-0">
+            
+            <!-- Item 1: 17 Years -->
+            <div class="flex flex-col items-center text-center lg:px-6 lg:border-r lg:border-slate-300">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center">
+                    <img 
+                        src="{% static 'images/icons/statics-1.png' %}" 
+                        alt="Experience Icon" 
+                        class="h-10 w-10 object-contain"
+                    >
                 </div>
-
-                {% if statistic.description %}
-                <p class="mt-3 text-xs leading-relaxed text-white/80 sm:text-sm">
-                    {{ statistic.description }}
+                <h3 class="text-xl sm:text-2xl font-black tracking-tight text-[#084843]">
+                    17 Years
+                </h3>
+                <p class="mt-1 text-xs sm:text-[13px] font-medium leading-relaxed text-slate-500">
+                    of Institutional<br>Experience
                 </p>
-                {% endif %}
-
             </div>
-            {% endfor %}
+
+            <!-- Item 2: 45+ Projects -->
+            <div class="flex flex-col items-center text-center lg:px-6 lg:border-r lg:border-slate-300">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center">
+                    <img 
+                        src="{% static 'images/icons/statics-2.png' %}" 
+                        alt="Projects Icon" 
+                        class="h-10 w-10 object-contain"
+                    >
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black tracking-tight text-[#084843]">
+                    45+ Projects
+                </h3>
+                <p class="mt-1 text-xs sm:text-[13px] font-medium leading-relaxed text-slate-500">
+                    Independently<br>Documented Projects
+                </p>
+            </div>
+
+            <!-- Item 3: 13+ Partners -->
+            <div class="flex flex-col items-center text-center lg:px-6 lg:border-r lg:border-slate-300">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center">
+                    <img 
+                        src="{% static 'images/icons/statics-3.png' %}" 
+                        alt="Partners Icon" 
+                        class="h-10 w-10 object-contain"
+                    >
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black tracking-tight text-[#084843]">
+                    13+ Partners
+                </h3>
+                <p class="mt-1 text-xs sm:text-[13px] font-medium leading-relaxed text-slate-500">
+                    Partners and<br>Collaborations
+                </p>
+            </div>
+
+            <!-- Item 4: 83k Lives Impacted -->
+            <div class="flex flex-col items-center text-center lg:px-6 lg:border-r lg:border-slate-300">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center">
+                    <img 
+                        src="{% static 'images/icons/statics-4.png' %}" 
+                        alt="Impact Icon" 
+                        class="h-10 w-10 object-contain"
+                    >
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black tracking-tight text-[#084843]">
+                    83k Lives Impacted
+                </h3>
+                <p class="mt-1 text-xs sm:text-[13px] font-medium leading-relaxed text-slate-500">
+                    People Reached<br>Through Our Work
+                </p>
+            </div>
+
+            <!-- Item 5: 12 of 17 SDGs -->
+            <div class="flex flex-col items-center text-center lg:px-6">
+                <div class="mb-4 flex h-12 w-12 items-center justify-center">
+                    <img 
+                        src="{% static 'images/icons/statics-5.png' %}" 
+                        alt="SDGs Icon" 
+                        class="h-10 w-10 object-contain"
+                    >
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black tracking-tight text-[#084843]">
+                    12 of 17 SDGs
+                </h3>
+                <p class="mt-1 text-xs sm:text-[13px] font-medium leading-relaxed text-slate-500">
+                    Sustainable Development<br>Goals Addressed
+                </p>
+            </div>
 
         </div>
 
     </div>
 </section>
-{% endif %}
 
 
 

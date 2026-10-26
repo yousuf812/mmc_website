@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}
     {% if page %}
         {{ page.title }} | MMC
@@ -54,32 +54,88 @@
 
 {% if page %}
 
-<section class="bg-white py-16 sm:py-20">
+<!-- Why MMC Section -->
+<section class="bg-white py-12 sm:py-16 lg:py-20">
+    <div class="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+            
+            <!-- Left Side: Image with Gradient Overlay & Badge (5 Columns) -->
+            <div class="relative overflow-hidden rounded-3xl shadow-lg lg:col-span-5 aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] min-h-[320px]">
+                <img
+                    src="{% if page.why_mmc_image %}{{ page.why_mmc_image.url }}{% else %}{% static 'images/about/why-mmc.jpg' %}{% endif %}"
+                    alt="{{ page.why_mmc_title|default:'Why Choose MMC' }}"
+                    class="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=800&q=80';"
+                >
+                <!-- Soft Emerald to Dark Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#083838]/90 via-[#083838]/40 to-transparent"></div>
 
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-
-            <div>
-
-                <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
-                    Why MMC
-                </p>
-
-                <h2 class="mt-3 text-3xl font-black text-slate-900 sm:text-4xl">
-                    {{ page.why_mmc_title }}
-                </h2>
-
+                <!-- Floating Bottom Badge/Tag on Image -->
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <span class="inline-block rounded-full bg-emerald-500/80 backdrop-blur-xs px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+                        Trusted Partner
+                    </span>
+                    <p class="mt-2 text-sm sm:text-base font-bold text-white/95">
+                        Delivering sustainable impact with accountability and community dignity.
+                    </p>
+                </div>
             </div>
 
-            <div class="text-lg leading-9 text-slate-600">
-                {{ page.why_mmc_content|linebreaks }}
+            <!-- Right Side: Content with Structured Layout (7 Columns) -->
+            <div class="flex flex-col justify-center lg:col-span-7">
+                
+                <!-- Section Header -->
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="h-1 w-8 rounded-full bg-[#1b7a66]"></span>
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1b7a66]">
+                            Why MMC
+                        </span>
+                    </div>
+
+                    <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-[#084843] sm:text-3xl lg:text-4xl">
+                        {{ page.why_mmc_title }}
+                    </h2>
+                </div>
+
+                <!-- Content Area -->
+                <div class="mt-6 text-xl sm:text-base leading-relaxed text-slate-600 space-y-4">
+                    {{ page.why_mmc_content|linebreaks }}
+                </div>
+
+                <!-- Subtle Trust Points / Features -->
+                <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 border-t border-slate-100 pt-6">
+                    <div class="flex items-start gap-3">
+                        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#1b7a66]">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xs sm:text-sm font-bold text-slate-800">Proven Track Record</h4>
+                            <p class="text-xs text-slate-500">Over 17 years of institutional field experience.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#1b7a66]">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xs sm:text-sm font-bold text-slate-800">Community Centric</h4>
+                            <p class="text-xs text-slate-500">Co-designed with local community members.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
     </div>
-
 </section>
 
 
@@ -87,30 +143,35 @@
      MODEL OF CHANGE
 ===================================================== -->
 
-<section class="bg-slate-50 py-16 sm:py-20">
+<!-- Our Model Section -->
+<section class="bg-slate-50 py-10 sm:py-12 md:py-14">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        
+        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 md:p-10 shadow-xs">
+            
+            <!-- Section Header (Left-aligned) -->
+            <div class="border-b border-slate-100 pb-5">
+                <div class="flex items-center gap-2">
+                    <span class="h-1 w-8 rounded-full bg-[#1b7a66]"></span>
+                    <p class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1b7a66]">
+                        Our Model
+                    </p>
+                </div>
 
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 class="mt-2 text-2xl font-extrabold tracking-tight text-[#084843] sm:text-3xl">
+                    {{ page.model_title }}
+                </h2>
+            </div>
 
-        <div class="mx-auto max-w-4xl text-center">
-
-            <p class="text-sm font-bold uppercase tracking-widest text-orange-600">
-                Our Model
-            </p>
-
-            <h2 class="mt-3 text-3xl font-black text-slate-900 sm:text-4xl">
-                {{ page.model_title }}
-            </h2>
-
-            <div class="mt-6 text-lg leading-9 text-slate-600">
+            <!-- Content Area (Clean Typography & Balanced Line Height) -->
+            <div class="mt-6 text-sm sm:text-base leading-relaxed text-slate-600 space-y-4">
                 {{ page.model_description|linebreaks }}
             </div>
 
         </div>
 
     </div>
-
 </section>
-
 {% endif %}
 
 
