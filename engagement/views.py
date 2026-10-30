@@ -20,27 +20,21 @@ from .forms import VolunteerApplicationForm
 # Shared submenu for all Get Involved pages
 GET_INVOLVED_MENU = [
     {
-        "title": "Join Our Team",
+        "title": "Work with us",
         "slug": "join-our-team",
     },
-    
     {
-        "title": " Donors",
+        "title": "Fund us",
         "slug": "donors",
     },
     {
-        "title": "Suppliers & Contractors",
+        "title": "Supply for us",
         "slug": "suppliers-contractors",
     },
     {
-        "title": "Clients",
-        "slug": "customers-clients",
-    },
-    {
-        "title": "Partnerships",
+        "title": "Partner with us",
         "slug": "partnerships",
     },
-       
 ]
 
 

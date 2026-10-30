@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+
 from .models import (
     EngagementPage,
     VolunteerOpportunity,
@@ -243,6 +244,10 @@ class JobVacancyAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    @admin.display(boolean=True, description="Circular Attached")
+    def has_document(self, obj):
+        return bool(obj.circular_document)
 
 
 

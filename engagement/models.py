@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.validators import FileExtensionValidator
 
 
 class EngagementPage(models.Model):
@@ -230,6 +231,13 @@ class JobVacancy(models.Model):
     ordering = models.PositiveIntegerField(
         default=0
     )
+    circular_document = models.FileField(
+        upload_to='job_circulars/%Y/%m/',
+        blank=True,
+        null=True,
+        help_text="Upload official circular (PDF, DOC, DOCX, PNG, JPG)",
+        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])]
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -244,6 +252,8 @@ class JobVacancy(models.Model):
             "ordering",
             "-created_at",
         ]
+        verbose_name = "Job Vacancy"
+        verbose_name_plural = "Job Vacancies"
 
     def save(self, *args, **kwargs):
 
