@@ -7,11 +7,10 @@ class EngagementPage(models.Model):
 
     PAGE_TYPE_CHOICES = [
         ("volunteer", "Volunteer"),
-        ("careers", "Careers"),
-        ("partnerships", "Partnerships"),
-        ("donate", "Donate & Support"),
-        ("clients", "Customers / Clients"),
-        ("suppliers", "Suppliers & Contractors"),
+        ("careers", "Work with us"),
+        ("partnerships", "Partner with us"),
+        ("donate", "Fund us"),
+        ("suppliers", "Supply for us"),
     ]
 
     page_type = models.CharField(
@@ -98,10 +97,8 @@ class EngagementPage(models.Model):
         verbose_name_plural = "Engagement Pages"
 
     def save(self, *args, **kwargs):
-
         if not self.slug:
             self.slug = slugify(self.title)
-
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -119,7 +116,6 @@ class VolunteerOpportunity(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True)
     
-    # Image er table onujayi notun fields
     opportunity_type = models.CharField(
         max_length=30, 
         choices=OPPORTUNITY_TYPES, 
@@ -149,13 +145,24 @@ class VolunteerOpportunity(models.Model):
     application_url = models.URLField(blank=True)
     deadline = models.DateField(blank=True, null=True)
 
+    # টেবিলের View/Download ফিচারের জন্য এই ফিল্ডটি এখানে যোগ করা হয়েছে
+    circular_document = models.FileField(
+        upload_to='opportunity_circulars/%Y/%m/',
+        blank=True,
+        null=True,
+        help_text="Upload official circular (PDF, DOC, DOCX, PNG, JPG)",
+        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])]
+    )
+
     is_open = models.BooleanField(default=True)
     ordering = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["ordering", "title"]
+        ordering = ["ordering", "-created_at"]
+        verbose_name = "Opportunity"
+        verbose_name_plural = "Opportunities"
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -256,16 +263,12 @@ class JobVacancy(models.Model):
         verbose_name_plural = "Job Vacancies"
 
     def save(self, *args, **kwargs):
-
         if not self.slug:
             self.slug = slugify(self.title)
-
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
-
-
 
 
 class JobApplication(models.Model):
@@ -303,7 +306,7 @@ class JobApplication(models.Model):
 
     language = models.CharField(
         max_length=255,
-        help_text="Languages you speak, e.g. English, Bangla.",
+        help_text="Languages you speak, e.g. English, Somali.",
     )
 
     availability = models.CharField(
@@ -345,8 +348,6 @@ class JobApplication(models.Model):
     def __str__(self):
         return f"{self.full_name} — {self.vacancy.title}"
 
-
-# volunteerr application
 
 class VolunteerApplication(models.Model):
 
@@ -414,4 +415,3 @@ class VolunteerApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} — {self.opportunity.title}"
-

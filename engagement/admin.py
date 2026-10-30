@@ -11,6 +11,8 @@ from .models import (
 
 
 
+
+
 @admin.register(EngagementPage)
 class EngagementPageAdmin(admin.ModelAdmin):
 
@@ -158,6 +160,10 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    @admin.display(boolean=True, description="Circular File")
+    def has_document(self, obj):
+        return bool(obj.circular_document)
 
 
 @admin.register(JobVacancy)
@@ -413,4 +419,6 @@ class VolunteerApplicationAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+
 
