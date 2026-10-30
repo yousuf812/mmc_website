@@ -40,7 +40,6 @@ class PublicationAdmin(admin.ModelAdmin):
         "-created_at",
     ]
 
-    date_hierarchy = "published_at"
 
     fieldsets = (
         (
