@@ -572,38 +572,42 @@
     {% if opp.document %}
         <div style="display: inline-flex; align-items: center; gap: 6px;">
 
-            <!-- View Document Button -->
-            <a href="{{ opp.document.url }}"
-               target="_blank"
-               rel="noopener noreferrer"
-               title="View Opportunity Document"
-               style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; border: 1px solid #084843; background-color: #ffffff; color: #084843; font-size: 12px; font-weight: 600; text-decoration: none;">
+           <!-- View Document Button -->
+        <a href="{{ opp.document.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View Opportunity Document"
+          style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; background-color: var(--color-mmc-primary, #084843); color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; transition: background-color 0.2s ease, transform 0.2s ease;"
+          onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+          onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';">
 
-                <svg style="width: 13px; height: 13px; margin-right: 4px;"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                View
-            </a>
+            <svg style="width: 13px; height: 13px; margin-right: 4px;"
+                fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            View
+        </a>
 
-            <!-- Download Document Button -->
-            <a href="{{ opp.document.url }}"
-               download
-               title="Download Opportunity Document"
-               style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; background-color: #084843; color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none;">
+        <!-- Download Document Button -->
+        <a href="{{ opp.document.url }}"
+          download
+          title="Download Opportunity Document"
+          style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; background-color: var(--color-mmc-primary, #084843); color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; transition: background-color 0.2s ease, transform 0.2s ease;"
+          onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+          onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';">
 
-                <svg style="width: 13px; height: 13px; margin-right: 4px;"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Download
-            </a>
+            <svg style="width: 13px; height: 13px; margin-right: 4px;"
+                fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download
+        </a>
 
         </div>
     {% else %}
