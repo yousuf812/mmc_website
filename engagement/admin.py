@@ -98,6 +98,7 @@ class EngagementPageAdmin(admin.ModelAdmin):
     )
 
 
+
 @admin.register(VolunteerOpportunity)
 class VolunteerOpportunityAdmin(admin.ModelAdmin):
     list_display = [
@@ -107,9 +108,11 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
         "location",
         "commitment",
         "deadline",
+        "has_document",
         "is_open",
         "ordering",
     ]
+
     list_filter = [
         "opportunity_type",
         "is_open",
@@ -117,6 +120,7 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
         "location",
         "deadline",
     ]
+
     search_fields = [
         "title",
         "area",
@@ -124,6 +128,7 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
         "description",
         "requirements",
     ]
+
     prepopulated_fields = {"slug": ("title",)}
     ordering = ["ordering", "title"]
 
@@ -153,6 +158,11 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
                 "deadline",
             )
         }),
+        ("Supporting Document", {
+            "fields": (
+                "document",
+            )
+        }),
         ("Status & Ordering", {
             "fields": (
                 "is_open",
@@ -161,99 +171,9 @@ class VolunteerOpportunityAdmin(admin.ModelAdmin):
         }),
     )
 
-    @admin.display(boolean=True, description="Circular File")
+    @admin.display(boolean=True, description="Document Attached")
     def has_document(self, obj):
-        return bool(obj.circular_document)
-
-
-@admin.register(JobVacancy)
-class JobVacancyAdmin(admin.ModelAdmin):
-
-    list_display = [
-        "title",
-        "department",
-        "location",
-        "employment_type",
-        "closing_date",
-        "is_open",
-        "ordering",
-    ]
-
-    list_filter = [
-        "is_open",
-        "department",
-        "location",
-        "employment_type",
-        "closing_date",
-    ]
-
-    search_fields = [
-        "title",
-        "department",
-        "location",
-        "description",
-        "qualifications",
-        "experience",
-    ]
-
-    prepopulated_fields = {
-        "slug": ("title",)
-    }
-
-    ordering = [
-        "ordering",
-        "-created_at",
-    ]
-
-    fieldsets = (
-        (
-            "Vacancy Information",
-            {
-                "fields": (
-                    "title",
-                    "slug",
-                    "department",
-                    "location",
-                    "employment_type",
-                )
-            },
-        ),
-        (
-            "Job Details",
-            {
-                "fields": (
-                    "description",
-                    "responsibilities",
-                    "qualifications",
-                    "experience",
-                )
-            },
-        ),
-        (
-            "Application",
-            {
-                "fields": (
-                    "application_instructions",
-                    "application_email",
-                    "application_url",
-                    "closing_date",
-                )
-            },
-        ),
-        (
-            "Status",
-            {
-                "fields": (
-                    "is_open",
-                    "ordering",
-                )
-            },
-        ),
-    )
-
-    @admin.display(boolean=True, description="Circular Attached")
-    def has_document(self, obj):
-        return bool(obj.circular_document)
+        return bool(obj.document)
 
 
 

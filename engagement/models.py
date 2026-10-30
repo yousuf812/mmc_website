@@ -146,12 +146,12 @@ class VolunteerOpportunity(models.Model):
     deadline = models.DateField(blank=True, null=True)
 
     # টেবিলের View/Download ফিচারের জন্য এই ফিল্ডটি এখানে যোগ করা হয়েছে
-    circular_document = models.FileField(
-        upload_to='opportunity_circulars/%Y/%m/',
+    document = models.FileField(
+        upload_to="engagement/opportunities/documents/",
         blank=True,
         null=True,
-        help_text="Upload official circular (PDF, DOC, DOCX, PNG, JPG)",
-        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])]
+        verbose_name="Opportunity Document",
+        help_text="Upload one PDF or other supporting document."
     )
 
     is_open = models.BooleanField(default=True)
