@@ -1,21 +1,19 @@
+
 {% extends "base.html" %}
 
 {% block title %}Press Kit | MMC{% endblock %}
 
 {% block content %}
 
-<!-- Submenu -->
 {% include "resources/includes/submenu.html" with active_resource="media" %}
 
-<!-- =========================================================
-     PAGE HERO
-========================================================= -->
+<!-- PAGE HERO -->
 <section class="relative overflow-hidden bg-slate-950 text-white">
     <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/40"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div class="max-w-3xl">
-            <span class="inline-flex items-center rounded-full bg-white/10 px-5 py-2 text-base font-semibold text-emerald-300">
+            <span class="inline-flex rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-emerald-300">
                 Resources
             </span>
 
@@ -30,102 +28,161 @@
     </div>
 </section>
 
-<!-- =========================================================
-     PRESS KIT ITEMS GRID
-========================================================= -->
+<!-- PRESS KIT ITEMS -->
 <section class="bg-white py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {% if press_kit_items %}
-            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+
                 {% for item in press_kit_items %}
-                    <article class="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-7">
-                        <div>
-                            <!-- Type Badge Icon -->
-                            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-50 text-base font-bold text-emerald-800">
-                                {% if item.item_type == "logo" %}
-                                    LOGO
-                                {% elif item.item_type == "photo" %}
-                                    PHOTO
-                                {% elif item.item_type == "biography" %}
-                                    BIO
-                                {% elif item.item_type == "video" %}
-                                    VIDEO
-                                {% elif item.item_type == "document" %}
-                                    DOC
-                                {% else %}
-                                    FILE
-                                {% endif %}
+
+                    <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                        <!-- Preview Image -->
+                        {% if item.image %}
+                            <div class="flex aspect-[16/10] items-center justify-center overflow-hidden border-b border-slate-100 bg-slate-50 p-4">
+                                <img
+                                    src="{{ item.image.url }}"
+                                    alt="{{ item.alt_text|default:item.title }}"
+                                    class="h-full w-full object-contain transition duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                >
                             </div>
-
-                            <!-- Preview Image -->
-                            {% if item.image %}
-                                <div class="mb-6 aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-50 border border-slate-100 p-2">
-                                    <img
-                                        src="{{ item.image.url }}"
-                                        alt="{{ item.alt_text|default:item.title }}"
-                                        class="h-full w-full object-contain"
-                                        loading="lazy"
-                                    >
+                        {% else %}
+                            <div class="flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-slate-100 to-emerald-50">
+                                <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-white text-2xl font-extrabold text-emerald-800 shadow-sm">
+                                    {% if item.item_type == "logo" %}
+                                        LOGO
+                                    {% elif item.item_type == "photo" %}
+                                        PHOTO
+                                    {% elif item.item_type == "biography" %}
+                                        BIO
+                                    {% elif item.item_type == "video" %}
+                                        VIDEO
+                                    {% elif item.item_type == "document" %}
+                                        DOC
+                                    {% else %}
+                                        FILE
+                                    {% endif %}
                                 </div>
-                            {% endif %}
+                            </div>
+                        {% endif %}
 
-                            <!-- Details -->
+                        <!-- Card Content -->
+                        <div class="flex flex-1 flex-col p-6 sm:p-7">
+
                             <div>
-                                <span class="rounded-full bg-emerald-50 px-3.5 py-1 text-base font-bold uppercase tracking-wider text-emerald-800">
+                                <span class="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800">
                                     {{ item.get_item_type_display }}
                                 </span>
 
-                                <h2 class="mt-3 text-xl font-bold text-slate-900 sm:text-2xl">
+                                <h2 class="mt-4 text-xl font-bold leading-snug text-slate-900 sm:text-2xl">
                                     {{ item.title }}
                                 </h2>
 
                                 {% if item.description %}
-                                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                                    <p class="mt-3 text-sm leading-6 text-slate-600 line-clamp-3">
                                         {{ item.description }}
                                     </p>
                                 {% endif %}
                             </div>
-                        </div>
 
-                        <!-- Action Button -->
-                        <div class="mt-8 border-t border-slate-100 pt-6">
-                            {% if item.file %}
-                                <a
-                                href="{{ item.file.url }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
-                                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
-                                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
-                            >
-                                <span>Download / View</span>
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
-                            {% elif item.external_url %}
-                               <a
-                            href="{{ item.external_url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
-                            onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
-                            onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold shadow-sm transition-colors duration-200"
-                        >
-                            <span>Open Resource</span>
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
-                            {% else %}
-                                <span class="text-base font-medium text-slate-500">
-                                    Resource details available on request.
-                                </span>
-                            {% endif %}
-                        </div>
+                           
+<!-- Separate View & Download Buttons -->
+<div class="mt-auto flex flex-col gap-3 border-t border-slate-100 pt-6 sm:flex-row">
 
+    {% if item.file or item.image %}
+
+        {% if item.file %}
+            {% with resource_url=item.file.url %}
+                <!-- View Button -->
+              <a
+            href="{{ resource_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="background-color: var(--color-mmc-primary, #084843); color: #ffffff;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';"
+            class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+        >
+            View
+        </a>
+
+                <!-- Download Button -->
+              <a
+            href="{{ resource_url }}"
+            download
+            style="background-color: var(--color-mmc-primary, #084843); color: #ffffff;"
+            onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
+            onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';"
+            class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+        >
+            Download
+        </a>
+            {% endwith %}
+
+        {% else %}
+            {% with resource_url=item.image.url %}
+                <!-- View Image -->
+               <a
+    href="{{ resource_url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="background-color: #084843; color: #ffffff; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+    class="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+>
+    <span>View</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
+
+                <!-- Download Image -->
+                <a
+    href="{{ resource_url }}"
+    download
+    style="background-color: #084843; color: #ffffff; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+    class="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+>
+    <span>Download</span>
+    <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+    </svg>
+</a>
+            {% endwith %}
+        {% endif %}
+
+    {% elif item.external_url %}
+
+        <a
+            href="{{ item.external_url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:opacity-90"
+            style="background-color: var(--color-mmc-secondary, #e97c61);"
+        >
+            View Resource
+        </a>
+
+    {% else %}
+
+        <span class="w-full rounded-xl bg-slate-50 px-4 py-3 text-center text-sm font-medium text-slate-500">
+            Resource details available on request.
+        </span>
+
+    {% endif %}
+
+</div>
+
+                        </div>
                     </article>
+
                 {% endfor %}
             </div>
+
         {% else %}
             <div class="mx-auto max-w-2xl rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center sm:p-12">
                 <h2 class="text-2xl font-bold text-slate-900">
@@ -141,12 +198,11 @@
     </div>
 </section>
 
-<!-- =========================================================
-     ADDITIONAL MEDIA ENQUIRY CTA
-========================================================= -->
+<!-- MEDIA ENQUIRY CTA -->
 <section class="bg-slate-50 py-12 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="rounded-3xl bg-slate-900 px-6 py-12 text-center text-white shadow-sm sm:px-12 sm:py-16">
+
             <h2 class="text-2xl font-bold sm:text-3xl lg:text-4xl">
                 Need additional media material?
             </h2>
@@ -157,15 +213,14 @@
 
             <div class="mt-8 flex justify-center">
                 <a
-                href="{% url 'contact:contact' %}"
-                style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff;"
-                onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)';"
-                onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-                class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold shadow transition-colors duration-200"
-            >
-                Contact MMC
-            </a>
+                    href="{% url 'contact:contact' %}"
+                    class="inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-base font-bold text-white shadow transition hover:opacity-90"
+                    style="background-color: var(--color-mmc-secondary, #e97c61);"
+                >
+                    Contact MMC
+                </a>
             </div>
+
         </div>
     </div>
 </section>

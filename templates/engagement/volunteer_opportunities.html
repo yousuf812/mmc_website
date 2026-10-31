@@ -390,7 +390,16 @@
         <h3>Volunteer</h3>
         <p>Give your time and skills to support our field teams, offices and communities.</p>
       </div>
-      <a href="?type=volunteer" class="btn-outline">View opportunities</a>
+    <a 
+    href="?type=volunteer" 
+    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+>
+    <span>View opportunities</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
     </div>
 
     <div class="category-card">
@@ -399,7 +408,16 @@
         <h3>Internship</h3>
         <p>Build early-career experience through supervised placements and mentoring.</p>
       </div>
-      <a href="?type=internship" class="btn-outline">View opportunities</a>
+    <a 
+    href="?type=internship" 
+    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+>
+    <span>View opportunities</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
     </div>
 
     <div class="category-card">
@@ -409,13 +427,14 @@
         <p>Start or grow a career in programmes, finance, operations and partnerships.</p>
       </div>
      <a 
-        href="?type=staff" 
-        class="btn-outline"
-        style="border: 1.5px solid var(--color-mmc-primary, #184544); color: var(--color-mmc-primary, #184544); background-color: transparent;"
-        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.color='#ffffff';"
-        onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-mmc-primary, #184544)';"
-    >
-    View opportunities
+    href="?type=staff" 
+    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+>
+    <span>View opportunities</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
 </a>
     </div>
   </div>
@@ -427,24 +446,26 @@
     <p>Always open. Join our consultant network for short-term expert assignments.</p>
     <div class="actions">
      <a 
-        href="?type=consultant" 
-        class="btn-outline"
-        style="border: 1.5px solid var(--color-mmc-primary, #184544); color: var(--color-mmc-primary, #184544); background-color: transparent;"
-        onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.color='#ffffff';"
-        onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--color-mmc-primary, #184544)';"
-    >
-        View opportunities
-    </a>
+    href="?type=consultant" 
+    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+>
+    <span>View opportunities</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
     {% if featured_opportunity %}
       <a 
-         href="{% url 'engagement:volunteer_application' slug=featured_opportunity.slug %}"
-          class="btn-dark"
-          style="background-color: var(--color-mmc-secondary, #e97c61); color: #ffffff; border: 1.5px solid var(--color-mmc-secondary, #e97c61);"
-          onmouseover="this.style.backgroundColor='var(--color-mmc-primary, #184544)'; this.style.borderColor='var(--color-mmc-primary, #184544)';"
-          onmouseout="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)'; this.style.borderColor='var(--color-mmc-secondary, #e97c61)';"
-      >
-          Join the network
-      </a>
+    href="{% url 'engagement:volunteer_application' slug=featured_opportunity.slug %}"
+    class="btn-dark group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+>
+    <span>Join the network</span>
+    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
       {% else %}
       <p>No volunteer opportunities are currently available.</p>
      {% endif %}
