@@ -136,106 +136,158 @@ def engagement_page(request, slug):
 
 
 
+
 def volunteer_opportunities(request):
-    queryset = VolunteerOpportunity.objects.all()
 
-    # Stat counters (Image onujayi)
-    total_open_count = queryset.filter(is_open=True).count()
-    volunteer_count = queryset.filter(is_open=True, opportunity_type="volunteer").count()
-    internship_count = queryset.filter(is_open=True, opportunity_type="internship").count()
-    staff_count = queryset.filter(is_open=True, opportunity_type="staff").count()
-
-    # Distinct values for dropdown filters
-    areas_list = (
-        VolunteerOpportunity.objects.exclude(area__exact="")
-        .values_list("area", flat=True)
-        .distinct()
-    )
-    locations_list = (
-        VolunteerOpportunity.objects.exclude(location__exact="")
-        .values_list("location", flat=True)
-        .distinct()
-    )
-
-    # Filter parameters from GET request
-    q = request.GET.get("q", "").strip()
-    opp_type = request.GET.get("type", "").strip()
-    area = request.GET.get("area", "").strip()
-    location = request.GET.get("location", "").strip()
-    status = request.GET.get("status", "").strip()
-
-    # Apply Filters
-    if q:
-        queryset = queryset.filter(
-            Q(title__icontains=q)
-            | Q(area__icontains=q)
-            | Q(location__icontains=q)
-            | Q(description__icontains=q)
-        )
-    if opp_type:
-        queryset = queryset.filter(opportunity_type=opp_type)
-    if area:
-        queryset = queryset.filter(area=area)
-    if location:
-        queryset = queryset.filter(location=location)
-    if status == "open":
-        queryset = queryset.filter(is_open=True)
-    elif status == "closed":
-        queryset = queryset.filter(is_open=False)
-
-    opportunities = queryset.order_by("ordering", "title")
+    # -----------------------------------------
+    # Existing Volunteer Opportunity Data
+    # -----------------------------------------
     featured_opportunity = VolunteerOpportunity.objects.filter(
         is_open=True
     ).exclude(
         slug=""
     ).order_by("ordering", "title").first()
 
+    # -----------------------------------------
+    # Career Board Statistics
+    # -----------------------------------------
+    career_queryset = JobVacancy.objects.all()
+
+    inactive_statuses = ["closed", "cancelled", "filled"]
+
+    active_careers = career_queryset.exclude(
+        status__in=inactive_statuses
+    )
+
+    total_open_count = active_careers.count()
+
+    volunteer_count = active_careers.filter(
+        employment_type="volunteer"
+    ).count()
+
+    internship_count = active_careers.filter(
+        employment_type="internships"
+    ).count()
+
+    staff_count = active_careers.filter(
+        employment_type="jobs"
+    ).count()
+
+    consultant_count = active_careers.filter(
+        employment_type="consulting"
+    ).count()
+
+    # -----------------------------------------
+    # Four Career Board Filters
+    # -----------------------------------------
+    selected_type = request.GET.get("type", "").strip()
+    selected_location = request.GET.get("location", "").strip()
+    selected_functional_area = request.GET.get(
+        "functional_area", ""
+    ).strip()
+    selected_status = request.GET.get("status", "").strip()
+
+    vacancies = career_queryset
+
+    if selected_type:
+        vacancies = vacancies.filter(
+            employment_type=selected_type
+        )
+
+    if selected_location:
+        vacancies = vacancies.filter(
+            location=selected_location
+        )
+
+    if selected_functional_area:
+        vacancies = vacancies.filter(
+            functional_area=selected_functional_area
+        )
+
+    if selected_status:
+        vacancies = vacancies.filter(
+            status=selected_status
+        )
+
+    vacancies = vacancies.order_by(
+        "ordering",
+        "title"
+    )
+
+    # -----------------------------------------
+    # Page Context
+    # -----------------------------------------
     context = {
-        "opportunities": opportunities,
         "get_involved_menu": GET_INVOLVED_MENU,
         "active_engagement_slug": "volunteer",
+
+        # Existing featured opportunity
         "featured_opportunity": featured_opportunity,
-        # Counters
+
+        # Career Board data
+        "vacancies": vacancies,
+
+        # Career Board counters
         "total_open_count": total_open_count,
         "volunteer_count": volunteer_count,
         "internship_count": internship_count,
         "staff_count": staff_count,
-        # Filter options
-        "areas_list": areas_list,
-        "locations_list": locations_list,
-        # Selected filter states
-        "selected_q": q,
-        "selected_type": opp_type,
-        "selected_area": area,
-        "selected_location": location,
-        "selected_status": status,
+        "consultant_count": consultant_count,
+
+        # Filter choices
+        "type_choices": JobVacancy.TYPE_CHOICES,
+        "location_choices": JobVacancy.LOCATION_CHOICES,
+        "functional_area_choices": JobVacancy.FUNCTIONAL_AREA_CHOICES,
+        "status_choices": JobVacancy.STATUS_CHOICES,
+
+        # Selected filters
+        "selected_type": selected_type,
+        "selected_location": selected_location,
+        "selected_functional_area": selected_functional_area,
+        "selected_status": selected_status,
     }
 
     return render(
-        request, 
-        "engagement/volunteer_opportunities.html", 
+        request,
+        "engagement/volunteer_opportunities.html",
         context
     )
 
 
+
+
 def job_vacancies(request):
-    vacancies = JobVacancy.objects.filter(
-        is_open=True
-    )
+    vacancies = JobVacancy.objects.all()
 
-    search_query = request.GET.get("q", "").strip()
-
-    if search_query:
-        from django.db.models import Q
-
+    # Type filter
+    selected_type = request.GET.get("type", "").strip()
+    if selected_type:
         vacancies = vacancies.filter(
-            Q(title__icontains=search_query)
-            | Q(department__icontains=search_query)
-            | Q(location__icontains=search_query)
-            | Q(employment_type__icontains=search_query)
-            | Q(description__icontains=search_query)
-            | Q(qualifications__icontains=search_query)
-            | Q(experience__icontains=search_query)
+            employment_type=selected_type
+        )
+
+    # Location filter
+    selected_location = request.GET.get("location", "").strip()
+    if selected_location:
+        vacancies = vacancies.filter(
+            location=selected_location
+        )
+
+    # Functional Area filter
+    selected_functional_area = request.GET.get(
+        "functional_area", ""
+    ).strip()
+
+    if selected_functional_area:
+        vacancies = vacancies.filter(
+            functional_area=selected_functional_area
+        )
+
+    # Status filter
+    selected_status = request.GET.get("status", "").strip()
+    if selected_status:
+        vacancies = vacancies.filter(
+            status=selected_status
         )
 
     vacancies = vacancies.order_by(
@@ -246,7 +298,16 @@ def job_vacancies(request):
     context = {
         "vacancies": vacancies,
         "get_involved_menu": GET_INVOLVED_MENU,
-        "search_query": search_query,
+
+        "type_choices": JobVacancy.TYPE_CHOICES,
+        "location_choices": JobVacancy.LOCATION_CHOICES,
+        "functional_area_choices": JobVacancy.FUNCTIONAL_AREA_CHOICES,
+        "status_choices": JobVacancy.STATUS_CHOICES,
+
+        "selected_type": selected_type,
+        "selected_location": selected_location,
+        "selected_functional_area": selected_functional_area,
+        "selected_status": selected_status,
     }
 
     return render(
@@ -376,5 +437,25 @@ def volunteer_application(request, slug):
             "get_involved_menu": GET_INVOLVED_MENU,
             "active_engagement_slug": "join-our-team",
         },
+    )
+
+
+
+def job_vacancy_detail(request, slug):
+    vacancy = get_object_or_404(
+        JobVacancy,
+        slug=slug
+    )
+
+    context = {
+        "vacancy": vacancy,
+        "get_involved_menu": GET_INVOLVED_MENU,
+        "active_engagement_slug": "volunteer",
+    }
+
+    return render(
+        request,
+        "engagement/job_vacancy_detail.html",
+        context
     )
 

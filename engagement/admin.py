@@ -339,6 +339,99 @@ class VolunteerApplicationAdmin(admin.ModelAdmin):
             },
         ),
     )
+    
+
+
+
+
+@admin.register(JobVacancy)
+class JobVacancyAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "employment_type",
+        "location",
+        "functional_area",
+        "closing_date",
+        "status",
+        "is_open",
+    )
+
+    list_filter = (
+        "employment_type",
+        "location",
+        "functional_area",
+        "status",
+    )
+
+    search_fields = (
+        "title",
+        "description",
+    )
+
+    prepopulated_fields = {
+        "slug": ("title",),
+    }
+
+    ordering = (
+        "ordering",
+        "-created_at",
+    )
+
+    list_editable = (
+        "status",
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+    fieldsets = (
+        ("Opportunity Information", {
+            "fields": (
+                "title",
+                "slug",
+                "employment_type",
+                "location",
+                "functional_area",
+            )
+        }),
+
+        ("Opportunity Details", {
+            "fields": (
+                "description",
+                "responsibilities",
+                "qualifications",
+                "experience",
+            )
+        }),
+
+        ("Application Information", {
+            "fields": (
+                "application_instructions",
+                "application_email",
+                "application_url",
+                "closing_date",
+                "circular_document",
+            )
+        }),
+
+        ("Publication Status", {
+            "fields": (
+                "status",
+                "is_open",
+                "ordering",
+            )
+        }),
+
+        ("System Information", {
+            "fields": (
+                "created_at",
+                "updated_at",
+            )
+        }),
+    )
 
 
 

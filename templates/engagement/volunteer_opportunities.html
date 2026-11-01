@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <!-- Get Involved Submenu -->
 {% include "engagement/includes/submenu.html" %}
@@ -145,35 +145,62 @@
     margin-top: 4px;
   }
 
-  /* Filter Bar */
-  .filter-form {
+  /* Career Board: left filters + right content */
+  .career-board-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    gap: 12px;
-    background: #f8fafc;
-    padding: 16px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    margin-bottom: 25px;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-top: 20px;
   }
+  .filter-sidebar {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px;
+    position: sticky;
+    top: 100px;
+  }
+  .filter-sidebar h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 5px;
+  }
+  .filter-description {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0 0 22px;
+  }
+  .filter-form { display: flex; flex-direction: column; gap: 18px; }
   .filter-group label {
     display: block;
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748b;
-    margin-bottom: 5px;
-    text-transform: capitalize;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 7px;
   }
   .filter-control {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 13px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    background: #ffffff;
-    color: #1e293b;
-    box-sizing: border-box;
+    width: 100%; padding: 10px 12px; font-size: 13px;
+    border: 1px solid #cbd5e1; border-radius: 7px;
+    background: #ffffff; color: #1e293b; box-sizing: border-box;
   }
+  .filter-control:focus {
+    outline: none; border-color: #084843;
+    box-shadow: 0 0 0 3px rgba(8,72,67,.10);
+  }
+  .filter-actions { display: flex; flex-direction: column; gap: 9px; margin-top: 5px; }
+  .filter-submit {
+    width: 100%; border: 0; border-radius: 7px; padding: 11px;
+    background: #084843; color: #fff; font-size: 13px;
+    font-weight: 700; cursor: pointer;
+  }
+  .filter-reset {
+    display: block; text-align: center; padding: 9px;
+    color: #64748b; font-size: 12px; font-weight: 600; text-decoration: none;
+  }
+  .career-board-main { min-width: 0; }
+  .career-board-main .counter-grid { margin-top: 0; }
 
   /* Table Design */
   .table-wrapper {
@@ -231,10 +258,14 @@
     font-weight: 600;
     display: inline-block;
   }
-  .status-closed {
-    background-color: #fee2e2;
-    color: #b91c1c;
-  }
+  .status-new { background: #dbeafe; color: #1d4ed8; }
+  .status-open { background: #dcfce7; color: #15803d; }
+  .status-closing_soon { background: #fef3c7; color: #b45309; }
+  .status-deadline_extended { background: #f3e8ff; color: #7e22ce; }
+  .status-readvertised { background: #e0e7ff; color: #4338ca; }
+  .status-closed { background: #fee2e2; color: #b91c1c; }
+  .status-cancelled { background: #ffe4e6; color: #be123c; }
+  .status-filled { background: #e2e8f0; color: #475569; }
   .btn-apply {
     background: #e97c61;
     color: #ffffff;
@@ -299,10 +330,19 @@
   }
 
   @media (max-width: 900px) {
-    .category-grid, .consultant-card { grid-template-columns: 1fr; width: 100%; }
+    .category-grid { grid-template-columns: 1fr; }
+    .consultant-card { width: 100%; }
     .counter-grid { grid-template-columns: repeat(2, 1fr); }
-    .filter-form { grid-template-columns: 1fr; }
+    .career-board-layout { grid-template-columns: 1fr; }
+    .filter-sidebar { position: static; }
+    .filter-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .filter-actions { grid-column: 1 / -1; flex-direction: row; }
+    .filter-submit, .filter-reset { flex: 1; }
     .apply-steps-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .filter-form { grid-template-columns: 1fr; }
+    .filter-actions { flex-direction: column; }
   }
 </style>
 
@@ -312,16 +352,24 @@
 <section class="relative overflow-hidden bg-[#184544] text-white">
     
     <!-- Background Conic / Concentric Circular Gradient Ripples (Right Side Decoration) -->
-    <div class="pointer-events-none absolute right-[-25%] top-[-30%] sm:right-[-15%] sm:top-[-20%] lg:right-[-5%] lg:top-[-10%] h-[550px] w-[550px] sm:h-[750px] sm:w-[750px] lg:h-[900px] lg:w-[900px] select-none" aria-hidden="true">
-        <!-- Outer Circle Ring -->
-        <div class="absolute inset-0 rounded-full border border-emerald-400/10 bg-emerald-500/[0.04]"></div>
-        <!-- Middle Circle Ring -->
-        <div class="absolute inset-[14%] rounded-full border border-emerald-300/15 bg-emerald-400/[0.05]"></div>
-        <!-- Inner Circle Ring -->
-        <div class="absolute inset-[28%] rounded-full border border-emerald-200/20 bg-emerald-300/[0.06] shadow-[0_0_120px_rgba(34,197,94,0.08)]"></div>
-        <!-- Core Soft Glow -->
-        <div class="absolute inset-[42%] rounded-full bg-gradient-to-br from-emerald-400/20 to-teal-900/40 blur-2xl"></div>
+    <div class="absolute right-4 sm:right-8 lg:right-12 top-6 sm:top-10 z-10 select-none">
+    <!-- Subtle Glow Background -->
+    <div class="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#084843]/30 to-[#e97c61]/30 blur-lg opacity-60"></div>
+
+    <!-- Small Round Image Container -->
+    <div class="relative h-32 w-32 sm:h-40 sm:w-40 lg:h-48 lg:w-48 rounded-full p-1.5 shadow-xl transition-transform duration-300 hover:scale-105"
+         style="background: linear-gradient(135deg, #084843, #e97c61); border: 2px solid rgba(255, 255, 255, 0.4);">
+        
+        <!-- Image Inner Container -->
+        <div class="h-full w-full rounded-full overflow-hidden border border-white/60">
+            <img 
+                src="{% static 'images/about/who-we-are.jpeg' %}" 
+                alt="MMC Feature Image" 
+                class="h-full w-full object-cover object-center"
+            />
+        </div>
     </div>
+</div>
 
     <!-- Container -->
     <div class="relative z-10 mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-12 lg:py-28 xl:py-32">
@@ -409,7 +457,7 @@
         <p>Build early-career experience through supervised placements and mentoring.</p>
       </div>
     <a 
-    href="?type=internship" 
+    href="?type=internships" 
     class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
     style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
     onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
@@ -427,7 +475,7 @@
         <p>Start or grow a career in programmes, finance, operations and partnerships.</p>
       </div>
      <a 
-    href="?type=staff" 
+    href="?type=jobs" 
     class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
     style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
     onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
@@ -446,7 +494,7 @@
     <p>Always open. Join our consultant network for short-term expert assignments.</p>
     <div class="actions">
      <a 
-    href="?type=consultant" 
+    href="?type=consulting" 
     class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
     style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
     onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
@@ -473,201 +521,203 @@
   </div>
 
   <!-- MMC Job Board Section -->
-  <h2 class="section-title">MMC job board</h2>
+  <h2 class="section-title">MMC Career Opportunities</h2>
 
-  <!-- Stats Counter Bar -->
-  <div class="counter-grid">
-    <div class="counter-box">
-      <div class="num">{{ total_open_count }}</div>
-      <div class="lbl">Open opportunities</div>
-    </div>
-    <div class="counter-box">
-      <div class="num">{{ volunteer_count }}</div>
-      <div class="lbl">Volunteer</div>
-    </div>
-    <div class="counter-box">
-      <div class="num">{{ internship_count }}</div>
-      <div class="lbl">Internship</div>
-    </div>
-    <div class="counter-box">
-      <div class="num">{{ staff_count }}</div>
-      <div class="lbl">Staff / Career</div>
-    </div>
-    <div class="counter-box">
-      <div class="num">Open</div>
-      <div class="lbl">Consultant network, always</div>
-    </div>
-  </div>
+  <div class="career-board-layout">
 
-  <!-- Dynamic Filter Bar -->
-  <form method="GET" action="" class="filter-form">
-    <div class="filter-group">
-      <label>Search</label>
-      <input 
-        type="text" 
-        name="q" 
-        class="filter-control" 
-        placeholder="Title or keyword" 
-        value="{{ selected_q }}" 
-        onchange="this.form.submit()"
-      >
-    </div>
+    <!-- LEFT: FILTER SIDEBAR -->
+    <aside class="filter-sidebar">
+      <h3>Filter Opportunities</h3>
+      <p class="filter-description">Find the right opportunity for your skills.</p>
 
-    <div class="filter-group">
-      <label>Opportunity type</label>
-      <select name="type" class="filter-control" onchange="this.form.submit()">
-        <option value="">All Types</option>
-        <option value="volunteer" {% if selected_type == 'volunteer' %}selected{% endif %}>Volunteer</option>
-        <option value="internship" {% if selected_type == 'internship' %}selected{% endif %}>Internship</option>
-        <option value="staff" {% if selected_type == 'staff' %}selected{% endif %}>Staff / Career</option>
-        <option value="consultant" {% if selected_type == 'consultant' %}selected{% endif %}>Consultant</option>
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label>Area</label>
-      <select name="area" class="filter-control" onchange="this.form.submit()">
-        <option value="">All areas</option>
-        {% for a in areas_list %}
-          <option value="{{ a }}" {% if selected_area == a %}selected{% endif %}>{{ a }}</option>
-        {% endfor %}
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label>Location</label>
-      <select name="location" class="filter-control" onchange="this.form.submit()">
-        <option value="">All locations</option>
-        {% for loc in locations_list %}
-          <option value="{{ loc }}" {% if selected_location == loc %}selected{% endif %}>{{ loc }}</option>
-        {% endfor %}
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label>Status</label>
-      <select name="status" class="filter-control" onchange="this.form.submit()">
-        <option value="">All</option>
-        <option value="open" {% if selected_status == 'open' %}selected{% endif %}>Open</option>
-        <option value="closed" {% if selected_status == 'closed' %}selected{% endif %}>Closed</option>
-      </select>
-    </div>
-  </form>
-
-  <!-- Opportunity Data Table -->
-  <div class="table-wrapper">
-    <table class="opportunity-table">
-      <thead>
-        <tr>
-          <th>Opportunity</th>
-          <th>Type</th>
-          <th>Area</th>
-          <th>Location</th>
-          <th>Commitment</th>
-          <th>Closing</th>
-          <th>Status</th>
-          <th>Document</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for opp in opportunities %}
-        <tr>
-          <td class="opp-title">{{ opp.title }}</td>
-          <td><span class="type-badge">{{ opp.get_opportunity_type_display }}</span></td>
-          <td>{{ opp.area|default:"—" }}</td>
-          <td>{{ opp.location|default:"—" }}</td>
-          <td>{{ opp.commitment|default:"—" }}</td>
-          <td>{{ opp.deadline|date:"d M Y"|default:"Open" }}</td>
-          <td>
-            {% if opp.is_open %}
-              <span class="status-badge">Open</span>
-            {% else %}
-              <span class="status-badge status-closed">Closed</span>
-            {% endif %}
-          </td>
-          
-          
-<!-- Opportunity Document View & Download Column -->
-<td style="white-space: nowrap;">
-    {% if opp.document %}
-        <div style="display: inline-flex; align-items: center; gap: 6px;">
-
-           <!-- View Document Button -->
-        <a href="{{ opp.document.url }}"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="View Opportunity Document"
-          style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; background-color: var(--color-mmc-primary, #084843); color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; transition: background-color 0.2s ease, transform 0.2s ease;"
-          onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-          onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';">
-
-            <svg style="width: 13px; height: 13px; margin-right: 4px;"
-                fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-            View
-        </a>
-
-        <!-- Download Document Button -->
-        <a href="{{ opp.document.url }}"
-          download
-          title="Download Opportunity Document"
-          style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; background-color: var(--color-mmc-primary, #084843); color: #ffffff; font-size: 12px; font-weight: 600; text-decoration: none; transition: background-color 0.2s ease, transform 0.2s ease;"
-          onmouseover="this.style.backgroundColor='var(--color-mmc-secondary, #e97c61)';"
-          onmouseout="this.style.backgroundColor='var(--color-mmc-primary, #084843)';">
-
-            <svg style="width: 13px; height: 13px; margin-right: 4px;"
-                fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Download
-        </a>
-
+      <form method="GET" action="" class="filter-form">
+        <div class="filter-group">
+          <label for="filter-type">Opportunity Type</label>
+          <select id="filter-type" name="type" class="filter-control">
+            <option value="">All Types</option>
+            {% for value, label in type_choices %}
+              <option value="{{ value }}" {% if selected_type == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
         </div>
-    {% else %}
-        <span style="color: #94a3b8; font-size: 13px;">—</span>
-    {% endif %}
-</td>
 
+        <div class="filter-group">
+          <label for="filter-location">Location</label>
+          <select id="filter-location" name="location" class="filter-control">
+            <option value="">All Locations</option>
+            {% for value, label in location_choices %}
+              <option value="{{ value }}" {% if selected_location == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
 
-          <!-- Apply Button Column -->
-          <td>
-            {% if opp.is_open %}
-              {% if opp.opportunity_type == "volunteer" or opp.opportunity_type == "internship" or opp.opportunity_type == "consultant" %}
-                <a href="{% url 'engagement:volunteer_application' slug=opp.slug %}"
-                   class="btn-apply">
-                    Apply
-                </a>
-              {% elif opp.opportunity_type == "staff" %}
-                <a href="{% url 'engagement:volunteer_application' slug=opp.slug %}"
-                   class="btn-apply">
-                    Apply
-                </a>
-              {% endif %}
+        <div class="filter-group">
+          <label for="filter-functional-area">Functional Area</label>
+          <select id="filter-functional-area" name="functional_area" class="filter-control">
+            <option value="">All Functional Areas</option>
+            {% for value, label in functional_area_choices %}
+              <option value="{{ value }}" {% if selected_functional_area == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" name="status" class="filter-control">
+            <option value="">All Statuses</option>
+            {% for value, label in status_choices %}
+              <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <button type="submit" class="filter-submit">Apply Filters</button>
+          <a href="?" class="filter-reset">Clear All Filters</a>
+        </div>
+      </form>
+    </aside>
+
+    <!-- RIGHT: CAREER BOARD CONTENT -->
+    <main class="career-board-main">
+
+      <!-- Statistics -->
+      <div class="counter-grid">
+        <div class="counter-box">
+          <div class="num">{{ total_open_count }}</div>
+          <div class="lbl">Active Opportunities</div>
+        </div>
+        <div class="counter-box">
+          <div class="num">{{ volunteer_count }}</div>
+          <div class="lbl">Volunteer</div>
+        </div>
+        <div class="counter-box">
+          <div class="num">{{ internship_count }}</div>
+          <div class="lbl">Internships</div>
+        </div>
+        <div class="counter-box">
+          <div class="num">{{ staff_count }}</div>
+          <div class="lbl">Jobs</div>
+        </div>
+        <div class="counter-box">
+          <div class="num">{{ consultant_count }}</div>
+          <div class="lbl">Consulting</div>
+        </div>
+      </div>
+
+      <!-- Opportunity Table -->
+      <div class="table-wrapper">
+    <table class="opportunity-table">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Closing Date</th>
+                <th>Actions</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for vacancy in vacancies %}
+                <tr>
+                    <!-- Job Title -->
+                    <td class="opp-title">
+                        {{ vacancy.title }}
+                    </td>
+
+                    <!-- Employment Type -->
+                    <td>
+                        <span class="type-badge">
+                            {{ vacancy.get_employment_type_display }}
+                        </span>
+                    </td>
+
+                    <!-- Location -->
+                    <td>
+                        {{ vacancy.get_location_display|default:vacancy.location|default:"—" }}
+                    </td>
+
+                    <!-- Closing Date -->
+                    <td>
+                        {{ vacancy.closing_date|date:"d M Y"|default:"Not specified" }}
+                    </td>
+
+                    <!-- Actions -->
+                    <td>
+    <div class="flex flex-wrap items-center gap-2">
+
+        <!-- View -->
+        <a href="{% url 'engagement:job_vacancies' %}"
+   style="background-color: #084843; color: #ffffff; text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+   class="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold shadow-xs">
+    <i class="fas fa-eye"></i> View
+</a>
+
+        <!-- Download -->
+        {% if vacancy.circular_document %}
+           <a href="{{ vacancy.circular_document.url }}"
+   target="_blank"
+   rel="noopener noreferrer"
+   download
+   style="background-color: #084843; color: #ffffff; text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+   class="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold shadow-xs">
+    <i class="fas fa-download"></i> Download
+</a>
+        {% endif %}
+
+        <!-- Apply -->
+        {% if vacancy.status != "closed" and vacancy.status != "cancelled" and vacancy.status != "filled" %}
+
+            {% if vacancy.employment_type == "jobs" %}
+                <a href="{% url 'engagement:job_application' slug=vacancy.slug %}"
+   style="background-color: #084843; color: #ffffff; text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+   class="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold shadow-xs">
+    <i class="fas fa-paper-plane"></i> Apply
+</a>
+            {% else %}
+                <a href="{% url 'engagement:volunteer_application' slug=vacancy.slug %}"
+   style="background-color: #084843; color: #ffffff; text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
+   class="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold shadow-xs">
+    <i class="fas fa-paper-plane"></i> Apply
+</a>
             {% endif %}
-          </td>
 
-        </tr>
-        {% empty %}
-        <tr>
-          <td colspan="9" style="text-align: center; padding: 30px; color: #64748b;">
-            No opportunities match your filter criteria.
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
+        {% endif %}
+
+    </div>
+</td>
+                    <!-- Status -->
+                    <td>
+                        <span class="status-badge status-{{ vacancy.status }}">
+                            {{ vacancy.get_status_display }}
+                        </span>
+                    </td>
+                </tr>
+
+            {% empty %}
+                <tr>
+                    <td colspan="6"
+                        style="text-align:center; padding:35px; color:#64748b;">
+                        No opportunities match your filter criteria.
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </div>
 
-  <div class="meta-footer">
-    {{ opportunities|length }} of {{ total_open_count }} opportunities shown
+      <div class="meta-footer">{{ vacancies|length }} opportunities shown</div>
+    </main>
   </div>
 
   <!-- How to apply section -->

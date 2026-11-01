@@ -173,11 +173,52 @@ class VolunteerOpportunity(models.Model):
         return f"{self.title} ({self.get_opportunity_type_display()})"
 
 
+
 class JobVacancy(models.Model):
 
-    title = models.CharField(
-        max_length=200
-    )
+    TYPE_CHOICES = [
+        ("jobs", "Jobs"),
+        ("internships", "Internships"),
+        ("consulting", "Consulting"),
+        ("volunteer", "Volunteer"),
+    ]
+
+    LOCATION_CHOICES = [
+        ("Mogadishu", "Mogadishu"),
+        ("Baidoa", "Baidoa"),
+        ("Remote", "Remote"),
+        ("Somalia", "Somalia"),
+        ("International", "International"),
+    ]
+
+    FUNCTIONAL_AREA_CHOICES = [
+        ("programmes_field_operations", "Programmes & Field Operations"),
+        ("technical_sectors_service_delivery", "Technical Sectors & Service Delivery"),
+        ("protection_safeguarding_inclusion", "Protection, Safeguarding & Inclusion"),
+        ("meal", "MEAL"),
+        ("research_data_analytics", "Research & Data Analytics"),
+        ("advocacy_policy_communications", "Advocacy, Policy & Communications"),
+        ("fundraising_partnerships_donor_relations", "Fundraising, Partnerships & Donor Relations"),
+        ("finance_accounting_audit", "Finance, Accounting & Audit"),
+        ("human_resources_administration", "Human Resources & Administration"),
+        ("logistics_procurement_supply_chain", "Logistics, Procurement & Supply Chain"),
+        ("technology_it_digital_innovation", "Technology, IT & Digital Innovation"),
+        ("governance_risk_compliance_security", "Governance, Risk, Compliance & Security"),
+        ("engineering_infrastructure_environment", "Engineering, Infrastructure & Environment"),
+    ]
+
+    STATUS_CHOICES = [
+        ("new", "New"),
+        ("open", "Open"),
+        ("closing_soon", "Closing Soon"),
+        ("deadline_extended", "Deadline Extended"),
+        ("readvertised", "Re-advertised"),
+        ("closed", "Closed"),
+        ("cancelled", "Cancelled"),
+        ("filled", "Filled"),
+    ]
+
+    title = models.CharField(max_length=200)
 
     slug = models.SlugField(
         max_length=220,
@@ -185,6 +226,7 @@ class JobVacancy(models.Model):
         blank=True
     )
 
+    # Keep old field temporarily for existing data compatibility
     department = models.CharField(
         max_length=150,
         blank=True
@@ -192,80 +234,85 @@ class JobVacancy(models.Model):
 
     location = models.CharField(
         max_length=150,
+        choices=LOCATION_CHOICES,
         blank=True
     )
 
     employment_type = models.CharField(
         max_length=100,
+        choices=TYPE_CHOICES,
         blank=True
+    )
+
+    functional_area = models.CharField(
+        max_length=100,
+        choices=FUNCTIONAL_AREA_CHOICES,
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=30,
+        choices=STATUS_CHOICES,
+        default="open"
     )
 
     description = models.TextField()
 
-    responsibilities = models.TextField(
-        blank=True
-    )
+    responsibilities = models.TextField(blank=True)
 
-    qualifications = models.TextField(
-        blank=True
-    )
+    qualifications = models.TextField(blank=True)
 
-    experience = models.TextField(
-        blank=True
-    )
+    experience = models.TextField(blank=True)
 
-    application_instructions = models.TextField(
-        blank=True
-    )
+    application_instructions = models.TextField(blank=True)
 
-    application_email = models.EmailField(
-        blank=True
-    )
+    application_email = models.EmailField(blank=True)
 
-    application_url = models.URLField(
-        blank=True
-    )
+    application_url = models.URLField(blank=True)
 
     closing_date = models.DateField(
         blank=True,
         null=True
     )
 
-    is_open = models.BooleanField(
-        default=True
-    )
+    # Keep temporarily for compatibility with existing code
+    is_open = models.BooleanField(default=True)
 
-    ordering = models.PositiveIntegerField(
-        default=0
-    )
+    ordering = models.PositiveIntegerField(default=0)
+
     circular_document = models.FileField(
-        upload_to='job_circulars/%Y/%m/',
+        upload_to="job_circulars/%Y/%m/",
         blank=True,
         null=True,
         help_text="Upload official circular (PDF, DOC, DOCX, PNG, JPG)",
-        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])]
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=["pdf", "doc", "docx", "jpg", "jpeg", "png"]
+            )
+        ]
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = [
-            "ordering",
-            "-created_at",
-        ]
+        ordering = ["ordering", "-created_at"]
         verbose_name = "Job Vacancy"
         verbose_name_plural = "Job Vacancies"
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        # Keep legacy is_open field synchronized with the new status
+        self.is_open = self.status not in ["closed", "cancelled", "filled"]
+
         super().save(*args, **kwargs)
+
+    @property
+    def can_apply(self):
+        return self.status not in ["closed", "cancelled", "filled"]
 
     def __str__(self):
         return self.title
