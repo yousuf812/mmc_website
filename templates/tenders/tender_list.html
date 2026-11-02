@@ -427,21 +427,25 @@
             <div class="mt-6 space-y-2">
 
                 <button
-                    type="submit"
-                    style="background:#084843;color:white;border:1px solid #084843;"
-                    onmouseover="this.style.background='#e97c61';this.style.borderColor='#e97c61';"
-                    onmouseout="this.style.background='#084843';this.style.borderColor='#084843';"
-                    class="w-full cursor-pointer rounded-xl px-3 py-3 text-xs font-bold transition"
-                >
-                    Search Tenders →
-                </button>
+    type="submit"
+    class="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-bold text-white shadow-sm transition-all duration-300 bg-[#084843] hover:bg-[#e97c61] border border-[#084843] hover:border-[#e97c61]"
+    style="background-color: #084843; color: #ffffff; border-color: #084843;"
+    onmouseenter="this.style.setProperty('background-color', '#e97c61', 'important'); this.style.setProperty('border-color', '#e97c61', 'important'); this.style.transform='translateY(-2px)';"
+    onmouseleave="this.style.setProperty('background-color', '#084843', 'important'); this.style.setProperty('border-color', '#084843', 'important'); this.style.transform='translateY(0)';"
+>
+    <span class="pointer-events-none">Search Tenders</span>
+    <span aria-hidden="true" class="pointer-events-none font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+</button>
 
                 <a
-                    href="{% url 'tenders:list' %}"
-                    class="block w-full rounded-xl border border-stone-300 px-3 py-2.5 text-center text-xs font-semibold text-slate-600 transition hover:bg-stone-100"
-                >
-                    Reset Filters
-                </a>
+    href="{% url 'tenders:list' %}"
+    style="background-color: #e97c61; color: #ffffff; border: 1.5px solid #e97c61; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+    class="block w-full cursor-pointer rounded-xl px-3 py-2.5 text-center text-xs font-bold shadow-sm"
+>
+    Reset Filters
+</a>
 
             </div>
 
