@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+{% if messages %}
+    <div class="mx-auto max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
+        {% for message in messages %}
+            <div class="mb-4 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 shadow-sm"
+                 role="alert">
+
+                <i class="fas fa-check-circle mt-0.5 text-lg"></i>
+
+                <div class="flex-1">
+                    <p class="font-semibold">
+                        {% if message.tags == "success" %}
+                            Application Submitted Successfully!
+                        {% else %}
+                            Notification
+                        {% endif %}
+                    </p>
+
+                    <p class="mt-1 text-sm">
+                        {{ message }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 <!-- Get Involved Submenu -->
 {% include "engagement/includes/submenu.html" %}
 <style>
@@ -649,13 +675,20 @@
     <div class="flex flex-wrap items-center gap-2">
 
         <!-- View -->
-        <a href="{% url 'engagement:job_vacancies' %}"
+       {% if vacancy.circular_document %}
+<a href="{{ vacancy.circular_document.url }}"
+   target="_blank"
+   rel="noopener noreferrer"
    style="background-color: #084843; color: #ffffff; text-decoration: none; transition: all 0.3s ease;"
    onmouseover="this.style.backgroundColor='#e97c61'; this.style.transform='translateY(-2px)';"
    onmouseout="this.style.backgroundColor='#084843'; this.style.transform='translateY(0)';"
    class="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold shadow-xs">
-    <i class="fas fa-eye"></i> View
+
+    <i class="fas fa-eye"></i>
+    View
+
 </a>
+{% endif %}
 
         <!-- Download -->
         {% if vacancy.circular_document %}
@@ -1115,6 +1148,9 @@
 </section>
 
 
+
+
+
 <!-- Testimonial Carousel Script -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -1230,6 +1266,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+
+
 <!-- END VOICES OF MMC -->
+
+
 
 {% endblock %}

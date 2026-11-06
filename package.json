@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.0",
+    "pdfjs-dist": "^6.5.438",
     "tailwindcss": "^4.1.0"
   }
 }

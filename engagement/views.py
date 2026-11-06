@@ -14,9 +14,13 @@ from django.shortcuts import redirect
 from .forms import JobApplicationForm
 from .models import VolunteerApplication
 from .forms import VolunteerApplicationForm
+import logging
+
+from django.conf import settings
+from django.core.mail import send_mail
+logger = logging.getLogger(__name__)
 
 
-# Shared submenu for all Get Involved pages
 
 # Shared submenu for all Get Involved pages
 GET_INVOLVED_MENU = [
@@ -340,6 +344,7 @@ def job_application(request, slug):
         is_open=True,
     )
 
+    # Check application deadline
     if vacancy.closing_date:
         from django.utils import timezone
 
@@ -348,7 +353,7 @@ def job_application(request, slug):
                 request,
                 "The application deadline for this vacancy has passed.",
             )
-            return redirect("engagement:job_vacancies")
+            return redirect("engagement:volunteer_opportunities")
 
     if request.method == "POST":
         form = JobApplicationForm(
@@ -361,12 +366,95 @@ def job_application(request, slug):
             application.vacancy = vacancy
             application.save()
 
+            # ---------------------------------
+            # Admin Email Notification
+            # ---------------------------------
+            try:
+                applicant_details = []
+
+                for field in application._meta.fields:
+
+                    if field.name in [
+                        "id",
+                        "vacancy",
+                        "created_at",
+                        "updated_at",
+                    ]:
+                        continue
+
+                    value = getattr(application, field.name, None)
+
+                    if value is None or value == "":
+                        continue
+
+                    # Display choice labels instead of raw values
+                    display_method = getattr(
+                        application,
+                        f"get_{field.name}_display",
+                        None,
+                    )
+
+                    if callable(display_method):
+                        value = display_method()
+
+                    # Handle uploaded files
+                    elif field.get_internal_type() == "FileField":
+                        value = value.name if value else "Not provided"
+
+                    applicant_details.append(
+                        f"{field.verbose_name.title()}: {value}"
+                    )
+
+                subject = (
+                    f"New Job Application: {vacancy.title}"
+                )
+
+                email_message = f"""
+A new job application has been submitted through the MMC International website.
+
+JOB INFORMATION
+------------------------------
+Position: {vacancy.title}
+Location: {vacancy.location}
+
+APPLICANT INFORMATION
+------------------------------
+{chr(10).join(applicant_details)}
+
+------------------------------
+Please log in to the MMC Admin Panel to review the complete application and uploaded documents.
+
+MMC International
+Website: https://mmcintnl.org
+"""
+
+                send_mail(
+                    subject=subject,
+                    message=email_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=["connect@mmcintnl.org"],
+                    fail_silently=False,
+                )
+
+            except Exception:
+                logger.exception(
+                    "Job application email notification failed."
+                )
+
+            # ---------------------------------
+            # Visitor Success Message
+            # ---------------------------------
             messages.success(
                 request,
-                "Your application has been submitted successfully.",
+                "Your application for "
+                f"{vacancy.title} has been submitted successfully. "
+                "Thank you for your interest in MMC International. "
+                "Our team will review your application."
             )
 
-            return redirect("engagement:job_vacancies")
+            return redirect(
+                "engagement:volunteer_opportunities"
+            )
 
     else:
         form = JobApplicationForm()
@@ -380,7 +468,6 @@ def job_application(request, slug):
             "get_involved_menu": GET_INVOLVED_MENU,
         },
     )
-
 
 
 

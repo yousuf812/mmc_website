@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 
 from pages.models import StrategicPriority
 from pages.models import ImpactStatistic
+from django.db.models import Q
 
 from .models import (
     WhatWeDoPage,
@@ -210,6 +211,7 @@ def project_detail(request, slug):
 
 
 
+
 def our_impact(request):
     completed_projects = (
         Project.objects
@@ -223,20 +225,60 @@ def our_impact(request):
             "sdgs",
             "delivery_engines",
         )
-        .order_by(
-            "-is_featured",
-            "ordering",
-            "-start_date",
-            "title",
-        )
     )
 
+    # Keyword Search
+    search_query = request.GET.get("q", "").strip()
+
+    if search_query:
+        completed_projects = completed_projects.filter(
+            Q(title__icontains=search_query)
+            | Q(short_description__icontains=search_query)
+            | Q(description__icontains=search_query)
+            | Q(location__icontains=search_query)
+            | Q(client_donor__icontains=search_query)
+            | Q(impact_summary__icontains=search_query)
+            | Q(success_story__icontains=search_query)
+        )
+
+    # Location Filter
+    location = request.GET.get("location", "").strip()
+
+    if location:
+        completed_projects = completed_projects.filter(
+            location__icontains=location
+        )
+
+    # Sector Filter
+    sector_id = request.GET.get("sector", "").strip()
+
+    if sector_id.isdigit():
+        completed_projects = completed_projects.filter(
+            sectors__id=sector_id
+        )
+
+    completed_projects = completed_projects.order_by(
+        "-is_featured",
+        "ordering",
+        "-start_date",
+        "title",
+    ).distinct()
+
+    # Active Sector Options
+    sectors = (
+        ProjectSector.objects
+        .filter(is_active=True)
+        .order_by("ordering", "name")
+    )
+
+    # Published Impact Metrics
     impact_metrics = (
         ImpactMetric.objects
         .filter(is_published=True)
         .order_by("ordering", "title")
     )
 
+    # Published Success Stories
     success_stories = (
         Project.objects
         .filter(
@@ -253,6 +295,7 @@ def our_impact(request):
         )
     )
 
+    # Published Testimonials
     testimonials = (
         Project.objects
         .filter(
@@ -275,6 +318,10 @@ def our_impact(request):
         "impact_metrics": impact_metrics,
         "success_stories": success_stories,
         "testimonials": testimonials,
+        "sectors": sectors,
+        "search_query": search_query,
+        "selected_sector": sector_id,
+        "location_query": location,
     }
 
     return render(
