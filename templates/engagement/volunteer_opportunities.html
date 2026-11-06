@@ -598,8 +598,17 @@
         </div>
 
         <div class="filter-actions">
-          <button type="submit" class="filter-submit">Apply Filters</button>
-          <a href="?" class="filter-reset">Clear All Filters</a>
+          <button type="submit" 
+        class="filter-submit group inline-flex items-center justify-center gap-2 rounded-xl !bg-[#084843] !border-[1.5px] !border-[#084843] px-4 py-3 text-sm font-bold !text-white shadow-sm transition-all duration-300 hover:!-translate-y-0.5 hover:!bg-[#e97c61] hover:!border-[#e97c61] hover:!text-white">
+    Apply Filters
+</button>
+          
+          <a href="?" 
+          class="btn-dark filter-reset filter-submit group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
+    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
+    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
+    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+          >Clear All Filters</a>
         </div>
       </form>
     </aside>
