@@ -1152,116 +1152,192 @@
 
 
 <!-- Testimonial Carousel Script -->
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    const track = document.getElementById("mmc-testimonial-track");
-    const previous = document.getElementById("mmc-testimonial-prev");
-    const next = document.getElementById("mmc-testimonial-next");
-    const dotsContainer = document.getElementById("mmc-testimonial-dots");
+/* ==========================================
+   MMC TESTIMONIAL CAROUSEL
+   Auto Slide + Navigation + Dots
+========================================== */
 
-    if (!track) return;
-
-    const cards = Array.from(track.querySelectorAll("article"));
-    const dots = dotsContainer
-        ? Array.from(dotsContainer.querySelectorAll(".mmc-testimonial-dot"))
-        : [];
-
-    if (cards.length <= 1) return;
-
-    let currentIndex = 0;
-    let autoSlide;
-
-    function getScrollAmount() {
-        const card = cards[0];
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-
-        return card.getBoundingClientRect().width + gap;
-    }
-
-    function updateDots() {
-        const amount = getScrollAmount();
-
-        currentIndex = Math.round(track.scrollLeft / amount);
-
-        currentIndex = Math.min(
-            currentIndex,
-            cards.length - 1
+(function () {
+    function initMMCTestimonialCarousel() {
+        const carousel = document.getElementById(
+            "mmc-testimonial-carousel"
         );
 
-        dots.forEach((dot, index) => {
-            if (index === currentIndex) {
-                dot.classList.add("w-8", "bg-[#084843]");
-                dot.classList.remove("w-2.5", "bg-slate-300");
+        const track = document.getElementById(
+            "mmc-testimonial-track"
+        );
+
+        const prevButton = document.getElementById(
+            "mmc-testimonial-prev"
+        );
+
+        const nextButton = document.getElementById(
+            "mmc-testimonial-next"
+        );
+
+        const dotsContainer = document.getElementById(
+            "mmc-testimonial-dots"
+        );
+
+        if (
+            !carousel ||
+            !track ||
+            !prevButton ||
+            !nextButton ||
+            !dotsContainer
+        ) {
+            return;
+        }
+
+        const slides = Array.from(track.children);
+        const totalSlides = slides.length;
+
+        if (totalSlides <= 1) {
+            return;
+        }
+
+        let currentIndex = 0;
+        let autoSlideTimer = null;
+
+        const AUTO_SLIDE_DELAY = 5000;
+
+        // Create navigation dots
+        dotsContainer.innerHTML = "";
+
+        const dots = slides.map((slide, index) => {
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+            dot.setAttribute(
+                "aria-label",
+                `Go to testimonial ${index + 1}`
+            );
+
+            dot.className =
+                "h-2 rounded-full transition-all duration-300";
+
+            dot.addEventListener("click", function () {
+                goToSlide(index);
+                restartAutoSlide();
+            });
+
+            dotsContainer.appendChild(dot);
+
+            return dot;
+        });
+
+        // Update carousel position
+        function updateCarousel() {
+            track.style.transform =
+                `translateX(-${currentIndex * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                const isActive = index === currentIndex;
+
+                dot.style.width = isActive ? "22px" : "8px";
+
+                dot.style.backgroundColor = isActive
+                    ? "#e97c61"
+                    : "rgba(255,255,255,0.4)";
+
+                dot.setAttribute(
+                    "aria-current",
+                    isActive ? "true" : "false"
+                );
+            });
+        }
+
+        // Go to a specific slide
+        function goToSlide(index) {
+            currentIndex =
+                (index + totalSlides) % totalSlides;
+
+            updateCarousel();
+        }
+
+        // Next slide
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        // Previous slide
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        // Stop automatic sliding
+        function stopAutoSlide() {
+            if (autoSlideTimer !== null) {
+                clearInterval(autoSlideTimer);
+                autoSlideTimer = null;
+            }
+        }
+
+        // Start automatic sliding
+        function startAutoSlide() {
+            stopAutoSlide();
+
+            autoSlideTimer = setInterval(function () {
+                if (!document.hidden) {
+                    nextSlide();
+                }
+            }, AUTO_SLIDE_DELAY);
+        }
+
+        // Restart timer after manual navigation
+        function restartAutoSlide() {
+            startAutoSlide();
+        }
+
+        // Button events
+        nextButton.addEventListener("click", function () {
+            nextSlide();
+            restartAutoSlide();
+        });
+
+        prevButton.addEventListener("click", function () {
+            prevSlide();
+            restartAutoSlide();
+        });
+
+        // Pause when mouse enters carousel
+        carousel.addEventListener("mouseenter", stopAutoSlide);
+
+        carousel.addEventListener("mouseleave", startAutoSlide);
+
+        // Pause when browser tab is inactive
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+                stopAutoSlide();
             } else {
-                dot.classList.remove("w-8", "bg-[#084843]");
-                dot.classList.add("w-2.5", "bg-slate-300");
+                startAutoSlide();
             }
         });
+
+        // Initial setup
+        updateCarousel();
+        startAutoSlide();
+
+        console.log(
+            "MMC Testimonial Carousel initialized:",
+            totalSlides,
+            "slides"
+        );
     }
 
-    function goToSlide(index) {
-        currentIndex = (index + cards.length) % cards.length;
-
-        track.scrollTo({
-            left: currentIndex * getScrollAmount(),
-            behavior: "smooth"
-        });
-
-        updateDots();
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initMMCTestimonialCarousel
+        );
+    } else {
+        initMMCTestimonialCarousel();
     }
+})();
 
-    function startAutoSlide() {
-        stopAutoSlide();
-
-        autoSlide = setInterval(function () {
-            goToSlide((currentIndex + 1) % cards.length);
-        }, 5000);
-    }
-
-    function stopAutoSlide() {
-        if (autoSlide) {
-            clearInterval(autoSlide);
-        }
-    }
-
-    if (previous) {
-        previous.addEventListener("click", function () {
-            goToSlide(currentIndex - 1);
-            startAutoSlide();
-        });
-    }
-
-    if (next) {
-        next.addEventListener("click", function () {
-            goToSlide(currentIndex + 1);
-            startAutoSlide();
-        });
-    }
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", function () {
-            goToSlide(index);
-            startAutoSlide();
-        });
-    });
-
-    // Update pagination during manual swipe
-    track.addEventListener("scroll", updateDots);
-
-    // Pause autoplay while mouse is over carousel
-    track.addEventListener("mouseenter", stopAutoSlide);
-    track.addEventListener("mouseleave", startAutoSlide);
-
-    // Pause autoplay while user touches the carousel
-    track.addEventListener("touchstart", stopAutoSlide);
-    track.addEventListener("touchend", startAutoSlide);
-
-    // Initial setup
-    updateDots();
-    startAutoSlide();
-
-});
 </script>
 
 
