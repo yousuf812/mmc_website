@@ -6,6 +6,7 @@ from .models import (
     VolunteerOpportunity,
     JobVacancy,
 )
+from .models import MMCTestimonial
 
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -137,6 +138,7 @@ def engagement_page(request, slug):
 
 
 
+
 def volunteer_opportunities(request):
 
     # -----------------------------------------
@@ -215,6 +217,16 @@ def volunteer_opportunities(request):
     )
 
     # -----------------------------------------
+    # Voices of MMC Testimonials
+    # -----------------------------------------
+    testimonials = MMCTestimonial.objects.filter(
+        is_active=True
+    ).order_by(
+        "ordering",
+        "-created_at"
+    )
+
+    # -----------------------------------------
     # Page Context
     # -----------------------------------------
     context = {
@@ -245,6 +257,9 @@ def volunteer_opportunities(request):
         "selected_location": selected_location,
         "selected_functional_area": selected_functional_area,
         "selected_status": selected_status,
+
+        # Voices of MMC
+        "testimonials": testimonials,
     }
 
     return render(

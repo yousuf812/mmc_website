@@ -462,3 +462,32 @@ class VolunteerApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} — {self.opportunity.title}"
+
+
+
+class MMCTestimonial(models.Model):
+    name = models.CharField(max_length=150)
+    role = models.CharField(max_length=150)
+    location = models.CharField(max_length=150)
+
+    photo = models.ImageField(
+        upload_to="testimonials/",
+        help_text="Upload testimonial person's photograph."
+    )
+
+    quote = models.TextField()
+
+    ordering = models.PositiveIntegerField(default=0)
+
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "MMC Testimonial"
+        verbose_name_plural = "Voices of MMC"
+        ordering = ["ordering", "-created_at"]
+
+    def __str__(self):
+        return self.name

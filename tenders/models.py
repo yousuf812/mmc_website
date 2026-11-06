@@ -248,3 +248,34 @@ class BidSubmission(models.Model):
 
     def __str__(self):
         return f"{self.submission_reference} - {self.company_name} ({self.tender_reference})"
+
+
+
+
+class TenderTestimonial(models.Model):
+    organization_name = models.CharField(max_length=200)
+    person_name = models.CharField(max_length=150)
+    designation = models.CharField(max_length=150)
+    location = models.CharField(max_length=150)
+
+    photo = models.ImageField(
+        upload_to="tender_testimonials/",
+        help_text="Upload a procurement partner's photograph."
+    )
+
+    quote = models.TextField()
+
+    ordering = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Tender Testimonial"
+        verbose_name_plural = "Tender Testimonials"
+        ordering = ["ordering", "-created_at"]
+
+    def __str__(self):
+        return f"{self.person_name} - {self.organization_name}"
+

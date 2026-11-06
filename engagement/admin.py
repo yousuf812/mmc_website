@@ -8,6 +8,7 @@ from .models import (
     JobApplication,
     VolunteerApplication
 )
+from .models import MMCTestimonial
 
 
 
@@ -434,4 +435,32 @@ class JobVacancyAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(MMCTestimonial)
+class MMCTestimonialAdmin(admin.ModelAdmin):
 
+    list_display = (
+        "name",
+        "role",
+        "location",
+        "ordering",
+        "is_active",
+    )
+
+    list_editable = (
+        "ordering",
+        "is_active",
+    )
+
+    search_fields = (
+        "name",
+        "role",
+        "location",
+        "quote",
+    )
+
+    list_filter = (
+        "is_active",
+        "location",
+    )
+
+    ordering = ("ordering", "-created_at")

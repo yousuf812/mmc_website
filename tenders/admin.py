@@ -4,6 +4,7 @@ from django.utils import timezone
 from .models import Tender, SupplierRegistration
 
 from .models import BidSubmission
+from .models import TenderTestimonial
 
 @admin.register(Tender)
 class TenderAdmin(admin.ModelAdmin):
@@ -223,3 +224,34 @@ class BidSubmissionAdmin(admin.ModelAdmin):
     #     return super().get_queryset(request).order_by(
     #         "closing_date", "reference"
     #     )
+
+
+@admin.register(TenderTestimonial)
+class TenderTestimonialAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "person_name",
+        "organization_name",
+        "designation",
+        "location",
+        "ordering",
+        "is_active",
+    )
+
+    list_editable = (
+        "ordering",
+        "is_active",
+    )
+
+    search_fields = (
+        "person_name",
+        "organization_name",
+        "designation",
+        "location",
+        "quote",
+    )
+
+    list_filter = (
+        "is_active",
+        "location",
+    )

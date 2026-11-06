@@ -2,6 +2,7 @@
 from django.urls import path
 
 from . import views
+from django.views.generic import RedirectView
 
 
 app_name = "engagement"
@@ -16,11 +17,19 @@ urlpatterns = [
     ),
 
     # Volunteer opportunities
-    path(
-        "volunteer-opportunities/",
-        views.volunteer_opportunities,
-        name="volunteer_opportunities",
+   path(
+    "work-for-us/",
+    views.volunteer_opportunities,
+    name="volunteer_opportunities"
+),
+
+path(
+    "volunteer-opportunities/",
+    RedirectView.as_view(
+        pattern_name="engagement:volunteer_opportunities",
+        permanent=True
     ),
+),
 
     # Volunteer application
     path(

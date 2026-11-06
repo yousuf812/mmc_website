@@ -15,6 +15,7 @@ from django.utils.html import strip_tags
 from engagement.views import GET_INVOLVED_MENU
 from .forms import BidSubmissionForm
 from .models import Tender, BidSubmission
+from .models import TenderTestimonial
 
 
 def tender_list(request):
@@ -65,9 +66,15 @@ def tender_list(request):
     else:
         selected_status = ""
 
+    # -----------------------------------------
+    # Pagination
+    # -----------------------------------------
     paginator = Paginator(tenders, 10)
     page_obj = paginator.get_page(request.GET.get("page"))
 
+    # -----------------------------------------
+    # Tender Statistics
+    # -----------------------------------------
     open_count = all_published.filter(
         status=Tender.Status.OPEN,
         closing_date__gte=today,
@@ -91,24 +98,47 @@ def tender_list(request):
         status=Tender.Status.AWARDED
     ).count()
 
+    # -----------------------------------------
+    # Tender Testimonials
+    # -----------------------------------------
+    tender_testimonials = TenderTestimonial.objects.filter(
+        is_active=True
+    ).order_by(
+        "ordering",
+        "-created_at"
+    )
+
+    # -----------------------------------------
+    # Page Context
+    # -----------------------------------------
     context = {
         "tenders": page_obj.object_list,
         "page_obj": page_obj,
+
         "search_query": search_query,
         "selected_category": selected_category,
         "selected_status": selected_status,
+
         "categories": Tender.Category.choices,
         "statuses": Tender.Status.choices,
+
         "open_count": open_count,
         "closing_soon_count": closing_soon_count,
         "closed_count": closed_count,
         "awarded_count": awarded_count,
+
         "get_involved_menu": GET_INVOLVED_MENU,
         "active_engagement_slug": "suppliers-contractors",
+
+        # Tender Testimonials
+        "tender_testimonials": tender_testimonials,
     }
 
-    return render(request, "tenders/tender_list.html", context)
-
+    return render(
+        request,
+        "tenders/tender_list.html",
+        context
+    )
 
 def tender_detail(request, slug):
     tender = get_object_or_404(
