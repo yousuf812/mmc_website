@@ -4,7 +4,7 @@
 
 {% block content %}
 <style>
-    /* Tender Layout */
+    /* Tender Layout - Desktop */
     .tender-layout {
         display: grid;
         grid-template-columns: 230px minmax(0, 1fr);
@@ -28,7 +28,9 @@
     .tender-table-wrapper {
         width: 100%;
         min-width: 0;
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
     }
 
     .tender-table {
@@ -42,8 +44,9 @@
         overflow-wrap: anywhere;
     }
 
-    /* Tablet and smaller screens */
+    /* Mobile Responsive */
     @media (max-width: 767px) {
+
         .tender-layout {
             grid-template-columns: minmax(0, 1fr);
             gap: 20px;
@@ -52,11 +55,99 @@
         .tender-sidebar,
         .tender-main {
             width: 100%;
+            min-width: 0;
+        }
+
+        /* Enable horizontal table scrolling */
+        .tender-table-wrapper {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-radius: 12px;
+        }
+
+        /* Prevent table columns from shrinking */
+        .tender-table {
+            width: 100%;
+            min-width: 950px;
+            table-layout: auto;
+        }
+
+        .tender-table th {
+            white-space: nowrap;
+            padding: 14px 16px;
+            font-size: 11px;
+        }
+
+        .tender-table td {
+            padding: 16px;
+            font-size: 12px;
+            vertical-align: top;
+            overflow-wrap: normal;
+        }
+
+        /* Reference */
+        .tender-table td:nth-child(1) {
+            min-width: 120px;
+            white-space: nowrap;
+        }
+
+        /* Tender Details */
+        .tender-table td:nth-child(2) {
+            min-width: 260px;
+        }
+
+        .tender-table td:nth-child(2) a {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .tender-table td:nth-child(2) p {
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* Category */
+        .tender-table td:nth-child(3) {
+            min-width: 130px;
+        }
+
+        /* Closing */
+        .tender-table td:nth-child(4) {
+            min-width: 120px;
+            white-space: nowrap;
+        }
+
+        /* Status */
+        .tender-table td:nth-child(5) {
+            min-width: 110px;
+            white-space: nowrap;
+        }
+
+        /* Actions */
+        .tender-table td:nth-child(6) {
+            min-width: 210px;
+        }
+
+        .tender-table td:nth-child(6) > div {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            gap: 6px;
+        }
+
+        .tender-table td:nth-child(6) a,
+        .tender-table td:nth-child(6) span {
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-size: 10px;
+            padding: 7px 11px;
         }
     }
 
-    /* Small laptop adjustment */
+    /* Small Laptop Adjustment */
     @media (min-width: 768px) and (max-width: 1023px) {
+
         .tender-layout {
             grid-template-columns: 200px minmax(0, 1fr);
             gap: 16px;
