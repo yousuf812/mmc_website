@@ -639,3 +639,198 @@ button {
     }
 
 }
+
+/* ==========================================
+   CAREER opportunity BOARD - MOBILE RESPONSIVE VIEW
+=========================================== */
+
+/* Mobile cards hidden by default */
+.career-mobile-cards {
+    display: none;
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 767px) {
+
+    /* Filter stays on top */
+    .career-board-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 22px !important;
+    }
+
+    .career-board-layout .filter-sidebar {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative !important;
+        top: auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .career-board-layout .career-board-main {
+        order: 2 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* Filter controls */
+    .filter-sidebar,
+    .filter-form,
+    .filter-group {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Hide desktop table */
+    .career-desktop-table {
+        display: none !important;
+    }
+
+    /* Show mobile cards */
+    .career-mobile-cards {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 14px !important;
+        margin-top: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Individual Card */
+    .career-mobile-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 18px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    /* Card Header */
+    .career-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .career-card-title {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .career-card-title h3 {
+        margin: 0 0 9px;
+        color: #084843;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .career-card-header .status-badge {
+        flex-shrink: 0;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    /* Details */
+    .career-card-details {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 0;
+    }
+
+    .career-card-detail {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .career-detail-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    .career-detail-label i {
+        color: #084843;
+    }
+
+    .career-detail-value {
+        color: #334155;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    /* Actions */
+    .career-card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 14px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .career-card-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 10px 12px;
+        border-radius: 9px;
+        background: #084843;
+        color: #ffffff !important;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none !important;
+        transition: background 0.2s ease;
+    }
+
+    .career-card-btn:hover {
+        background: #e97c61;
+    }
+
+    .career-card-btn.career-apply-btn {
+        background: #e97c61;
+    }
+
+    .career-card-btn.career-apply-btn:hover {
+        background: #084843;
+    }
+
+    /* Empty State */
+    .career-mobile-empty {
+        padding: 30px 15px;
+        text-align: center;
+        color: #64748b;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+    }
+
+    /* Prevent horizontal overflow */
+    .career-board-layout,
+    .career-board-main,
+    .career-mobile-cards,
+    .career-mobile-card {
+        overflow-x: hidden;
+    }
+}
