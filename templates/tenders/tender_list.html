@@ -568,254 +568,308 @@
 
 
         <!-- Table Card -->
-        <div class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+       
+<div class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 px-4 py-4 sm:px-5">
+        <div>
+            <h2 class="text-sm font-bold text-slate-900 sm:text-base">
+                Available Tender Notices
+            </h2>
+            <p class="mt-1 text-[10px] text-slate-500">
+                Explore current procurement opportunities.
+            </p>
+        </div>
+
+        <span class="shrink-0 rounded-full bg-stone-100 px-3 py-1.5 text-[10px] font-semibold text-slate-600">
+            {{ tenders|length }} Result{{ tenders|length|pluralize }}
+        </span>
+    </div>
 
 
-            <!-- Header -->
-            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 px-4 py-4 sm:px-5">
+    <!-- =========================================
+         DESKTOP & TABLET TABLE
+    ========================================== -->
+    <div class="tender-desktop-view hidden md:block">
 
-                <div>
+        <table class="w-full table-fixed text-left">
 
-                    <h2 class="text-sm font-bold text-slate-900 sm:text-base">
-                        Available Tender Notices
-                    </h2>
+            <colgroup>
+                <col style="width: 12%;">
+                <col style="width: 28%;">
+                <col style="width: 12%;">
+                <col style="width: 12%;">
+                <col style="width: 11%;">
+                <col style="width: 25%;">
+            </colgroup>
 
-                    <p class="mt-1 text-[10px] text-slate-500">
-                        Explore current procurement opportunities.
-                    </p>
+            <thead class="border-b border-stone-200 bg-stone-50">
+                <tr class="text-[9px] uppercase tracking-wide text-slate-500 lg:text-[10px]">
+                    <th class="px-2 py-3.5 font-bold">Reference</th>
+                    <th class="px-2 py-3.5 font-bold">Tender Details</th>
+                    <th class="px-2 py-3.5 font-bold">Category</th>
+                    <th class="px-2 py-3.5 font-bold">Closing</th>
+                    <th class="px-2 py-3.5 font-bold">Status</th>
+                    <th class="px-2 py-3.5 text-right font-bold">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-stone-100">
+
+                {% for tender in tenders %}
+                <tr class="transition hover:bg-stone-50/70">
+
+                    <!-- Reference -->
+                    <td class="break-words px-2 py-4 align-top font-mono text-[10px] font-bold leading-4 text-slate-600">
+                        {{ tender.reference }}
+                    </td>
+
+                    <!-- Details -->
+                    <td class="break-words px-2 py-4 align-top">
+                        <a href="{% url 'tenders:detail' tender.slug %}"
+                           class="block text-[11px] font-bold leading-5 text-slate-900 hover:text-[#084843] lg:text-xs">
+                            {{ tender.title }}
+                        </a>
+
+                        {% if tender.description %}
+                        <p class="mt-1 line-clamp-2 text-[10px] leading-4 text-slate-500">
+                            {{ tender.description }}
+                        </p>
+                        {% endif %}
+                    </td>
+
+                    <!-- Category -->
+                    <td class="break-words px-2 py-4 align-top text-[10px] leading-4 text-slate-600">
+                        {{ tender.get_category_display }}
+                    </td>
+
+                    <!-- Closing -->
+                    <td class="px-2 py-4 align-top text-[10px] leading-4 text-slate-600">
+                        {{ tender.closing_date|date:"j M Y" }}
+                    </td>
+
+                    <!-- Status -->
+                    <td class="px-2 py-4 align-top">
+                        {% if tender.effective_status == "open" %}
+                        <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-bold text-emerald-700">
+                            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"></span>
+                            Open
+                        </span>
+
+                        {% elif tender.effective_status == "awarded" %}
+                        <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-[9px] font-bold text-blue-700">
+                            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500"></span>
+                            Awarded
+                        </span>
+
+                        {% else %}
+                        <span class="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-1 text-[9px] font-bold text-rose-700">
+                            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500"></span>
+                            Closed
+                        </span>
+                        {% endif %}
+                    </td>
+
+                    <!-- Actions -->
+                    <td class="px-1.5 py-4 align-top">
+                        <div class="flex flex-wrap items-center justify-end gap-1">
+
+                            {% if tender.document %}
+                            <a href="{% url 'tenders:document' tender.slug %}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               style="background-color:#084843;color:#ffffff;border:1px solid #084843;text-decoration:none;transition:all 0.3s ease;"
+                               onmouseover="this.style.backgroundColor='#e97c61';this.style.borderColor='#e97c61';this.style.transform='translateY(-1px)';"
+                               onmouseout="this.style.backgroundColor='#084843';this.style.borderColor='#084843';this.style.transform='translateY(0)';"
+                               class="inline-flex items-center justify-center rounded-md px-2.5 py-1.5 text-[9px] font-bold shadow-xs cursor-pointer">
+                                View
+                            </a>
+
+                            <a href="{{ tender.document.url }}"
+                               download
+                               style="background-color:#084843;color:#ffffff;border:1px solid #084843;text-decoration:none;transition:all 0.3s ease;"
+                               onmouseover="this.style.backgroundColor='#e97c61';this.style.borderColor='#e97c61';this.style.transform='translateY(-1px)';"
+                               onmouseout="this.style.backgroundColor='#084843';this.style.borderColor='#084843';this.style.transform='translateY(0)';"
+                               class="inline-flex items-center justify-center rounded-md px-2.5 py-1.5 text-[9px] font-bold shadow-xs cursor-pointer">
+                                Download
+                            </a>
+                            {% endif %}
+
+                            {% if tender.effective_status == "open" %}
+                            <a href="{% url 'tenders:apply' tender.slug %}"
+                               style="background:#084843;color:white;"
+                               onmouseover="this.style.background='#e97c61';"
+                               onmouseout="this.style.background='#084843';"
+                               class="rounded-md px-2 py-1.5 text-[9px] font-bold transition">
+                                Apply →
+                            </a>
+                            {% else %}
+                            <span class="rounded-md bg-red-500 px-2 py-1.5 text-[9px] font-semibold text-white">
+                                Closed
+                            </span>
+                            {% endif %}
+
+                        </div>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="px-4 py-16 text-center">
+                        <p class="text-sm font-bold text-slate-800">No tender notices found</p>
+                        <p class="mt-1 text-xs text-slate-500">
+                            Try modifying your search criteria or resetting filters.
+                        </p>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- =========================================
+         MOBILE CARD VIEW
+    ========================================== -->
+  <div class="tender-mobile-view block space-y-3 bg-stone-50/70 p-3 md:hidden">
+
+        {% for tender in tenders %}
+
+        <article class="min-w-0 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+
+            <!-- Card Header -->
+            <div class="border-b border-stone-100 p-4">
+
+                <div class="flex flex-wrap items-center justify-between gap-2">
+
+                    <span class="rounded-md bg-stone-100 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-600">
+                        {{ tender.reference }}
+                    </span>
+
+                    {% if tender.effective_status == "open" %}
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
+                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        Open
+                    </span>
+
+                    {% elif tender.effective_status == "awarded" %}
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-700">
+                        <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                        Awarded
+                    </span>
+
+                    {% else %}
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-2.5 py-1 text-[10px] font-bold text-rose-700">
+                        <span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
+                        Closed
+                    </span>
+                    {% endif %}
 
                 </div>
 
-                <span class="shrink-0 rounded-full bg-stone-100 px-3 py-1.5 text-[10px] font-semibold text-slate-600">
-                    {{ tenders|length }} Result{{ tenders|length|pluralize }}
+                <a href="{% url 'tenders:detail' tender.slug %}"
+                   class="mt-3 block break-words text-sm font-bold leading-6 text-slate-900 hover:text-[#084843]">
+                    {{ tender.title }}
+                </a>
+
+                {% if tender.description %}
+                <p class="mt-1.5 break-words text-xs leading-5 text-slate-500">
+                    {{ tender.description }}
+                </p>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Card Information -->
+            <div class="grid grid-cols-2 gap-x-3 gap-y-4 p-4">
+
+                <div class="min-w-0">
+                    <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                        Category
+                    </p>
+                    <p class="mt-1 break-words text-xs font-semibold text-slate-700">
+                        {{ tender.get_category_display }}
+                    </p>
+                </div>
+
+                <div class="min-w-0">
+                    <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                        Closing Date
+                    </p>
+                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                        {{ tender.closing_date|date:"j M Y" }}
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Card Actions -->
+            <div class="flex flex-wrap items-center gap-2 border-t border-stone-100 bg-stone-50/70 p-3">
+
+                {% if tender.document %}
+
+                <a href="{% url 'tenders:document' tender.slug %}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="background-color:#084843;color:#ffffff;border:1px solid #084843;"
+                   class="inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2.5 text-[10px] font-bold transition hover:opacity-90">
+                    <i class="fas fa-eye mr-1.5"></i>
+                    View
+                </a>
+
+                <a href="{{ tender.document.url }}"
+                   download
+                   style="background-color:#084843;color:#ffffff;border:1px solid #084843;"
+                   class="inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2.5 text-[10px] font-bold transition hover:opacity-90">
+                    <i class="fas fa-download mr-1.5"></i>
+                    Download
+                </a>
+
+                {% endif %}
+
+                {% if tender.effective_status == "open" %}
+                <a href="{% url 'tenders:apply' tender.slug %}"
+                   style="background:#084843;color:white;"
+                   class="inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2.5 text-[10px] font-bold transition hover:opacity-90">
+                    <i class="fas fa-paper-plane mr-1.5"></i>
+                    Apply Now →
+                </a>
+                {% else %}
+                <span class="inline-flex flex-1 items-center justify-center rounded-lg bg-red-500 px-3 py-2.5 text-[10px] font-bold text-white">
+                    Closed
                 </span>
+                {% endif %}
 
             </div>
 
-
-
-            <!-- Table -->
-            <div class="tender-table-wrapper">
-
-                <table class="tender-table text-left">
-
-                    <colgroup>
-                        <col style="width: 12%;">
-                        <col style="width: 28%;">
-                        <col style="width: 12%;">
-                        <col style="width: 12%;">
-                        <col style="width: 11%;">
-                        <col style="width: 25%;">
-                    </colgroup>
-
-
-                    <!-- Table Header -->
-                    <thead class="border-b border-stone-200 bg-stone-50">
-
-                        <tr class="text-[9px] uppercase tracking-wide text-slate-500 sm:text-[10px]">
-
-                            <th class="px-2 py-3.5 font-bold">
-                                Reference
-                            </th>
-
-                            <th class="px-2 py-3.5 font-bold">
-                                Tender Details
-                            </th>
-
-                            <th class="px-2 py-3.5 font-bold">
-                                Category
-                            </th>
-
-                            <th class="px-2 py-3.5 font-bold">
-                                Closing
-                            </th>
-
-                            <th class="px-2 py-3.5 font-bold">
-                                Status
-                            </th>
-
-                            <th class="px-2 py-3.5 text-right font-bold">
-                                Actions
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-
-                    <!-- Table Body -->
-                    <tbody class="divide-y divide-stone-100">
-
-                        {% for tender in tenders %}
-
-                        <tr class="transition hover:bg-stone-50/70">
-
-
-                            <!-- Reference -->
-                            <td class="px-2 py-4 align-top font-mono text-[10px] font-bold leading-4 text-slate-600">
-                                {{ tender.reference }}
-                            </td>
-
-
-                            <!-- Details -->
-                            <td class="px-2 py-4 align-top">
-
-                                <a
-                                    href="{% url 'tenders:detail' tender.slug %}"
-                                    class="block text-[11px] font-bold leading-5 text-slate-900 hover:text-[#084843] sm:text-xs"
-                                >
-                                    {{ tender.title }}
-                                </a>
-
-                                {% if tender.description %}
-
-                                <p class="mt-1 line-clamp-2 text-[10px] leading-4 text-slate-500">
-                                    {{ tender.description }}
-                                </p>
-
-                                {% endif %}
-
-                            </td>
-
-
-                            <!-- Category -->
-                            <td class="px-2 py-4 align-top text-[10px] leading-4 text-slate-600">
-                                {{ tender.get_category_display }}
-                            </td>
-
-
-                            <!-- Closing Date -->
-                            <td class="px-2 py-4 align-top text-[10px] leading-4 text-slate-600">
-                                {{ tender.closing_date|date:"j M Y" }}
-                            </td>
-
-
-                            <!-- Status -->
-                            <td class="px-2 py-4 align-top">
-
-                                {% if tender.effective_status == "open" %}
-
-                                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-bold text-emerald-700">
-                                    <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"></span>
-                                    Open
-                                </span>
-
-                                {% elif tender.effective_status == "awarded" %}
-
-                                <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-[9px] font-bold text-blue-700">
-                                    <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500"></span>
-                                    Awarded
-                                </span>
-
-                                {% else %}
-
-                                <span class="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-1 text-[9px] font-bold text-rose-700">
-                                    <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500"></span>
-                                    Closed
-                                </span>
-
-                                {% endif %}
-
-                            </td>
-
-
-                            <!-- Actions -->
-                            <td class="px-1.5 py-4 align-top">
-
-                                <div class="flex flex-wrap items-center justify-end gap-1">
-
-                                    {% if tender.document %}
-
-                                    <a
-    href="{% url 'tenders:document' tender.slug %}"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="background-color: #084843; color: #ffffff; border: 1px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.transform='translateY(-1px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.transform='translateY(0)';"
-    class="inline-flex items-center justify-center rounded-md px-2.5 py-1.5 text-[9px] font-bold shadow-xs cursor-pointer"
->
-    View
-</a>
-
-<a
-    href="{{ tender.document.url }}"
-    download
-    style="background-color: #084843; color: #ffffff; border: 1px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.transform='translateY(-1px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.transform='translateY(0)';"
-    class="inline-flex items-center justify-center rounded-md px-2.5 py-1.5 text-[9px] font-bold shadow-xs cursor-pointer"
->
-    Download
-</a>
-
-                                    {% endif %}
-
-
-                                    {% if tender.effective_status == "open" %}
-
-                                    <a
-                                        href="{% url 'tenders:apply' tender.slug %}"
-                                        style="background:#084843;color:white;"
-                                        onmouseover="this.style.background='#e97c61';"
-                                        onmouseout="this.style.background='#084843';"
-                                        class="rounded-md px-2 py-1.5 text-[9px] font-bold transition"
-                                    >
-                                        Apply →
-                                    </a>
-
-                                    {% else %}
-
-                                    <span class="rounded-md bg-red-500 px-2 py-1.5 text-[9px] font-semibold text-white">
-                                        Closed
-                                    </span>
-
-                                    {% endif %}
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        {% empty %}
-
-                        <tr>
-
-                            <td colspan="6" class="px-4 py-16 text-center">
-
-                                <p class="text-sm font-bold text-slate-800">
-                                    No tender notices found
-                                </p>
-
-                                <p class="mt-1 text-xs text-slate-500">
-                                    Try modifying your search criteria or resetting filters.
-                                </p>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-
-            <!-- Footer Notice -->
-            <div class="border-t border-stone-200 bg-stone-50/70 px-4 py-3.5 text-[10px] leading-5 text-slate-500 sm:px-5">
-
-                Official procurement guidelines require full review of relevant tender documents before submitting proposals.
-
-            </div>
-
+        </article>
+
+        {% empty %}
+
+        <div class="rounded-xl border border-dashed border-stone-300 bg-white px-4 py-12 text-center">
+            <p class="text-sm font-bold text-slate-800">No tender notices found</p>
+            <p class="mt-1 text-xs text-slate-500">
+                Try modifying your search criteria or resetting filters.
+            </p>
         </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- Footer Notice -->
+    <div class="border-t border-stone-200 bg-stone-50/70 px-4 py-3.5 text-[10px] leading-5 text-slate-500 sm:px-5">
+        Official procurement guidelines require full review of relevant tender documents before submitting proposals.
+    </div>
+
+</div>
+
 
 
 

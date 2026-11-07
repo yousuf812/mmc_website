@@ -536,4 +536,106 @@ button {
     }
 }
 
+/* tender table responsive */
+/* Tender Responsive Visibility Fix */
 
+@media (max-width: 767px) {
+    .tender-desktop-view {
+        display: none !important;
+    }
+
+    .tender-mobile-view {
+        display: block !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .tender-desktop-view {
+        display: block !important;
+    }
+
+    .tender-mobile-view {
+        display: none !important;
+    }
+}
+
+
+/* counter responsive code */
+/* =====================================
+   RESPONSIVE COUNTER GRID
+===================================== */
+
+/* =====================================
+   COUNTER RESPONSIVE FIX
+===================================== */
+
+.counter-grid {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 14px;
+}
+
+.counter-grid .counter-box {
+    min-width: 0;
+}
+
+/* Mobile and Tablet */
+@media screen and (max-width: 1023px) {
+
+    .counter-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+
+    .counter-grid > .counter-box {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        padding: 16px 12px !important;
+    }
+
+    .counter-grid > .counter-box .num {
+        display: block !important;
+        width: 100%;
+        font-size: 26px;
+        line-height: 1.3;
+        white-space: nowrap;
+    }
+
+    .counter-grid > .counter-box .lbl {
+        display: block !important;
+        width: 100%;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+}
+
+/* Counter Divider - Mobile & Tablet */
+
+@media screen and (max-width: 1023px) {
+
+    .counter-grid > .counter-box:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb !important;
+        padding-bottom: 20px !important;
+    }
+
+    .counter-grid > .counter-box:last-child {
+        border-bottom: none !important;
+    }
+
+}

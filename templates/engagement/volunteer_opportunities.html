@@ -228,148 +228,173 @@
   .career-board-main { min-width: 0; }
   .career-board-main .counter-grid { margin-top: 0; }
 
-  /* Table Design */
+  /* Table Base & Desktop Design */
+.table-wrapper {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.opportunity-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.opportunity-table th {
+  background: #f8fafc;
+  padding: 12px 16px;
+  font-weight: 700;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.opportunity-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.opportunity-table tr:last-child td {
+  border-bottom: none;
+}
+
+.opp-title {
+  font-weight: 700;
+  color: #084843;
+  font-size: 15px;
+}
+
+.type-badge {
+  border: 1px solid #0f172a;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #0f172a;
+  background: transparent;
+  display: inline-block;
+}
+
+.status-badge {
+  background-color: #e2f2e9;
+  color: #1e5e3a;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+}
+
+.status-new { background: #dbeafe; color: #1d4ed8; }
+.status-open { background: #e2f2e9; color: #1e5e3a; }
+.status-closing_soon { background: #fef3c7; color: #b45309; }
+.status-deadline_extended { background: #e2f2e9; color: #1e5e3a; }
+.status-readvertised { background: #e0e7ff; color: #4338ca; }
+.status-closed { background: #fee2e2; color: #b91c1c; }
+.status-cancelled { background: #ffe4e6; color: #be123c; }
+.status-filled { background: #e2e8f0; color: #475569; }
+
+/* ========================================================
+   MOBILE RESPONSIVE VIEW (No Horizontal Scroll - Card Mode)
+   ======================================================== */
+@media (max-width: 768px) {
+  /* টেবিল র‍্যাপারের স্ক্রোল ও বর্ডার সরানো */
   .table-wrapper {
+    background: transparent;
+    border: none;
+    overflow-x: visible;
+  }
+
+  .opportunity-table {
+    display: block;
+    width: 100%;
+  }
+
+  /* হেডার হাইড করা */
+  .opportunity-table thead {
+    display: none;
+  }
+
+  .opportunity-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* প্রতিটা রো (Row) হবে এক একটি আলাদা কার্ড */
+  .opportunity-table tr {
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin-bottom: 12px;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
-  .opportunity-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 13px;
-  }
-  .opportunity-table th {
-    background: #f8fafc;
-    padding: 12px 16px;
-    font-weight: 700;
-    color: #475569;
-    border-bottom: 1px solid #e2e8f0;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-  }
+
   .opportunity-table td {
-    padding: 16px;
-    border-bottom: 1px solid #e2e8f0;
-    vertical-align: middle;
-  }
-  .opportunity-table tr:last-child td {
+    padding: 0;
     border-bottom: none;
   }
+
+  /* ১. টাইটেল */
   .opp-title {
-    font-weight: 700;
-    color: #0f172a;
-    font-size: 14px;
-  }
-  .type-badge {
-    border: 1px solid #0f172a;
-    border-radius: 20px;
-    padding: 3px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #0f172a;
-    background: transparent;
-    display: inline-block;
-  }
-  .status-badge {
-    background-color: #dcfce7;
-    color: #15803d;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .status-new { background: #dbeafe; color: #1d4ed8; }
-  .status-open { background: #dcfce7; color: #15803d; }
-  .status-closing_soon { background: #fef3c7; color: #b45309; }
-  .status-deadline_extended { background: #f3e8ff; color: #7e22ce; }
-  .status-readvertised { background: #e0e7ff; color: #4338ca; }
-  .status-closed { background: #fee2e2; color: #b91c1c; }
-  .status-cancelled { background: #ffe4e6; color: #be123c; }
-  .status-filled { background: #e2e8f0; color: #475569; }
-  .btn-apply {
-    background: #e97c61;
-    color: #ffffff;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn-apply:hover {
-    background: #184544;
-  }
-  .meta-footer {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-bottom: 40px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #084843;
+    margin-bottom: 8px;
   }
 
-  /* How To Apply */
-  .apply-steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 20px;
-  }
-  .step-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 20px;
-  }
-  .step-circle {
-    width: 26px;
-    height: 26px;
-    background: #0f766e;
-    color: #ffffff;
-    border-radius: 50%;
+  /* ২. মেটা ইনফো গ্রুপ (Type, Location, Date পাশাপাশি বসবে) */
+  .opp-meta-row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    gap: 16px;
     font-size: 13px;
-    font-weight: 700;
+    color: #475569;
+    margin-bottom: 16px;
+  }
+
+  /* মোবাইলে টাইপ ব্যাজের বর্ডার রিমুভ করে ক্লিন টেক্সট লুক */
+  .opp-meta-row .type-badge {
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+  }
+
+  /* ৩. একশন বাটনস */
+  .opp-actions {
     margin-bottom: 12px;
   }
-  .step-card h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 6px 0;
-    color: #0f172a;
-  }
-  .step-card p {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.5;
-    margin: 0;
-  }
-  .footer-subnote {
-    font-size: 11px;
-    color: #94a3b8;
-    margin-top: 15px;
+
+  .opp-actions .flex {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
-  @media (max-width: 900px) {
-    .category-grid { grid-template-columns: 1fr; }
-    .consultant-card { width: 100%; }
-    .counter-grid { grid-template-columns: repeat(2, 1fr); }
-    .career-board-layout { grid-template-columns: 1fr; }
-    .filter-sidebar { position: static; }
-    .filter-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .filter-actions { grid-column: 1 / -1; flex-direction: row; }
-    .filter-submit, .filter-reset { flex: 1; }
-    .apply-steps-grid { grid-template-columns: 1fr 1fr; }
+  /* ৪. স্ট্যাটাস ব্যাজ */
+  .opp-status {
+    display: flex;
   }
-  @media (max-width: 520px) {
-    .filter-form { grid-template-columns: 1fr; }
-    .filter-actions { flex-direction: column; }
+
+  .opp-status .status-badge {
+    font-size: 12px;
+    padding: 5px 14px;
   }
+}
 </style>
 
 <!-- =========================================================
@@ -456,95 +481,174 @@
     Join us in saving lives and transforming lives. Whether you want to volunteer, build experience as an intern, start or grow a career, or offer your expertise as a consultant, there is a place for you. Browse every opportunity in one job board and filter to find the right fit.
   </p>
 
-  <!-- Top 3 Option Cards -->
-  <div class="category-grid">
-    <div class="category-card">
-      <div>
-        <span class="cat-badge">{{ volunteer_count }} open now</span>
-        <h3>Volunteer</h3>
-        <p>Give your time and skills to support our field teams, offices and communities.</p>
-      </div>
-    <a 
-    href="?type=volunteer" 
-    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
-    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
->
-    <span>View opportunities</span>
-    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
-</a>
-    </div>
+  
+<!-- ==========================================
+     MMC OPPORTUNITY CATEGORY CARDS
+     Fully Responsive - 4 Cards
+=========================================== -->
 
-    <div class="category-card">
-      <div>
-        <span class="cat-badge">{{ internship_count }} open now</span>
-        <h3>Internship</h3>
-        <p>Build early-career experience through supervised placements and mentoring.</p>
-      </div>
-    <a 
-    href="?type=internships" 
-    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
-    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
->
-    <span>View opportunities</span>
-    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
-</a>
-    </div>
+<section class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
-    <div class="category-card">
-      <div>
-        <span class="cat-badge">{{ staff_count }} open now</span>
-        <h3>Staff / Career</h3>
-        <p>Start or grow a career in programmes, finance, operations and partnerships.</p>
-      </div>
-     <a 
-    href="?type=jobs" 
-    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
-    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
->
-    <span>View opportunities</span>
-    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
-</a>
-    </div>
-  </div>
+    <!-- Parent Container -->
+    <div class="rounded-3xl border border-[#084843]/10 bg-[#f5f8f7] p-4 shadow-sm sm:p-6 lg:p-8">
 
-  <!-- Consultant Card -->
-  <div class="consultant-card">
-    <span class="cat-badge">Always open</span>
-    <h3 class="font-bold">Consultant</h3>
-    <p>Always open. Join our consultant network for short-term expert assignments.</p>
-    <div class="actions">
-     <a 
-    href="?type=consulting" 
-    class="btn-outline group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
-    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
->
-    <span>View opportunities</span>
-    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
-</a>
-    {% if featured_opportunity %}
-      <a 
-    href="{% url 'engagement:volunteer_application' slug=featured_opportunity.slug %}"
-    class="btn-dark group inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold shadow-sm"
-    style="background-color: #084843; color: #ffffff; border: 1.5px solid #084843; text-decoration: none; transition: all 0.3s ease;"
-    onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.color='#ffffff'; this.style.transform='translateY(-2px)';"
-    onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='#084843'; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
->
-    <span>Join the network</span>
-    <span aria-hidden="true" class="font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
-</a>
-      {% else %}
-      <p>No volunteer opportunities are currently available.</p>
-     {% endif %}
+        <!-- Section Heading -->
+        <div class="mb-7 text-center sm:mb-9">
+            <span class="inline-block rounded-full bg-[#084843]/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#084843] sm:text-xs">
+                Explore Opportunities
+            </span>
+
+            <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+                Find Your Place at MMC
+            </h2>
+
+            <p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                Discover opportunities to contribute your skills, gain experience and grow with MMC International.
+            </p>
+        </div>
+
+        <!-- Four Cards Grid -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4 xl:gap-5">
+
+            <!-- Volunteer -->
+            <div class="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#084843]/30 hover:shadow-lg sm:p-6">
+
+                <div class="mb-5 flex items-center justify-between gap-2">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
+                        <i class="fas fa-hand-holding-heart text-xl"></i>
+                    </div>
+
+                    <span class="cat-badge">
+                        {{ volunteer_count }} open now
+                    </span>
+                </div>
+
+                <div class="flex-1">
+                    <h3 class="text-lg font-extrabold text-slate-900 sm:text-xl">
+                        Volunteer
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
+                        Give your time and skills to support our field teams, offices and communities.
+                    </p>
+                </div>
+
+                <a href="?type=volunteer"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#084843] bg-[#084843] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#e97c61] hover:bg-[#e97c61]">
+                    View opportunities
+                    <span>→</span>
+                </a>
+            </div>
+
+
+            <!-- Internship -->
+            <div class="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#084843]/30 hover:shadow-lg sm:p-6">
+
+                <div class="mb-5 flex items-center justify-between gap-2">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+
+                    <span class="cat-badge">
+                        {{ internship_count }} open now
+                    </span>
+                </div>
+
+                <div class="flex-1">
+                    <h3 class="text-lg font-extrabold text-slate-900 sm:text-xl">
+                        Internship
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
+                        Build early-career experience through supervised placements and mentoring.
+                    </p>
+                </div>
+
+                <a href="?type=internships"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#084843] bg-[#084843] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#e97c61] hover:bg-[#e97c61]">
+                    View opportunities
+                    <span>→</span>
+                </a>
+            </div>
+
+
+            <!-- Staff / Career -->
+            <div class="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#084843]/30 hover:shadow-lg sm:p-6">
+
+                <div class="mb-5 flex items-center justify-between gap-2">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
+                        <i class="fas fa-briefcase text-xl"></i>
+                    </div>
+
+                    <span class="cat-badge">
+                        {{ staff_count }} open now
+                    </span>
+                </div>
+
+                <div class="flex-1">
+                    <h3 class="text-lg font-extrabold text-slate-900 sm:text-xl">
+                        Staff / Career
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
+                        Start or grow a career in programmes, finance, operations and partnerships.
+                    </p>
+                </div>
+
+                <a href="?type=jobs"
+                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#084843] bg-[#084843] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#e97c61] hover:bg-[#e97c61]">
+                    View opportunities
+                    <span>→</span>
+                </a>
+            </div>
+
+
+            <!-- Consultant -->
+            <div class="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#084843]/30 hover:shadow-lg sm:p-6">
+
+                <div class="mb-5 flex items-center justify-between gap-2">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
+                        <i class="fas fa-user-tie text-xl"></i>
+                    </div>
+
+                    <span class="cat-badge">
+                        Always open
+                    </span>
+                </div>
+
+                <div class="flex-1">
+                    <h3 class="text-lg font-extrabold text-slate-900 sm:text-xl">
+                        Consultant
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-slate-600">
+                        Join our consultant network for short-term expert assignments.
+                    </p>
+                </div>
+
+                <div class="mt-6 flex flex-col gap-2">
+
+                    <a href="?type=consulting"
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#084843] bg-[#084843] px-3 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#e97c61] hover:bg-[#e97c61]">
+                        View opportunities
+                        <span>→</span>
+                    </a>
+
+                    {% if featured_opportunity %}
+                    <a href="{% url 'engagement:volunteer_application' slug=featured_opportunity.slug %}"
+                       class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#e97c61] bg-[#e97c61]/10 px-3 py-3 text-sm font-bold text-[#084843] transition-all duration-300 hover:bg-[#e97c61] hover:text-white">
+                        Join the network
+                        <span>→</span>
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
+</section>
+
 
   <!-- MMC Job Board Section -->
   <h2 class="section-title">MMC Career Opportunities</h2>
@@ -618,27 +722,33 @@
 
       <!-- Statistics -->
       <div class="counter-grid">
-        <div class="counter-box">
-          <div class="num">{{ total_open_count }}</div>
-          <div class="lbl">Active Opportunities</div>
-        </div>
-        <div class="counter-box">
-          <div class="num">{{ volunteer_count }}</div>
-          <div class="lbl">Volunteer</div>
-        </div>
-        <div class="counter-box">
-          <div class="num">{{ internship_count }}</div>
-          <div class="lbl">Internships</div>
-        </div>
-        <div class="counter-box">
-          <div class="num">{{ staff_count }}</div>
-          <div class="lbl">Jobs</div>
-        </div>
-        <div class="counter-box">
-          <div class="num">{{ consultant_count }}</div>
-          <div class="lbl">Consulting</div>
-        </div>
-      </div>
+
+    <div class="counter-box">
+        <div class="num">{{ total_open_count }}</div>
+        <div class="lbl">Active Opportunities</div>
+    </div>
+
+    <div class="counter-box">
+        <div class="num">{{ volunteer_count }}</div>
+        <div class="lbl">Volunteer</div>
+    </div>
+
+    <div class="counter-box">
+        <div class="num">{{ internship_count }}</div>
+        <div class="lbl">Internships</div>
+    </div>
+
+    <div class="counter-box">
+        <div class="num">{{ staff_count }}</div>
+        <div class="lbl">Jobs</div>
+    </div>
+
+    <div class="counter-box">
+        <div class="num">{{ consultant_count }}</div>
+        <div class="lbl">Consulting</div>
+    </div>
+
+</div>
 
       <!-- Opportunity Table -->
       <div class="table-wrapper">
@@ -768,30 +878,8 @@
     </main>
   </div>
 
-  <!-- How to apply section -->
-  <h2 class="section-title">How to apply</h2>
-  <div class="apply-steps-grid">
-    <div class="step-card">
-      <div class="step-circle">1</div>
-      <h4>Choose</h4>
-      <p>Pick the opportunity type and role that fit you.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-circle">2</div>
-      <h4>Apply online</h4>
-      <p>Complete the short form and attach your CV where asked.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-circle">3</div>
-      <h4>Screening</h4>
-      <p>Shortlisted applicants are contacted for interview.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-circle">4</div>
-      <h4>Onboarding</h4>
-      <p>Safeguarding and code-of-conduct briefing, then start.</p>
-    </div>
-  </div>
+ 
+  
 
   <p class="footer-subnote">
     Only shortlisted applicants are contacted. All applicants complete safeguarding and code-of-conduct briefing before starting.
@@ -814,130 +902,188 @@
         <!-- Two-Column Grid: Left Slider + Right Content -->
         <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14 ">
 
-            <!-- =========================================================
-                 LEFT SECTION: Carousel (Unchanged Original Code)
-                 Desktop: lg:col-span-7
-            ========================================================== -->
             
-<div class="relative flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#084843] px-5 py-8 shadow-xl sm:px-8 sm:py-10 lg:col-span-7">
+<!-- =========================================================
+     LEFT SECTION: REDESIGNED TESTIMONIAL CAROUSEL
+========================================================== -->
+
+<div class="relative flex min-w-0 flex-col justify-between overflow-hidden rounded-3xl border border-[#084843] bg-[#084843] p-5 shadow-xl sm:p-7 lg:col-span-7 lg:p-8">
 
     <!-- Decorative Background -->
-    <div class="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-white/5 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-16 -left-16 h-52 w-52 rounded-full bg-[#e97c61]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/[0.04] blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#e97c61]/10 blur-3xl"></div>
 
-    <!-- Section Heading -->
-    <div class="relative z-10 mb-7 text-center">
-        <span class="mb-3 inline-block rounded-full border border-white/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f3b09d]">
-            Testimonials
-        </span>
+    <!-- Top Heading -->
+    <div class="relative z-10 mb-8 flex items-center justify-between gap-4">
 
-        <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Voices of MMC
-        </h3>
+        <div>
+            <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f3b09d]">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#e97c61]"></span>
+                Voices of MMC
+            </span>
 
-        <p class="mt-2 text-sm text-teal-100/70">
-            Stories and experiences from our valued community
-        </p>
+            <h3 class="mt-2 text-xl font-extrabold tracking-tight text-white sm:text-2xl">
+                Community Stories
+            </h3>
+        </div>
+
+        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06]">
+            <i class="fas fa-quote-right text-lg text-[#e97c61]"></i>
+        </div>
+
     </div>
 
-    <!-- Carousel Main Item -->
-    <div class="relative z-10 mx-auto w-full max-w-[590px] rounded-2xl border border-white/15 bg-transparent px-5 py-7 sm:px-8 sm:py-9">
 
-        <div id="mmc-testimonial-carousel" class="relative w-full overflow-hidden">
+    <!-- Main Carousel -->
+    <div id="mmc-testimonial-carousel"
+         class="relative z-10 w-full overflow-hidden">
 
-            <div id="mmc-testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+        <div id="mmc-testimonial-track"
+             class="flex items-stretch transition-transform duration-500 ease-in-out">
 
-                {% for testimonial in testimonials %}
-                <div class="w-full shrink-0 px-1 text-center">
+            {% for testimonial in testimonials %}
 
-                    <!-- Quote Icon -->
-                    <div class="mb-5 flex justify-center">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full border border-[#e97c61]/40 bg-[#e97c61]/10">
-                            <i class="fas fa-quote-left text-xl text-[#f3a18b]"></i>
-                        </div>
+            <div class="flex w-full min-w-0 shrink-0 flex-col px-1">
+
+                <!-- Quote Content -->
+                <div class="flex-1">
+
+                    <!-- Large Quote Icon -->
+                    <div class="mb-5">
+                        <i class="fas fa-quote-left text-3xl text-[#e97c61] sm:text-4xl"></i>
                     </div>
 
                     <!-- Testimonial Text -->
-                    <blockquote class="mx-auto max-w-[500px] text-sm leading-8 text-teal-50/90 sm:text-base sm:leading-9">
+                    <blockquote class="max-w-[560px] text-left text-base font-medium leading-8 text-white sm:text-lg sm:leading-9 lg:text-xl lg:leading-10">
                         “{{ testimonial.quote }}”
                     </blockquote>
 
-                    <!-- Divider -->
-                    <div class="mx-auto my-6 h-px w-16 bg-gradient-to-r from-transparent via-[#e97c61] to-transparent"></div>
+                </div>
 
-                    <!-- Person Information -->
-                    <div class="flex flex-col items-center">
+
+                <!-- Divider -->
+                <div class="my-7 h-px w-full bg-gradient-to-r from-white/25 via-white/10 to-transparent"></div>
+
+
+                <!-- Author Information -->
+                <div class="flex min-w-0 items-center gap-4">
+
+                    <!-- Profile Image -->
+                    <div class="shrink-0">
 
                         {% if testimonial.photo %}
-                            <img
-                                src="{{ testimonial.photo.url }}"
-                                alt="{{ testimonial.name }}"
-                                class="mb-3 h-16 w-16 rounded-full border-2 border-[#e97c61] object-cover shadow-lg"
-                            >
+
+                        <img
+                            src="{{ testimonial.photo.url }}"
+                            alt="{{ testimonial.name }}"
+                            class="h-14 w-14 rounded-full border-2 border-[#e97c61] object-cover shadow-lg sm:h-16 sm:w-16"
+                        >
+
                         {% else %}
-                            <div class="mb-3 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#e97c61] bg-white/10 text-xl font-bold text-white">
-                                {{ testimonial.name|first|upper }}
-                            </div>
+
+                        <div class="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#e97c61] bg-white/10 text-xl font-extrabold text-white sm:h-16 sm:w-16">
+                            {{ testimonial.name|first|upper }}
+                        </div>
+
                         {% endif %}
 
-                        <h4 class="text-base font-bold text-white">
+                    </div>
+
+
+                    <!-- Name & Designation -->
+                    <div class="min-w-0 flex-1">
+
+                        <h4 class="break-words text-sm font-extrabold text-white sm:text-base">
                             {{ testimonial.name }}
                         </h4>
 
-                        <p class="mt-1 text-xs font-semibold text-[#f3a18b]">
+                        <p class="mt-1 break-words text-xs font-semibold text-[#f3a18b] sm:text-sm">
                             {{ testimonial.role }}
                         </p>
 
-                        <p class="mt-1 text-xs text-teal-100/60">
-                            <i class="fas fa-map-marker-alt mr-1"></i>
+                        {% if testimonial.location %}
+                        <p class="mt-1 text-[11px] text-teal-100/60 sm:text-xs">
+                            <i class="fas fa-map-marker-alt mr-1 text-[#e97c61]"></i>
                             {{ testimonial.location }}
                         </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Small Decorative Quote -->
+                    <div class="hidden shrink-0 sm:block">
+                        <i class="fas fa-quote-right text-3xl text-white/10"></i>
                     </div>
 
                 </div>
-                {% empty %}
-                <div class="w-full shrink-0 py-8 text-center text-sm text-teal-100/70">
-                    Testimonials will be available soon.
-                </div>
-                {% endfor %}
 
             </div>
+
+            {% empty %}
+
+            <div class="w-full shrink-0 py-10 text-center text-sm text-teal-100/70">
+                Testimonials will be available soon.
+            </div>
+
+            {% endfor %}
+
         </div>
+
     </div>
 
-    <!-- Carousel Controls -->
-    <div class="relative z-10 mt-7 flex w-full max-w-[590px] items-center justify-between">
 
-        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-100/60">
-            Community Voices
-        </span>
+    <!-- Bottom Navigation -->
+    <div class="relative z-10 mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-5">
 
+        <!-- Left Label -->
+        <div class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#e97c61]"></span>
+
+            <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-teal-100/60 sm:text-[10px]">
+                Community Voices
+            </span>
+        </div>
+
+
+        <!-- Navigation -->
         <div class="flex items-center gap-4">
 
-            <div id="mmc-testimonial-dots" class="flex items-center gap-2"></div>
+            <!-- Dots -->
+            <div id="mmc-testimonial-dots"
+                 class="flex items-center gap-2">
+            </div>
 
+
+            <!-- Previous / Next -->
             <div class="flex items-center gap-2">
+
                 <button
                     id="mmc-testimonial-prev"
                     type="button"
                     aria-label="Previous testimonial"
-                    class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-[#e97c61] hover:bg-[#e97c61]">
-                    <i class="fas fa-chevron-left text-xs"></i>
+                    class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/[0.04] text-white transition duration-300 hover:border-[#e97c61] hover:bg-[#e97c61] hover:text-white"
+                >
+                    <i class="fas fa-arrow-left text-xs"></i>
                 </button>
 
                 <button
                     id="mmc-testimonial-next"
                     type="button"
                     aria-label="Next testimonial"
-                    class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-[#e97c61] hover:bg-[#e97c61]">
-                    <i class="fas fa-chevron-right text-xs"></i>
+                    class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/[0.04] text-white transition duration-300 hover:border-[#e97c61] hover:bg-[#e97c61] hover:text-white"
+                >
+                    <i class="fas fa-arrow-right text-xs"></i>
                 </button>
+
             </div>
 
         </div>
+
     </div>
 
 </div>
+
 
 
             <!-- =========================================================
