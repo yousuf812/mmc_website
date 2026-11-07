@@ -834,3 +834,56 @@ button {
         overflow-x: hidden;
     }
 }
+
+
+/* ==========================================
+   CAREER COUNTERS - MOBILE 2 COLUMN GRID
+=========================================== */
+
+@media screen and (max-width: 767px) {
+
+    .counter-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .counter-grid > .counter-box {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding: 18px 10px !important;
+        text-align: center !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 14px !important;
+        background: #ffffff;
+    }
+
+    .counter-grid > .counter-box:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        width: calc(50% - 6px) !important;
+        justify-self: center;
+    }
+
+    .counter-grid > .counter-box .num {
+        font-size: 25px !important;
+        line-height: 1.3 !important;
+        font-weight: 800 !important;
+        white-space: nowrap;
+    }
+
+    .counter-grid > .counter-box .lbl {
+        font-size: 11px !important;
+        line-height: 1.5 !important;
+        text-align: center !important;
+    }
+
+    .counter-grid > .counter-box:not(:last-child) {
+        padding-bottom: 18px !important;
+    }
+}

@@ -317,7 +317,7 @@
                 </div>
 
                 <!-- Description Text -->
-                <p class="mt-6 text-[15px] sm:text-base leading-relaxed text-slate-700 font-normal">
+                <p class="mt-6 text-[15px] sm:text-base leading-relaxed text-slate-700 font-normal text-justify">
                     {% if homepage and homepage.who_we_are_text %}
                         {{ homepage.who_we_are_text }}
                     {% else %}
@@ -429,7 +429,7 @@
 <!-- area of experties -->
 
 <!-- Section Header -->
-    <div class="mb-6 sm:mb-8 md:mb-10">
+    <div class="mb-6 sm:mb-8 md:mb-10 mt-10">
         <h2 class="text-2xl font-bold tracking-tight text-[#084843] sm:text-3xl">
             Areas of Expertise
         </h2>
@@ -441,7 +441,7 @@
          - Tablet (sm >= 640px): 4 columns grid
          - Desktop (xl >= 1280px): 8 columns horizontal grid (all in one line)
     -->
-    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8 xl:gap-3 2xl:gap-4">
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 xl:grid-cols-8 xl:gap-3 2xl:gap-4 px-5">
         
         <!-- 1. Emergency Response -->
         <a href="#" class="group flex flex-col items-center justify-start rounded-2xl border border-slate-100 bg-[#f8fafc] p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-slate-200 hover:bg-white hover:shadow-md">
@@ -468,17 +468,36 @@
         </a>
 
         <!-- 3. Food Security and Livelihoods -->
-        <a href="#" class="group flex flex-col items-center justify-start rounded-2xl border border-slate-100 bg-[#f8fafc] p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-slate-200 hover:bg-white hover:shadow-md">
-            <div class="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-xs transition-transform duration-200 group-hover:scale-105">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V6m0 0a5 5 0 0 0-5 5c0 3 5 8 5 8s5-5 5-8a5 5 0 0 0-5-5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19c-4 0-7-2-7-5 0-3 3-5 7-5"/>
-                </svg>
-            </div>
-            <h3 class="mt-2.5 sm:mt-3 text-xs font-bold leading-tight sm:leading-snug text-[#084843] group-hover:text-[#1b7a66]">
-                Food Security<br>and Livelihoods
-            </h3>
-        </a>
+       <a href="#" class="group flex flex-col items-center justify-start rounded-2xl border border-slate-100 bg-[#f8fafc] p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-slate-200 hover:bg-white hover:shadow-md">
+    <!-- Icon Container -->
+    <div class="flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-xs transition-transform duration-200 group-hover:scale-105">
+        <!-- Uploaded Image Vector Icon (Hand holding grain/food sack) -->
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Bag Top & Knot -->
+            <path d="M10 2.5h4l1.5 2H8.5L10 2.5z" />
+            <path d="M9 4.5h6" />
+            <path d="M15 4.5c1.5 0 2.5 1 2.5 1.5s-1 1-2.5 0.5" />
+            
+            <!-- Food Sack Outline -->
+            <path d="M9.5 4.5H14.5C17.5 4.5 18.5 7 18.5 10C18.5 13 18 13.5 16 13.5H8C6 13.5 5.5 13 5.5 10C5.5 7 6.5 4.5 9.5 4.5Z" />
+            
+            <!-- Wheat / Grain inside the sack -->
+            <path d="M12 7.5v4" />
+            <path d="M12 8.5c-.8-.8-1.5-.5-1.5.5s.8 1.2 1.5 1" />
+            <path d="M12 8.5c.8-.8 1.5-.5 1.5.5s-.8 1.2-1.5 1" />
+            
+            <!-- Supporting Hand underneath -->
+            <path d="M3.5 15.5l2.5-1.5c1-.6 2.2-.2 2.8.8l.7 1.2h7c1.4 0 2.5 1.1 2.5 2.5v.5H9l-2.5-2.5-3 2.5z" />
+            <!-- Wrist Band -->
+            <path d="M19 18.5h2v3.5h-2z" />
+        </svg>
+    </div>
+
+    <!-- Text -->
+    <h3 class="mt-2.5 sm:mt-3 text-xs font-bold leading-tight sm:leading-snug text-[#084843] group-hover:text-[#1b7a66]">
+        Food Security<br>and Livelihoods
+    </h3>
+</a>
 
         <!-- 4. Health and Nutrition -->
         <a href="#" class="group flex flex-col items-center justify-start rounded-2xl border border-slate-100 bg-[#f8fafc] p-3.5 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-slate-200 hover:bg-white hover:shadow-md">
@@ -652,24 +671,48 @@
                 <div class="flex items-start gap-4">
                     <!-- Sprout / Plant Icon -->
                     <div class="shrink-0 pt-0.5">
-                        <svg class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21V11m0 0a5 5 0 0 0-5 5c0 2.5 5 5 5 5s5-2.5 5-5a5 5 0 0 0-5-5z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c-2.5-4-1-8 3-9 1 3 0 6-3 9z"/>
-                        </svg>
-                    </div>
+    <svg class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Monitor Frame -->
+        <path d="M12 4H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3.5" />
+        <path d="M2 14h18" />
+        
+        <!-- Monitor Stand & Base -->
+        <path d="M9 18v2" />
+        <path d="M15 18v2" />
+        <rect x="6" y="20" width="12" height="2" rx="1" stroke="none" fill="currentColor" />
+        
+        <!-- Top Left Dots/Pixels -->
+        <rect x="4.5" y="6.5" width="1" height="1" fill="currentColor" stroke="none" />
+        <rect x="6.5" y="6.5" width="1" height="1" fill="currentColor" stroke="none" />
+        <rect x="4.5" y="8.5" width="1" height="1" fill="currentColor" stroke="none" />
+
+        <!-- Package / Box Inside -->
+        <rect x="7" y="9" width="7" height="7" rx="0.5" />
+        <!-- Package Tape / Flap -->
+        <path d="M10 9v3h2.5V9" />
+
+        <!-- Clock on Top-Right -->
+        <!-- Clock Outer Circle -->
+        <circle cx="18" cy="6" r="5" fill="#184544" />
+        <!-- Clock Inner Ring -->
+        <circle cx="18" cy="6" r="3.2" />
+        <!-- Clock Hands -->
+        <path d="M18 4.2v2h1.8" />
+    </svg>
+</div>
                     <!-- Content -->
                     <div>
-                        <h3 class="text-base font-bold leading-snug text-white">
+                        <h3 class="text-xl font-bold leading-snug text-white">
                             Direct Programme Delivery
                         </h3>
-                        <p class="mt-2 text-xs leading-relaxed text-white/90">
+                        <p class="mt-2 text-ms leading-relaxed text-white/90">
                             Frontline humanitarian and development programming.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Learn More Link -->
-                <div class="mt-6 flex items-center gap-1.5 pl-14 text-xs font-semibold text-white/95 group-hover:text-white">
+                <div class="mt-6 flex items-center gap-1.5 pl-14 text-ms font-semibold text-white/95 group-hover:text-white">
                     <span>Learn more</span>
                     <span aria-hidden="true" class="text-sm font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
@@ -687,17 +730,17 @@
                     </div>
                     <!-- Content -->
                     <div>
-                        <h3 class="text-base font-bold leading-snug text-white">
+                        <h3 class="text-xl font-bold leading-snug text-white">
                             Technical Consulting
                         </h3>
-                        <p class="mt-2 text-xs leading-relaxed text-white/90">
+                        <p class="mt-2 text-ms leading-relaxed text-white/90">
                             Advisory, research, assessment, M&amp;E and specialised expertise.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Learn More Link -->
-                <div class="mt-6 flex items-center gap-1.5 pl-14 text-xs font-semibold text-white/95 group-hover:text-white">
+                <div class="mt-6 flex items-center gap-1.5 pl-14 text-ms font-semibold text-white/95 group-hover:text-white">
                     <span>Learn more</span>
                     <span aria-hidden="true" class="text-sm font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
@@ -714,17 +757,17 @@
                     </div>
                     <!-- Content -->
                     <div>
-                        <h3 class="text-base font-bold leading-snug text-white">
+                        <h3 class="text-xl font-bold leading-snug text-white">
                             Policy and Advocacy
                         </h3>
-                        <p class="mt-2 text-xs leading-relaxed text-white/90">
+                        <p class="mt-2 text-ms leading-relaxed text-white/90">
                             Evidence-based advocacy and policy engagement.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Learn More Link -->
-                <div class="mt-6 flex items-center gap-1.5 pl-14 text-xs font-semibold text-white/95 group-hover:text-white">
+                <div class="mt-6 flex items-center gap-1.5 pl-14 text-ms font-semibold text-white/95 group-hover:text-white">
                     <span>Learn more</span>
                     <span aria-hidden="true" class="text-sm font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
@@ -741,17 +784,17 @@
                     </div>
                     <!-- Content -->
                     <div>
-                        <h3 class="text-base font-bold leading-snug text-white">
+                        <h3 class="text-xl font-bold leading-snug text-white">
                             Social Enterprise
                         </h3>
-                        <p class="mt-2 text-xs leading-relaxed text-white/90">
+                        <p class="mt-2 text-ms leading-relaxed text-white/90">
                             Enterprise-based approaches for jobs and economic opportunity.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Learn More Link -->
-                <div class="mt-6 flex items-center gap-1.5 pl-14 text-xs font-semibold text-white/95 group-hover:text-white">
+                <div class="mt-6 flex items-center gap-1.5 pl-14 text-ms font-semibold text-white/95 group-hover:text-white">
                     <span>Learn more</span>
                     <span aria-hidden="true" class="text-sm font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>

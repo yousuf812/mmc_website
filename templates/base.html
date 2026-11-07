@@ -16,6 +16,38 @@
     {% endif %}
 
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <style>
+/* ==========================================
+   FOOTER - MINIMUM FONT SIZE 14PX
+   ALL DEVICES
+=========================================== */
+
+footer {
+    font-size: 14px !important;
+}
+
+footer p,
+footer span,
+footer a,
+footer li,
+footer h2,
+footer h3,
+footer ul {
+    font-size: 14px !important;
+    line-height: 1.6;
+}
+
+/* Preserve icons */
+footer svg {
+    flex-shrink: 0;
+}
+
+/* Preserve logo size */
+footer img {
+    height: 120px !important;
+    width: 150px !important;
+}
+</style>
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -293,8 +325,8 @@
                         <a href="{% url 'engagement:home' %}" class="text-base font-bold text-slate-800 hover:text-emerald-700">Get Involved</a>
                     </div>
                     <div class="ml-4 flex flex-col border-l-2 border-emerald-200 pl-3 py-1 gap-1">
-                        <a href="{% url 'engagement:page' slug='join-our-team' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Works for us</a>
-                        <a href="{% url 'engagement:page' slug='suppliers-contractors' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Supply for us</a>
+                        <a href="{% url 'engagement:volunteer_opportunities' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Works for us</a>
+                        <a href="{% url 'tenders:list' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Supply for us</a>
                         <a href="{% url 'engagement:page' slug='donors' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Fund for us</a>
                         <a href="{% url 'engagement:page' slug='partnership' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Partner with us</a>
                         <a href="{% url 'contact:feedback' %}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-emerald-50 hover:text-emerald-800">Feedback &amp; complaints</a>

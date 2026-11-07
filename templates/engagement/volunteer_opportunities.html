@@ -400,72 +400,104 @@
 <!-- =========================================================
      CAREER OPPORTUNITY HERO SECTION
 ========================================================= -->
-<section class="relative overflow-hidden bg-[#184544] text-white">
-    
-    <!-- Background Conic / Concentric Circular Gradient Ripples (Right Side Decoration) -->
-    <div class="absolute right-4 sm:right-8 lg:right-12 top-6 sm:top-10 z-10 select-none">
-    <!-- Subtle Glow Background -->
-    <div class="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#084843]/30 to-[#e97c61]/30 blur-lg opacity-60"></div>
-
-    <!-- Small Round Image Container -->
-    <div class="relative h-32 w-32 sm:h-40 sm:w-40 lg:h-48 lg:w-48 rounded-full p-1.5 shadow-xl transition-transform duration-300 hover:scale-105"
-         style="background: linear-gradient(135deg, #084843, #e97c61); border: 2px solid rgba(255, 255, 255, 0.4);">
-        
-        <!-- Image Inner Container -->
-        <div class="h-full w-full rounded-full overflow-hidden border border-white/60">
-            <img 
-                src="{% static 'images/about/who-we-are.jpeg' %}" 
-                alt="MMC Feature Image" 
-                class="h-full w-full object-cover object-center"
-            />
-        </div>
-    </div>
-</div>
-
-    <!-- Container -->
-    <div class="relative z-10 mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-12 lg:py-28 xl:py-32">
-        <div class="max-w-3xl">
+<section class="relative overflow-hidden bg-[#184544] text-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <!-- Main Responsive Grid Container -->
+    <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
             
-            <!-- Breadcrumb / Section Label Tag -->
-            <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-emerald-200/90">
-                GET INVOLVED &middot; WORK FOR US
-            </p>
+            <!-- ==========================================
+                 IMAGE SECTION (Mobile-এ Order 1, Desktop-এ Order 2)
+                 ========================================== -->
+            <div class="order-1 w-full lg:order-2 lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end">
+                <div class="relative w-full max-w-md lg:max-w-none">
+                    
+                    <!-- Decorative Frame Border behind image (as shown in reference design) -->
+                    <div class="absolute -inset-3 sm:-inset-4 rounded-3xl border-2 border-[#e97c61]/40 -translate-x-2 translate-y-2 sm:-translate-x-3 sm:translate-y-3 -z-10"></div>
+                    
+                    <!-- Soft Glow behind image -->
+                    <div class="absolute -inset-4 rounded-3xl bg-[#e97c61]/15 blur-xl -z-20"></div>
 
-            <!-- Main Headline -->
-            <h1 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
-                Join MMC.<br>
-                Make an impact.
-            </h1>
+                    <!-- Main Image Box -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-2xl border border-white/20 bg-[#084843]/60 aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/3] w-full">
+                        <img 
+                            src="{% static 'images/about/who-we-are.jpeg' %}" 
+                            alt="MMC Feature Image" 
+                            class="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                        />
+                        
+                        <!-- Floating Top Badge (matches the clean white card in reference) -->
+                        <div class="absolute top-4 right-4 z-20 flex items-center gap-2 rounded-xl bg-white/95 backdrop-blur-md px-3.5 py-2 text-xs font-bold text-[#084843] shadow-lg">
+                            <svg class="h-4 w-4 text-[#e97c61]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <span>Built for progress</span>
+                        </div>
+                    </div>
 
-            <!-- Subtitle Description -->
-            <p class="mt-5 max-w-2xl text-sm leading-relaxed text-emerald-100/90 sm:text-base md:text-lg">
-                Explore jobs, internships, consulting, and volunteer opportunities with Mission for Meaningful Change (MMC).
-            </p>
+                    <!-- Floating Bottom Accent Pill (as in reference image) -->
+                    <div class="mt-4 sm:absolute sm:-bottom-4 sm:left-4 sm:mt-0 z-20 inline-flex items-center gap-2 rounded-xl bg-white/95 backdrop-blur-md px-4 py-2 text-xs sm:text-sm font-semibold text-[#0f172a] shadow-lg border border-slate-100">
+                        <span class="h-1.5 w-6 rounded-full bg-[#e97c61]"></span>
+                        <span>Built on expertise. Focused on lasting value.</span>
+                    </div>
 
-            <!-- Call-to-Action Buttons -->
-            <div class="mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
-                
-                <!-- Primary Solid Button (Matches Light Green Badge in Screenshot) -->
-                <a href="#open-vacancies"
-                   style="background-color: #6da571; color: #08332d;"
-                   onmouseover="this.style.backgroundColor='#5b915f';"
-                   onmouseout="this.style.backgroundColor='#6da571';"
-                   class="group inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-xs sm:text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-                    <span>View Open Career Opportunities</span>
-                    <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1 font-bold">→</span>
-                </a>
-
-                <!-- Secondary Transparent Outline Button -->
-                <a href="#explore-path"
-                   class="inline-flex items-center justify-center rounded-lg border border-white/30 bg-transparent px-6 py-3.5 text-xs sm:text-sm font-bold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10 hover:-translate-y-0.5">
-                    Explore your path
-                </a>
+                </div>
             </div>
 
-            <!-- Bottom Tagline / Micro-copy -->
-            <p class="mt-10 text-xs sm:text-sm font-medium text-emerald-100/75">
-                Bring your skills. Grow your experience. Contribute to meaningful change.
-            </p>
+            <!-- ==========================================
+                 CONTENT SECTION (Mobile-এ Order 2, Desktop-এ Order 1)
+                 ========================================== -->
+            <div class="order-2 w-full lg:order-1 lg:col-span-7 xl:col-span-6 flex flex-col justify-center text-left">
+                
+                <!-- Breadcrumb / Section Label Tag with accent line -->
+                <div class="flex items-center gap-3">
+                    <span class="h-[2px] w-8 bg-[#e97c61]"></span>
+                    <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-emerald-200/90">
+                        GET INVOLVED &middot; WORK FOR US
+                    </p>
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-white leading-[1.12]">
+                    Join MMC.<br>
+                    <span class="text-[#e97c61]">Make an impact.</span>
+                </h1>
+
+                <!-- Subtitle Description -->
+                <p class="mt-5 text-sm leading-relaxed text-emerald-100/90 sm:text-base md:text-lg">
+                    Explore jobs, internships, consulting, and volunteer opportunities with Mission for Meaningful Change (MMC).
+                </p>
+
+                <!-- Call-to-Action Buttons -->
+                <div class="mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
+                    
+                    <!-- Primary Solid Button -->
+                  <!-- Primary Button (MMC Primary -> Hover: MMC Secondary) -->
+<!-- Primary Button (With border & MMC Primary -> Hover: MMC Secondary) -->
+<a href="#open-vacancies"
+   style="background-color: #084843; color: #ffffff; border: 1.5px solid rgba(255, 255, 255, 0.35); text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#e97c61'; this.style.borderColor='#e97c61'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='#084843'; this.style.borderColor='rgba(255, 255, 255, 0.35)'; this.style.transform='translateY(0)';"
+   class="group inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-xs sm:text-sm font-bold shadow-md">
+    <span>View Open Career Opportunities</span>
+    <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1 font-bold">→</span>
+</a>
+
+<!-- Secondary Outline Button (Fixed Hover) -->
+<a href="#explore-path"
+   style="background-color: transparent; color: #ffffff; border: 1.5px solid rgba(255, 255, 255, 0.4); text-decoration: none; transition: all 0.3s ease;"
+   onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.15)'; this.style.borderColor='#ffffff'; this.style.transform='translateY(-2px)';"
+   onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(255, 255, 255, 0.4)'; this.style.transform='translateY(0)';"
+   class="inline-flex items-center justify-center rounded-lg px-6 py-3.5 text-xs sm:text-sm font-bold shadow-sm">
+    Explore your path
+</a>
+                </div>
+
+                <!-- Bottom Tagline / Micro-copy -->
+                <p class="mt-8 sm:mt-10 text-xs sm:text-sm font-medium text-emerald-100/75">
+                    Bring your skills. Grow your experience. Contribute to meaningful change.
+                </p>
+
+            </div>
 
         </div>
     </div>
@@ -515,7 +547,11 @@
 
                 <div class="mb-5 flex items-center justify-between gap-2">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
-                        <i class="fas fa-hand-holding-heart text-xl"></i>
+                        <!-- Hand Holding Heart SVG Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                            <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9"/>
+                        </svg>
                     </div>
 
                     <span class="cat-badge">
@@ -546,7 +582,11 @@
 
                 <div class="mb-5 flex items-center justify-between gap-2">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
-                        <i class="fas fa-graduation-cap text-xl"></i>
+                        <!-- Graduation Cap SVG Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
                     </div>
 
                     <span class="cat-badge">
@@ -577,7 +617,11 @@
 
                 <div class="mb-5 flex items-center justify-between gap-2">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
-                        <i class="fas fa-briefcase text-xl"></i>
+                        <!-- Briefcase SVG Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
                     </div>
 
                     <span class="cat-badge">
@@ -608,7 +652,12 @@
 
                 <div class="mb-5 flex items-center justify-between gap-2">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#084843]/10 text-[#084843]">
-                        <i class="fas fa-user-tie text-xl"></i>
+                        <!-- User Tie / Consultant SVG Icon -->
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="10" cy="7" r="4"/>
+                            <path d="m14 11 2 2 4-4"/>
+                        </svg>
                     </div>
 
                     <span class="cat-badge">
@@ -1293,129 +1342,133 @@
 
         <!-- 7-Step Responsive Process Grid -->
         <!-- Mobile: 1-col | Tablet: 2-col/3-col | Large Desktop: 7-col -->
-        <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:gap-4 xl:gap-6">
+       <div class="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-7 lg:gap-4 xl:gap-6">
 
-            <!-- Step 1: Choose -->
-            <div class="group relative flex flex-col pt-4">
-                <!-- Top Accent Line -->
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+    <!-- Step 1: Choose -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
 
-                <!-- Number Circle Badge -->
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    1
-                </div>
-
-                <!-- Content -->
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Choose
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Browse jobs, internships, consulting, or volunteer roles.
-                </p>
-            </div>
-
-            <!-- Step 2: Apply -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    2
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Apply
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Complete the application and upload your CV or requested documents.[cite: 5]
-                </p>
-            </div>
-
-            <!-- Step 3: Screening -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    3
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Screening
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Applications are reviewed against the role requirements.
-                </p>
-            </div>
-
-            <!-- Step 4: Interview -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    4
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Interview
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Shortlisted applicants may be invited to interview or assessment.
-                </p>
-            </div>
-
-            <!-- Step 5: Checks -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    5
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Checks
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Final candidates may complete reference or background checks.
-                </p>
-            </div>
-
-            <!-- Step 6: Offer -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    6
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Offer
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Successful applicants receive and accept an offer.
-                </p>
-            </div>
-
-            <!-- Step 7: Onboarding -->
-            <div class="group relative flex flex-col pt-4">
-                <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
-
-                <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-xs font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
-                    7
-                </div>
-
-                <h3 class="mt-3.5 text-sm font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
-                    Onboarding
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-slate-600">
-                    Safeguarding and Code of Conduct briefing before starting.
-                </p>
-            </div>
-
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            1
         </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Choose
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Browse jobs, internships, consulting, or volunteer roles.
+        </p>
+    </div>
+
+    <!-- Step 2: Apply -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            2
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Apply
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Complete the application and upload your CV or requested documents.
+        </p>
+    </div>
+
+    <!-- Step 3: Screening -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            3
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Screening
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Applications are reviewed against the role requirements.
+        </p>
+    </div>
+
+    <!-- Step 4: Interview -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            4
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Interview
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Shortlisted applicants may be invited to interview or assessment.
+        </p>
+    </div>
+
+    <!-- Step 5: Checks -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            5
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Checks
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Final candidates may complete reference or background checks.
+        </p>
+    </div>
+
+    <!-- Step 6: Offer -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            6
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Offer
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Successful applicants receive and accept an offer.
+        </p>
+    </div>
+
+    <!-- Step 7: Onboarding -->
+    <div class="group relative flex flex-col pt-4">
+        <div class="h-1 w-full rounded-full bg-[#084843]/20 transition-colors duration-300 group-hover:bg-[#e97c61]"></div>
+
+        <div class="mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#084843] text-[14px] font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#e97c61]">
+            7
+        </div>
+
+        <h3 class="mt-3.5 text-[14px] font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#084843]">
+            Onboarding
+        </h3>
+
+        <p class="mt-2 text-[14px] leading-relaxed text-slate-600">
+            Safeguarding and Code of Conduct briefing before starting.
+        </p>
+    </div>
+
+</div>
 
         <!-- Bottom Notice / Status Bar -->
         <div class="mt-14 rounded-xl border-l-4 border-[#e97c61] bg-[#f8faf9] px-5 py-4 shadow-2xs">
-            <p class="text-xs leading-relaxed text-slate-600 sm:text-sm">
-                Applicants who are not selected will be notified once the recruitment process has been completed.[cite: 5]
+            <p class="text-ms leading-relaxed text-slate-600 sm:text-sm">
+                Applicants who are not selected will be notified once the recruitment process has been completed.
             </p>
         </div>
 
